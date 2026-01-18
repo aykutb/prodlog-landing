@@ -2,7 +2,7 @@ import React from 'react';
 import { CTASection, PageHeader, Section } from '@/src/components/ui';
 
 export const HowItWorksPage = () => (
-  <div className="max-w-4xl mx-auto px-6 pb-24">
+  <div className="max-w-5xl mx-auto px-8 md:px-12 pb-24">
     <PageHeader
       title="How Prodlog works"
       subtitle="Prodlog is designed around how memory actually works — not how tools wish it did. It helps you capture what matters before it fades."

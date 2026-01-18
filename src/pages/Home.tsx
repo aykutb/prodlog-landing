@@ -7,8 +7,6 @@ import {
   DifferentiationSection,
   ValidationSection,
   PrivacySection,
-  PricingSection,
-  FAQSection,
 } from '@/src/components/sections';
 
 export const HomePage = () => (
@@ -20,7 +18,5 @@ export const HomePage = () => (
     <DifferentiationSection />
     <ValidationSection />
     <PrivacySection />
-    <PricingSection />
-    <FAQSection />
   </>
 );

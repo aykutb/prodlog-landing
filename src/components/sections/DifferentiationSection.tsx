@@ -2,8 +2,8 @@ import React from 'react';
 
 export const DifferentiationSection = () => (
   <section className="py-24 border-t border-divider">
-    <div className="max-w-2xl mx-auto px-6">
-      <h2 className="serif-headline text-3xl mb-8 text-primary">
+    <div className="max-w-5xl mx-auto px-8 md:px-12">
+      <h2 className="serif-headline text-2xl md:text-[36px] mb-8 text-primary">
         Why this isn't a Notion template.
       </h2>
       <ul className="space-y-6 mb-10">

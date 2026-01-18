@@ -3,9 +3,9 @@ import React from 'react';
 export const ProblemSection = () => (
   <>
     <section className="py-32 bg-ink border-y border-divider">
-      <div className="max-w-2xl mx-auto px-6 text-center">
+      <div className="max-w-5xl mx-auto px-8 md:px-12 text-center">
         <h2 className="text-muted text-sm uppercase tracking-widest mb-8">What usually happens</h2>
-        <p className="text-primary text-2xl md:text-3xl leading-relaxed font-light">
+        <p className="text-primary text-xl md:text-2xl leading-relaxed font-light">
           You try to remember what you did six months ago.
           <br />
           <span className="text-muted">You undersell yourself when it counts.</span>
@@ -13,7 +13,7 @@ export const ProblemSection = () => (
       </div>
     </section>
 
-    <section className="py-24 max-w-4xl mx-auto px-6">
+    <section className="py-24 max-w-5xl mx-auto px-8 md:px-12">
       <div className="grid md:grid-cols-3 gap-12">
         <div className="space-y-2">
           <h3 className="text-primary font-medium">Reviews reward recency</h3>

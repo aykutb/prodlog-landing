@@ -2,8 +2,8 @@ import React from 'react';
 
 export const ValidationSection = () => (
   <section className="py-24 bg-ink border-t border-divider">
-    <div className="max-w-4xl mx-auto px-6 text-center">
-      <h2 className="serif-headline text-3xl mb-6 text-primary">
+    <div className="max-w-5xl mx-auto px-8 md:px-12 text-center">
+      <h2 className="serif-headline text-2xl md:text-[36px] mb-6 text-primary">
         Credibility, without performative networking.
       </h2>
       <p className="text-secondary mb-12 max-w-xl mx-auto">

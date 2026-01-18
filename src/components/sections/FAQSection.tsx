@@ -21,8 +21,8 @@ const FAQ_DATA = [
 
 export const FAQSection = () => (
   <section className="py-24 border-t border-divider">
-    <div className="max-w-3xl mx-auto px-6">
-      <h2 className="serif-headline text-3xl mb-12 text-center text-primary">
+    <div className="max-w-5xl mx-auto px-8 md:px-12">
+      <h2 className="serif-headline text-2xl md:text-[36px] mb-12 text-center text-primary">
         Frequently asked questions.
       </h2>
       <div className="space-y-8">

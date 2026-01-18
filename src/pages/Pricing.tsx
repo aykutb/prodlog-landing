@@ -2,7 +2,7 @@ import React from 'react';
 import { CTASection, PageHeader } from '@/src/components/ui';
 
 export const PricingPage = () => (
-  <div className="max-w-4xl mx-auto px-6 pb-24">
+  <div className="max-w-5xl mx-auto px-8 md:px-12 pb-24">
     <PageHeader
       title="Pricing that makes forgetting your work the expensive option"
       subtitle="Prodlog costs less than the time you'll spend trying to remember what you did. It's designed to quietly pay for itself."

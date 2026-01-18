@@ -221,7 +221,7 @@ export const SampleImpactPage = () => {
   ).length;
 
   return (
-    <div className="max-w-4xl mx-auto px-6 pt-28 pb-24">
+    <div className="max-w-5xl mx-auto px-8 md:px-12 pt-28 pb-24">
       {/* Sample Banner */}
       <div className="mb-8 p-4 bg-impact/10 border border-impact/30 rounded-lg">
         <div className="flex items-center gap-3">

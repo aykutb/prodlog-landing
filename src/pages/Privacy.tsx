@@ -2,7 +2,7 @@ import React from 'react';
 import { CTASection, PageHeader, Section } from '@/src/components/ui';
 
 export const PrivacyPage = () => (
-  <div className="max-w-4xl mx-auto px-6 pb-24">
+  <div className="max-w-5xl mx-auto px-8 md:px-12 pb-24">
     <PageHeader
       title="Privacy is the foundation, not a feature"
       subtitle="Prodlog exists because career work deserves a private place to live."

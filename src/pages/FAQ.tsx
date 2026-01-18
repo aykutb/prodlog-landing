@@ -41,7 +41,7 @@ const FAQ_DATA = [
 ];
 
 export const FAQPage = () => (
-  <div className="max-w-4xl mx-auto px-6 pb-24">
+  <div className="max-w-5xl mx-auto px-8 md:px-12 pb-24">
     <PageHeader
       title="Frequently asked questions"
       subtitle="Honest answers to common questions and unspoken anxieties."

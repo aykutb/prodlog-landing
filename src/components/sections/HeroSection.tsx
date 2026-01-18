@@ -2,16 +2,12 @@ import React from 'react';
 import { CTASection } from '@/src/components/ui';
 
 export const HeroSection = () => (
-  <section className="pt-40 pb-20 px-6 max-w-5xl mx-auto text-center fade-in">
-    <h1 className="serif-headline text-5xl md:text-7xl mb-4 leading-tight text-primary">
+  <section className="pt-40 pb-20 px-8 md:px-12 max-w-5xl mx-auto text-center fade-in">
+    <h1 className="serif-headline text-4xl md:text-[64px] mb-4 leading-tight text-primary">
       The work behind products is hard to show.
     </h1>
-    <p className="text-secondary text-xl md:text-2xl mb-8 italic opacity-80">
-      If you don't write it down, it disappears.
-    </p>
-    <p className="text-secondary text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
-      Product managers (PMs) are evaluated on outcomes, not artifacts.
-      <br />
+
+    <p className="text-secondary text-base md:text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
       Prodlog helps you capture impact as it happens and turn it into summaries for reviews, resumes,
       and interviews.
     </p>
@@ -19,7 +15,7 @@ export const HeroSection = () => (
     <CTASection />
 
     {/* Hero Visual Mock */}
-    <div className="relative mt-20 max-w-4xl mx-auto bg-charcoal border border-divider rounded-lg p-8 text-left shadow-2xl">
+    <div className="relative mt-20 bg-charcoal border border-divider rounded-lg p-8 text-left shadow-2xl">
       <div className="flex items-center justify-between mb-8 pb-4 border-b border-divider">
         <div className="flex items-center gap-3">
           <div className="w-3 h-3 rounded-full bg-divider"></div>

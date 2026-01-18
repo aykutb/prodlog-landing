@@ -22,8 +22,8 @@ export const SummariesSection = () => {
 
   return (
     <section className="py-24 bg-charcoal">
-      <div className="max-w-4xl mx-auto px-6">
-        <h2 className="serif-headline text-3xl mb-12 text-center text-primary">
+      <div className="max-w-5xl mx-auto px-8 md:px-12">
+        <h2 className="serif-headline text-2xl md:text-[36px] mb-12 text-center text-primary">
           Summaries for reviews, resumes, and interviews.
         </h2>
         <div className="border border-divider rounded-lg overflow-hidden bg-ink">

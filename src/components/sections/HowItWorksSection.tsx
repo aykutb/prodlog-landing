@@ -2,8 +2,8 @@ import React from 'react';
 
 export const HowItWorksSection = () => (
   <section className="py-24 border-t border-divider">
-    <div className="max-w-4xl mx-auto px-6">
-      <h2 className="serif-headline text-3xl md:text-4xl mb-16 text-center">
+    <div className="max-w-5xl mx-auto px-8 md:px-12">
+      <h2 className="serif-headline text-2xl md:text-[36px] mb-16 text-center">
         Infrastructure for your career.
       </h2>
       <div className="grid md:grid-cols-3 gap-16">

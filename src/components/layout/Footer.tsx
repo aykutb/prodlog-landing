@@ -4,8 +4,8 @@ import { CTASection } from '@/src/components/ui';
 
 export const Footer = () => (
   <footer className="py-24 border-t border-divider bg-ink">
-    <div className="max-w-4xl mx-auto px-6 text-center">
-      <h2 className="serif-headline text-4xl md:text-5xl mb-8 text-primary">
+    <div className="max-w-5xl mx-auto px-8 md:px-12 text-center">
+      <h2 className="serif-headline text-2xl md:text-[40px] mb-8 text-primary leading-tight">
         Don't rely on memory when it matters most.
       </h2>
 

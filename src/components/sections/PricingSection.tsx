@@ -2,8 +2,8 @@ import React from 'react';
 
 export const PricingSection = () => (
   <section className="py-24 border-t border-divider bg-charcoal/30">
-    <div className="max-w-4xl mx-auto px-6">
-      <h2 className="serif-headline text-3xl mb-12 text-center text-primary">Simple pricing.</h2>
+    <div className="max-w-5xl mx-auto px-8 md:px-12">
+      <h2 className="serif-headline text-2xl md:text-[36px] mb-12 text-center text-primary">Simple pricing.</h2>
       <div className="grid md:grid-cols-2 gap-8 max-w-2xl mx-auto">
         <div className="p-8 border border-divider rounded bg-ink flex flex-col">
           <div className="text-primary font-bold text-xl mb-1">Free</div>
