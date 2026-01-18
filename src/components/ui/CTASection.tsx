@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 interface CTASectionProps {
   centered?: boolean;
@@ -15,9 +16,12 @@ export const CTASection = ({ centered = true, showSecondary = true }: CTASection
         Start my impact log
       </a>
       {showSecondary && (
-        <button className="w-full md:w-auto border border-divider text-primary px-8 py-4 rounded font-medium text-lg hover:bg-charcoal transition-all">
+        <Link
+          to="/sample"
+          className="w-full md:w-auto border border-divider text-primary px-8 py-4 rounded font-medium text-lg hover:bg-charcoal transition-all text-center"
+        >
           View a sample Impact Page
-        </button>
+        </Link>
       )}
     </div>
     <p className="text-muted text-sm font-medium">If you don't write it down, it disappears.</p>
