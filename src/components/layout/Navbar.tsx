@@ -31,9 +31,12 @@ export const Navbar = () => {
             FAQ
           </Link>
         </div>
-        <button className="bg-impact hover:opacity-90 text-white px-5 py-2 rounded text-sm transition-all font-medium">
+        <a
+          href="https://dashboard.prodlog.app/auth"
+          className="bg-impact hover:opacity-90 text-white px-5 py-2 rounded text-sm transition-all font-medium"
+        >
           Start my impact log
-        </button>
+        </a>
       </div>
     </nav>
   );

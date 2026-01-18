@@ -25,9 +25,12 @@ export const PricingPage = () => (
             <span>•</span> Export anytime
           </li>
         </ul>
-        <button className="w-full py-3 border border-divider rounded text-primary text-sm hover:bg-charcoal transition-colors font-medium">
+        <a
+          href="https://dashboard.prodlog.app/auth"
+          className="w-full py-3 border border-divider rounded text-primary text-sm hover:bg-charcoal transition-colors font-medium text-center block"
+        >
           Get started
-        </button>
+        </a>
       </div>
 
       <div className="p-8 border border-impact rounded bg-charcoal/50 flex flex-col relative">
@@ -53,9 +56,12 @@ export const PricingPage = () => (
             <span>•</span> Priority support
           </li>
         </ul>
-        <button className="w-full py-3 bg-impact text-white rounded text-sm hover:opacity-90 transition-colors font-medium">
+        <a
+          href="https://dashboard.prodlog.app/auth"
+          className="w-full py-3 bg-impact text-white rounded text-sm hover:opacity-90 transition-colors font-medium text-center block"
+        >
           Start Pro trial
-        </button>
+        </a>
       </div>
     </div>
 
