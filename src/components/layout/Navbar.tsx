@@ -14,8 +14,8 @@ export const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-ink/80 backdrop-blur-md border-b border-divider">
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <Link to="/" className="text-primary font-bold tracking-tight text-xl cursor-pointer">
-          Prodlog
+        <Link to="/" className="cursor-pointer">
+          <img src="/prodloglogo-light.svg" alt="Prodlog" className="h-7" />
         </Link>
         <div className="hidden md:flex items-center space-x-8">
           <Link to="/how-it-works" className={navLinkClass('/how-it-works')}>
