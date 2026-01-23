@@ -8,8 +8,9 @@ export const HeroSection = () => (
     </h1>
 
     <p className="text-secondary text-base md:text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
-      Prodlog helps you capture impact as it happens and turn it into summaries for reviews, resumes,
-      and interviews.
+      Prodlog is a private impact log for product managers.
+      <br />
+      It helps PMs capture outcomes, add context while it's fresh, and preserve their work for career moments.
     </p>
 
     <CTASection />

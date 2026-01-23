@@ -26,9 +26,7 @@ export const PrivacyPage = () => (
 
       <Section title="3. Sharing is deliberate">
         <p>
-          Prodlog is not a social network. There are no feeds, no "discovery" algorithms, and no
-          public profiles that can be crawled by search engines. Sharing is a point-to-point
-          transaction that you control.
+          Sharing is a point-to-point transaction that you control. There are no public profiles that can be crawled by search engines. You decide what to share and with whom.
         </p>
       </Section>
 

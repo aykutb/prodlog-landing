@@ -29,8 +29,13 @@ export const DifferentiationSection = () => (
           </p>
         </li>
       </ul>
-      <p className="text-primary italic border-l-2 border-impact pl-4">
+      <p className="text-primary italic border-l-2 border-impact pl-4 mb-8">
         Notion stores information. Prodlog makes impact usable.
+      </p>
+      <p className="text-secondary text-center mt-12">
+        Prodlog is calm, private, and intentionally minimal.
+        <br />
+        Designed for reflection.
       </p>
     </div>
   </section>

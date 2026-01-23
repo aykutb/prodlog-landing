@@ -1,6 +1,9 @@
 export { HeroSection } from './HeroSection';
 export { ProblemSection } from './ProblemSection';
+export { WhatItIsSection } from './WhatItIsSection';
 export { HowItWorksSection } from './HowItWorksSection';
+export { UseCasesSection } from './UseCasesSection';
+export { PositioningSection } from './PositioningSection';
 export { SummariesSection } from './SummariesSection';
 export { DifferentiationSection } from './DifferentiationSection';
 export { ValidationSection } from './ValidationSection';

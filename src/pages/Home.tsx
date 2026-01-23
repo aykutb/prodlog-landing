@@ -2,7 +2,10 @@ import React from 'react';
 import {
   HeroSection,
   ProblemSection,
+  WhatItIsSection,
   HowItWorksSection,
+  UseCasesSection,
+  PositioningSection,
   SummariesSection,
   DifferentiationSection,
   ValidationSection,
@@ -13,7 +16,10 @@ export const HomePage = () => (
   <>
     <HeroSection />
     <ProblemSection />
+    <WhatItIsSection />
     <HowItWorksSection />
+    <UseCasesSection />
+    <PositioningSection />
     <SummariesSection />
     <DifferentiationSection />
     <ValidationSection />

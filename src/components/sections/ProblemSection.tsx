@@ -1,39 +1,37 @@
 import React from 'react';
 
 export const ProblemSection = () => (
-  <>
-    <section className="py-32 bg-ink border-y border-divider">
-      <div className="max-w-5xl mx-auto px-8 md:px-12 text-center">
-        <h2 className="text-muted text-sm uppercase tracking-widest mb-8">What usually happens</h2>
-        <p className="text-primary text-xl md:text-2xl leading-relaxed font-light">
-          You try to remember what you did six months ago.
-          <br />
-          <span className="text-muted">You undersell yourself when it counts.</span>
+  <section className="py-24 px-8 md:px-12 border-t border-divider">
+    <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+      <div>
+        <h2 className="serif-headline text-2xl md:text-[36px] mb-8 text-primary leading-tight">
+          Product managers are judged on impact, not effort.
+        </h2>
+        <p className="text-secondary mb-4">
+          Impact gets scattered.
+        </p>
+        <p className="text-secondary mb-6">
+          By the time reviews or interviews come around, the details are gone.
+        </p>
+        <p className="text-secondary">
+          Prodlog gives you one place to log what changed, while it's still fresh.
         </p>
       </div>
-    </section>
-
-    <section className="py-24 max-w-5xl mx-auto px-8 md:px-12">
-      <div className="grid md:grid-cols-3 gap-12">
-        <div className="space-y-2">
-          <h3 className="text-primary font-medium">Reviews reward recency</h3>
-          <p className="text-secondary text-sm leading-relaxed">
-            Most managers only remember the last 30 days of your work. The rest is lost.
-          </p>
+      <div className="bg-charcoal border border-divider rounded p-8 flex flex-col items-center justify-center min-h-[300px] relative overflow-hidden">
+        {/* Convergence Visual */}
+        <div className="absolute inset-0 opacity-10 flex items-center justify-center">
+          <div className="w-64 h-64 border border-impact rounded-full animate-pulse"></div>
         </div>
-        <div className="space-y-2">
-          <h3 className="text-primary font-medium">Interviews reward stories</h3>
-          <p className="text-secondary text-sm leading-relaxed">
-            Concrete details fade. Prodlog keeps the data and context fresh for your next move.
-          </p>
-        </div>
-        <div className="space-y-2">
-          <h3 className="text-primary font-medium">Memory fades quickly</h3>
-          <p className="text-secondary text-sm leading-relaxed">
-            The logic behind your hardest decisions is gone within weeks if not captured.
-          </p>
+        <div className="text-center relative z-10">
+          <div className="text-muted text-xs mb-8 flex flex-wrap justify-center gap-2">
+            <span className="p-2 border border-divider rounded">Slack Thread.</span>
+            <span className="p-2 border border-divider rounded">PRD Note.</span>
+            <span className="p-2 border border-divider rounded">Jira Ticket.</span>
+          </div>
+          <div className="w-16 h-1 bg-impact mx-auto mb-8 rounded-full"></div>
+          <div className="text-primary font-bold text-lg">Clean Impact Log.</div>
         </div>
       </div>
-    </section>
-  </>
+    </div>
+  </section>
 );
