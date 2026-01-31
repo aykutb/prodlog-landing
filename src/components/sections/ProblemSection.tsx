@@ -5,7 +5,7 @@ export const ProblemSection = () => (
     <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-16 items-center">
       <div>
         <h2 className="serif-headline text-2xl md:text-[36px] mb-8 text-primary leading-tight">
-          Product managers are judged on impact, not effort.
+          Product managers are judged on impact, not effort
         </h2>
         <p className="text-secondary mb-4">
           Impact gets scattered.

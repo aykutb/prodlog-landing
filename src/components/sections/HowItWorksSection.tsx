@@ -10,7 +10,7 @@ export const HowItWorksSection = () => (
   <section className="py-24 px-8 md:px-12 border-t border-divider">
     <div className="max-w-5xl mx-auto">
       <h2 className="serif-headline text-2xl md:text-[36px] mb-12 text-primary text-center leading-tight">
-        Log once. Reuse forever.
+        Log once, reuse forever
       </h2>
       <div className="grid md:grid-cols-3 gap-12">
         {STEPS.map((item) => (

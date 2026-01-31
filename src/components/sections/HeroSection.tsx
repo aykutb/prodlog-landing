@@ -4,7 +4,7 @@ import { CTASection } from '@/src/components/ui';
 export const HeroSection = () => (
   <section className="pt-40 pb-20 px-8 md:px-12 max-w-5xl mx-auto text-center fade-in">
     <h1 className="serif-headline text-4xl md:text-[64px] mb-4 leading-tight text-primary">
-      The work behind products is hard to show.
+      The work behind products is hard to show
     </h1>
 
     <p className="text-secondary text-base md:text-lg max-w-2xl mx-auto mb-10 leading-relaxed">

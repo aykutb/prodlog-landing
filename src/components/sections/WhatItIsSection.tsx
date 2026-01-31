@@ -4,7 +4,7 @@ export const WhatItIsSection = () => (
   <section className="py-24 px-8 md:px-12 bg-charcoal/30 border-t border-divider">
     <div className="max-w-5xl mx-auto">
       <h2 className="serif-headline text-2xl md:text-[36px] mb-12 text-primary text-center leading-tight">
-        A private impact log for product managers.
+        A private impact log for product managers
       </h2>
       <div className="grid md:grid-cols-2 gap-12">
         <div className="space-y-6">
