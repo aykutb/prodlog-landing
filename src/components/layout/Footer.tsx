@@ -1,17 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { CTASection } from '@/src/components/ui';
 
 export const Footer = () => (
-  <footer className="py-24 border-t border-divider bg-ink">
-    <div className="max-w-5xl mx-auto px-8 md:px-12 text-center">
-      <h2 className="serif-headline text-2xl md:text-[40px] mb-8 text-primary leading-tight">
-        Don't rely on memory when it matters most.
-      </h2>
-
-      <CTASection />
-
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-left text-sm mb-20">
+  <footer className="py-16 border-t border-divider bg-ink">
+    <div className="max-w-5xl mx-auto px-8 md:px-12">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-left text-sm mb-12">
         <div className="flex flex-col gap-3">
           <span className="text-primary font-semibold">Product</span>
           <Link to="/how-it-works" className="text-muted hover:text-primary transition-colors">

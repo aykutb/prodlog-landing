@@ -5,11 +5,9 @@ import {
   WhatItIsSection,
   HowItWorksSection,
   UseCasesSection,
-  PositioningSection,
   SummariesSection,
   DifferentiationSection,
   ValidationSection,
-  PrivacySection,
 } from '@/src/components/sections';
 
 export const HomePage = () => (
@@ -19,10 +17,8 @@ export const HomePage = () => (
     <WhatItIsSection />
     <HowItWorksSection />
     <UseCasesSection />
-    <PositioningSection />
     <SummariesSection />
     <DifferentiationSection />
     <ValidationSection />
-    <PrivacySection />
   </>
 );
