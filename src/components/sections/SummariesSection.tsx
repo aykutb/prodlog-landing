@@ -50,7 +50,7 @@ Mentored 2 associate PMs, both promoted.`,
     title: 'Senior PM Resume Bullets',
     shortTitle: 'Resume Bullets',
     visibility: 'Shareable',
-    visibilityColor: 'text-blue-400 border-blue-400/30',
+    visibilityColor: 'text-deep-ink-blue border-deep-ink-blue/30',
     content: `• Led cross-functional alignment for checkout redesign, increasing conversion by 14% and driving $2.4M in incremental ARR
 
 • Orchestrated migration of legacy billing infrastructure for 50k+ users with zero downtime, reducing incident response time by 40%
@@ -76,7 +76,7 @@ Mentored 2 associate PMs, both promoted.`,
     title: 'Checkout Redesign - STAR Format',
     shortTitle: 'Checkout STAR',
     visibility: 'Anonymized',
-    visibilityColor: 'text-amber-400 border-amber-400/30',
+    visibilityColor: 'text-warm-amber border-warm-amber/30',
     content: `**Situation**
 Checkout conversion had been stagnant for 6 months. Mobile conversion was 40% lower than desktop, and 22% of users abandoned at the payment step. Leadership was considering a complete platform rewrite.
 
@@ -120,16 +120,16 @@ export const SummariesSection = () => {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-charcoal">
+    <section className="py-16 md:py-24 border-t border-divider">
       <div className="max-w-5xl mx-auto px-4 md:px-12">
         <h2 className="serif-headline text-xl md:text-[36px] mb-8 md:mb-12 text-center text-primary leading-tight">
           Summaries for reviews, resumes, and interviews.
         </h2>
 
         {/* Summary View Mock */}
-        <div className="border border-divider rounded-lg overflow-hidden bg-ink">
+        <div className="border border-divider rounded-xl overflow-hidden bg-white shadow-[0_4px_20px_-5px_rgba(31,42,68,0.1)]">
           {/* Header Bar */}
-          <div className="flex items-center justify-between px-3 md:px-6 py-3 md:py-4 border-b border-divider bg-charcoal/50">
+          <div className="flex items-center justify-between px-3 md:px-6 py-3 md:py-4 border-b border-divider bg-charcoal">
             <div className="flex items-center gap-2 md:gap-3 min-w-0">
               <span className="text-base md:text-lg shrink-0">{TABS.find(t => t.key === activeTab)?.icon}</span>
               <div className="min-w-0">
@@ -148,17 +148,17 @@ export const SummariesSection = () => {
             </div>
             {/* Desktop buttons */}
             <div className="hidden md:flex items-center gap-2">
-              <button className="text-[10px] px-3 py-1.5 rounded border border-divider text-muted hover:text-primary hover:border-impact/50 transition-colors flex items-center gap-1.5">
+              <button className="text-[10px] px-3 py-1.5 rounded border border-divider text-muted hover:text-primary hover:border-deep-ink-blue/50 transition-colors flex items-center gap-1.5 bg-white">
                 <span>📋</span> Copy
               </button>
-              <button className="text-[10px] px-3 py-1.5 rounded border border-divider text-muted hover:text-primary hover:border-impact/50 transition-colors flex items-center gap-1.5">
+              <button className="text-[10px] px-3 py-1.5 rounded border border-divider text-muted hover:text-primary hover:border-deep-ink-blue/50 transition-colors flex items-center gap-1.5 bg-white">
                 <span>⬇</span> Export
               </button>
             </div>
             {/* Mobile buttons - icon only */}
             <div className="flex md:hidden items-center gap-1">
-              <button className="p-1.5 rounded border border-divider text-muted text-xs">📋</button>
-              <button className="p-1.5 rounded border border-divider text-muted text-xs">⬇</button>
+              <button className="p-1.5 rounded border border-divider text-muted text-xs bg-white">📋</button>
+              <button className="p-1.5 rounded border border-divider text-muted text-xs bg-white">⬇</button>
             </div>
           </div>
 
@@ -170,8 +170,8 @@ export const SummariesSection = () => {
                 onClick={() => setActiveTab(tab.key)}
                 className={`flex-1 py-2.5 md:py-3 text-[10px] md:text-xs font-medium transition-all flex items-center justify-center gap-1 md:gap-2 ${
                   activeTab === tab.key
-                    ? 'bg-ink text-primary border-b-2 border-impact'
-                    : 'text-muted hover:text-secondary bg-charcoal/30'
+                    ? 'bg-white text-primary border-b-2 border-deep-ink-blue'
+                    : 'text-muted hover:text-secondary bg-charcoal'
                 }`}
               >
                 <span>{tab.icon}</span>
@@ -182,8 +182,8 @@ export const SummariesSection = () => {
           </div>
 
           {/* Content Area */}
-          <div className="p-4 md:p-8">
-            <div className="prose prose-sm prose-invert max-w-none">
+          <div className="p-4 md:p-8 bg-white">
+            <div className="prose prose-sm max-w-none">
               {/* Desktop content */}
               <div className="hidden md:block text-secondary text-sm leading-relaxed whitespace-pre-line font-mono">
                 {renderContent(data.content)}
@@ -196,7 +196,7 @@ export const SummariesSection = () => {
           </div>
 
           {/* Source Impacts */}
-          <div className="px-4 md:px-8 pb-4 md:pb-6">
+          <div className="px-4 md:px-8 pb-4 md:pb-6 bg-white">
             <div className="border-t border-divider pt-3 md:pt-4">
               <div className="text-[9px] md:text-[10px] text-muted uppercase tracking-wider mb-2 md:mb-3 flex items-center gap-1.5 md:gap-2">
                 <span>🎯</span> Source Impacts ({data.impacts.length})
@@ -205,10 +205,10 @@ export const SummariesSection = () => {
                 {data.impacts.map((impact, i) => (
                   <div
                     key={i}
-                    className="flex items-center justify-between p-2 md:p-3 bg-charcoal/50 rounded-lg border border-divider/50 hover:border-impact/30 transition-colors"
+                    className="flex items-center justify-between p-2 md:p-3 bg-charcoal rounded-lg border border-divider hover:border-deep-ink-blue/30 transition-colors"
                   >
                     <div className="flex items-center gap-1.5 md:gap-2 min-w-0">
-                      <span className="text-impact text-[10px] md:text-xs shrink-0">●</span>
+                      <span className="text-deep-ink-blue text-[10px] md:text-xs shrink-0">●</span>
                       <span className="text-primary text-[10px] md:text-xs truncate">
                         <span className="hidden md:inline">{impact.title}</span>
                         <span className="md:hidden">{impact.shortTitle}</span>

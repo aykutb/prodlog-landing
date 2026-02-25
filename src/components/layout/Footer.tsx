@@ -2,35 +2,56 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 export const Footer = () => (
-  <footer className="py-16 border-t border-divider bg-ink">
+  <footer className="py-16 border-t border-divider">
     <div className="max-w-5xl mx-auto px-8 md:px-12">
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-left text-sm mb-12">
-        <div className="flex flex-col gap-3">
-          <span className="text-primary font-semibold">Product</span>
-          <Link to="/how-it-works" className="text-muted hover:text-primary transition-colors">
-            How it works
+      {/* Main Footer Content */}
+      <div className="flex flex-col md:flex-row justify-between gap-12 mb-12">
+        {/* Left - Logo and Tagline */}
+        <div className="flex flex-col gap-4">
+          <Link to="/" className="flex items-center gap-2">
+            <img src="/logomark.svg" alt="" className="h-6" />
+            <span 
+              className="text-primary font-normal text-xl"
+              style={{ letterSpacing: '-0.07em', fontFamily: 'Outfit, sans-serif' }}
+            >
+              Prodlog
+            </span>
           </Link>
-          <Link to="/pricing" className="text-muted hover:text-primary transition-colors">
-            Pricing
-          </Link>
-          <Link to="/faq" className="text-muted hover:text-primary transition-colors">
-            FAQ
-          </Link>
+          <p className="text-muted text-sm max-w-xs">
+            Career infrastructure for product managers.
+          </p>
         </div>
-        <div className="flex flex-col gap-3">
-          <span className="text-primary font-semibold">Company</span>
-          <Link to="/privacy" className="text-muted hover:text-primary transition-colors">
-            Security
-          </Link>
-          <Link to="/privacy" className="text-muted hover:text-primary transition-colors">
-            Privacy
-          </Link>
+
+        {/* Right - Menu Columns */}
+        <div className="flex gap-16">
+          <div className="flex flex-col gap-3">
+            <span className="text-primary font-semibold text-sm">Product</span>
+            <Link to="/how-it-works" className="text-muted text-sm hover:text-primary transition-colors">
+              How it works
+            </Link>
+            <Link to="/pricing" className="text-muted text-sm hover:text-primary transition-colors">
+              Pricing
+            </Link>
+            <Link to="/faq" className="text-muted text-sm hover:text-primary transition-colors">
+              FAQ
+            </Link>
+          </div>
+          <div className="flex flex-col gap-3">
+            <span className="text-primary font-semibold text-sm">Company</span>
+            <Link to="/privacy" className="text-muted text-sm hover:text-primary transition-colors">
+              Security
+            </Link>
+            <Link to="/privacy" className="text-muted text-sm hover:text-primary transition-colors">
+              Privacy
+            </Link>
+          </div>
         </div>
       </div>
 
-      <div className="flex flex-col md:flex-row justify-between items-center text-muted text-[10px] border-t border-divider pt-8 gap-4">
-        <div>© Prodlog Inc. Career Infrastructure for Product Managers.</div>
-        <div className="space-x-4">
+      {/* Bottom Bar */}
+      <div className="flex flex-col md:flex-row justify-between items-center text-muted text-xs border-t border-divider pt-8 gap-4">
+        <div>© {new Date().getFullYear()} Prodlog Inc.</div>
+        <div className="flex gap-6">
           <a href="#" className="hover:text-primary transition-colors">
             Terms of Service
           </a>

@@ -1,21 +1,33 @@
 @import "tailwindcss";
 
 @theme {
-  --color-ink: #0E0F12;
-  --color-charcoal: #16181D;
-  --color-divider: #23262E;
-  --color-primary: #F2F3F5;
-  --color-secondary: #B8BCC6;
-  --color-muted: #8B90A0;
-  --color-impact: #5B7CFF;
+  /* New color palette */
+  --color-soft-canvas: #F6F7F9;
+  --color-deep-ink-blue: #1F2A44;
+  --color-charcoal-black: #1E1F24;
+  --color-sage-green: #6FAF8E;
+  --color-warm-amber: #E1A948;
+  --color-muted-plum: #6B5C7A;
+  --color-secondary-text: #4B4F5C;
 
-  --font-serif: Georgia, serif;
+  /* Semantic color mappings */
+  --color-ink: #F6F7F9;
+  --color-charcoal: #EDEEF1;
+  --color-divider: #D8DAE0;
+  --color-primary: #1E1F24;
+  --color-secondary: #4B4F5C;
+  --color-muted: #7A7F8C;
+  --color-impact: #1F2A44;
+
+  /* Fonts */
+  --font-serif: 'Source Serif 4', Georgia, serif;
   --font-sans: Inter, system-ui, sans-serif;
 }
 
 body {
-  background-color: #0E0F12;
-  color: #F2F3F5;
+  background-color: #F6F7F9;
+  color: #1E1F24;
+  font-family: Inter, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -35,5 +47,5 @@ body {
 }
 
 .serif-headline {
-  font-family: Georgia, 'Times New Roman', serif;
+  font-family: 'Source Serif 4', Georgia, serif;
 }

@@ -2,23 +2,29 @@ import React from 'react';
 import {
   HeroSection,
   ProblemSection,
-  WhatItIsSection,
-  HowItWorksSection,
+  ThreePillarsSection,
+  LogFromAnywhereSection,
   UseCasesSection,
   SummariesSection,
-  DifferentiationSection,
+  PortfolioSection,
+  SocialProofSection,
   ValidationSection,
+  DifferentiationSection,
+  FinalCTASection,
 } from '@/src/components/sections';
 
 export const HomePage = () => (
   <>
     <HeroSection />
     <ProblemSection />
-    <WhatItIsSection />
-    <HowItWorksSection />
-    <UseCasesSection />
+    <ThreePillarsSection />
+    <LogFromAnywhereSection />
+    {/* <UseCasesSection /> */}
     <SummariesSection />
-    <DifferentiationSection />
+    <PortfolioSection />
+    {/* <SocialProofSection /> */}
     <ValidationSection />
+    {/* <DifferentiationSection /> */}
+    <FinalCTASection />
   </>
 );
