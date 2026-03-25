@@ -59,7 +59,7 @@ export const ProblemSection = () => (
           </div>
         </div>
 
-        {/* After - Clean Impact Log */}
+        {/* After - clean log */}
         <div className="flex-1 w-full">
           <div className="relative">
             <div className="absolute -top-2 left-3 text-[10px] text-deep-ink-blue uppercase tracking-wider bg-charcoal px-2 z-10 font-medium">After</div>

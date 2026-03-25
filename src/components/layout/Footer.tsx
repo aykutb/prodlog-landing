@@ -39,9 +39,6 @@ export const Footer = () => (
           <div className="flex flex-col gap-3">
             <span className="text-primary font-semibold text-sm">Company</span>
             <Link to="/privacy" className="text-muted text-sm hover:text-primary transition-colors">
-              Security
-            </Link>
-            <Link to="/privacy" className="text-muted text-sm hover:text-primary transition-colors">
               Privacy
             </Link>
           </div>
@@ -52,10 +49,10 @@ export const Footer = () => (
       <div className="flex flex-col md:flex-row justify-between items-center text-muted text-xs border-t border-divider pt-8 gap-4">
         <div>© {new Date().getFullYear()} Prodlog Inc.</div>
         <div className="flex gap-6">
-          <a href="#" className="hover:text-primary transition-colors">
+          <Link to="/terms" className="hover:text-primary transition-colors">
             Terms of Service
-          </a>
-          <Link to="/privacy" className="hover:text-primary transition-colors">
+          </Link>
+          <Link to="/privacy-policy" className="hover:text-primary transition-colors">
             Privacy Policy
           </Link>
         </div>

@@ -7,7 +7,7 @@ const FAQ_DATA = [
   },
   {
     q: 'How is this different from a brag document?',
-    a: "Brag documents are usually unorganized lists. Prodlog is infrastructure—it forces structure, captures the 'why' while it's fresh, and automates the synthesis for different audiences.",
+    a: "Brag documents are usually unorganized lists. Prodlog is infrastructure: it forces structure, captures the 'why' while it's fresh, and automates the synthesis for different audiences.",
   },
   {
     q: 'Can I keep everything private?',

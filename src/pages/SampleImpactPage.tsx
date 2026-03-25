@@ -1,6 +1,6 @@
 import React from 'react';
 
-// Sample data representing a PM's impact logs
+// Sample data representing a PM's logs
 const SAMPLE_LOGS = [
   {
     id: '1',
@@ -211,14 +211,6 @@ const SampleImpactCard = ({ log }: { log: typeof SAMPLE_LOGS[0] }) => {
 
 export const SampleImpactPage = () => {
   const groupedLogs = groupByQuarter(SAMPLE_LOGS);
-  
-  // Calculate stats
-  const inProgressCount = SAMPLE_LOGS.filter(log => 
-    log.metrics.some(m => m.status === 'in_progress')
-  ).length;
-  const doneCount = SAMPLE_LOGS.filter(log => 
-    log.metrics.every(m => m.status === 'done')
-  ).length;
 
   return (
     <div className="max-w-5xl mx-auto px-8 md:px-12 pt-28 pb-24">
@@ -232,8 +224,8 @@ export const SampleImpactPage = () => {
             </svg>
           </div>
           <div>
-            <p className="text-sm font-medium text-primary">Sample Impact Page</p>
-            <p className="text-xs text-secondary">This is an example of what your impact logs could look like</p>
+            <p className="text-sm font-medium text-primary">Sample log page</p>
+            <p className="text-xs text-secondary">This is an example of what your logs could look like</p>
           </div>
           <a
             href="https://dashboard.prodlog.app/auth"
@@ -246,49 +238,10 @@ export const SampleImpactPage = () => {
 
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-2xl font-serif font-semibold text-primary">Impact Logs</h1>
+        <h1 className="text-2xl font-serif font-semibold text-primary">Logs</h1>
         <p className="text-sm text-muted mt-1">
           Track your product improvements and their impact
         </p>
-      </div>
-
-      {/* Stats Cards */}
-      <div className="grid grid-cols-3 gap-4 mb-8">
-        <div className="bg-charcoal border border-divider rounded-lg p-4 flex items-center gap-3">
-          <div className="p-2 rounded-full bg-amber-500/10">
-            <svg className="w-5 h-5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-          </div>
-          <div>
-            <p className="text-2xl font-semibold text-primary">{inProgressCount}</p>
-            <p className="text-xs text-muted">In Progress</p>
-          </div>
-        </div>
-        
-        <div className="bg-charcoal border border-divider rounded-lg p-4 flex items-center gap-3">
-          <div className="p-2 rounded-full bg-emerald-500/10">
-            <svg className="w-5 h-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-          </div>
-          <div>
-            <p className="text-2xl font-semibold text-primary">{doneCount}</p>
-            <p className="text-xs text-muted">Done</p>
-          </div>
-        </div>
-        
-        <div className="bg-charcoal border border-divider rounded-lg p-4 flex items-center gap-3">
-          <div className="p-2 rounded-full bg-impact/10">
-            <svg className="w-5 h-5 text-impact" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-            </svg>
-          </div>
-          <div>
-            <p className="text-2xl font-semibold text-primary">3</p>
-            <p className="text-xs text-muted">Days Since Update</p>
-          </div>
-        </div>
       </div>
 
       {/* Timeline */}
@@ -326,12 +279,12 @@ export const SampleImpactPage = () => {
 
       {/* Bottom CTA */}
       <div className="mt-16 text-center">
-        <p className="text-secondary mb-6">Ready to start tracking your own impact?</p>
+        <p className="text-secondary mb-6">Ready to start your own logs?</p>
         <a
           href="https://dashboard.prodlog.app/auth"
           className="inline-block bg-impact hover:opacity-90 text-white px-8 py-4 rounded font-medium text-lg transition-all"
         >
-          Start my impact log
+          Start logging
         </a>
         <p className="text-muted text-sm mt-4">Free to start. No credit card required.</p>
       </div>

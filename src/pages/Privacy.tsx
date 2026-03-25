@@ -3,27 +3,22 @@ import { CTASection, PageHeader } from '@/src/components/ui';
 
 const PRIVACY_FEATURES = [
   {
-    icon: '🔒',
     title: 'Private by default',
     description: 'Every impact you capture begins its life as a private record. No one can see it without your explicit action.',
   },
   {
-    icon: '🎭',
     title: 'Anonymized by design',
     description: 'Strip away sensitive identifiers before sharing. Share the patterns of your impact without exposing trade secrets.',
   },
   {
-    icon: '🎯',
     title: 'Sharing is deliberate',
     description: 'Sharing is a point-to-point transaction you control. You decide what to share and with whom.',
   },
   {
-    icon: '📦',
     title: 'Your data stays yours',
     description: 'We do not sell your data or train models on your reflections. Export or delete anytime.',
   },
   {
-    icon: '✓',
     title: 'Verified, not exposed',
     description: 'Collaborators can verify your impact without seeing sensitive details. Quiet credibility.',
   },
@@ -77,12 +72,9 @@ export const PrivacyPage = () => (
       {/* Privacy Features List */}
       <div className="space-y-4">
         {PRIVACY_FEATURES.map((feature, i) => (
-          <div key={i} className="flex gap-4 p-4 bg-white border border-divider rounded-lg hover:border-deep-ink-blue/30 transition-colors">
-            <div className="text-2xl">{feature.icon}</div>
-            <div>
-              <h3 className="text-primary font-medium mb-1">{feature.title}</h3>
-              <p className="text-secondary text-sm leading-relaxed">{feature.description}</p>
-            </div>
+          <div key={i} className="p-4 bg-white border border-divider rounded-lg hover:border-deep-ink-blue/30 transition-colors">
+            <h3 className="text-primary font-medium mb-1">{feature.title}</h3>
+            <p className="text-secondary text-sm leading-relaxed">{feature.description}</p>
           </div>
         ))}
       </div>

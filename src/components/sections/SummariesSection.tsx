@@ -195,8 +195,8 @@ export const SummariesSection = () => {
             </div>
           </div>
 
-          {/* Source Impacts */}
-          <div className="px-4 md:px-8 pb-4 md:pb-6 bg-white">
+          {/* Source Impacts (md+) */}
+          <div className="hidden md:block px-4 md:px-8 pb-4 md:pb-6 bg-white">
             <div className="border-t border-divider pt-3 md:pt-4">
               <div className="text-[9px] md:text-[10px] text-muted uppercase tracking-wider mb-2 md:mb-3 flex items-center gap-1.5 md:gap-2">
                 <span>🎯</span> Source Impacts ({data.impacts.length})

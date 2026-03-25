@@ -4,11 +4,11 @@ import {
   ProblemSection,
   ThreePillarsSection,
   LogFromAnywhereSection,
+  ValidationSection,
   UseCasesSection,
   SummariesSection,
   PortfolioSection,
   SocialProofSection,
-  ValidationSection,
   DifferentiationSection,
   FinalCTASection,
 } from '@/src/components/sections';
@@ -19,11 +19,11 @@ export const HomePage = () => (
     <ProblemSection />
     <ThreePillarsSection />
     <LogFromAnywhereSection />
+    <ValidationSection />
     {/* <UseCasesSection /> */}
     <SummariesSection />
     <PortfolioSection />
     {/* <SocialProofSection /> */}
-    <ValidationSection />
     {/* <DifferentiationSection /> */}
     <FinalCTASection />
   </>
