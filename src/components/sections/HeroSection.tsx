@@ -22,7 +22,7 @@ export const HeroSection = () => (
           <div className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-[#FFBD2E]"></div>
           <div className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-[#27CA40]"></div>
         </div>
-        <div className="text-muted text-[8px] md:text-[10px] bg-charcoal px-2 md:px-3 py-1 rounded border border-divider">
+        <div className="text-muted text-[8px] md:text-[10px] bg-white px-2 md:px-3 py-1 rounded border border-divider shadow-sm">
           prodlog.app/logs
         </div>
         <div className="w-8 md:w-16"></div>
@@ -48,7 +48,7 @@ export const HeroSection = () => (
             </div>
             <div className="absolute left-4 md:left-5 top-5 md:top-6 w-2 md:w-3 h-0.5 bg-deep-ink-blue/50"></div>
             
-            <div className="bg-charcoal border border-divider rounded-lg p-3 md:p-4 hover:border-deep-ink-blue/30 transition-colors">
+            <div className="rounded-lg border border-divider bg-white p-3 shadow-[0_2px_12px_-4px_rgba(31,42,68,0.12)] transition-colors hover:border-deep-ink-blue/30 md:p-4">
               <div className="flex items-start justify-between gap-2 mb-2">
                 <div className="flex items-center gap-1.5 md:gap-2 flex-wrap">
                   <span className="text-[8px] md:text-[10px] px-1.5 md:px-2 py-0.5 rounded bg-white border border-divider text-muted flex items-center gap-1">
@@ -112,7 +112,7 @@ export const HeroSection = () => (
             </div>
             <div className="absolute left-4 md:left-5 top-5 md:top-6 w-2 md:w-3 h-0.5 bg-deep-ink-blue/30"></div>
             
-            <div className="bg-charcoal border border-divider rounded-lg p-3 md:p-4">
+            <div className="rounded-lg border border-divider bg-white p-3 shadow-[0_2px_12px_-4px_rgba(31,42,68,0.12)] md:p-4">
               <div className="flex items-center gap-1.5 md:gap-2 flex-wrap mb-2">
                 <span className="text-[8px] md:text-[10px] px-1.5 md:px-2 py-0.5 rounded bg-warm-amber/10 text-warm-amber border border-warm-amber/20 font-medium">In Progress</span>
                 <span className="text-[8px] md:text-[10px] text-muted">Nov 28, 2024</span>
@@ -137,7 +137,7 @@ export const HeroSection = () => (
             </div>
             <div className="absolute left-5 top-6 w-3 h-0.5 bg-deep-ink-blue/20"></div>
             
-            <div className="bg-charcoal border border-divider rounded-lg p-4">
+            <div className="rounded-lg border border-divider bg-white p-4 shadow-[0_2px_12px_-4px_rgba(31,42,68,0.12)]">
               <div className="flex items-center gap-2 flex-wrap mb-2">
                 <span className="text-[10px] px-2 py-0.5 rounded bg-sage-green/10 text-sage-green border border-sage-green/20 font-medium">Done</span>
                 <span className="text-[10px] text-muted">Sep 12, 2024</span>
@@ -154,7 +154,7 @@ export const HeroSection = () => (
             </div>
             <div className="absolute left-5 top-6 w-3 h-0.5 bg-deep-ink-blue/10"></div>
             
-            <div className="bg-charcoal border border-divider rounded-lg p-4">
+            <div className="rounded-lg border border-divider bg-white p-4 shadow-[0_2px_12px_-4px_rgba(31,42,68,0.12)]">
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-[10px] px-2 py-0.5 rounded bg-sage-green/10 text-sage-green border border-sage-green/20 font-medium">Done</span>
                 <span className="text-[10px] text-muted">Aug 5, 2024</span>

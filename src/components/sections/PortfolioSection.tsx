@@ -21,7 +21,7 @@ export const PortfolioSection = () => (
             <div className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-[#FFBD2E]"></div>
             <div className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-[#27CA40]"></div>
           </div>
-          <div className="text-muted text-[8px] md:text-[10px] bg-charcoal px-2 md:px-3 py-1 rounded border border-divider">
+          <div className="text-muted text-[8px] md:text-[10px] bg-white px-2 md:px-3 py-1 rounded border border-divider shadow-sm">
             prodlog.app/@sarahchen
           </div>
           <div className="w-8 md:w-16"></div>
@@ -40,7 +40,7 @@ export const PortfolioSection = () => (
         {/* Bento Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">
           {/* Bio Card */}
-          <div className="col-span-2 bg-charcoal border border-divider rounded-lg p-3 md:p-4">
+          <div className="col-span-2 bg-white border border-divider rounded-lg shadow-[0_2px_12px_-4px_rgba(31,42,68,0.12)] p-3 md:p-4">
             <div className="text-[9px] md:text-[10px] text-muted uppercase tracking-wider mb-1.5 md:mb-2">Bio</div>
             <p className="text-secondary text-[10px] md:text-xs leading-relaxed line-clamp-3 md:line-clamp-none">
               Building payments infrastructure. Previously at Notion and Figma. I care about developer experience.
@@ -48,7 +48,7 @@ export const PortfolioSection = () => (
           </div>
 
           {/* Stats Card */}
-          <div className="col-span-1 bg-charcoal border border-divider rounded-lg p-3 md:p-4">
+          <div className="col-span-1 bg-white border border-divider rounded-lg shadow-[0_2px_12px_-4px_rgba(31,42,68,0.12)] p-3 md:p-4">
             <div className="text-[9px] md:text-[10px] text-muted uppercase tracking-wider mb-2 md:mb-3">Stats</div>
             <div className="space-y-1.5 md:space-y-2">
               <div className="flex justify-between">
@@ -67,7 +67,7 @@ export const PortfolioSection = () => (
           </div>
 
           {/* Social Links */}
-          <div className="col-span-1 bg-charcoal border border-divider rounded-lg p-3 md:p-4">
+          <div className="col-span-1 bg-white border border-divider rounded-lg shadow-[0_2px_12px_-4px_rgba(31,42,68,0.12)] p-3 md:p-4">
             <div className="text-[9px] md:text-[10px] text-muted uppercase tracking-wider mb-2 md:mb-3">Links</div>
             <div className="flex flex-wrap gap-1.5 md:gap-2">
               <div className="w-6 h-6 md:w-7 md:h-7 rounded bg-white border border-divider flex items-center justify-center">
@@ -83,7 +83,7 @@ export const PortfolioSection = () => (
           </div>
 
           {/* Activity Grid - Desktop only */}
-          <div className="hidden md:block col-span-2 row-span-2 bg-charcoal border border-divider rounded-lg p-4">
+          <div className="hidden md:block col-span-2 row-span-2 bg-white border border-divider rounded-lg shadow-[0_2px_12px_-4px_rgba(31,42,68,0.12)] p-4">
             <div className="text-[10px] text-muted uppercase tracking-wider mb-3">Activity</div>
             <div className="grid grid-cols-12 gap-1">
               {Array.from({ length: 48 }).map((_, i) => (
@@ -112,7 +112,7 @@ export const PortfolioSection = () => (
           </div>
 
           {/* Products */}
-          <div className="col-span-2 bg-charcoal border border-divider rounded-lg p-3 md:p-4">
+          <div className="col-span-2 bg-white border border-divider rounded-lg shadow-[0_2px_12px_-4px_rgba(31,42,68,0.12)] p-3 md:p-4">
             <div className="text-[9px] md:text-[10px] text-muted uppercase tracking-wider mb-2 md:mb-3">Products</div>
             <div className="space-y-2">
               <div className="flex items-center gap-2">
@@ -133,7 +133,7 @@ export const PortfolioSection = () => (
           </div>
 
           {/* Featured Impact */}
-          <div className="col-span-1 md:col-span-2 bg-charcoal border border-divider rounded-lg p-3 md:p-4">
+          <div className="col-span-1 md:col-span-2 bg-white border border-divider rounded-lg shadow-[0_2px_12px_-4px_rgba(31,42,68,0.12)] p-3 md:p-4">
             <div className="flex items-center justify-between mb-1.5 md:mb-2">
               <div className="text-[9px] md:text-[10px] text-muted uppercase tracking-wider">Impact</div>
               <span className="text-[8px] md:text-[9px] px-1 md:px-1.5 py-0.5 rounded bg-sage-green/20 text-sage-green font-medium">Done</span>
@@ -146,7 +146,7 @@ export const PortfolioSection = () => (
           </div>
 
           {/* Featured Story */}
-          <div className="col-span-1 md:col-span-2 bg-charcoal border border-divider rounded-lg p-3 md:p-4">
+          <div className="col-span-1 md:col-span-2 bg-white border border-divider rounded-lg shadow-[0_2px_12px_-4px_rgba(31,42,68,0.12)] p-3 md:p-4">
             <div className="flex items-center justify-between mb-1.5 md:mb-2">
               <div className="text-[9px] md:text-[10px] text-muted uppercase tracking-wider">Story</div>
               <span className="text-[8px] md:text-[9px] px-1 md:px-1.5 py-0.5 rounded bg-muted-plum/20 text-muted-plum font-medium">Published</span>

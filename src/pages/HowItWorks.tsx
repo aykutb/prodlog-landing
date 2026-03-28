@@ -33,7 +33,7 @@ export const HowItWorksPage = () => (
         <div className="space-y-3">
           <div className="relative">
             <div className="absolute -left-5 top-4 w-3 h-3 rounded-full border-2 border-deep-ink-blue bg-white"></div>
-            <div className="border border-divider rounded-lg p-4 bg-charcoal">
+            <div className="rounded-lg border border-divider bg-white p-4 shadow-[0_2px_12px_-4px_rgba(31,42,68,0.12)]">
               <div className="flex items-center flex-wrap gap-2 mb-2">
                 <span className="text-[10px] px-2 py-0.5 rounded bg-sage-green/10 text-sage-green font-medium">Done</span>
                 <span className="text-[10px] px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 border border-blue-500/30 font-medium">
@@ -52,7 +52,7 @@ export const HowItWorksPage = () => (
           
           <div className="relative opacity-60">
             <div className="absolute -left-5 top-4 w-3 h-3 rounded-full border-2 border-deep-ink-blue/50 bg-white"></div>
-            <div className="border border-divider rounded-lg p-4 bg-charcoal">
+            <div className="rounded-lg border border-divider bg-white p-4 shadow-[0_2px_12px_-4px_rgba(31,42,68,0.12)]">
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-[10px] px-2 py-0.5 rounded bg-warm-amber/10 text-warm-amber font-medium">In Progress</span>
                 <span className="text-[10px] text-muted">Nov 28, 2025</span>
@@ -78,7 +78,7 @@ export const HowItWorksPage = () => (
               Claude, then tidy them in Prodlog. A short weekly habit beats a scramble before review season.
             </p>
           </div>
-          <div className="bg-charcoal border border-divider rounded-lg p-4 space-y-3">
+          <div className="space-y-3 rounded-lg border border-divider bg-white p-4 shadow-[0_2px_12px_-4px_rgba(31,42,68,0.12)]">
             <div className="flex flex-wrap gap-1.5">
               <span className="text-[9px] px-2 py-1 rounded-full border border-divider bg-white text-muted font-medium">Slack</span>
               <span className="text-[9px] px-2 py-1 rounded-full border border-divider bg-white text-muted font-medium">Claude</span>
@@ -86,7 +86,7 @@ export const HowItWorksPage = () => (
               <span className="text-[9px] px-2 py-1 rounded-full border border-divider bg-white text-muted font-medium">App</span>
             </div>
             <div className="text-[10px] text-muted uppercase tracking-wider font-semibold">Q4 2025</div>
-            <div className="border border-divider rounded p-3 bg-white">
+            <div className="rounded border border-divider bg-white p-3 shadow-sm">
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-[10px] px-2 py-0.5 rounded bg-sage-green/10 text-sage-green font-medium">Done</span>
                 <span className="text-[10px] text-muted">Dec 15</span>
@@ -97,7 +97,7 @@ export const HowItWorksPage = () => (
                 <span className="text-[9px] text-muted">2 teammates</span>
               </div>
             </div>
-            <div className="border border-divider rounded p-3 bg-white opacity-60">
+            <div className="rounded border border-divider bg-white p-3 opacity-60 shadow-sm">
               <div className="flex items-center gap-2 mb-1">
                 <span className="text-[10px] px-2 py-0.5 rounded bg-warm-amber/10 text-warm-amber font-medium">In progress</span>
               </div>
@@ -120,8 +120,8 @@ export const HowItWorksPage = () => (
               whenever you want proof without oversharing context.
             </p>
           </div>
-          <div className="bg-charcoal border border-divider rounded-lg p-4 space-y-3">
-            <div className="border border-divider rounded p-3 bg-white">
+          <div className="space-y-3 rounded-lg border border-divider bg-white p-4 shadow-[0_2px_12px_-4px_rgba(31,42,68,0.12)]">
+            <div className="rounded border border-divider bg-white p-3 shadow-sm">
               <div className="flex items-center flex-wrap gap-2 mb-2">
                 <span className="text-[10px] px-2 py-0.5 rounded bg-sage-green/10 text-sage-green font-medium">Done</span>
                 <span className="text-[10px] px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 border border-blue-500/30 font-medium">
@@ -131,7 +131,7 @@ export const HowItWorksPage = () => (
               <div className="text-primary text-sm font-medium mb-2">Checkout optimization</div>
               <p className="text-[10px] text-muted">Verified by Sarah Chen · Dec 16, 2025</p>
             </div>
-            <div className="border border-divider border-dashed rounded p-3 bg-white/80">
+            <div className="rounded border border-divider border-dashed bg-white/80 p-3 shadow-sm">
               <p className="text-[10px] text-muted mb-1">Request verification</p>
               <p className="text-[10px] text-secondary">We’ll email your teammate a one-tap confirm, no account required.</p>
             </div>
@@ -152,8 +152,8 @@ export const HowItWorksPage = () => (
               one place. Export or tweak for resumes and interviews when you need a different angle.
             </p>
           </div>
-          <div className="bg-charcoal border border-divider rounded-lg p-4 space-y-3">
-            <div className="border border-divider rounded p-3 bg-white">
+          <div className="space-y-3 rounded-lg border border-divider bg-white p-4 shadow-[0_2px_12px_-4px_rgba(31,42,68,0.12)]">
+            <div className="rounded border border-divider bg-white p-3 shadow-sm">
               <div className="flex items-center justify-between gap-2 mb-2">
                 <span className="text-primary text-sm font-medium">Q4 performance review</span>
                 <span className="text-[10px] px-2 py-0.5 rounded border border-divider text-muted shrink-0">Private</span>
@@ -163,7 +163,7 @@ export const HowItWorksPage = () => (
                 <span className="text-[10px] text-muted">Built from 8 logs</span>
               </div>
             </div>
-            <div className="border border-divider rounded p-3 bg-white">
+            <div className="rounded border border-divider bg-white p-3 shadow-sm">
               <div className="flex items-center justify-between gap-2 mb-2">
                 <span className="text-primary text-sm font-medium">Resume bullets</span>
                 <span className="text-[10px] px-2 py-0.5 rounded bg-deep-ink-blue/10 text-deep-ink-blue font-medium shrink-0">Shareable</span>
@@ -190,7 +190,7 @@ export const HowItWorksPage = () => (
               what changed for users and the business, so recruiters and hiring managers see the full arc.
             </p>
           </div>
-          <div className="bg-charcoal border border-divider rounded-lg p-4">
+          <div className="rounded-lg border border-divider bg-white p-4 shadow-[0_2px_12px_-4px_rgba(31,42,68,0.12)]">
             <div className="flex items-center gap-4 mb-4">
               <div className="w-12 h-12 rounded-full bg-deep-ink-blue/10 flex items-center justify-center text-deep-ink-blue font-bold">JD</div>
               <div>
@@ -199,15 +199,15 @@ export const HowItWorksPage = () => (
               </div>
             </div>
             <div className="grid grid-cols-3 gap-3 mb-4">
-              <div className="p-3 bg-white rounded border border-divider text-center">
+              <div className="rounded border border-divider bg-white p-3 text-center shadow-sm">
                 <div className="text-primary font-semibold">12</div>
                 <div className="text-[10px] text-muted">Logs</div>
               </div>
-              <div className="p-3 bg-white rounded border border-divider text-center">
+              <div className="rounded border border-divider bg-white p-3 text-center shadow-sm">
                 <div className="text-primary font-semibold">3</div>
                 <div className="text-[10px] text-muted">Products</div>
               </div>
-              <div className="p-3 bg-white rounded border border-divider text-center">
+              <div className="rounded border border-divider bg-white p-3 text-center shadow-sm">
                 <div className="text-primary font-semibold">2</div>
                 <div className="text-[10px] text-muted">Stories</div>
               </div>

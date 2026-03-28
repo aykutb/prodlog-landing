@@ -11,15 +11,22 @@ export const ValidationSection = () => (
     <div className="max-w-5xl mx-auto px-8 md:px-12">
       <div className="grid md:grid-cols-2 gap-12 items-center">
         <div>
-          <h2 className="serif-headline text-2xl md:text-[36px] mb-6 text-primary leading-tight">
-            Get your impact verified
-          </h2>
-          <p className="text-secondary mb-4">
-            Ask collaborators to confirm your contributions with one click.
-          </p>
-          <p className="text-secondary">
-            No awkward emails. No chasing approvals. Just quiet credibility that strengthens your career documentation.
-          </p>
+          <img
+            src="/verify.svg"
+            alt=""
+            className="mx-auto mb-6 h-32 w-32 object-contain sm:h-36 sm:w-36 md:mx-0 md:mb-8 md:h-40 md:w-40 lg:h-44 lg:w-44"
+          />
+          <div className="min-w-0 text-center md:text-left">
+            <h2 className="serif-headline text-2xl md:text-[36px] mb-6 text-primary leading-tight">
+              Get your impact verified
+            </h2>
+            <p className="text-secondary mb-4">
+              Ask collaborators to confirm your contributions with one click.
+            </p>
+            <p className="text-secondary">
+              No awkward emails. No chasing approvals. Just quiet credibility that strengthens your career documentation.
+            </p>
+          </div>
         </div>
 
         <div className="bg-white border border-divider rounded-xl p-6 shadow-[0_4px_20px_-5px_rgba(31,42,68,0.1)]">

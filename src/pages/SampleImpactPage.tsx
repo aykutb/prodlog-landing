@@ -92,7 +92,7 @@ const SampleImpactCard = ({ log }: { log: typeof SAMPLE_LOGS[0] }) => {
   const hasInProgress = log.metrics.some(m => m.status === 'in_progress');
   
   return (
-    <div className="group relative border border-divider rounded-xl overflow-hidden bg-charcoal hover:border-impact/40 transition-all duration-300">
+    <div className="group relative overflow-hidden rounded-xl border border-divider bg-white shadow-[0_2px_12px_-4px_rgba(31,42,68,0.12)] transition-all duration-300 hover:border-impact/40">
       <div className="p-6 space-y-4">
         {/* Header */}
         <div className="flex items-start justify-between gap-4">
@@ -254,7 +254,7 @@ export const SampleImpactPage = () => {
             <div key={quarter} className="space-y-4">
               {/* Quarter header */}
               <div className="relative pl-12">
-                <span className="inline-flex items-center text-sm font-semibold px-3 py-1.5 rounded-md bg-charcoal border border-impact/30 text-primary shadow-sm">
+                <span className="inline-flex items-center rounded-md border border-impact/30 bg-white px-3 py-1.5 text-sm font-semibold text-primary shadow-sm">
                   {quarter}
                 </span>
               </div>

@@ -3,10 +3,16 @@ import React from 'react';
 export const ProblemSection = () => (
   <section className="py-24 px-4 md:px-12 bg-charcoal border-t border-divider">
     <div className="max-w-5xl mx-auto">
-      {/* Centered Header */}
-      <h2 className="serif-headline text-2xl md:text-[36px] mb-12 text-primary leading-tight text-center">
-        Product managers are judged on impact, not effort.
-      </h2>
+      <div className="flex flex-col items-center text-center mb-12">
+        <img
+          src="/problem-pm.svg"
+          alt=""
+          className="w-full max-w-[220px] sm:max-w-[280px] md:max-w-[320px] h-auto mb-6 md:mb-8"
+        />
+        <h2 className="serif-headline text-2xl md:text-[36px] text-primary leading-tight max-w-3xl">
+          Product managers are judged on impact, not effort.
+        </h2>
+      </div>
 
       {/* Horizontal Before → After Visual */}
       <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6">
