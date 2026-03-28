@@ -59,11 +59,11 @@ export const FAQPage = () => (
   <div className="max-w-5xl mx-auto px-8 md:px-12 pb-24">
     <header className="pt-32 pb-16 fade-in">
       <div className="flex flex-col md:flex-row md:items-stretch gap-8 md:gap-10 lg:gap-12">
-        <div className="flex shrink-0 justify-center md:justify-start md:w-[min(42%,280px)] lg:w-[min(38%,300px)] md:self-stretch md:min-h-0 md:items-center md:flex">
+        <div className="flex shrink-0 justify-center md:justify-start md:w-[min(21%,140px)] lg:w-[min(19%,150px)] md:self-stretch md:min-h-0 md:items-center md:flex">
           <img
             src="/question-icon.svg"
             alt=""
-            className="h-28 w-28 sm:h-32 sm:w-32 md:h-full md:w-full md:max-h-full object-contain object-center md:object-left"
+            className="h-14 w-14 object-contain object-center sm:h-16 sm:w-16 md:h-auto md:w-full md:max-w-full md:object-left"
           />
         </div>
         <div className="flex min-w-0 flex-1 flex-col justify-center text-center md:text-left">

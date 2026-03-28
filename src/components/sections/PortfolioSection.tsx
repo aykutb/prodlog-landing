@@ -29,8 +29,12 @@ export const PortfolioSection = () => (
 
         {/* Profile Header */}
         <div className="flex flex-col items-center text-center mb-4 md:mb-8">
-          <div className="w-14 h-14 md:w-20 md:h-20 rounded-full bg-gradient-to-br from-deep-ink-blue/20 to-deep-ink-blue/5 border-2 md:border-4 border-divider flex items-center justify-center mb-2 md:mb-4">
-            <span className="text-lg md:text-2xl font-bold text-deep-ink-blue">SC</span>
+          <div className="mb-2 md:mb-4 h-14 w-14 shrink-0 overflow-hidden rounded-full border-2 border-divider md:h-20 md:w-20 md:border-4">
+            <img
+              src="/sarah.svg"
+              alt=""
+              className="h-full w-full object-cover"
+            />
           </div>
           <h2 className="text-base md:text-xl font-semibold text-primary">Sarah Chen</h2>
           <p className="text-[10px] md:text-xs text-muted mb-0.5 md:mb-1">@sarahchen</p>

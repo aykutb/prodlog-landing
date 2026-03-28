@@ -1,5 +1,5 @@
 import React from 'react';
-import { CTASection, PageHeader } from '@/src/components/ui';
+import { CTASection } from '@/src/components/ui';
 
 const PRIVACY_FEATURES = [
   {
@@ -26,10 +26,25 @@ const PRIVACY_FEATURES = [
 
 export const PrivacyPage = () => (
   <div className="max-w-5xl mx-auto px-8 md:px-12 pb-24">
-    <PageHeader
-      title="Privacy is the foundation"
-      subtitle="Your career documentation deserves a private place to live. Prodlog is built around this principle."
-    />
+    <header className="pt-32 pb-16 fade-in">
+      <div className="flex flex-col md:flex-row md:items-stretch gap-8 md:gap-10 lg:gap-12">
+        <div className="flex shrink-0 justify-center md:justify-start md:w-[min(21%,140px)] lg:w-[min(19%,150px)] md:self-stretch md:min-h-0 md:items-center md:flex">
+          <img
+            src="/private-icon.svg"
+            alt=""
+            className="h-14 w-14 object-contain object-center sm:h-16 sm:w-16 md:h-auto md:w-full md:max-w-full md:object-left"
+          />
+        </div>
+        <div className="flex min-w-0 flex-1 flex-col justify-center text-center md:text-left">
+          <h1 className="serif-headline text-3xl md:text-[48px] mb-4 md:mb-6 text-primary leading-tight">
+            Privacy is the foundation
+          </h1>
+          <p className="text-secondary text-base md:text-lg leading-relaxed max-w-2xl md:max-w-none mx-auto md:mx-0">
+            Your career documentation deserves a private place to live. Prodlog is built around this principle.
+          </p>
+        </div>
+      </div>
+    </header>
 
     <div className="grid md:grid-cols-2 gap-8 mb-16">
       {/* Privacy Controls Visual */}

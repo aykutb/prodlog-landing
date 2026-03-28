@@ -4,13 +4,24 @@ import { CTASection, ScrollReveal } from '@/src/components/ui';
 export const HowItWorksPage = () => (
   <div className="max-w-5xl mx-auto px-8 md:px-12 pb-24">
     {/* Hero Header */}
-    <header className="pt-32 pb-16 text-center fade-in">
-      <h1 className="serif-headline text-3xl md:text-[48px] mb-6 text-primary leading-tight">
-        How Prodlog works
-      </h1>
-      <p className="text-secondary text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
-        Capture work as you go, get it verified, then turn it into reviews and a portfolio without starting from a blank page.
-      </p>
+    <header className="pt-32 pb-16 fade-in">
+      <div className="flex flex-col md:flex-row md:items-stretch gap-8 md:gap-10 lg:gap-12">
+        <div className="flex shrink-0 justify-center md:justify-start md:w-[min(21%,140px)] lg:w-[min(19%,150px)] md:self-stretch md:min-h-0 md:items-center md:flex">
+          <img
+            src="/flow-arrows-icon.svg"
+            alt=""
+            className="h-14 w-14 object-contain object-center sm:h-16 sm:w-16 md:h-auto md:w-full md:max-w-full md:object-left"
+          />
+        </div>
+        <div className="flex min-w-0 flex-1 flex-col justify-center text-center md:text-left">
+          <h1 className="serif-headline text-3xl md:text-[48px] mb-4 md:mb-6 text-primary leading-tight">
+            How Prodlog works
+          </h1>
+          <p className="text-secondary text-base md:text-lg leading-relaxed max-w-2xl md:max-w-none mx-auto md:mx-0">
+            Capture work as you go, get it verified, then turn it into reviews and a portfolio without starting from a blank page.
+          </p>
+        </div>
+      </div>
     </header>
 
     {/* Hero Screenshot - Logs Page Visual */}
