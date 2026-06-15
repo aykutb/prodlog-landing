@@ -1,20 +1,23 @@
+'use client';
+
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export const Navbar = () => {
-  const location = useLocation();
+  const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navLinkClass = (path: string) =>
     `transition-all text-sm ${
-      location.pathname === path
+      pathname === path
         ? 'text-primary font-medium'
         : 'text-muted hover:text-primary'
     }`;
 
   const mobileNavLinkClass = (path: string) =>
     `block py-4 px-6 transition-colors text-base ${
-      location.pathname === path
+      pathname === path
         ? 'text-primary font-medium bg-charcoal/30'
         : 'text-muted hover:text-primary hover:bg-charcoal/20'
     }`;
@@ -29,11 +32,14 @@ export const Navbar = () => {
       <div className="fixed top-0 left-0 right-0 z-50 px-4 pt-4">
         <nav className="max-w-4xl mx-auto bg-white/80 backdrop-blur-xl border border-divider rounded-2xl shadow-sm">
           <div className="px-4 md:px-6 h-12 flex items-center justify-between">
-            <Link to="/" className="cursor-pointer flex items-center gap-2">
+            <Link href="/" className="cursor-pointer flex items-center gap-2">
               <img src="/logomark.svg" alt="" className="h-5" />
-              <span 
+              <span
                 className="text-primary font-normal text-lg"
-                style={{ letterSpacing: '-0.07em', fontFamily: 'Outfit, sans-serif' }}
+                style={{
+                  letterSpacing: '-0.07em',
+                  fontFamily: 'var(--font-outfit), sans-serif',
+                }}
               >
                 Prodlog
               </span>
@@ -41,10 +47,10 @@ export const Navbar = () => {
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-6">
-              <Link to="/how-it-works" className={navLinkClass('/how-it-works')}>
+              <Link href="/how-it-works" className={navLinkClass('/how-it-works')}>
                 How it works
               </Link>
-              <Link to="/pricing" className={navLinkClass('/pricing')}>
+              <Link href="/pricing" className={navLinkClass('/pricing')}>
                 Pricing
               </Link>
               <a
@@ -91,14 +97,14 @@ export const Navbar = () => {
       >
         <div className="py-2">
           <Link
-            to="/how-it-works"
+            href="/how-it-works"
             className={mobileNavLinkClass('/how-it-works')}
             onClick={handleLinkClick}
           >
             How it works
           </Link>
           <Link
-            to="/pricing"
+            href="/pricing"
             className={mobileNavLinkClass('/pricing')}
             onClick={handleLinkClick}
           >

@@ -5,11 +5,8 @@ import {
   ThreePillarsSection,
   LogFromAnywhereSection,
   ValidationSection,
-  UseCasesSection,
   SummariesSection,
   PortfolioSection,
-  SocialProofSection,
-  DifferentiationSection,
   FinalCTASection,
 } from '@/src/components/sections';
 

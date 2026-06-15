@@ -20,14 +20,14 @@
   --color-impact: #1F2A44;
 
   /* Fonts */
-  --font-serif: 'Source Serif 4', Georgia, serif;
-  --font-sans: Inter, system-ui, sans-serif;
+  --font-serif: var(--font-source-serif), Georgia, serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
 }
 
 body {
   background-color: #F6F7F9;
   color: #1E1F24;
-  font-family: Inter, system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -69,5 +69,5 @@ body {
 }
 
 .serif-headline {
-  font-family: 'Source Serif 4', Georgia, serif;
+  font-family: var(--font-source-serif), Georgia, serif;
 }

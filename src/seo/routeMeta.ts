@@ -1,0 +1,54 @@
+export type RouteMeta = {
+  title: string;
+  description: string;
+};
+
+/** Per-path SEO. Paths must match React Router locations (no trailing slash except `/`). */
+export const ROUTE_META: Record<string, RouteMeta> = {
+  '/': {
+    title: 'Prodlog | PM Portfolio, Impact Logs & Brag Document',
+    description:
+      'Build your product manager portfolio and PM impact log in one place. Capture wins for performance reviews, PM interviews, and your brag document—without scattered docs.',
+  },
+  '/how-it-works': {
+    title: 'How It Works | PM Impact Log & Portfolio | Prodlog',
+    description:
+      'See how Prodlog turns shipped work into verified impact logs and a PM portfolio you can use for reviews, your brag document, and interview prep.',
+  },
+  '/privacy': {
+    title: 'Privacy-First Career Docs | Prodlog',
+    description:
+      'Prodlog is built so your PM impact logs and portfolio stay yours. Learn how we approach privacy for career documentation.',
+  },
+  '/privacy-policy': {
+    title: 'Privacy Policy | Prodlog',
+    description:
+      'Read the Prodlog privacy policy: what we collect, how we use data, and how to contact us about your information.',
+  },
+  '/terms': {
+    title: 'Terms of Service | Prodlog',
+    description:
+      'Terms governing your use of Prodlog. Delaware governing law. Contact support@prodlog.app with questions.',
+  },
+  '/pricing': {
+    title: 'Pricing | Prodlog',
+    description:
+      'Freemium pricing for PM impact logs and your product manager portfolio. Compare Free and Pro and start logging wins.',
+  },
+  '/faq': {
+    title: 'FAQ | PM Interviews, STAR Framework & Impact Logs | Prodlog',
+    description:
+      'Answers about PM interviews, the STAR framework, impact logs, brag documents, and building a product manager portfolio with Prodlog.',
+  },
+  '/sample': {
+    title: 'Sample PM Impact Logs | Examples | Prodlog',
+    description:
+      'Browse sample PM impact log examples. See how verified work feeds your brag document and PM portfolio for reviews and interviews.',
+  },
+};
+
+const FALLBACK = ROUTE_META['/']!;
+
+export function getRouteMeta(pathname: string): RouteMeta {
+  return ROUTE_META[pathname] ?? FALLBACK;
+}

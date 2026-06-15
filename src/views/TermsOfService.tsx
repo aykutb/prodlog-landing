@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { PageHeader } from '@/src/components/ui';
 
 const Section = ({ title, children }: { title: string; children: React.ReactNode }) => (
@@ -72,7 +72,7 @@ export const TermsOfServicePage = () => (
       <Section title="6. Privacy">
         <p>
           Our collection and use of personal information is described in our{' '}
-          <Link to="/privacy-policy" className="text-deep-ink-blue underline hover:opacity-80">
+          <Link href="/privacy-policy" className="text-deep-ink-blue underline hover:opacity-80">
             Privacy Policy
           </Link>
           . By using the Service, you acknowledge that we may process information as described there.

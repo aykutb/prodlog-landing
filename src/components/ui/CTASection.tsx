@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 interface CTASectionProps {
   centered?: boolean;
@@ -17,7 +17,7 @@ export const CTASection = ({ centered = true, showSecondary = true }: CTASection
       </a>
       {showSecondary && (
         <Link
-          to="/sample"
+          href="/sample"
           className="w-full md:w-auto border border-divider text-primary px-6 py-3 rounded font-medium text-sm hover:bg-charcoal transition-all text-center"
         >
           See a sample log page

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { PageHeader } from '@/src/components/ui';
 
 const Section = ({ title, children }: { title: string; children: React.ReactNode }) => (
@@ -24,7 +24,7 @@ export const PrivacyPolicyPage = () => (
           Prodlog Inc. (“Prodlog,” “we,” “us,” or “our”) operates the Prodlog websites, applications,
           and related services (collectively, the “Service”). This Privacy Policy explains how we handle
           personal information when you use the Service. For contractual terms, see our{' '}
-          <Link to="/terms" className="text-deep-ink-blue underline hover:opacity-80">
+          <Link href="/terms" className="text-deep-ink-blue underline hover:opacity-80">
             Terms of Service
           </Link>
           .
