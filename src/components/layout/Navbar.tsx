@@ -1,10 +1,17 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { isResourcePath } from '@/src/navigation/resourcesNav';
+import { ResourcesDropdown } from './ResourcesDropdown';
+import type { NavItem } from '@/src/lib/content';
 
-export const Navbar = () => {
+interface NavbarProps {
+  compareNavItems: NavItem[];
+}
+
+export const Navbar = ({ compareNavItems }: NavbarProps) => {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -22,9 +29,25 @@ export const Navbar = () => {
         : 'text-muted hover:text-primary hover:bg-charcoal/20'
     }`;
 
+  useEffect(() => {
+    if (!isMenuOpen) return;
+
+    document.body.style.overflow = 'hidden';
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setIsMenuOpen(false);
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.body.style.overflow = '';
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isMenuOpen]);
+
   const handleLinkClick = () => {
     setIsMenuOpen(false);
   };
+
+  const resourcesActive = isResourcePath(pathname);
 
   return (
     <>
@@ -50,6 +73,16 @@ export const Navbar = () => {
               <Link href="/how-it-works" className={navLinkClass('/how-it-works')}>
                 How it works
               </Link>
+              <ResourcesDropdown
+                isActive={resourcesActive}
+                compareNavItems={compareNavItems}
+                linkClassName={
+                  resourcesActive
+                    ? 'transition-all text-sm text-primary font-medium'
+                    : 'transition-all text-sm text-muted hover:text-primary'
+                }
+                onNavigate={handleLinkClick}
+              />
               <Link href="/pricing" className={navLinkClass('/pricing')}>
                 Pricing
               </Link>
@@ -66,6 +99,7 @@ export const Navbar = () => {
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="md:hidden p-2 text-muted hover:text-primary transition-colors -mr-2"
               aria-label="Toggle menu"
+              aria-expanded={isMenuOpen}
             >
               {isMenuOpen ? (
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -91,7 +125,7 @@ export const Navbar = () => {
 
       {/* Mobile Menu Panel */}
       <div
-        className={`fixed top-20 left-4 right-4 bg-white border border-divider rounded-2xl shadow-lg z-40 md:hidden transform transition-all duration-200 ease-out ${
+        className={`fixed top-20 left-4 right-4 max-h-[calc(100dvh-6rem)] overflow-y-auto overscroll-contain bg-white border border-divider rounded-2xl shadow-lg z-40 md:hidden transform transition-all duration-200 ease-out ${
           isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'
         }`}
       >
@@ -103,6 +137,13 @@ export const Navbar = () => {
           >
             How it works
           </Link>
+          <ResourcesDropdown
+            variant="mobile"
+            isActive={resourcesActive}
+            compareNavItems={compareNavItems}
+            linkClassName=""
+            onNavigate={handleLinkClick}
+          />
           <Link
             href="/pricing"
             className={mobileNavLinkClass('/pricing')}
