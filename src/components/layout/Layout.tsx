@@ -1,26 +1,13 @@
-'use client';
-
-import React, { useEffect } from 'react';
-import { usePathname } from 'next/navigation';
-import { Navbar } from './Navbar';
-import { Footer } from './Footer';
+import React from 'react';
+import { getCompareNavItems } from '@/src/lib/content';
+import { LayoutClient } from './LayoutClient';
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
-export const Layout = ({ children }: LayoutProps) => {
-  const pathname = usePathname();
+export const Layout = async ({ children }: LayoutProps) => {
+  const compareNavItems = await getCompareNavItems();
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
-
-  return (
-    <div className="bg-ink min-h-screen text-primary selection:bg-impact/30 selection:text-white">
-      <Navbar />
-      <main>{children}</main>
-      <Footer />
-    </div>
-  );
+  return <LayoutClient compareNavItems={compareNavItems}>{children}</LayoutClient>;
 };

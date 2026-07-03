@@ -3,6 +3,7 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   outputFileTracingRoot: path.join(__dirname),
+  transpilePackages: ['next-sanity'],
 };
 
 export default nextConfig;

@@ -7,14 +7,42 @@ import {
   getOgImageUrl,
 } from '@/src/seo/siteUrl';
 
+export function createContentMetadata({
+  title,
+  description,
+  path,
+}: {
+  title: string;
+  description: string;
+  path: string;
+}): Metadata {
+  return buildMetadata({ title, description, pathname: path });
+}
+
 export function createRouteMetadata(pathname: string): Metadata {
   const meta = getRouteMeta(pathname);
+  return buildMetadata({
+    title: meta.title,
+    description: meta.description,
+    pathname,
+  });
+}
+
+function buildMetadata({
+  title,
+  description,
+  pathname,
+}: {
+  title: string;
+  description: string;
+  pathname: string;
+}): Metadata {
   const canonical = canonicalUrl(pathname);
   const ogImage = getOgImageUrl();
 
   return {
-    title: meta.title,
-    description: meta.description,
+    title,
+    description,
     alternates: {
       canonical,
     },
@@ -22,8 +50,8 @@ export function createRouteMetadata(pathname: string): Metadata {
       type: 'website',
       siteName: 'Prodlog',
       locale: 'en_US',
-      title: meta.title,
-      description: meta.description,
+      title,
+      description,
       url: canonical,
       images: [
         {
@@ -36,8 +64,8 @@ export function createRouteMetadata(pathname: string): Metadata {
     },
     twitter: {
       card: 'summary_large_image',
-      title: meta.title,
-      description: meta.description,
+      title,
+      description,
       images: [ogImage],
     },
   };

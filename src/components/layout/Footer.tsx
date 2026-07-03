@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { RESOURCES_NAV } from '@/src/navigation/resourcesNav';
 
 export const Footer = () => (
   <footer className="py-16 border-t border-divider">
@@ -26,7 +27,7 @@ export const Footer = () => (
         </div>
 
         {/* Right - Menu Columns */}
-        <div className="flex gap-16">
+        <div className="flex flex-wrap gap-16">
           <div className="flex flex-col gap-3">
             <span className="text-primary font-semibold text-sm">Product</span>
             <Link href="/how-it-works" className="text-muted text-sm hover:text-primary transition-colors">
@@ -38,6 +39,18 @@ export const Footer = () => (
             <Link href="/faq" className="text-muted text-sm hover:text-primary transition-colors">
               FAQ
             </Link>
+          </div>
+          <div className="flex flex-col gap-3">
+            <span className="text-primary font-semibold text-sm">Resources</span>
+            {RESOURCES_NAV.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="text-muted text-sm hover:text-primary transition-colors"
+              >
+                {item.label}
+              </Link>
+            ))}
           </div>
           <div className="flex flex-col gap-3">
             <span className="text-primary font-semibold text-sm">Company</span>
