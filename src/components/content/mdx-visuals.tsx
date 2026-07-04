@@ -133,7 +133,7 @@ export function ComparisonColumns({ leftTitle, rightTitle, children }: Compariso
   return (
     <div className="not-prose my-8 overflow-hidden rounded-xl border border-divider bg-white">
       <div className="grid grid-cols-2 border-b border-divider">
-        <div className="bg-deep-ink-blue/[0.04] px-4 py-3 text-sm font-semibold text-deep-ink-blue md:px-5">
+        <div className="bg-deep-ink-blue/8 px-4 py-3 text-sm font-semibold text-deep-ink-blue md:px-5">
           {leftTitle}
         </div>
         <div className="border-l border-divider px-4 py-3 text-sm font-semibold text-primary md:px-5">
@@ -156,12 +156,12 @@ export function ComparisonRow({ label, left, right }: ComparisonRowProps) {
   return (
     <div>
       {label && (
-        <p className="border-b border-divider/60 bg-charcoal/30 px-4 py-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-muted md:px-5">
+        <p className="px-4 pt-3 text-[10px] font-semibold uppercase tracking-[0.14em] text-muted md:px-5">
           {label}
         </p>
       )}
       <div className="grid grid-cols-2">
-        <p className="bg-deep-ink-blue/[0.02] px-4 py-3 text-sm leading-relaxed text-secondary md:px-5">
+        <p className="px-4 py-3 text-sm leading-relaxed text-secondary md:px-5">
           {left}
         </p>
         <p className="border-l border-divider px-4 py-3 text-sm leading-relaxed text-secondary md:px-5">
