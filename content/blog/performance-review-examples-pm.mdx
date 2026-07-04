@@ -1,11 +1,118 @@
 ---
 title: Performance Review Examples for PMs
-description: PM performance review examples and phrasing—how to present impact, tradeoffs, and growth areas clearly.
+description: >-
+  PM performance review examples and phrasing—how to present impact, tradeoffs,
+  and growth areas clearly.
 order: 2
 ---
 
-Performance reviews reward PMs who can connect daily work to business outcomes.
+The self-review is the highest-leverage document a PM writes all year — and most PMs write it like a diary. A quarter of real work, translated into a list of activities, read by a committee in about three minutes, rated, filed. The work was senior; the writing made it look mid-level.
 
-These examples show how to write self-reviews and talking points that land with managers and calibrations.
+Here's the part nobody says out loud: your review isn't evaluated by your manager. It's evaluated in a calibration room by people who weren't there, comparing you against PMs they also barely know, using whatever evidence fits on a slide. Your manager is your advocate in that room — and your self-review is their ammunition. Write it for the room, not for your manager.
 
-_More coming soon._
+This guide covers the four moves of a strong PM self-review, then the part that actually decides ratings: real before-and-after phrasing for shipping impact, invisible work, judgment calls, and the growth section everyone gets wrong.
+
+<ImagePlaceholder
+  label="Where your self-review actually goes"
+  caption="Flow diagram idea: self-review → manager's packet → calibration room → rating. Most PMs write for the first step; the document lives or dies at the third."
+/>
+
+## The four moves of a strong self-review
+
+<ProcessSteps>
+  <ProcessStep title="Lead with the outcome, not the effort">
+    The first sentence of every section is a number or a shipped change. Effort is assumed at your level; outcomes are the currency.
+  </ProcessStep>
+  <ProcessStep title="Attach evidence, not adjectives">
+    Links, dashboard snapshots, a quote from a partner team. "Widely praised" is your opinion; a staff engineer's sentence is a fact.
+  </ProcessStep>
+  <ProcessStep title="Show one visible tradeoff">
+    What you chose not to do, and why. Tradeoffs are the difference between "shipped a lot" and "exercised judgment" — only one of those is a senior rating.
+  </ProcessStep>
+  <ProcessStep title="Name your growth area before the room does" isLast>
+    Calibration will find a weakness; the only question is whether you framed it first, with a system attached.
+  </ProcessStep>
+</ProcessSteps>
+
+## Phrasing that survives calibration
+
+The same quarter can read junior or senior depending entirely on the sentences. Four categories, weak and strong versions of each.
+
+### Shipping impact
+
+**Weak:** "Led the redesign of the checkout flow and collaborated closely with engineering and design to deliver a great experience."
+
+**Strong:** "Shipped the checkout redesign in Q2: conversion +14%, payment-failure tickets −22%. Cut scope twice to hold the date — saved-cards v2 moved to Q3, with no measurable loss in the A/B holdout."
+
+The strong version has verbs, numbers, and a visible scope decision. Note what it doesn't have: the word "collaborated." Collaboration is demonstrated by the fact that a cross-functional project shipped — claiming it as a skill wastes the line.
+
+### Influence and invisible work
+
+**Weak:** "Played a key role in improving cross-team alignment and communication."
+
+**Strong:** "Unblocked the payments migration by negotiating an API contract freeze with Platform six weeks early; their EM cited it in their retro as the reason the cutover held."
+
+Invisible work becomes visible through borrowed credibility. One sentence from another team's retro, doc, or Slack outweighs a paragraph of self-description. If nobody else ever wrote down that your influence mattered, that's a thing to fix during the quarter — not in review week.
+
+### Judgment calls and things you killed
+
+**Weak:** — this category is usually just absent. Most self-reviews only contain things that shipped.
+
+**Strong:** "Killed the loyalty pilot in week 3 when early retention came in at half the business case; reallocated the pod to search, which became the Q3 result above."
+
+This is the controversial one, so here's the senior take: a well-reasoned kill is stronger calibration evidence than a mediocre launch. A review containing only green wins reads as either a lucky quarter or a PM who doesn't make hard calls. One deliberate "no" with reasoning signals the judgment that ratings above "meets" are actually about.
+
+### The growth area
+
+**Weak:** "I want to continue improving my communication and stakeholder management skills."
+
+**Strong:** "I escalated the vendor risk too late in Q1 — I flagged in week 8 what I suspected in week 3. Since then I've run a pre-mortem at kickoff on both new initiatives; both surfaced risks that changed sequencing."
+
+The weak version is humility theater — a non-answer that invites the room to substitute its own opinion of your weaknesses. The strong version follows one rule: **past-tense mistake, present-tense system.** Name a real, specific miss, then show the mechanism you built so it doesn't recur. That converts the weakness section from a liability into more evidence of seniority.
+
+<ImagePlaceholder
+  label="Before / after: the same quarter, two ways"
+  caption="Side-by-side card idea: identical quarter written in activity language (left) vs outcome language (right), with the numbers and tradeoffs visually highlighted on the right."
+/>
+
+## Anti-patterns that quietly cap your rating
+
+- **The laundry list.** Twelve items at equal weight reads as no judgment about what mattered. Three outcomes with depth beat twelve bullets every time.
+- **Adjectives doing the work of evidence.** "Significant," "successfully," and "key role" are what people write when they don't have the number.
+- **Recency bias.** Reviews written in the last week over-index on the last month. Q1's win paid for this quarter's rating too — if you can still remember it.
+- **Disappearing from your own review.** "The team shipped X" — calibration needs to know what *you* decided, changed, or unblocked. Credit the team specifically and claim your decisions specifically.
+- **Surprise wins.** If your manager first learns about an accomplishment while reading your self-review, it's too late for them to have socialized it. The review should confirm a narrative, not introduce one.
+
+## You can't write this in review week
+
+The hard part of everything above isn't the phrasing — it's the raw material. By review week, the dashboard has changed, the Slack thread is archived, and "conversion +14%" has become "I think it was double digits?" The difference between the weak and strong lines in this post is mostly whether the numbers survived the six months between the work and the writing.
+
+That's a logging habit, not a writing skill. The strong entries above look like this when they're captured in the moment:
+
+<BragExamplesGrid>
+  <BragExampleCard
+    title="Checkout redesign shipped"
+    initiative="Checkout conversion (Q2 flagship)"
+    role="Lead PM — scope calls, launch decision"
+    collaborators="Checkout pod, payments eng, design"
+    outcome="Conversion +14%, payment-failure tickets −22% (holdout-verified)"
+    notes="Cut saved-cards v2 to hold the date. Revisit in Q3 — flagged no loss in holdout."
+  />
+  <BragExampleCard
+    title="Killed loyalty pilot at week 3"
+    initiative="Loyalty pilot"
+    role="Made the kill call, wrote the post-mortem"
+    collaborators="Growth pod, finance for the model rerun"
+    outcome="Week-2 retention at 50% of business case; pod reallocated to search"
+    notes="CFO agreed with the math in the Thursday review. Search reallocation became the Q3 win."
+  />
+</BragExamplesGrid>
+
+Six months later, each of those becomes a one-line review bullet with the numbers intact. That's the whole trick — a [brag document](/brag-document) is a self-review paying itself forward one entry at a time.
+
+<ImagePlaceholder
+  label="From running log to review line"
+  caption="Illustration idea: a quarter's timeline of small logged entries condensing (arrow / funnel) into one polished self-review bullet — many small notes in, one strong numbered line out."
+/>
+
+<ArticleCTA message="Review season rewards PMs who kept receipts. Prodlog is the running log of wins, numbers, and tradeoffs that writes your next self-review for you." />

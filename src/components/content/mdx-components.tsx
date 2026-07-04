@@ -4,6 +4,8 @@ import { CTASection } from '@/src/components/ui';
 import {
   BragExampleCard,
   BragExamplesGrid,
+  ComparisonColumns,
+  ComparisonRow,
   ImagePlaceholder,
   NotComparisonCard,
   NotComparisonSection,
@@ -68,22 +70,34 @@ type TemplateDownloadCTAProps = {
   href?: string;
   download?: string;
   children?: React.ReactNode;
+  /** Alternative API used by template pages */
+  title?: string;
+  description?: string;
+  fileUrl?: string;
+  fileLabel?: string;
 };
 
 export function TemplateDownloadCTA({
   href = '/downloads/pm-brag-document-template',
   download = 'pm-brag-document-template.docx',
   children = 'Download the free template',
+  title,
+  description,
+  fileUrl,
+  fileLabel,
 }: TemplateDownloadCTAProps) {
   return (
     <div className="not-prose my-6">
       <a
-        href={href}
-        download={download}
+        href={fileUrl ?? href}
+        download={fileLabel ?? download}
         className="inline-block bg-deep-ink-blue !text-white px-6 py-3 rounded font-medium text-sm hover:opacity-90 transition-all no-underline mdx-btn-primary"
       >
-        {children}
+        {title ?? children}
       </a>
+      {description && (
+        <p className="mt-2 text-xs text-muted">{description}</p>
+      )}
     </div>
   );
 }
@@ -128,4 +142,6 @@ export const mdxComponents = {
   NotComparisonCard,
   ProcessSteps,
   ProcessStep,
+  ComparisonColumns,
+  ComparisonRow,
 };

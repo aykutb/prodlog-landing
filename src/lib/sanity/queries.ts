@@ -8,6 +8,9 @@ export type SanityContentPage = {
   description: string;
   headline?: string;
   order?: number;
+  author?: string;
+  imageUrl?: string;
+  updatedAt?: string;
   body: string;
   downloadUrl?: string;
 };
@@ -19,6 +22,9 @@ export const contentPagesBySectionQuery = groq`
     description,
     headline,
     order,
+    author,
+    "imageUrl": image.asset->url,
+    "updatedAt": _updatedAt,
     body,
     "downloadUrl": downloadFile.asset->url
   }
@@ -31,6 +37,9 @@ export const contentPageBySectionAndSlugQuery = groq`
     description,
     headline,
     order,
+    author,
+    "imageUrl": image.asset->url,
+    "updatedAt": _updatedAt,
     body,
     "downloadUrl": downloadFile.asset->url
   }

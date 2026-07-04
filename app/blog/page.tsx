@@ -1,4 +1,4 @@
-import { HubPage } from '@/src/components/content/HubPage';
+import { BlogHub } from '@/src/components/content/BlogHub';
 import { HUBS } from '@/src/content/resources';
 import { getAllSectionEntries } from '@/src/lib/content';
 import { createContentMetadata } from '@/src/seo/metadata';
@@ -16,5 +16,5 @@ export const metadata = createContentMetadata({
 
 export default async function Page() {
   const entries = await getAllSectionEntries(SECTION);
-  return <HubPage hub={hub} section={SECTION} entries={entries} />;
+  return <BlogHub hub={hub} section={SECTION} entries={entries} />;
 }

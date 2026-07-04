@@ -1,11 +1,142 @@
 ---
 title: STAR Method Examples for PM Interviews
-description: STAR framework examples tailored to product managers—structure behavioral answers with real impact.
+description: >-
+  STAR framework examples tailored to product managers—structure behavioral
+  answers with real impact.
 order: 1
 ---
 
-The STAR method (Situation, Task, Action, Result) helps PMs tell crisp stories in behavioral interviews.
+The STAR method (Situation, Task, Action, Result) is table stakes for PM interviews — every candidate walks in knowing it. What separates offers from rejections isn't whether you use the structure. It's whether your stories survive the questions senior interviewers actually ask.
 
-These examples show how to frame product work with outcomes recruiters and hiring managers care about.
+Here's the uncomfortable truth: at the senior level, interviewers deliberately pick controversial prompts. Disagreeing with engineering. Shipping against the data. Killing something customers loved. Owning a failed launch. They do this because process can be rehearsed, but judgment can't — and the fastest way to see judgment is to make you talk about conflict.
 
-_More coming soon._
+This guide covers the STAR structure in 30 seconds, then spends the rest of the time where interviews are actually won: five controversial questions with full example answers, and the specific ways candidates blow them.
+
+## The STAR structure in 30 seconds
+
+<ProcessSteps>
+  <ProcessStep title="Situation — one sentence of context">
+    Company stage, team, what was at stake. If your situation takes longer than 20 seconds, you're losing the room.
+  </ProcessStep>
+  <ProcessStep title="Task — your specific responsibility">
+    Not the team's mission. Yours. "I owned checkout conversion" beats "we were working on the purchase funnel."
+  </ProcessStep>
+  <ProcessStep title="Action — the decisions you made">
+    This is the bulk of the answer. What you chose, what you traded off, who you had to move, and how.
+  </ProcessStep>
+  <ProcessStep title="Result — the number, then the aftermath" isLast>
+    A metric, what happened next, and one thing you'd do differently. Senior candidates always volunteer the third part.
+  </ProcessStep>
+</ProcessSteps>
+
+A useful ratio: 10% situation, 10% task, 50% action, 30% result. Most candidates invert it — two minutes of scene-setting, then "and it went well."
+
+## Five controversial questions, answered
+
+### 1. "Tell me about a time you disagreed with your engineering lead"
+
+**What's being tested:** whether you win arguments with evidence or with escalation — and whether the relationship survived.
+
+**Situation:** We were rebuilding onboarding at a Series B fintech. Our engineering lead wanted to migrate the flow to the new design system first — a six-week detour — before touching activation.
+
+**Task:** I owned activation rate, which had been flat at 34% for two quarters, and I had committed a move to the leadership team by end of quarter.
+
+**Action:** Instead of arguing priorities in the abstract, I asked him to co-write the sequencing doc with me. We listed what each path made better, cheaper, or faster. His case was real — the old system genuinely slowed every experiment. So I proposed a split: we'd run three activation experiments on the old stack while one engineer started the migration behind a flag. I gave up two experiment slots to fund it.
+
+**Result:** Two of three experiments shipped; activation moved from 34% to 41% that quarter, and the migration landed a month later than he wanted but with zero conflict debt. The thing I'd change: I let the disagreement simmer for two weeks before forcing the conversation. That fortnight was pure waste.
+
+**Where candidates blow it:** telling a story where the engineer was simply wrong and you were simply right. Interviewers hear that as "this person will burn my senior engineers."
+
+### 2. "Tell me about a time you went against the data"
+
+**What's being tested:** whether you understand that data describes the past, and whether you can articulate when conviction should override it. This is the most controversial question in PM loops — some interviewers want to hear "never," and good candidates push back on that premise politely.
+
+**Situation:** At a marketplace company, our A/B test showed that removing seller phone numbers from listings increased in-platform message volume by 12% — a metric my team was goaled on.
+
+**Task:** I was the PM recommending whether to ship the change permanently.
+
+**Action:** I recommended against shipping it, in writing, to a VP who liked the number. The lift was real but the mechanism was coercion: we were making it harder to transact, not more attractive. I pulled 30 support tickets from the test cell showing sellers coaching buyers to find their numbers elsewhere, and framed the decision as short-term metric vs. marketplace trust. I proposed we goal instead on completed transactions, where the test was flat.
+
+**Result:** We didn't ship it. Two quarters later a competitor did ship the equivalent change and their seller churn became a public case study we quoted in planning. The honest coda: I couldn't prove the counterfactual at decision time, and I said so. Conviction against data should be rare, explicit, and documented — mine was one of maybe three times in six years.
+
+**Where candidates blow it:** romanticizing gut feel. If your story sounds like "the data said no but I believed," you've failed. The strong version is "the metric was measuring the wrong thing, and here's how I knew."
+
+### 3. "Tell me about a time you killed something customers loved"
+
+**What's being tested:** whether you can absorb hate for the right reasons — and how you handle the stakeholders who liked the thing.
+
+**Situation:** I inherited a "power user dashboard" used weekly by about 4% of accounts, including three of our ten largest customers. It consumed roughly a fifth of the team's maintenance capacity and blocked a platform upgrade.
+
+**Task:** Decide whether it lived or died, and own the fallout either way.
+
+**Action:** I interviewed eight of the heaviest users before deciding anything — not to validate killing it, but to find what job it was doing. Seven of eight used it for one export that our reporting API already served better. I made the kill call, but sequenced it: we built the export into core reporting first, gave 90 days notice with a migration guide, and I personally called the three big accounts before the email went out. Sales was angrier than the customers; I brought their VP the capacity math showing what the dashboard was costing the roadmap they kept asking for.
+
+**Result:** We lost zero accounts. Two escalations, both resolved with the new export. The platform upgrade shipped a quarter earlier, and the reclaimed capacity funded the integrations sales had ranked first for a year. What I'd change: I'd have found the "one export" insight a year earlier if I'd been talking to power users regularly instead of during a crisis.
+
+**Where candidates blow it:** skipping the people part. Killing features is a stakeholder story wearing a product story's clothes.
+
+### 4. "Walk me through a launch that failed"
+
+**What's being tested:** whether you take real ownership or perform it. "I should have communicated more" is performed ownership. Naming the flawed decision you made, with the information you had, is the real thing.
+
+**Situation:** We launched a subscription tier at a consumer app — my proposal, my pricing, my launch plan.
+
+**Task:** I owned the business case: 5% of monthly actives converting within two quarters.
+
+**Action and what actually happened:** We hit 0.9%. The post-mortem I wrote led with my own error: I had validated willingness to pay with a survey and a fake-door test, but both measured interest in the features, not in a subscription. The features bundled things people wanted occasionally, which monetizes as one-time purchases, not recurring revenue. I recommended we unbundle into consumable purchases, and cut the tier rather than let it linger.
+
+**Result:** The consumable model reached about 60% of the original revenue target with a fraction of the surface area. The failure became the pricing checklist the company still uses: every monetization proposal now has to state whether the underlying usage pattern is recurring. That checklist has probably saved more revenue than the launch lost.
+
+**Where candidates blow it:** choosing a fake failure ("we succeeded, just late") or blaming the market. Interviewers ask this question specifically to watch for deflection. Volunteer the decision you'd reverse.
+
+### 5. "Tell me about pushing back on an executive"
+
+**What's being tested:** spine, and whether you understand that "disagree and commit" has two verbs in it.
+
+**Situation:** Our CEO wanted an AI assistant in the product within a quarter, announced at our user conference. The team's capacity math said a credible version needed two.
+
+**Task:** As the area PM, I had to either find a way or say no with a plan — silence or heroics would both have been failures.
+
+**Action:** I didn't argue against the goal; I re-scoped what "launch" meant. I brought two options to the exec review: a demo-quality assistant on stage in one quarter with a waitlist, or general availability in two. I was explicit about what the one-quarter version couldn't do and where it would embarrass us if we called it GA. I recommended the waitlist path, and put the risk I most feared — support volume from a half-working assistant — on the slide rather than in the hallway.
+
+**Result:** He picked the waitlist option. The stage demo landed, the waitlist gave us 9,000 signups to learn from, and GA shipped the following quarter with retention 20 points above the demo cohort's. Once the decision was made, I defended the aggressive date to my own team as if it had been my idea — because at that point, it was.
+
+**Where candidates blow it:** stories where they secretly slow-rolled a decision they lost, or where "pushing back" means they complained to their manager. Executives on your panel are listening for whether you'd fight them honestly and then actually commit.
+
+## Where STAR answers fall apart
+
+Even with strong stories, four failure modes show up constantly in PM loops:
+
+- **The hero narrative.** If engineering, design, and data science are set dressing in your story, senior interviewers notice. Credit specifically: "our data scientist caught the selection bias" makes you look stronger, not weaker.
+- **Results without numbers.** "Significantly improved retention" is a red flag phrase. If you genuinely can't share the number, give the shape: "a double-digit relative lift, the biggest that team saw that year."
+- **Situations that never end.** Twenty seconds of context. Interviewers will ask if they need more.
+- **No scar tissue.** Every real story has something you'd do differently. Answers that end in flawless victory read as edited — and get probed harder.
+
+## You can't retrofit the R
+
+Here's what nobody tells you about STAR prep: the structure takes an evening to learn. The *results* take years to remember — and by the time you're interviewing, the numbers are gone. What was the actual conversion lift? Which quarter did the migration land? What did the VP say in that review?
+
+Senior PMs with great interview stories aren't better storytellers. They kept receipts. A [brag document](/brag-document) — a running log of what you shipped, the metrics that moved, and the messy tradeoffs behind each call — is the difference between "I think it was around 20%" and the crisp, numbered answers you just read. Start it while the work is happening, not the night before the loop.
+
+## FAQ
+
+<FAQSection>
+  <FAQItem
+    question="Should I use STAR for every interview question?"
+    answer="No. STAR is for behavioral questions — 'tell me about a time.' Product sense, estimation, and strategy questions need different structures, and forcing STAR onto them reads as rehearsed. Save it for the stories."
+  />
+  <FAQItem
+    question="How long should a STAR answer be?"
+    answer="About two minutes uninterrupted, then stop and let the interviewer dig. Strong candidates treat the follow-up questions as the real interview — that's where prepared answers end and judgment shows."
+  />
+  <FAQItem
+    question="What if my honest result was a failure?"
+    answer="Use it — deliberately. One well-owned failure story with a named decision you'd reverse builds more trust than five wins. Loops are designed to find your failure story anyway; better to bring one you've actually reflected on."
+  />
+  <FAQItem
+    question="Can I reuse the same story across a loop?"
+    answer="Once, at most. Interviewers compare notes in the debrief, and three panelists hearing the same checkout story reads as a thin track record. You need five or six distinct stories — which is exactly why keeping a running log beats cramming."
+  />
+</FAQSection>
+
+<ArticleCTA message="The best STAR answers are written in the moment, not the night before the loop. Prodlog is where PMs log the wins, the numbers, and the messy tradeoffs they'll need to talk about next time." />

@@ -44,7 +44,13 @@ export default async function Page({
   try {
     const article = await getSectionEntry(SECTION, slug);
     return (
-      <MdxArticle frontmatter={article.frontmatter}>{article.content}</MdxArticle>
+      <MdxArticle
+        frontmatter={article.frontmatter}
+        showByline
+        readingTimeMin={article.readingTimeMin}
+      >
+        {article.content}
+      </MdxArticle>
     );
   } catch {
     notFound();

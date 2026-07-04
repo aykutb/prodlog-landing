@@ -59,12 +59,26 @@ export const contentPage = defineType({
       description: 'Lower numbers appear first in hub listings.',
     }),
     defineField({
+      name: 'author',
+      title: 'Author',
+      type: 'string',
+      description: 'Shown on blog article pages and listing cards.',
+    }),
+    defineField({
+      name: 'image',
+      title: 'Card image',
+      type: 'image',
+      description:
+        'Shown on blog listing cards. Cards without an image get a styled placeholder tile.',
+      options: { hotspot: true },
+    }),
+    defineField({
       name: 'body',
       title: 'MDX body',
       type: 'text',
       rows: 30,
       description:
-        'MDX content without frontmatter. Use registered components: ProcessSteps, ProcessStep, FAQSection, FAQItem, BragExamplesGrid, BragExampleCard, ImagePlaceholder, TemplateDownloadCTA, ArticleCTA, NotComparisonSection, NotComparisonCard.',
+        'MDX content without frontmatter. Use registered components: ProcessSteps, ProcessStep, FAQSection, FAQItem, BragExamplesGrid, BragExampleCard, ImagePlaceholder, TemplateDownloadCTA, ArticleCTA, NotComparisonSection, NotComparisonCard, ComparisonColumns, ComparisonRow.',
       validation: (rule) => rule.required(),
     }),
     defineField({

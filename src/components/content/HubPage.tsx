@@ -22,7 +22,9 @@ export const HubPage = ({ hub, section, entries }: HubPageProps) => (
             href={sectionEntryPath(section, entry.slug)}
             className="block p-6 border border-divider rounded-xl bg-white hover:border-deep-ink-blue/30 hover:shadow-[0_4px_20px_-5px_rgba(31,42,68,0.1)] transition-all"
           >
-            <h2 className="text-primary font-semibold text-lg mb-2">{entry.frontmatter.title}</h2>
+            <h2 className="text-primary font-semibold text-lg mb-2">
+              {entry.frontmatter.headline ?? entry.frontmatter.title}
+            </h2>
             <p className="text-secondary text-sm leading-relaxed">
               {entry.frontmatter.description}
             </p>

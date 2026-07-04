@@ -16,7 +16,7 @@
   --color-divider: #D8DAE0;
   --color-primary: #1E1F24;
   --color-secondary: #4B4F5C;
-  --color-muted: #7A7F8C;
+  --color-muted: #646976; /* >=4.5:1 on white (WCAG AA) */
   --color-impact: #1F2A44;
 
   /* Fonts */

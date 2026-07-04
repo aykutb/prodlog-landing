@@ -19,6 +19,11 @@ export type ContentFrontmatter = {
   /** Visible page H1 (falls back to title without site suffix) */
   headline?: string;
   order?: number;
+  author?: string;
+  /** Card image URL (Sanity asset) */
+  image?: string;
+  /** ISO date of last content edit */
+  updatedAt?: string;
 };
 
 export type ContentSection = 'templates' | 'blog' | 'compare';
@@ -28,6 +33,7 @@ export type LoadedContent = {
   frontmatter: ContentFrontmatter;
   content: ReactElement;
   downloadUrl?: string;
+  readingTimeMin: number;
 };
 
 const SECTION_MAP: Record<ContentSection, SanityContentSection> = {
@@ -42,7 +48,18 @@ function toFrontmatter(page: SanityContentPage): ContentFrontmatter {
     description: page.description,
     headline: page.headline,
     order: page.order,
+    author: page.author,
+    image: page.imageUrl,
+    updatedAt: page.updatedAt,
   };
+}
+
+export function formatContentDate(iso: string): string {
+  return new Date(iso).toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  });
 }
 
 export async function compileMdxString(
@@ -57,11 +74,14 @@ export async function compileMdxString(
     options: { parseFrontmatter: false },
   });
 
+  const wordCount = body.split(/\s+/).filter(Boolean).length;
+
   return {
     slug,
     frontmatter,
     content,
     downloadUrl,
+    readingTimeMin: Math.max(1, Math.round(wordCount / 200)),
   };
 }
 

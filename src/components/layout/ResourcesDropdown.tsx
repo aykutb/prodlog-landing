@@ -159,6 +159,17 @@ export const ResourcesDropdown = ({
   // Tracks whether the menu was opened by hover, so the click that usually
   // follows a hover doesn't immediately toggle it closed.
   const hoverOpenRef = useRef(false);
+  // Short open delay so cursor travel across the nav doesn't flash the menu.
+  const hoverTimerRef = useRef<number | null>(null);
+
+  const cancelHoverTimer = () => {
+    if (hoverTimerRef.current !== null) {
+      window.clearTimeout(hoverTimerRef.current);
+      hoverTimerRef.current = null;
+    }
+  };
+
+  useEffect(() => cancelHoverTimer, []);
 
   useEffect(() => {
     if (variant !== 'desktop') return;
@@ -169,7 +180,6 @@ export const ResourcesDropdown = ({
         !containerRef.current.contains(event.target as Node)
       ) {
         setIsOpen(false);
-        setCompareOpen(false);
       }
     };
 
@@ -183,7 +193,6 @@ export const ResourcesDropdown = ({
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key !== 'Escape') return;
       setIsOpen(false);
-      setCompareOpen(false);
       buttonRef.current?.focus();
     };
 
@@ -288,22 +297,25 @@ export const ResourcesDropdown = ({
       ref={containerRef}
       className="relative"
       onMouseEnter={() => {
-        hoverOpenRef.current = true;
-        setIsOpen(true);
+        cancelHoverTimer();
+        hoverTimerRef.current = window.setTimeout(() => {
+          hoverTimerRef.current = null;
+          hoverOpenRef.current = true;
+          setIsOpen(true);
+        }, 120);
       }}
       onMouseLeave={(e) => {
+        cancelHoverTimer();
         const next = e.relatedTarget;
         if (next instanceof Node && containerRef.current?.contains(next)) {
           return;
         }
         hoverOpenRef.current = false;
         setIsOpen(false);
-        setCompareOpen(false);
       }}
       onBlur={(e) => {
         if (!e.currentTarget.contains(e.relatedTarget as Node | null)) {
           setIsOpen(false);
-          setCompareOpen(false);
         }
       }}
     >
@@ -315,12 +327,12 @@ export const ResourcesDropdown = ({
         aria-haspopup="true"
         onClick={() => {
           if (!isOpen) {
+            cancelHoverTimer();
             setIsOpen(true);
           } else if (hoverOpenRef.current) {
             hoverOpenRef.current = false;
           } else {
             setIsOpen(false);
-            setCompareOpen(false);
           }
         }}
       >
@@ -352,76 +364,31 @@ export const ResourcesDropdown = ({
                   <HubRow key={item.href} item={item} onNavigate={handleLinkClick} />
                 ))}
 
-                <div
-                  className="relative"
-                  onMouseEnter={() => setCompareOpen(true)}
-                  onMouseLeave={() => setCompareOpen(false)}
-                  onFocus={() => setCompareOpen(true)}
-                  onBlur={(e) => {
-                    if (!e.currentTarget.contains(e.relatedTarget as Node | null)) {
-                      setCompareOpen(false);
-                    }
-                  }}
-                >
-                  <Link
-                    href={COMPARE_HUB.href}
-                    onClick={handleLinkClick}
-                    className={`group flex items-start gap-3 rounded-xl border ${itemPadding} transition-all ${
-                      compareOpen
-                        ? 'border-deep-ink-blue/20 bg-charcoal/40'
-                        : 'border-transparent hover:border-divider hover:bg-charcoal/35'
-                    }`}
-                  >
-                    <div
-                      className={`${iconBoxClass} transition-colors ${
-                        compareOpen
-                          ? 'border-deep-ink-blue/25 bg-deep-ink-blue/8 text-deep-ink-blue'
-                          : 'border-divider bg-charcoal/50 text-muted group-hover:text-deep-ink-blue'
-                      }`}
-                    >
-                      <CompareIcon />
-                    </div>
-                    <div className="min-w-0 flex-1 pt-0.5">
-                      <p className="text-sm font-medium text-primary">Compare</p>
-                      <p className="mt-0.5 text-xs leading-relaxed text-muted">
-                        Prodlog vs alternatives
-                      </p>
-                    </div>
-                    <ChevronRight
-                      className={`mt-2.5 h-4 w-4 shrink-0 rotate-180 transition-all ${
-                        compareOpen ? '-translate-x-0.5 text-deep-ink-blue' : 'text-muted'
-                      }`}
-                    />
-                  </Link>
-
-                  {compareOpen && compareNavItems.length > 0 && (
-                    <div className="absolute right-full top-0 z-50 flex items-stretch">
-                      <div className="min-w-[240px] overflow-hidden rounded-xl border border-divider bg-white py-2 shadow-[0_16px_40px_-12px_rgba(31,42,68,0.2)]">
-                        <Link
-                          href={COMPARE_HUB.href}
-                          onClick={handleLinkClick}
-                          className="block px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-muted transition-colors hover:bg-charcoal/40 hover:text-primary"
-                        >
-                          All comparisons
-                        </Link>
-                        <div className="mx-3 border-t border-divider" />
-                        {compareNavItems.map((item) => (
-                          <Link
-                            key={item.href}
-                            href={item.href}
-                            onClick={handleLinkClick}
-                            className="block px-4 py-2.5 text-sm text-secondary transition-colors hover:bg-charcoal/40 hover:text-primary"
-                          >
-                            {item.label}
-                          </Link>
-                        ))}
-                      </div>
-                      {/* Invisible bridge so the cursor can reach the flyout without closing */}
-                      <div className="w-4 shrink-0" aria-hidden="true" />
-                    </div>
-                  )}
-                </div>
               </div>
+            </div>
+
+            <div className="mt-5 flex flex-wrap items-center gap-2 border-t border-divider pt-4">
+              <span className="flex items-center gap-2 pr-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-muted">
+                <CompareIcon />
+                Compare
+              </span>
+              {compareNavItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={handleLinkClick}
+                  className="rounded-lg border border-divider bg-charcoal/30 px-3 py-1.5 text-xs font-medium text-secondary transition-colors hover:border-deep-ink-blue/25 hover:bg-charcoal/50 hover:text-primary"
+                >
+                  {item.label}
+                </Link>
+              ))}
+              <Link
+                href={COMPARE_HUB.href}
+                onClick={handleLinkClick}
+                className="ml-auto text-xs font-medium text-muted transition-colors hover:text-deep-ink-blue"
+              >
+                All comparisons →
+              </Link>
             </div>
           </div>
         </div>
