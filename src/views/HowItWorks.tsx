@@ -4,24 +4,14 @@ import { CTASection, ScrollReveal } from '@/src/components/ui';
 export const HowItWorksPage = () => (
   <div className="max-w-5xl mx-auto px-8 md:px-12 pb-24">
     {/* Hero Header */}
-    <header className="pt-32 pb-16 fade-in">
-      <div className="flex flex-col md:flex-row md:items-stretch gap-8 md:gap-10 lg:gap-12">
-        <div className="flex shrink-0 justify-center md:justify-start md:w-[min(21%,140px)] lg:w-[min(19%,150px)] md:self-stretch md:min-h-0 md:items-center md:flex">
-          <img
-            src="/flow-arrows-icon.svg"
-            alt=""
-            className="h-14 w-14 object-contain object-center sm:h-16 sm:w-16 md:h-auto md:w-full md:max-w-full md:object-left"
-          />
-        </div>
-        <div className="flex min-w-0 flex-1 flex-col justify-center text-center md:text-left">
-          <h1 className="serif-headline text-3xl md:text-[48px] mb-4 md:mb-6 text-primary leading-tight">
-            How Prodlog works
-          </h1>
-          <p className="text-secondary text-base md:text-lg leading-relaxed max-w-2xl md:max-w-none mx-auto md:mx-0">
-            Capture work as you go, get it verified, then turn it into reviews and a portfolio without starting from a blank page.
-          </p>
-        </div>
-      </div>
+    <header className="pt-32 pb-16 fade-in text-center">
+      <img src="/flow-arrows-icon.svg" alt="" className="mx-auto mb-6 h-12 w-12" />
+      <h1 className="serif-headline text-3xl md:text-[48px] mb-6 text-primary leading-tight">
+        How Prodlog works
+      </h1>
+      <p className="text-secondary text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
+        Capture work as you go, get it verified, then turn it into reviews and a portfolio without starting from a blank page.
+      </p>
     </header>
 
     {/* Hero Screenshot - Logs Page Visual */}
@@ -47,7 +37,7 @@ export const HowItWorksPage = () => (
             <div className="rounded-lg border border-divider bg-white p-4 shadow-[0_2px_12px_-4px_rgba(31,42,68,0.12)]">
               <div className="flex items-center flex-wrap gap-2 mb-2">
                 <span className="text-[10px] px-2 py-0.5 rounded bg-sage-green/10 text-sage-green font-medium">Done</span>
-                <span className="text-[10px] px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 border border-blue-500/30 font-medium">
+                <span className="text-[10px] px-2 py-0.5 rounded bg-sage-green/10 text-sage-green border border-sage-green/20 font-medium">
                   Verified
                 </span>
                 <span className="text-[10px] text-muted">Dec 15, 2025</span>
@@ -79,7 +69,7 @@ export const HowItWorksPage = () => (
     <div className="space-y-8 mb-20">
       {/* Step 1: Capture from anywhere */}
       <ScrollReveal>
-      <div className="bg-white border border-divider rounded-xl p-8 hover:border-deep-ink-blue/30 hover:shadow-[0_4px_20px_-5px_rgba(31,42,68,0.1)] transition-all">
+      <div className="bg-white border border-divider rounded-xl p-8">
         <div className="grid md:grid-cols-2 gap-8 items-start">
           <div>
             <div className="text-deep-ink-blue text-3xl serif-headline mb-4 opacity-30">01</div>
@@ -121,7 +111,7 @@ export const HowItWorksPage = () => (
 
       {/* Step 2: Verification */}
       <ScrollReveal>
-      <div className="bg-white border border-divider rounded-xl p-8 hover:border-deep-ink-blue/30 hover:shadow-[0_4px_20px_-5px_rgba(31,42,68,0.1)] transition-all">
+      <div className="bg-white border border-divider rounded-xl p-8">
         <div className="grid md:grid-cols-2 gap-8 items-start">
           <div>
             <div className="text-deep-ink-blue text-3xl serif-headline mb-4 opacity-30">02</div>
@@ -135,7 +125,7 @@ export const HowItWorksPage = () => (
             <div className="rounded border border-divider bg-white p-3 shadow-sm">
               <div className="flex items-center flex-wrap gap-2 mb-2">
                 <span className="text-[10px] px-2 py-0.5 rounded bg-sage-green/10 text-sage-green font-medium">Done</span>
-                <span className="text-[10px] px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 border border-blue-500/30 font-medium">
+                <span className="text-[10px] px-2 py-0.5 rounded bg-sage-green/10 text-sage-green border border-sage-green/20 font-medium">
                   Verified
                 </span>
               </div>
@@ -153,7 +143,7 @@ export const HowItWorksPage = () => (
 
       {/* Step 3: Summaries for reviews */}
       <ScrollReveal>
-      <div className="bg-white border border-divider rounded-xl p-8 hover:border-deep-ink-blue/30 hover:shadow-[0_4px_20px_-5px_rgba(31,42,68,0.1)] transition-all">
+      <div className="bg-white border border-divider rounded-xl p-8">
         <div className="grid md:grid-cols-2 gap-8 items-start">
           <div>
             <div className="text-deep-ink-blue text-3xl serif-headline mb-4 opacity-30">03</div>
@@ -191,7 +181,7 @@ export const HowItWorksPage = () => (
 
       {/* Step 4: Portfolio */}
       <ScrollReveal>
-      <div className="bg-white border border-divider rounded-xl p-8 hover:border-deep-ink-blue/30 hover:shadow-[0_4px_20px_-5px_rgba(31,42,68,0.1)] transition-all">
+      <div className="bg-white border border-divider rounded-xl p-8">
         <div className="grid md:grid-cols-2 gap-8 items-start">
           <div>
             <div className="text-deep-ink-blue text-3xl serif-headline mb-4 opacity-30">04</div>
