@@ -1,7 +1,10 @@
 import type { Metadata } from 'next';
 import { Inter, Outfit, Source_Serif_4 } from 'next/font/google';
+import Script from 'next/script';
 import { Layout } from '@/src/components/layout';
 import './globals.css';
+
+const GA_MEASUREMENT_ID = 'G-VYKQQTGRNT';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -40,6 +43,22 @@ export default function RootLayout({
     >
       <body>
         <Layout>{children}</Layout>
+        {process.env.NODE_ENV === 'production' && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script id="google-analytics" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${GA_MEASUREMENT_ID}');
+              `}
+            </Script>
+          </>
+        )}
       </body>
     </html>
   );
