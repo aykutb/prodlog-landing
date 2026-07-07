@@ -76,9 +76,12 @@ export async function compileMdxString(
 
   const wordCount = body.split(/\s+/).filter(Boolean).length;
 
+  // Cards fall back to the first image in the body when no card image is set.
+  const bodyImage = body.match(/src="(\/images\/[^"]+)"/)?.[1];
+
   return {
     slug,
-    frontmatter,
+    frontmatter: { ...frontmatter, image: frontmatter.image ?? bodyImage },
     content,
     downloadUrl,
     readingTimeMin: Math.max(1, Math.round(wordCount / 200)),

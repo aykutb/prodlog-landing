@@ -41,7 +41,7 @@ type BragExampleAccent = 'metric' | 'process' | 'deprioritize';
 
 type BragExampleCardProps = {
   title: string;
-  date: string;
+  date?: string;
   initiative: string;
   role: string;
   collaborators: string;
@@ -89,11 +89,13 @@ export function BragExampleCard({
     >
       <div className="flex items-start justify-between gap-2 mb-4">
         <h3 className="text-primary font-semibold text-sm leading-snug">{title}</h3>
-        <span
-          className={`shrink-0 text-[10px] px-2 py-0.5 rounded border font-medium ${accentBadge[accent]}`}
-        >
-          {date}
-        </span>
+        {date && (
+          <span
+            className={`shrink-0 text-[10px] px-2 py-0.5 rounded border font-medium ${accentBadge[accent]}`}
+          >
+            {date}
+          </span>
+        )}
       </div>
       <dl className="space-y-3">
         <ExampleField label="Initiative" value={initiative} />
@@ -111,14 +113,22 @@ type BragExamplesGridProps = {
 };
 
 export function BragExamplesGrid({ children }: BragExamplesGridProps) {
+  const count = React.Children.count(children);
+  const cols =
+    count <= 1 ? 'md:grid-cols-1' : count === 2 ? 'md:grid-cols-2' : 'md:grid-cols-3';
+
   return (
     <div className="not-prose my-6 -mx-2 md:mx-0">
-      <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2 px-2 md:px-0 md:grid md:grid-cols-3 md:overflow-visible md:snap-none">
+      <div
+        className={`flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2 px-2 md:px-0 md:grid ${cols} md:overflow-visible md:snap-none`}
+      >
         {children}
       </div>
-      <p className="mt-3 text-xs text-muted text-center md:hidden">
-        Swipe to see more examples →
-      </p>
+      {count > 1 && (
+        <p className="mt-3 text-xs text-muted text-center md:hidden">
+          Swipe to see more examples →
+        </p>
+      )}
     </div>
   );
 }

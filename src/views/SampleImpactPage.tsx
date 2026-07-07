@@ -122,7 +122,7 @@ const SampleImpactCard = ({ log }: { log: typeof SAMPLE_LOGS[0] }) => {
               </span>
               
               {log.isVerified && (
-                <span className="inline-flex items-center text-xs font-medium px-2.5 py-1 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/30">
+                <span className="inline-flex items-center text-xs font-medium px-2.5 py-1 rounded-full bg-sage-green/10 text-sage-green border border-sage-green/30">
                   <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
