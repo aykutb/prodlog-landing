@@ -1,0 +1,21 @@
+import { createClient, type SupabaseClient } from '@supabase/supabase-js';
+
+let client: SupabaseClient | null = null;
+
+/**
+ * Anon-key Supabase client for public portfolio reads. Server-side only —
+ * RLS scopes anonymous access to public rows, same as the dashboard SPA.
+ */
+export function getSupabase(): SupabaseClient {
+  if (!client) {
+    const url = process.env.SUPABASE_URL;
+    const key = process.env.SUPABASE_ANON_KEY;
+    if (!url || !key) {
+      throw new Error('SUPABASE_URL and SUPABASE_ANON_KEY must be set');
+    }
+    client = createClient(url, key, {
+      auth: { persistSession: false, autoRefreshToken: false },
+    });
+  }
+  return client;
+}
