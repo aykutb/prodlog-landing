@@ -3,6 +3,11 @@ import { getSupabase } from './supabase';
 // Shapes mirror the dashboard app's Supabase tables (prodlog2), limited to
 // the fields the public portfolio renders.
 
+export interface FavoriteProduct {
+  name: string;
+  url: string;
+}
+
 export interface PortfolioProfile {
   user_id: string;
   username: string;
@@ -18,6 +23,7 @@ export interface PortfolioProfile {
   substack_url: string | null;
   medium_url: string | null;
   career_start_date: string | null;
+  favorite_products: FavoriteProduct[] | null;
 }
 
 export interface PortfolioMetric {
@@ -30,6 +36,7 @@ export interface PortfolioLog {
   id: string;
   title: string;
   description: string | null;
+  content: string | null;
   change_description: string | null;
   metrics: PortfolioMetric[] | null;
   date: string;
@@ -43,18 +50,45 @@ export interface PortfolioProduct {
   name: string;
   type: string | null;
   url: string | null;
+  business_model: string | null;
+  problem_definition: string | null;
+  start_date: string | null;
+  end_date: string | null;
+}
+
+/** Bento card layout config, as stored by the dashboard app (types/bento.ts). */
+export interface BentoCardConfig {
+  id: string;
+  type:
+    | 'profile'
+    | 'stats'
+    | 'social_links'
+    | 'contribution'
+    | 'inspiring_products'
+    | 'single_product'
+    | 'all_products'
+    | 'product_list'
+    | 'single_log'
+    | 'all_logs';
+  size: 'S' | 'M' | 'L';
+  order: number;
+  contentId?: string;
+  customTitle?: string;
+  selectedProductIds?: string[];
 }
 
 export interface Portfolio {
   profile: PortfolioProfile;
   logs: PortfolioLog[];
   products: PortfolioProduct[];
+  /** The user's bento layout; null when they haven't customized it (use defaults). */
+  bentoCards: BentoCardConfig[] | null;
   /** log ids that have at least one accepted (verified_at set) verification */
   verifiedLogIds: Set<string>;
 }
 
 const PROFILE_FIELDS =
-  'user_id, username, first_name, last_name, title, bio, avatar_url, linkedin_url, twitter_url, github_url, dribbble_url, substack_url, medium_url, career_start_date';
+  'user_id, username, first_name, last_name, title, bio, avatar_url, linkedin_url, twitter_url, github_url, dribbble_url, substack_url, medium_url, career_start_date, favorite_products';
 
 /** Minimum public log count (with a bio) for indexing + build-time static generation. */
 export const QUALITY_BAR_MIN_LOGS = 5;
@@ -85,18 +119,23 @@ export async function fetchPortfolio(username: string): Promise<Portfolio | null
   if (error) throw error;
   if (!profile) return null;
 
-  const [logsRes, productsRes] = await Promise.all([
+  const [logsRes, productsRes, bentoRes] = await Promise.all([
     supabase
       .from('logs')
-      .select('id, title, description, change_description, metrics, date, quarter, tags, product_id')
+      .select('id, title, description, content, change_description, metrics, date, quarter, tags, product_id')
       .eq('user_id', profile.user_id)
       .eq('is_public', true)
       .order('date', { ascending: false }),
     supabase
       .from('products')
-      .select('id, name, type, url')
+      .select('id, name, type, url, business_model, problem_definition, start_date, end_date')
       .eq('user_id', profile.user_id)
       .order('end_date', { ascending: false, nullsFirst: false }),
+    supabase
+      .from('bento_cards')
+      .select('cards')
+      .eq('user_id', profile.user_id)
+      .maybeSingle(),
   ]);
 
   if (logsRes.error) throw logsRes.error;
@@ -120,6 +159,7 @@ export async function fetchPortfolio(username: string): Promise<Portfolio | null
     profile,
     logs,
     products: (productsRes.data ?? []) as PortfolioProduct[],
+    bentoCards: (bentoRes.data?.cards as BentoCardConfig[] | undefined) ?? null,
     verifiedLogIds,
   };
 }
