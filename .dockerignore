@@ -1,0 +1,14 @@
+node_modules
+.next
+.git
+.github
+.claude
+dist
+scripts
+*.tsbuildinfo
+.env
+.env.*
+README.md
+.DS_Store
+Dockerfile
+.dockerignore
