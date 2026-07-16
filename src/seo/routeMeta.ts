@@ -31,9 +31,9 @@ export const ROUTE_META: Record<string, RouteMeta> = {
       'Terms governing your use of Prodlog. Delaware governing law. Contact support@prodlog.app with questions.',
   },
   '/pricing': {
-    title: 'Pricing | Prodlog',
+    title: 'Pricing | Free During Early Access | Prodlog',
     description:
-      'Freemium pricing for PM impact logs and your product manager portfolio. Compare Free and Pro and start logging wins.',
+      'Prodlog is free while in early access: the first 1,000 founding members get Pro free for a year. Unlimited entries, private by default, export anytime.',
   },
   '/faq': {
     title: 'FAQ | PM Interviews, STAR Framework & Impact Logs | Prodlog',
