@@ -30,6 +30,11 @@ export const ROUTE_META: Record<string, RouteMeta> = {
     description:
       'Terms governing your use of Prodlog. Delaware governing law. Contact support@prodlog.app with questions.',
   },
+  '/integrations/slack': {
+    title: 'Log Work in Slack | Prodlog Slack Integration',
+    description:
+      'Log shipped work to your brag document without leaving Slack. One slash command captures what shipped, your role, and the outcome — straight into your Prodlog timeline.',
+  },
   '/pricing': {
     title: 'Pricing | Free During Early Access | Prodlog',
     description:
@@ -39,6 +44,11 @@ export const ROUTE_META: Record<string, RouteMeta> = {
     title: 'FAQ | PM Interviews, STAR Framework & Impact Logs | Prodlog',
     description:
       'Answers about PM interviews, the STAR framework, impact logs, brag documents, and building a product manager portfolio with Prodlog.',
+  },
+  '/support': {
+    title: 'Support | Prodlog',
+    description:
+      'Need help with Prodlog? Send us a support request and we will get back to you by email, or reach us directly at support@prodlog.app.',
   },
   '/sample': {
     title: 'Sample PM Impact Logs | Examples | Prodlog',

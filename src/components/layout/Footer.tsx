@@ -57,6 +57,9 @@ export const Footer = () => (
             <Link href="/privacy" className="text-muted text-sm hover:text-primary transition-colors">
               Privacy
             </Link>
+            <Link href="/support" className="text-muted text-sm hover:text-primary transition-colors">
+              Support
+            </Link>
           </div>
         </div>
       </div>
