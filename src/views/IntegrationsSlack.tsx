@@ -12,6 +12,7 @@ const STEPS = [
       label: 'Slack message box with the /log slash command typed in a channel',
       caption: 'Trigger a new log from any Slack channel or DM.',
       alt: 'Typing the /log slash command into the Slack message box in a team channel',
+      src: '/images/slack-log-command.png',
     },
   },
   {
@@ -21,6 +22,7 @@ const STEPS = [
       label: 'Prodlog modal open in Slack with fields for what shipped, role, collaborators, and outcome',
       caption: 'Capture the win in a structured form without leaving Slack.',
       alt: 'Prodlog modal in Slack with fields for what shipped, your role, collaborators, and outcome',
+      src: '/images/slack-log-modal.png',
     },
   },
   {
@@ -30,6 +32,7 @@ const STEPS = [
       label: 'Prodlog timeline showing the new entry that was just logged from Slack',
       caption: 'Every Slack log lands in your timeline, ready for review season.',
       alt: 'Prodlog timeline with a newly logged entry created from Slack at the top',
+      src: '/images/slack-log-timeline.png',
     },
   },
 ];
@@ -78,11 +81,7 @@ export const IntegrationsSlackPage = () => (
                   <p className="text-secondary text-sm leading-relaxed">{step.body}</p>
                 </div>
                 <div className="[&_figure]:my-0">
-                  <ImagePlaceholder
-                    label={step.placeholder.label}
-                    caption={step.placeholder.caption}
-                    alt={step.placeholder.alt}
-                  />
+                  <ImagePlaceholder {...step.placeholder} />
                 </div>
               </div>
             </div>
