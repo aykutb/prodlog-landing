@@ -20,6 +20,19 @@ import {
 import { PaginatedCardPages } from './PaginatedCardPages';
 import { ActivityGrid } from './ActivityGrid';
 import {
+  BeforeAfterCard,
+  DecisionCard,
+  DomainExpertiseCard,
+  EmbedCard,
+  ImpactMetricCard,
+  KillCard,
+  NowCard,
+  SkillsMatrixCard,
+  TestimonialCard,
+  TradeoffCard,
+  WritingCard,
+} from './EvidenceCards';
+import {
   Building2Icon,
   CalendarIcon,
   DribbbleIcon,
@@ -194,35 +207,6 @@ const ContributionCard = ({ logs }: { logs: PortfolioLog[] }) => {
         {yearCount} contribution{yearCount !== 1 ? 's' : ''} in the last year
       </h3>
       <ActivityGrid logDates={logs.map((log) => log.date)} />
-    </div>
-  );
-};
-
-// ─── inspiring_products ──────────────────────────────────────────────
-
-const InspiringProductsCard = ({ portfolio, size }: { portfolio: Portfolio; size: Size }) => {
-  const favorites = portfolio.profile.favorite_products ?? [];
-  const pages = chunk(favorites, getItemsPerPage(size, 2)).map((pageItems, i) => (
-    <div key={i} className="flex flex-wrap gap-2">
-      {pageItems.map((product, index) => (
-        <a
-          key={index}
-          href={product.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-divider hover:border-impact/40 text-sm transition-colors"
-        >
-          <ProductFavicon url={product.url} pixelSize={32} className="w-4 h-4" fallbackIconClass="w-3 h-3" />
-          <span>{product.name}</span>
-        </a>
-      ))}
-    </div>
-  ));
-
-  return (
-    <div className="p-4 h-full flex flex-col relative">
-      <h3 className="text-sm font-serif font-medium text-muted mb-3">Inspiring Products</h3>
-      <PaginatedCardPages pages={pages} />
     </div>
   );
 };
@@ -517,8 +501,42 @@ const renderCard = (card: BentoCardConfig, portfolio: Portfolio): React.ReactNod
       return <SocialLinksCard portfolio={portfolio} size={card.size} />;
     case 'contribution':
       return <ContributionCard logs={logs} />;
-    case 'inspiring_products':
-      return <InspiringProductsCard portfolio={portfolio} size={card.size} />;
+    case 'now':
+      return <NowCard card={card} size={card.size} />;
+    case 'skills_matrix':
+      return <SkillsMatrixCard portfolio={portfolio} size={card.size} />;
+    case 'domain_expertise':
+      return <DomainExpertiseCard domains={portfolio.domains} size={card.size} />;
+    case 'impact_metric': {
+      const metric = portfolio.impactMetrics.find((m) => m.id === card.contentId);
+      return metric ? <ImpactMetricCard metric={metric} portfolio={portfolio} size={card.size} /> : null;
+    }
+    case 'decision': {
+      const decision = portfolio.decisions.find((d) => d.id === card.contentId);
+      return decision ? <DecisionCard decision={decision} portfolio={portfolio} size={card.size} /> : null;
+    }
+    case 'tradeoff': {
+      const tradeoff = portfolio.tradeoffs.find((t) => t.id === card.contentId);
+      return tradeoff ? <TradeoffCard tradeoff={tradeoff} portfolio={portfolio} size={card.size} /> : null;
+    }
+    case 'kill': {
+      const kill = portfolio.kills.find((k) => k.id === card.contentId);
+      return kill ? <KillCard kill={kill} portfolio={portfolio} size={card.size} /> : null;
+    }
+    case 'verified_testimonial': {
+      const testimonial = portfolio.testimonials.find((t) => t.id === card.contentId);
+      return testimonial ? <TestimonialCard testimonial={testimonial} size={card.size} /> : null;
+    }
+    case 'before_after': {
+      const beforeAfter = portfolio.beforeAfters.find((b) => b.id === card.contentId);
+      return beforeAfter ? (
+        <BeforeAfterCard beforeAfter={beforeAfter} portfolio={portfolio} size={card.size} />
+      ) : null;
+    }
+    case 'writing':
+      return <WritingCard writings={portfolio.writings} size={card.size} />;
+    case 'embed':
+      return <EmbedCard card={card} size={card.size} />;
     case 'single_product': {
       const product = products.find((p) => p.id === card.contentId);
       return product ? <SingleProductCard product={product} size={card.size} /> : null;

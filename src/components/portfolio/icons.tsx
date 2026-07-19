@@ -126,3 +126,69 @@ export const MediumIcon = ({ className }: IconProps) => (
     <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z" />
   </svg>
 );
+
+// ─── Evidence card icons (lucide paths) ─────────────────────────────
+
+export const CheckIcon = (props: IconProps) =>
+  lucide(props, <path d="M20 6 9 17l-5-5" />);
+
+export const ExternalLinkIcon = (props: IconProps) =>
+  lucide(
+    props,
+    <>
+      <path d="M15 3h6v6" />
+      <path d="M10 14 21 3" />
+      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+    </>,
+  );
+
+export const LockIcon = (props: IconProps) =>
+  lucide(
+    props,
+    <>
+      <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+      <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+    </>,
+  );
+
+export const CornerDownRightIcon = (props: IconProps) =>
+  lucide(
+    props,
+    <>
+      <polyline points="15 10 20 15 15 20" />
+      <path d="M4 4v7a4 4 0 0 0 4 4h12" />
+    </>,
+  );
+
+export const ArrowRightIcon = (props: IconProps) =>
+  lucide(
+    props,
+    <>
+      <path d="M5 12h14" />
+      <path d="m12 5 7 7-7 7" />
+    </>,
+  );
+
+export const ArrowUpIcon = (props: IconProps) =>
+  lucide(
+    props,
+    <>
+      <path d="m5 12 7-7 7 7" />
+      <path d="M12 19V5" />
+    </>,
+  );
+
+export const ArrowDownIcon = (props: IconProps) =>
+  lucide(
+    props,
+    <>
+      <path d="M12 5v14" />
+      <path d="m19 12-7 7-7-7" />
+    </>,
+  );
+
+export const ChevronDownIcon = (props: IconProps) =>
+  lucide(props, <path d="m6 9 6 6 6-6" />);
+
+export const ChevronUpIcon = (props: IconProps) =>
+  lucide(props, <path d="m18 15-6-6-6 6" />);

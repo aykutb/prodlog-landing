@@ -15,9 +15,8 @@ export const DEFAULT_BENTO_CARDS: BentoCardConfig[] = [
   { id: 'default-stats', type: 'stats', size: 'S', order: 1 },
   { id: 'default-social', type: 'social_links', size: 'S', order: 2 },
   { id: 'default-contribution', type: 'contribution', size: 'M', order: 3 },
-  { id: 'default-inspiring', type: 'inspiring_products', size: 'M', order: 4 },
-  { id: 'default-all-products', type: 'all_products', size: 'M', order: 5 },
-  { id: 'default-all-logs', type: 'all_logs', size: 'L', order: 6 },
+  { id: 'default-all-products', type: 'all_products', size: 'M', order: 4 },
+  { id: 'default-all-logs', type: 'all_logs', size: 'L', order: 5 },
 ];
 
 /** Items per bento-card page: L → 8 (2-col) / 4 (1-col); S, M → 4 / 2. */
@@ -25,6 +24,8 @@ export function getItemsPerPage(size: BentoCardConfig['size'], columns: 1 | 2 = 
   if (size === 'L') return columns === 2 ? 8 : 4;
   return columns === 2 ? 4 : 2;
 }
+
+const MIN_PUBLIC_SKILLS = 3;
 
 /** Same rule the dashboard uses to hide empty cards from visitors. */
 export function isCardEmpty(card: BentoCardConfig, portfolio: Portfolio): boolean {
@@ -41,8 +42,6 @@ export function isCardEmpty(card: BentoCardConfig, portfolio: Portfolio): boolea
         profile.substack_url ||
         profile.medium_url
       );
-    case 'inspiring_products':
-      return !(profile.favorite_products && profile.favorite_products.length > 0);
     case 'all_products':
       return products.length === 0;
     case 'single_product':
@@ -53,6 +52,29 @@ export function isCardEmpty(card: BentoCardConfig, portfolio: Portfolio): boolea
       return logs.length === 0;
     case 'single_log':
       return !card.contentId || !logs.some((l) => l.id === card.contentId);
+    case 'now':
+      return !card.nowText?.trim();
+    case 'skills_matrix':
+      return portfolio.skills.length < MIN_PUBLIC_SKILLS;
+    case 'domain_expertise':
+      return portfolio.domains.length === 0;
+    case 'impact_metric':
+      return !card.contentId || !portfolio.impactMetrics.some((m) => m.id === card.contentId);
+    case 'decision':
+      return !card.contentId || !portfolio.decisions.some((d) => d.id === card.contentId);
+    case 'tradeoff':
+      return !card.contentId || !portfolio.tradeoffs.some((t) => t.id === card.contentId);
+    case 'kill':
+      return !card.contentId || !portfolio.kills.some((k) => k.id === card.contentId);
+    case 'verified_testimonial':
+      // The public view only ever contains confirmed testimonials
+      return !card.contentId || !portfolio.testimonials.some((t) => t.id === card.contentId);
+    case 'before_after':
+      return !card.contentId || !portfolio.beforeAfters.some((b) => b.id === card.contentId);
+    case 'writing':
+      return portfolio.writings.length === 0;
+    case 'embed':
+      return !card.embedUrl?.trim();
     default:
       return false; // stats, contribution are never hidden
   }
