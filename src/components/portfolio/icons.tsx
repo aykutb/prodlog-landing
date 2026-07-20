@@ -129,6 +129,24 @@ export const MediumIcon = ({ className }: IconProps) => (
 
 // ─── Evidence card icons (lucide paths) ─────────────────────────────
 
+export const PenLineIcon = (props: IconProps) =>
+  lucide(
+    props,
+    <>
+      <path d="M12 20h9" />
+      <path d="M16.376 3.622a1 1 0 0 1 3.002 3.002L7.368 18.635a2 2 0 0 1-.855.506l-2.872.838a.5.5 0 0 1-.62-.62l.838-2.872a2 2 0 0 1 .506-.854z" />
+    </>,
+  );
+
+export const BadgeCheckIcon = (props: IconProps) =>
+  lucide(
+    props,
+    <>
+      <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" />
+      <path d="m9 12 2 2 4-4" />
+    </>,
+  );
+
 export const CheckIcon = (props: IconProps) =>
   lucide(props, <path d="M20 6 9 17l-5-5" />);
 

@@ -13,7 +13,7 @@ import type {
   PortfolioTradeoff,
   PortfolioWriting,
 } from '@/src/lib/portfolio/data';
-import { formatMonthYear, getFaviconUrl } from '@/src/lib/portfolio/bento';
+import { formatMonthYear, formatShortDate, getFaviconUrl } from '@/src/lib/portfolio/bento';
 import {
   AGED_CHIP_LABELS,
   SKILL_CATEGORIES,
@@ -28,16 +28,19 @@ import {
 } from '@/src/lib/portfolio/evidence';
 import { resolveEmbed, safeLinkParts } from '@/src/lib/portfolio/embed';
 import { InlineReveal } from './InlineReveal';
+import { WritingCover } from './WritingCover';
 import {
   ArrowDownIcon,
   ArrowRightIcon,
   ArrowUpIcon,
+  BadgeCheckIcon,
   CheckIcon,
   CornerDownRightIcon,
   ExternalLinkIcon,
   FileTextIcon,
   LockIcon,
   PackageIcon,
+  PenLineIcon,
 } from './icons';
 
 // Read-only, server-rendered versions of the dashboard's evidence bento
@@ -654,39 +657,51 @@ export const TestimonialCard = ({
       className={`h-full flex flex-col overflow-hidden ${isLarge ? 'p-5' : 'px-4 py-3'}`}
       aria-label={`Testimonial from ${testimonial.verifier_name}, confirmed`}
     >
+      {/* Accent-tinted verification badge */}
+      <span className="inline-flex w-fit shrink-0 items-center gap-1 rounded-full bg-impact/10 px-2 py-0.5 text-impact">
+        <BadgeCheckIcon className="w-3 h-3 shrink-0" />
+        <span className="text-[10px] font-medium uppercase tracking-wider">Verified testimonial</span>
+      </span>
+
+      {/* The quote is the hero: serif voice, larger than body text */}
       <blockquote
-        className={`flex-1 min-h-0 text-primary leading-relaxed overflow-hidden ${
-          isLarge ? 'text-base line-clamp-5' : 'text-sm line-clamp-3'
+        className={`flex-1 min-h-0 overflow-hidden font-serif text-primary leading-snug ${
+          isLarge ? 'mt-2.5 text-xl line-clamp-4' : 'mt-2 text-base line-clamp-2'
         }`}
       >
         “{testimonial.quote}”
       </blockquote>
-      <div className={`shrink-0 ${isLarge ? 'mt-3 space-y-1.5' : 'mt-2'}`}>
-        <div className="flex items-center gap-2.5 min-w-0">
-          <div
-            className={`rounded-full bg-impact/10 flex items-center justify-center shrink-0 ${
-              isLarge ? 'w-9 h-9' : 'w-8 h-8'
-            }`}
-          >
-            <span className="text-xs font-medium text-impact">{initialsOf(testimonial.verifier_name)}</span>
+
+      {/* Credential block under a hairline divider */}
+      <div className={`shrink-0 border-t border-divider ${isLarge ? 'mt-3 pt-3' : 'mt-2 pt-2'}`}>
+        <div className="flex items-center justify-between gap-3 min-w-0">
+          <div className="flex items-center gap-2.5 min-w-0">
+            <div
+              className={`rounded-full bg-impact/10 flex items-center justify-center shrink-0 ${
+                isLarge ? 'w-9 h-9' : 'w-8 h-8'
+              }`}
+            >
+              <span className="text-xs font-medium text-impact">{initialsOf(testimonial.verifier_name)}</span>
+            </div>
+            <div className="min-w-0">
+              <p className="text-sm font-medium text-primary min-w-0 truncate">
+                {testimonial.verifier_name}
+                <CheckIcon className="inline w-3.5 h-3.5 ml-1 align-[-2px] text-primary" />
+              </p>
+              {meta && <p className="text-xs text-muted truncate">{meta}</p>}
+            </div>
           </div>
-          <div className="min-w-0">
-            <p className="text-sm min-w-0 truncate">
-              <CheckIcon className="inline w-3.5 h-3.5 text-primary mr-1 align-[-2px]" />
-              <span className="text-muted">Confirmed by </span>
-              <span className="font-medium text-primary">{testimonial.verifier_name}</span>
-            </p>
-            {meta && <p className="text-xs text-muted truncate">{meta}</p>}
-          </div>
+          {testimonial.confirmed_at && (
+            <div className="text-right shrink-0">
+              <p className="text-xs text-muted">
+                {testimonial.edited_by_verifier ? 'Edited & confirmed' : 'Confirmed'}
+              </p>
+              <p className="text-[11px] text-muted/70">{formatMonthYear(testimonial.confirmed_at)}</p>
+            </div>
+          )}
         </div>
         {isLarge && testimonial.relationship && (
-          <p className="text-xs text-muted line-clamp-1">{testimonial.relationship}</p>
-        )}
-        {isLarge && testimonial.confirmed_at && (
-          <p className="text-[11px] text-muted/70">
-            {testimonial.edited_by_verifier ? 'Edited and confirmed' : 'Confirmed'}{' '}
-            {formatMonthYear(testimonial.confirmed_at)}
-          </p>
+          <p className="mt-1.5 text-xs text-muted line-clamp-1">{testimonial.relationship}</p>
         )}
       </div>
     </div>
@@ -849,30 +864,73 @@ const writingHostname = (url: string | null): string | null => {
   return parts ? parts.hostname.replace(/^www\./, '') : null;
 };
 
-const WritingRow = ({ item, showNote }: { item: PortfolioWriting; showNote: boolean }) => {
-  const publication = item.publication?.trim() || writingHostname(item.url);
-  const meta = [publication, item.published_on ? formatMonthYear(item.published_on) : null]
+// Known publishing hosts → reader-facing platform names, so the meta row says
+// "Substack" instead of "100p100d.substack.com". Mirrors the dashboard's
+// WritingBentoCard mapping (prodlog2); dot-anchored suffix match.
+const PLATFORM_NAMES: ReadonlyArray<readonly [suffix: string, name: string]> = [
+  ['substack.com', 'Substack'],
+  ['medium.com', 'Medium'],
+  ['dev.to', 'DEV'],
+  ['hashnode.dev', 'Hashnode'],
+  ['notion.site', 'Notion'],
+  ['linkedin.com', 'LinkedIn'],
+  ['ghost.io', 'Ghost'],
+  ['wordpress.com', 'WordPress'],
+  ['beehiiv.com', 'beehiiv'],
+  ['mirror.xyz', 'Mirror'],
+  ['x.com', 'X'],
+  ['twitter.com', 'X'],
+  ['github.com', 'GitHub'],
+  ['youtube.com', 'YouTube'],
+];
+
+const looksLikeHostname = (s: string): boolean => /^[a-z0-9-]+(\.[a-z0-9-]+)+$/i.test(s);
+
+const prettifyHost = (host: string): string => {
+  for (const [suffix, name] of PLATFORM_NAMES) {
+    if (host === suffix || host.endsWith(`.${suffix}`)) return name;
+  }
+  return host;
+};
+
+/** Platform name for the meta row. A hand-written publication wins as-is; a
+ *  stored/derived hostname is mapped to its platform name when known. */
+const platformLabel = (publication: string | null, url: string | null): string | null => {
+  const stored = publication?.trim() || null;
+  if (stored && !looksLikeHostname(stored)) return stored;
+  const host = stored ?? writingHostname(url);
+  return host ? prettifyHost(host) : null;
+};
+
+/** Meta row parts: platform · date · read time — only whatever is present. */
+const writingMetaLine = (item: PortfolioWriting): string =>
+  [
+    platformLabel(item.publication, item.url),
+    item.published_on ? formatShortDate(item.published_on) : null,
+    item.read_time_minutes ? `${item.read_time_minutes} min read` : null,
+  ]
     .filter(Boolean)
     .join(' · ');
+
+const WritingInternalChip = () => (
+  <span className="rounded-full bg-charcoal/50 px-1.5 py-0.5 text-[10px] font-medium text-muted whitespace-nowrap shrink-0 inline-flex items-center gap-1">
+    <LockIcon className="w-2.5 h-2.5" />
+    Internal
+  </span>
+);
+
+/** Wraps a row in the external link (sanitized, new tab) when it has one;
+ *  mentions stay deliberately inert — never styled as a broken link. */
+const WritingRowShell = ({
+  item,
+  meta,
+  children,
+}: {
+  item: PortfolioWriting;
+  meta: string;
+  children: React.ReactNode;
+}) => {
   const linkParts = item.type === 'link' ? safeLinkParts(item.url ?? '') : null;
-
-  const body = (
-    <>
-      <p className="flex items-center gap-1.5 min-w-0">
-        <span className="text-sm font-medium text-primary truncate">{item.title}</span>
-        {linkParts && <ExternalLinkIcon className="w-3 h-3 text-muted shrink-0 opacity-70" />}
-        {item.type === 'mention' && (
-          <span className="rounded-full bg-charcoal/50 px-1.5 py-0.5 text-[10px] font-medium text-muted whitespace-nowrap shrink-0 inline-flex items-center gap-1">
-            <LockIcon className="w-2.5 h-2.5" />
-            Internal
-          </span>
-        )}
-      </p>
-      {meta && <p className="text-xs text-muted truncate">{meta}</p>}
-      {showNote && item.note && <p className="text-xs text-muted mt-0.5 line-clamp-2">{item.note}</p>}
-    </>
-  );
-
   if (linkParts) {
     return (
       <li className="min-w-0">
@@ -880,18 +938,63 @@ const WritingRow = ({ item, showNote }: { item: PortfolioWriting; showNote: bool
           href={linkParts.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="block min-w-0 rounded-sm hover:bg-charcoal/40 transition-colors -mx-1 px-1 py-0.5"
+          className="block min-w-0 rounded-md hover:bg-charcoal/40 transition-colors -mx-1 px-1 py-1"
           aria-label={`${item.title}${meta ? `, ${meta}` : ''} (opens in a new tab)`}
         >
-          {body}
+          {children}
         </a>
       </li>
     );
   }
   return (
-    <li className="min-w-0 py-0.5" aria-label={`${item.title}${meta ? `, ${meta}` : ''}, internal`}>
-      {body}
+    <li className="min-w-0 py-1" aria-label={`${item.title}${meta ? `, ${meta}` : ''}, internal`}>
+      {children}
     </li>
+  );
+};
+
+// Compact row (M): a glance — title + meta, no cover or excerpt.
+const WritingRow = ({ item }: { item: PortfolioWriting }) => {
+  const meta = writingMetaLine(item);
+  const isLink = item.type === 'link' && safeLinkParts(item.url ?? '') != null;
+  return (
+    <WritingRowShell item={item} meta={meta}>
+      <p className="flex items-center gap-1.5 min-w-0">
+        <span className="text-sm font-medium text-primary truncate">{item.title}</span>
+        {isLink && <ExternalLinkIcon className="w-3 h-3 text-muted shrink-0 opacity-70" />}
+        {item.type === 'mention' && <WritingInternalChip />}
+      </p>
+      {meta && <p className="text-xs text-muted truncate">{meta}</p>}
+    </WritingRowShell>
+  );
+};
+
+// Artifact row (L): cover + series + dominant title + excerpt + meta — the
+// entry as a self-contained piece, not a bare link.
+const WritingArtifactRow = ({ item }: { item: PortfolioWriting }) => {
+  const meta = writingMetaLine(item);
+  const isLink = item.type === 'link' && safeLinkParts(item.url ?? '') != null;
+  return (
+    <WritingRowShell item={item} meta={meta}>
+      <div className="flex gap-3 min-w-0">
+        <WritingCover coverImageUrl={item.cover_image_url} title={item.title} />
+        <div className="flex-1 min-w-0 flex flex-col gap-0.5">
+          {item.series_label && (
+            <p className="text-[10px] font-medium uppercase tracking-wider text-muted truncate">
+              {item.series_label}
+            </p>
+          )}
+          <p className="flex items-start gap-1.5 min-w-0">
+            <span className="text-sm font-semibold text-primary line-clamp-2">{item.title}</span>
+            {isLink && <ExternalLinkIcon className="w-3 h-3 mt-1 text-muted shrink-0 opacity-70" />}
+            {item.type === 'mention' && <WritingInternalChip />}
+          </p>
+          {item.excerpt && <p className="text-xs text-muted line-clamp-2">{item.excerpt}</p>}
+          {meta && <p className="text-[11px] text-muted/80 truncate">{meta}</p>}
+          {item.note && <p className="text-xs text-muted/90 italic line-clamp-2">{item.note}</p>}
+        </div>
+      </div>
+    </WritingRowShell>
   );
 };
 
@@ -899,11 +1002,17 @@ export const WritingCard = ({ writings, size }: { writings: PortfolioWriting[]; 
   const isLarge = size === 'L';
   return (
     <div className={`h-full flex flex-col overflow-hidden ${isLarge ? 'p-5' : 'p-4'}`}>
-      <h3 className="text-sm font-serif font-medium text-muted mb-2 shrink-0">Writing</h3>
-      <ul className="flex-1 min-h-0 space-y-1.5 overflow-hidden">
-        {writings.map((item) => (
-          <WritingRow key={item.id} item={item} showNote={isLarge} />
-        ))}
+      {/* Small uppercase tag — must not compete with the entry titles */}
+      <p className="flex items-center gap-1.5 mb-2 shrink-0 text-muted">
+        <PenLineIcon className="w-3 h-3" />
+        <span className="text-[10px] font-medium uppercase tracking-wider">Writing</span>
+      </p>
+      <ul
+        className={`flex-1 min-h-0 ${isLarge ? 'overflow-y-auto pr-1 space-y-2' : 'overflow-hidden space-y-1.5'}`}
+      >
+        {writings.map((item) =>
+          isLarge ? <WritingArtifactRow key={item.id} item={item} /> : <WritingRow key={item.id} item={item} />,
+        )}
       </ul>
     </div>
   );

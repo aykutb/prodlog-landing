@@ -19,6 +19,7 @@ import {
 } from '@/src/lib/portfolio/bento';
 import { PaginatedCardPages } from './PaginatedCardPages';
 import { ActivityGrid } from './ActivityGrid';
+import { ScreenshotStrip } from './ScreenshotStrip';
 import {
   BeforeAfterCard,
   DecisionCard,
@@ -64,15 +65,22 @@ const chunk = <T,>(items: T[], perPage: number): T[][] => {
 
 const ProductFavicon = ({
   url,
+  iconUrl,
   pixelSize,
   className,
   fallbackIconClass,
 }: {
   url: string | null;
+  /** User-uploaded icon; overrides the URL-derived favicon when present. */
+  iconUrl?: string | null;
   pixelSize: number;
   className: string;
   fallbackIconClass: string;
 }) => {
+  if (iconUrl) {
+    // eslint-disable-next-line @next/next/no-img-element
+    return <img src={iconUrl} alt="" className={`${className} shrink-0 object-cover`} />;
+  }
   const favicon = getFaviconUrl(url, pixelSize);
   if (favicon) {
     // eslint-disable-next-line @next/next/no-img-element
@@ -215,7 +223,7 @@ const ContributionCard = ({ logs }: { logs: PortfolioLog[] }) => {
 
 const CompactProduct = ({ product }: { product: PortfolioProduct }) => (
   <div className="flex items-center gap-2 p-2 rounded-lg bg-charcoal/40">
-    <ProductFavicon url={product.url} pixelSize={32} className="w-6 h-6 rounded" fallbackIconClass="w-3 h-3" />
+    <ProductFavicon url={product.url} iconUrl={product.icon_url} pixelSize={32} className="w-6 h-6 rounded" fallbackIconClass="w-3 h-3" />
     <span className="text-sm truncate flex-1">{product.name}</span>
   </div>
 );
@@ -224,7 +232,7 @@ const DetailedProduct = ({ product }: { product: PortfolioProduct }) => {
   const dateRange = formatDateRange(product.start_date, product.end_date);
   return (
     <div className="flex gap-3 p-3 rounded-lg bg-charcoal/40">
-      <ProductFavicon url={product.url} pixelSize={48} className="w-12 h-12 rounded-lg" fallbackIconClass="w-6 h-6" />
+      <ProductFavicon url={product.url} iconUrl={product.icon_url} pixelSize={48} className="w-12 h-12 rounded-lg" fallbackIconClass="w-6 h-6" />
       <div className="flex-1 min-w-0">
         <p className="font-medium truncate">{product.name}</p>
         {product.type && (
@@ -285,7 +293,7 @@ const SingleProductCard = ({ product, size }: { product: PortfolioProduct; size:
     return (
       <div className="p-4 h-full flex flex-col relative">
         <div className="flex items-start gap-4 mb-4">
-          <ProductFavicon url={product.url} pixelSize={faviconPixelSize} className={`${iconSize} ${rounding}`} fallbackIconClass={packageIconSize} />
+          <ProductFavicon url={product.url} iconUrl={product.icon_url} pixelSize={faviconPixelSize} className={`${iconSize} ${rounding}`} fallbackIconClass={packageIconSize} />
           <div className="flex-1 min-w-0">
             <div className="flex items-start justify-between gap-2">
               <h3 className="text-xl font-serif font-semibold text-primary">{product.name}</h3>
@@ -317,6 +325,9 @@ const SingleProductCard = ({ product, size }: { product: PortfolioProduct; size:
             </div>
           )}
         </div>
+        {product.screenshots && product.screenshots.length > 0 && (
+          <ScreenshotStrip screenshots={product.screenshots} productName={product.name} />
+        )}
       </div>
     );
   }
@@ -326,7 +337,7 @@ const SingleProductCard = ({ product, size }: { product: PortfolioProduct; size:
       <div className="p-4 h-full flex flex-col relative">
         <div className="flex gap-3 h-full">
           <div className="shrink-0">
-            <ProductFavicon url={product.url} pixelSize={faviconPixelSize} className={`${iconSize} ${rounding}`} fallbackIconClass={packageIconSize} />
+            <ProductFavicon url={product.url} iconUrl={product.icon_url} pixelSize={faviconPixelSize} className={`${iconSize} ${rounding}`} fallbackIconClass={packageIconSize} />
           </div>
           <div className="flex-1 min-w-0 flex flex-col">
             <div className="flex items-start justify-between gap-2">
@@ -347,7 +358,7 @@ const SingleProductCard = ({ product, size }: { product: PortfolioProduct; size:
   return (
     <div className="p-4 h-full flex flex-col relative">
       <div className="flex items-start gap-3">
-        <ProductFavicon url={product.url} pixelSize={faviconPixelSize} className={`${iconSize} ${rounding}`} fallbackIconClass={packageIconSize} />
+        <ProductFavicon url={product.url} iconUrl={product.icon_url} pixelSize={faviconPixelSize} className={`${iconSize} ${rounding}`} fallbackIconClass={packageIconSize} />
         <div className="flex-1 min-w-0">
           <h3 className="font-serif font-semibold text-primary truncate text-sm">{product.name}</h3>
           {product.type && <span className="text-xs text-muted">{product.type}</span>}
@@ -487,12 +498,26 @@ const AllLogsCard = ({ logs, size }: { logs: PortfolioLog[]; size: Size }) => {
   );
 };
 
+// ─── section_header ──────────────────────────────────────────────────
+
+// Mirrors the dashboard's SectionHeaderBentoCard: a full-width divider band,
+// bottom-anchored so the empty space above reads as section separation.
+const SectionHeaderCard = ({ title }: { title: string }) => (
+  <div className="h-full flex flex-col justify-end pb-2">
+    <div className="border-b border-divider pb-2">
+      <h2 className="text-lg sm:text-xl font-serif font-semibold text-primary truncate">{title}</h2>
+    </div>
+  </div>
+);
+
 // ─── grid ────────────────────────────────────────────────────────────
 
 const renderCard = (card: BentoCardConfig, portfolio: Portfolio): React.ReactNode => {
   const { profile, logs, products } = portfolio;
 
   switch (card.type) {
+    case 'section_header':
+      return <SectionHeaderCard title={card.sectionTitle ?? ''} />;
     case 'profile':
       return <ProfileCard bio={profile.bio ?? ''} size={card.size} />;
     case 'stats':
@@ -569,11 +594,21 @@ export const PortfolioBentoGrid = ({ portfolio }: { portfolio: Portfolio }) => {
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[140px]">
       {cards.map((card) => {
         const span = SIZE_TO_GRID_SPAN[card.size];
+        // Section headings span the full row and render bare — a divider
+        // band, not a boxed card.
+        const isSectionHeader = card.type === 'section_header';
         return (
           <div
             key={card.id}
-            style={{ gridColumn: `span ${span.colSpan}`, gridRow: `span ${span.rowSpan}` }}
-            className="relative rounded-xl border border-divider bg-white overflow-hidden transition-all"
+            style={{
+              gridColumn: isSectionHeader ? '1 / -1' : `span ${span.colSpan}`,
+              gridRow: `span ${span.rowSpan}`,
+            }}
+            className={
+              isSectionHeader
+                ? 'relative overflow-hidden'
+                : 'relative rounded-xl border border-divider bg-white overflow-hidden transition-all'
+            }
           >
             {renderCard(card, portfolio)}
           </div>

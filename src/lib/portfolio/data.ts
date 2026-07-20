@@ -58,6 +58,9 @@ export interface PortfolioProduct {
   problem_definition: string | null;
   start_date: string | null;
   end_date: string | null;
+  /** User-uploaded icon; overrides the URL-derived favicon when present. */
+  icon_url: string | null;
+  screenshots: string[] | null;
 }
 
 // ─── Evidence card rows (all RLS-scoped to public profiles) ──────────
@@ -135,6 +138,11 @@ export interface PortfolioWriting {
   publication: string | null;
   published_on: string | null;
   note: string | null;
+  // Optional artifact fields (writing card redesign); absent on older entries.
+  excerpt: string | null;
+  cover_image_url: string | null;
+  read_time_minutes: number | null;
+  series_label: string | null;
   sort_order: number;
 }
 
@@ -170,6 +178,7 @@ export type VerificationCounts = Record<string, number>;
 export interface BentoCardConfig {
   id: string;
   type:
+    | 'section_header'
     | 'profile'
     | 'stats'
     | 'social_links'
@@ -201,6 +210,7 @@ export interface BentoCardConfig {
   embedProvider?: string;
   embedTitle?: string;
   embedCaption?: string;
+  sectionTitle?: string;
 }
 
 export interface Portfolio {
@@ -311,9 +321,11 @@ export async function fetchPortfolio(username: string): Promise<Portfolio | null
       .order('date', { ascending: false }),
     supabase
       .from('products')
-      .select('id, name, type, url, business_model, problem_definition, start_date, end_date')
+      .select('id, name, type, url, business_model, problem_definition, start_date, end_date, icon_url, screenshots')
       .eq('user_id', userId)
-      .order('end_date', { ascending: false, nullsFirst: false }),
+      // The owner's drag order from the products management page
+      .order('sort_order', { ascending: true })
+      .order('created_at', { ascending: false }),
     supabase
       .from('bento_cards')
       .select('cards')
@@ -351,7 +363,7 @@ export async function fetchPortfolio(username: string): Promise<Portfolio | null
       .order('created_at', { ascending: true }),
     supabase
       .from('writings')
-      .select('id, type, url, title, publication, published_on, note, sort_order')
+      .select('id, type, url, title, publication, published_on, note, excerpt, cover_image_url, read_time_minutes, series_label, sort_order')
       .eq('user_id', userId)
       .order('sort_order', { ascending: true }),
     supabase

@@ -31,6 +31,9 @@ const MIN_PUBLIC_SKILLS = 3;
 export function isCardEmpty(card: BentoCardConfig, portfolio: Portfolio): boolean {
   const { profile, logs, products } = portfolio;
   switch (card.type) {
+    case 'section_header':
+      // A heading with no text is nothing to a visitor
+      return !card.sectionTitle?.trim();
     case 'profile':
       return !profile.bio?.trim();
     case 'social_links':
