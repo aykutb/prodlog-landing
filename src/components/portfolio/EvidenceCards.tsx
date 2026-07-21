@@ -106,7 +106,7 @@ const LinkedLogLine = ({ log }: { log: PortfolioLog }) => (
 export const NowCard = ({ card, size }: { card: BentoCardConfig; size: Size }) => (
   <div className="p-4 h-full flex flex-col relative">
     <h3 className="text-sm font-serif font-medium text-muted mb-2">Now</h3>
-    <p className={`text-primary text-sm ${size === 'S' ? 'line-clamp-2' : 'line-clamp-3'}`}>
+    <p className={`text-primary text-sm ${size === 'S' ? 'sm:line-clamp-2' : 'sm:line-clamp-3'}`}>
       {card.nowText?.trim()}
     </p>
     {card.nowUpdatedAt && (
@@ -340,7 +340,7 @@ export const ImpactMetricCard = ({
         <div className="flex-1 flex items-center gap-4 min-h-0">
           <MetricNumber metric={metric} size="M" verified={verified} />
           <div className="min-w-0">
-            <p className={`${measureClass} line-clamp-2`}>{metric.measure}</p>
+            <p className={`${measureClass} sm:line-clamp-2`}>{metric.measure}</p>
             <div className="mt-0.5">
               <MetricBeforeAfterLine metric={metric} size="M" />
             </div>
@@ -356,7 +356,7 @@ export const ImpactMetricCard = ({
         <ProductEyebrow product={product} size="S" />
         <div className="flex-1 flex flex-col justify-center min-h-0">
           <MetricNumber metric={metric} size="S" verified={verified} />
-          <p className={`${measureClass} line-clamp-2 mt-1`}>{metric.measure}</p>
+          <p className={`${measureClass} sm:line-clamp-2 mt-1`}>{metric.measure}</p>
         </div>
       </div>
     );
@@ -378,7 +378,7 @@ export const ImpactMetricCard = ({
       <div className="border-t border-divider pt-2.5 space-y-1.5">
         <span className="block text-sm font-medium text-primary">{getMetricRoleLabel(metric.role)}</span>
         {metric.confound && (
-          <p className="text-sm text-muted line-clamp-2">
+          <p className="text-sm text-muted sm:line-clamp-2">
             <span className="text-[11px] uppercase tracking-wide text-muted/70 mr-1.5">Not mine</span>
             {metric.confound}
           </p>
@@ -453,12 +453,12 @@ export const DecisionCard = ({
         {verified && <VerifiedMark count={count} withLabel />}
       </div>
       <div className="flex-1 min-h-0 overflow-hidden pt-3">
-        <p className="text-lg font-semibold text-primary leading-snug line-clamp-2">{decision.decision}</p>
-        <InsteadOf alternative={decision.alternative} className="text-sm mt-1 line-clamp-2" />
-        <p className="text-sm text-primary/80 mt-2.5 line-clamp-2">{decision.why}</p>
+        <p className="text-lg font-semibold text-primary leading-snug sm:line-clamp-2">{decision.decision}</p>
+        <InsteadOf alternative={decision.alternative} className="text-sm mt-1 sm:line-clamp-2" />
+        <p className="text-sm text-primary/80 mt-2.5 sm:line-clamp-2">{decision.why}</p>
       </div>
       <div className="border-t border-divider pt-2.5 space-y-1.5">
-        <p className="text-sm text-muted line-clamp-2">
+        <p className="text-sm text-muted sm:line-clamp-2">
           <span className="text-[11px] uppercase tracking-wide text-muted/70 mr-1.5">What it cost</span>
           {decision.cost}
         </p>
@@ -473,7 +473,7 @@ export const DecisionCard = ({
           </div>
         )}
         {decision.aged && decision.aged_note && (
-          <p className="text-sm text-muted line-clamp-1">{decision.aged_note}</p>
+          <p className="text-sm text-muted sm:line-clamp-1">{decision.aged_note}</p>
         )}
       </div>
     </div>
@@ -484,8 +484,8 @@ export const DecisionCard = ({
 
 const ChoseOver = ({ tradeoff, size }: { tradeoff: PortfolioTradeoff; size: Size }) => (
   <div>
-    <p className="text-sm font-semibold text-primary leading-snug line-clamp-2">{tradeoff.chose}</p>
-    <p className={`text-muted mt-0.5 text-xs ${size === 'S' ? 'line-clamp-2' : 'line-clamp-1'}`}>
+    <p className="text-sm font-semibold text-primary leading-snug sm:line-clamp-2">{tradeoff.chose}</p>
+    <p className={`text-muted mt-0.5 text-xs ${size === 'S' ? 'sm:line-clamp-2' : 'sm:line-clamp-1'}`}>
       <span>over </span>
       <span className="line-through decoration-muted/60">{tradeoff.over}</span>
     </p>
@@ -534,7 +534,7 @@ export const TradeoffCard = ({
       </div>
       <div className="flex-1 flex flex-col justify-center min-h-0">
         <ChoseOver tradeoff={tradeoff} size="M" />
-        <p className="text-xs text-muted mt-1.5 line-clamp-2">{tradeoff.because}</p>
+        <p className="text-xs text-muted mt-1.5 sm:line-clamp-2">{tradeoff.because}</p>
       </div>
     </div>
   );
@@ -547,7 +547,7 @@ const FreedLine = ({ freed, size, className }: { freed: string; size: Size; clas
     <CornerDownRightIcon
       className={`shrink-0 text-muted ${size === 'L' ? 'w-4 h-4 mt-0.5' : 'w-3.5 h-3.5'}`}
     />
-    <span className="min-w-0 line-clamp-2">
+    <span className="min-w-0 sm:line-clamp-2">
       <span className="text-muted">freed </span>
       <span className="font-medium text-primary">{freed}</span>
     </span>
@@ -618,9 +618,9 @@ export const KillCard = ({
         </div>
       )}
       <div className="flex-1 min-h-0 overflow-hidden pt-3">
-        <p className="text-lg font-semibold text-primary leading-snug line-clamp-2">{kill.killed}</p>
+        <p className="text-lg font-semibold text-primary leading-snug sm:line-clamp-2">{kill.killed}</p>
         <FreedLine freed={kill.freed} size="L" className="mt-1.5" />
-        <p className="text-sm text-primary/80 mt-2.5 line-clamp-3">{kill.why}</p>
+        <p className="text-sm text-primary/80 mt-2.5 sm:line-clamp-3">{kill.why}</p>
       </div>
       {(metadata.length > 0 || log) && (
         <div className="border-t border-divider pt-2.5 space-y-1.5">
@@ -666,7 +666,7 @@ export const TestimonialCard = ({
       {/* The quote is the hero: serif voice, larger than body text */}
       <blockquote
         className={`flex-1 min-h-0 overflow-hidden font-serif text-primary leading-snug ${
-          isLarge ? 'mt-2.5 text-xl line-clamp-4' : 'mt-2 text-base line-clamp-2'
+          isLarge ? 'mt-2.5 text-xl sm:line-clamp-4' : 'mt-2 text-base sm:line-clamp-2'
         }`}
       >
         “{testimonial.quote}”
@@ -701,7 +701,7 @@ export const TestimonialCard = ({
           )}
         </div>
         {isLarge && testimonial.relationship && (
-          <p className="mt-1.5 text-xs text-muted line-clamp-1">{testimonial.relationship}</p>
+          <p className="mt-1.5 text-xs text-muted sm:line-clamp-1">{testimonial.relationship}</p>
         )}
       </div>
     </div>
@@ -760,7 +760,7 @@ export const BeforeAfterCard = ({
         {header}
         {pair}
         {beforeAfter.caption && (
-          <p className="text-sm text-muted line-clamp-2 shrink-0">{beforeAfter.caption}</p>
+          <p className="text-sm text-muted sm:line-clamp-2 shrink-0">{beforeAfter.caption}</p>
         )}
       </div>
     );

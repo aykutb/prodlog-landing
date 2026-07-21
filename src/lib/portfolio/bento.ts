@@ -4,10 +4,12 @@ import type { BentoCardConfig, Portfolio } from './data';
 // and src/hooks/use-bento-pagination.ts) so the public page renders the same
 // grid the owner arranged.
 
-export const SIZE_TO_GRID_SPAN: Record<BentoCardConfig['size'], { colSpan: number; rowSpan: number }> = {
-  S: { colSpan: 1, rowSpan: 1 },
-  M: { colSpan: 2, rowSpan: 1 },
-  L: { colSpan: 2, rowSpan: 2 },
+// Spans apply from `sm` up only: on mobile the grid is a single column and
+// every card takes the full width with a content-driven height.
+export const SIZE_TO_SPAN_CLASS: Record<BentoCardConfig['size'], string> = {
+  S: '',
+  M: 'sm:col-span-2',
+  L: 'sm:col-span-2 sm:row-span-2',
 };
 
 export const DEFAULT_BENTO_CARDS: BentoCardConfig[] = [

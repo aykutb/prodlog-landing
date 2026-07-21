@@ -6,7 +6,7 @@ import type {
   PortfolioProduct,
 } from '@/src/lib/portfolio/data';
 import {
-  SIZE_TO_GRID_SPAN,
+  SIZE_TO_SPAN_CLASS,
   differenceInYears,
   formatDateRange,
   formatLongDate,
@@ -98,7 +98,7 @@ const ProductFavicon = ({
 const ProfileCard = ({ bio, size }: { bio: string; size: Size }) => (
   <div className="p-4 h-full flex flex-col relative">
     <h3 className="text-sm font-serif font-medium text-muted mb-2">About</h3>
-    <p className={`text-primary ${size === 'S' ? 'text-sm line-clamp-3' : size === 'M' ? 'line-clamp-4' : ''}`}>
+    <p className={`text-primary ${size === 'S' ? 'text-sm sm:line-clamp-3' : size === 'M' ? 'sm:line-clamp-4' : ''}`}>
       {bio}
     </p>
   </div>
@@ -346,7 +346,7 @@ const SingleProductCard = ({ product, size }: { product: PortfolioProduct; size:
             </div>
             {product.type && <span className="text-xs text-muted">{product.type}</span>}
             {product.problem_definition && (
-              <p className="text-sm text-muted line-clamp-2 mt-1 flex-1">{product.problem_definition}</p>
+              <p className="text-sm text-muted sm:line-clamp-2 mt-1 flex-1">{product.problem_definition}</p>
             )}
             {product.business_model && <p className="text-xs text-muted/70 mt-auto">{product.business_model}</p>}
           </div>
@@ -417,7 +417,7 @@ const SingleLogCard = ({ log, size }: { log: PortfolioLog; size: Size }) => {
               </div>
             </div>
           </div>
-          {previewText && <p className="text-sm text-muted line-clamp-4 flex-1">{previewText}</p>}
+          {previewText && <p className="text-sm text-muted sm:line-clamp-4 flex-1">{previewText}</p>}
         </div>
       ) : size === 'M' ? (
         <div className="flex gap-3 h-full">
@@ -430,7 +430,7 @@ const SingleLogCard = ({ log, size }: { log: PortfolioLog; size: Size }) => {
               <CalendarIcon className="w-3 h-3" />
               {formatShortDate(log.date)}
             </div>
-            {previewText && <p className="text-sm text-muted line-clamp-2 mt-1 flex-1">{previewText}</p>}
+            {previewText && <p className="text-sm text-muted sm:line-clamp-2 mt-1 flex-1">{previewText}</p>}
           </div>
         </div>
       ) : (
@@ -591,23 +591,20 @@ export const PortfolioBentoGrid = ({ portfolio }: { portfolio: Portfolio }) => {
   const cards = visibleCards(portfolio);
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[140px]">
+    // Mobile is a single column with content-driven row heights (min one
+    // module); the owner's fixed bento geometry only kicks in from `sm` up.
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[minmax(140px,auto)] sm:auto-rows-[140px]">
       {cards.map((card) => {
-        const span = SIZE_TO_GRID_SPAN[card.size];
         // Section headings span the full row and render bare — a divider
         // band, not a boxed card.
         const isSectionHeader = card.type === 'section_header';
         return (
           <div
             key={card.id}
-            style={{
-              gridColumn: isSectionHeader ? '1 / -1' : `span ${span.colSpan}`,
-              gridRow: `span ${span.rowSpan}`,
-            }}
             className={
               isSectionHeader
-                ? 'relative overflow-hidden'
-                : 'relative rounded-xl border border-divider bg-white overflow-hidden transition-all'
+                ? 'col-span-full relative overflow-hidden'
+                : `${SIZE_TO_SPAN_CLASS[card.size]} relative rounded-xl border border-divider bg-white overflow-hidden transition-all`
             }
           >
             {renderCard(card, portfolio)}
