@@ -12,6 +12,47 @@ export const SIZE_TO_SPAN_CLASS: Record<BentoCardConfig['size'], string> = {
   L: 'sm:col-span-2 sm:row-span-2',
 };
 
+// Content-aware row spans, mirrored from the dashboard's BentoGrid: L cards
+// default to 2 rows, but list-like content (skills) and free text (a
+// testimonial quote) can need more vertical room, so those cards get extra
+// grid rows instead of being clipped. Literal class strings so Tailwind's
+// scanner picks them up. Rows are 140px with a 16px gap from `sm` up.
+const L_ROW_SPAN_CLASS: Record<number, string> = {
+  2: 'sm:col-span-2 sm:row-span-2',
+  3: 'sm:col-span-2 sm:row-span-3',
+  4: 'sm:col-span-2 sm:row-span-4',
+};
+
+const GRID_ROW_HEIGHT = 140;
+const GRID_GAP = 16;
+const MAX_L_ROW_SPAN = 4;
+
+const rowsForHeight = (height: number): number =>
+  Math.ceil((height + GRID_GAP) / (GRID_ROW_HEIGHT + GRID_GAP));
+
+/** Span classes for a card, growing L skills/testimonial cards to fit. */
+export function cardSpanClass(card: BentoCardConfig, portfolio: Portfolio): string {
+  if (card.size !== 'L') return SIZE_TO_SPAN_CLASS[card.size];
+
+  let rows = 2;
+  if (card.type === 'skills_matrix' && portfolio.skills.length > 0) {
+    const groups = new Set(portfolio.skills.map((s) => s.category)).size;
+    // padding + title block (~60px), per-category header + spacing (~22px),
+    // per-skill row (~24px)
+    const estimated = 60 + groups * 22 + portfolio.skills.length * 24 - 8;
+    rows = rowsForHeight(estimated);
+  } else if (card.type === 'verified_testimonial' && card.contentId) {
+    const testimonial = portfolio.testimonials.find((t) => t.id === card.contentId);
+    if (testimonial) {
+      // padding + badge + credential block (~160px) plus the serif quote at
+      // ~36 chars per line, 28px line height
+      const lines = Math.max(1, Math.ceil(testimonial.quote.length / 36));
+      rows = rowsForHeight(160 + lines * 28);
+    }
+  }
+  return L_ROW_SPAN_CLASS[Math.min(Math.max(rows, 2), MAX_L_ROW_SPAN)];
+}
+
 export const DEFAULT_BENTO_CARDS: BentoCardConfig[] = [
   { id: 'default-profile', type: 'profile', size: 'M', order: 0 },
   { id: 'default-stats', type: 'stats', size: 'S', order: 1 },

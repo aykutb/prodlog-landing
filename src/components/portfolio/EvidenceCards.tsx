@@ -666,7 +666,9 @@ export const TestimonialCard = ({
       {/* The quote is the hero: serif voice, larger than body text */}
       <blockquote
         className={`flex-1 min-h-0 overflow-hidden font-serif text-primary leading-snug ${
-          isLarge ? 'mt-2.5 text-xl sm:line-clamp-4' : 'mt-2 text-base sm:line-clamp-2'
+          // L never clamps — cardSpanClass gives the card extra grid rows to
+          // fit the full quote. M stays the deliberately compact variant.
+          isLarge ? 'mt-2.5 text-xl' : 'mt-2 text-base sm:line-clamp-2'
         }`}
       >
         “{testimonial.quote}”

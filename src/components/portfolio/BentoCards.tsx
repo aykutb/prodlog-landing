@@ -6,7 +6,7 @@ import type {
   PortfolioProduct,
 } from '@/src/lib/portfolio/data';
 import {
-  SIZE_TO_SPAN_CLASS,
+  cardSpanClass,
   differenceInYears,
   formatDateRange,
   formatLongDate,
@@ -604,7 +604,7 @@ export const PortfolioBentoGrid = ({ portfolio }: { portfolio: Portfolio }) => {
             className={
               isSectionHeader
                 ? 'col-span-full relative overflow-hidden'
-                : `${SIZE_TO_SPAN_CLASS[card.size]} relative rounded-xl border border-divider bg-white overflow-hidden transition-all`
+                : `${cardSpanClass(card, portfolio)} relative rounded-xl border border-divider bg-white overflow-hidden transition-all`
             }
           >
             {renderCard(card, portfolio)}
