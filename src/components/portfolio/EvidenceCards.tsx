@@ -63,12 +63,19 @@ const EYEBROW_SIZES: Record<Size, { px: number; box: string; pkg: string; text: 
 
 const ProductEyebrow = ({ product, size }: { product: PortfolioProduct; size: Size }) => {
   const s = EYEBROW_SIZES[size];
-  const favicon = getFaviconUrl(product.url, s.px);
+  // Same priority as ProductFavicon (BentoCards.tsx): the user-uploaded icon
+  // overrides the URL-derived favicon — products without a URL (or with an
+  // app-store URL whose domain favicon is useless) still get their icon.
+  const src = product.icon_url ?? getFaviconUrl(product.url, s.px);
   return (
     <div className="flex items-center gap-2 min-w-0">
-      {favicon ? (
+      {src ? (
         // eslint-disable-next-line @next/next/no-img-element
-        <img src={favicon} alt="" className={`${s.box} rounded-md shrink-0 object-contain`} />
+        <img
+          src={src}
+          alt=""
+          className={`${s.box} rounded-md shrink-0 ${product.icon_url ? 'object-cover' : 'object-contain'}`}
+        />
       ) : (
         <div className={`${s.box} rounded-md bg-charcoal/50 flex items-center justify-center shrink-0`}>
           <PackageIcon className={`${s.pkg} text-muted`} />
