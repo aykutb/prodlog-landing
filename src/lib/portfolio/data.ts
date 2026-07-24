@@ -9,6 +9,7 @@ import type {
   SkillCategory,
   SkillLevel,
 } from './evidence';
+import type { RichTextDoc } from './richText';
 
 // Shapes mirror the dashboard app's Supabase tables (prodlog2), limited to
 // the fields the public portfolio renders.
@@ -193,6 +194,7 @@ export interface BentoCardConfig {
     | 'before_after'
     | 'writing'
     | 'embed'
+    | 'rich_text'
     | 'contribution'
     | 'single_product'
     | 'all_products'
@@ -211,6 +213,8 @@ export interface BentoCardConfig {
   embedTitle?: string;
   embedCaption?: string;
   sectionTitle?: string;
+  richTextTitle?: string;
+  richTextBody?: RichTextDoc;
 }
 
 export interface Portfolio {

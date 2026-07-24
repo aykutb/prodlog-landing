@@ -1,4 +1,5 @@
 import type { BentoCardConfig, Portfolio } from './data';
+import { estimateRichTextHeight, isRichTextEmpty } from './richText';
 
 // Layout rules mirrored from the dashboard app (prodlog2 src/types/bento.ts
 // and src/hooks/use-bento-pagination.ts) so the public page renders the same
@@ -18,20 +19,34 @@ export const SIZE_TO_SPAN_CLASS: Record<BentoCardConfig['size'], string> = {
 // grid rows instead of being clipped. Literal class strings so Tailwind's
 // scanner picks them up. Rows are 140px with a 16px gap from `sm` up.
 const L_ROW_SPAN_CLASS: Record<number, string> = {
+  1: 'sm:col-span-2',
   2: 'sm:col-span-2 sm:row-span-2',
   3: 'sm:col-span-2 sm:row-span-3',
   4: 'sm:col-span-2 sm:row-span-4',
+  5: 'sm:col-span-2 sm:row-span-5',
+  6: 'sm:col-span-2 sm:row-span-6',
 };
 
 const GRID_ROW_HEIGHT = 140;
 const GRID_GAP = 16;
 const MAX_L_ROW_SPAN = 4;
+// Rich text gets more headroom than other L cards: the public page never
+// clamps prose, and a 2,000-char body needs more than 4 rows.
+const MAX_RICH_TEXT_ROW_SPAN = 6;
 
 const rowsForHeight = (height: number): number =>
   Math.ceil((height + GRID_GAP) / (GRID_ROW_HEIGHT + GRID_GAP));
 
 /** Span classes for a card, growing L skills/testimonial cards to fit. */
 export function cardSpanClass(card: BentoCardConfig, portfolio: Portfolio): string {
+  // Rich text always grows to its content, at M and L alike — the public
+  // page never clamps prose (a clamp would hide text from crawlers too).
+  if (card.type === 'rich_text' && card.richTextBody) {
+    const estimated = estimateRichTextHeight(card.richTextBody, !!card.richTextTitle?.trim());
+    const rows = Math.min(Math.max(rowsForHeight(estimated), 1), MAX_RICH_TEXT_ROW_SPAN);
+    return L_ROW_SPAN_CLASS[rows];
+  }
+
   if (card.size !== 'L') return SIZE_TO_SPAN_CLASS[card.size];
 
   let rows = 2;
@@ -121,6 +136,8 @@ export function isCardEmpty(card: BentoCardConfig, portfolio: Portfolio): boolea
       return portfolio.writings.length === 0;
     case 'embed':
       return !card.embedUrl?.trim();
+    case 'rich_text':
+      return isRichTextEmpty(card.richTextBody);
     default:
       return false; // stats, contribution are never hidden
   }

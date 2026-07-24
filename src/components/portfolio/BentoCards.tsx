@@ -18,6 +18,8 @@ import {
   visibleCards,
 } from '@/src/lib/portfolio/bento';
 import { PaginatedCardPages } from './PaginatedCardPages';
+import { RichTextContent } from './RichTextContent';
+import { isRichTextEmpty } from '@/src/lib/portfolio/richText';
 import { ActivityGrid } from './ActivityGrid';
 import { ScreenshotStrip } from './ScreenshotStrip';
 import {
@@ -498,6 +500,21 @@ const AllLogsCard = ({ logs, size }: { logs: PortfolioLog[]; size: Size }) => {
   );
 };
 
+// ─── rich_text ───────────────────────────────────────────────────────
+
+// Mirrors the dashboard's RichTextBentoCard face. The grid gives the card a
+// content-driven row span (cardSpanClass), so the body renders in full —
+// no clamp, no internal scroll.
+const RichTextCard = ({ card }: { card: BentoCardConfig }) => {
+  const title = card.richTextTitle?.trim();
+  return (
+    <div className="p-4 h-full flex flex-col">
+      {title && <h3 className="text-sm font-serif font-medium text-muted mb-2 shrink-0">{title}</h3>}
+      <RichTextContent doc={card.richTextBody!} />
+    </div>
+  );
+};
+
 // ─── section_header ──────────────────────────────────────────────────
 
 // Mirrors the dashboard's SectionHeaderBentoCard: a full-width divider band,
@@ -562,6 +579,10 @@ const renderCard = (card: BentoCardConfig, portfolio: Portfolio): React.ReactNod
       return <WritingCard writings={portfolio.writings} size={card.size} />;
     case 'embed':
       return <EmbedCard card={card} size={card.size} />;
+    case 'rich_text':
+      return card.richTextBody && !isRichTextEmpty(card.richTextBody) ? (
+        <RichTextCard card={card} />
+      ) : null;
     case 'single_product': {
       const product = products.find((p) => p.id === card.contentId);
       return product ? <SingleProductCard product={product} size={card.size} /> : null;
