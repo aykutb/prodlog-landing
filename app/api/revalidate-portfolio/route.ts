@@ -46,14 +46,13 @@ export async function POST(request: Request) {
     return json({ error: 'Invalid username' }, 400);
   }
 
-  const { data: profile } = await getSupabase()
-    .from('profiles')
-    .select('username')
-    .eq('username', username)
-    .is('deleted_at', null)
-    .maybeSingle();
+  // RPC instead of a direct profiles read — the REST-revoke cutover removed
+  // the anon table endpoints (same move as fetchPortfolio).
+  const { data: profile } = await getSupabase().rpc('get_public_profile', {
+    p_username: username,
+  });
 
-  if (!profile) {
+  if (!profile || (profile as { deleted_at?: string | null }).deleted_at) {
     return json({ error: 'Unknown username' }, 404);
   }
 

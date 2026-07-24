@@ -241,9 +241,6 @@ export interface Portfolio {
   beforeAfters: PortfolioBeforeAfter[];
 }
 
-const PROFILE_FIELDS =
-  'user_id, username, first_name, last_name, title, bio, avatar_url, linkedin_url, twitter_url, github_url, dribbble_url, substack_url, medium_url, career_start_date';
-
 /** Minimum public log count (with a bio) for indexing + build-time static generation. */
 export const QUALITY_BAR_MIN_LOGS = 5;
 
@@ -259,49 +256,57 @@ export function displayName(profile: PortfolioProfile): string {
   return name || profile.username;
 }
 
-// Anonymous readers only ever see verified_at-set rows (RLS), so a plain
-// count of returned rows per parent id is the confirmed count.
-async function fetchVerificationCounts(
-  table: string,
-  parentColumn: string,
-  parentIds: string[],
-): Promise<VerificationCounts> {
-  if (parentIds.length === 0) return {};
-  const supabase = getSupabase();
-  const { data } = await supabase
-    .from(table)
-    .select(parentColumn)
-    .in(parentColumn, parentIds)
-    .not('verified_at', 'is', null);
-
-  const counts: VerificationCounts = {};
-  for (const row of (data ?? []) as unknown as Record<string, string>[]) {
-    const id = row[parentColumn];
-    counts[id] = (counts[id] ?? 0) + 1;
-  }
-  return counts;
-}
-
-// PostgREST can return numeric columns as strings to preserve precision.
+// JSON numerics can arrive as strings depending on the transport.
 const toNumber = (value: unknown): number => Number(value);
 const toNullableNumber = (value: unknown): number | null =>
   value == null ? null : Number(value);
 
-/** Everything the public portfolio page needs; null when no such (live) profile. */
+// Evidence RPCs bundle the rows with their confirmed-verification counts
+// in one payload: { <listKey>: [...], verification_counts: {...} }.
+type CountedPayload<K extends string, T> = Partial<Record<K, T[]>> & {
+  verification_counts?: VerificationCounts;
+};
+
+/**
+ * Everything the public portfolio page needs; null when no such (live)
+ * profile. All reads go through the RPC data API (prodlog2's rpc_data_api
+ * migration) — the REST-revoke cutover removed the direct /rest/v1/<table>
+ * endpoints for anon, so `.from(<table>)` no longer works here.
+ */
 export async function fetchPortfolio(username: string): Promise<Portfolio | null> {
   const supabase = getSupabase();
 
-  const { data: profile, error } = await supabase
-    .from('profiles')
-    .select(PROFILE_FIELDS)
-    .eq('username', username)
-    .is('deleted_at', null)
-    .maybeSingle<PortfolioProfile>();
+  const { data: profileRow, error } = await supabase.rpc('get_public_profile', {
+    p_username: username,
+  });
 
   if (error) throw error;
-  if (!profile) return null;
+  const fullProfile = profileRow as
+    | (PortfolioProfile & { deleted_at?: string | null })
+    | null;
+  if (!fullProfile || fullProfile.deleted_at) return null;
+
+  // Only the rendered fields leave this module — the RPC returns the whole
+  // profile row, and the rest shouldn't ride along into the RSC payload.
+  const profile: PortfolioProfile = {
+    user_id: fullProfile.user_id,
+    username: fullProfile.username,
+    first_name: fullProfile.first_name,
+    last_name: fullProfile.last_name,
+    title: fullProfile.title,
+    bio: fullProfile.bio,
+    avatar_url: fullProfile.avatar_url,
+    linkedin_url: fullProfile.linkedin_url,
+    twitter_url: fullProfile.twitter_url,
+    github_url: fullProfile.github_url,
+    dribbble_url: fullProfile.dribbble_url,
+    substack_url: fullProfile.substack_url,
+    medium_url: fullProfile.medium_url,
+    career_start_date: fullProfile.career_start_date,
+  };
 
   const userId = profile.user_id;
+  const byUser = { p_user_id: userId };
 
   const [
     logsRes,
@@ -316,136 +321,66 @@ export async function fetchPortfolio(username: string): Promise<Portfolio | null
     writingsRes,
     testimonialsRes,
     beforeAftersRes,
+    logVerificationsRes,
   ] = await Promise.all([
-    supabase
-      .from('logs')
-      .select('id, title, description, content, change_description, metrics, date, quarter, tags, product_id')
-      .eq('user_id', userId)
-      .eq('is_public', true)
-      .order('date', { ascending: false }),
-    supabase
-      .from('products')
-      .select('id, name, type, url, business_model, problem_definition, start_date, end_date, icon_url, screenshots')
-      .eq('user_id', userId)
-      // The owner's drag order from the products management page
-      .order('sort_order', { ascending: true })
-      .order('created_at', { ascending: false }),
-    supabase
-      .from('bento_cards')
-      .select('cards')
-      .eq('user_id', userId)
-      .maybeSingle(),
-    supabase
-      .from('skills')
-      .select('id, name, category, level, sort_order')
-      .eq('user_id', userId)
-      .order('sort_order', { ascending: true }),
-    supabase
-      .from('domains')
-      .select('id, name, depth, years, context, sort_order')
-      .eq('user_id', userId)
-      .order('sort_order', { ascending: true }),
-    supabase
-      .from('impact_metrics')
-      .select('id, product_id, value, unit, direction, measure, before_value, after_value, timeframe, role, confound, log_id')
-      .eq('user_id', userId)
-      .order('created_at', { ascending: true }),
-    supabase
-      .from('decisions')
-      .select('id, product_id, decision, alternative, why, cost, decided_on, log_id, aged, aged_note')
-      .eq('user_id', userId)
-      .order('created_at', { ascending: true }),
-    supabase
-      .from('tradeoffs')
-      .select('id, product_id, chose, over, because, context')
-      .eq('user_id', userId)
-      .order('created_at', { ascending: true }),
-    supabase
-      .from('kills')
-      .select('id, product_id, killed, why, freed, stage, killed_on, log_id')
-      .eq('user_id', userId)
-      .order('created_at', { ascending: true }),
-    supabase
-      .from('writings')
-      .select('id, type, url, title, publication, published_on, note, excerpt, cover_image_url, read_time_minutes, series_label, sort_order')
-      .eq('user_id', userId)
-      .order('sort_order', { ascending: true }),
-    supabase
-      .from('testimonials_public')
-      .select('id, quote, verifier_name, verifier_role, verifier_company, relationship, confirmed_at, edited_by_verifier, sort_order')
-      .eq('user_id', userId)
-      .order('confirmed_at', { ascending: true }),
-    supabase
-      .from('before_afters')
-      .select('id, product_id, before_display_path, after_display_path, before_label, after_label, caption, metric_delta')
-      .eq('user_id', userId)
-      .order('created_at', { ascending: true }),
+    supabase.rpc('get_public_logs', byUser),
+    supabase.rpc('get_products', byUser),
+    supabase.rpc('get_bento_cards', byUser),
+    supabase.rpc('get_skills', byUser),
+    supabase.rpc('get_domains', byUser),
+    supabase.rpc('get_impact_metrics', byUser),
+    supabase.rpc('get_decisions', byUser),
+    supabase.rpc('get_tradeoffs', byUser),
+    supabase.rpc('get_kills', byUser),
+    supabase.rpc('get_writings', byUser),
+    supabase.rpc('get_public_testimonials', byUser),
+    supabase.rpc('get_before_afters', byUser),
+    supabase.rpc('get_public_log_verifications', byUser),
   ]);
 
   if (logsRes.error) throw logsRes.error;
   if (productsRes.error) throw productsRes.error;
 
-  const logs = (logsRes.data ?? []) as PortfolioLog[];
-  const skills = (skillsRes.data ?? []) as PortfolioSkill[];
-  const domains = (domainsRes.data ?? []) as PortfolioDomain[];
-  const impactMetrics = ((metricsRes.data ?? []) as Record<string, unknown>[]).map((row) => ({
+  const logs = ((logsRes.data ?? []) as PortfolioLog[]);
+  const skillsPayload = (skillsRes.data ?? {}) as CountedPayload<'skills', PortfolioSkill>;
+  const metricsPayload = (metricsRes.data ?? {}) as CountedPayload<'metrics', Record<string, unknown>>;
+  const decisionsPayload = (decisionsRes.data ?? {}) as CountedPayload<'decisions', PortfolioDecision>;
+  const tradeoffsPayload = (tradeoffsRes.data ?? {}) as CountedPayload<'tradeoffs', PortfolioTradeoff>;
+  const killsPayload = (killsRes.data ?? {}) as CountedPayload<'kills', PortfolioKill>;
+
+  const impactMetrics = (metricsPayload.metrics ?? []).map((row) => ({
     ...(row as unknown as PortfolioImpactMetric),
     value: toNumber(row.value),
     before_value: toNullableNumber(row.before_value),
     after_value: toNullableNumber(row.after_value),
   }));
-  const decisions = (decisionsRes.data ?? []) as PortfolioDecision[];
-  const tradeoffs = (tradeoffsRes.data ?? []) as PortfolioTradeoff[];
-  const kills = (killsRes.data ?? []) as PortfolioKill[];
-  const writings = (writingsRes.data ?? []) as PortfolioWriting[];
-  const testimonials = (testimonialsRes.data ?? []) as PortfolioTestimonial[];
-  const beforeAfters = (beforeAftersRes.data ?? []) as PortfolioBeforeAfter[];
 
-  // Verifications are best-effort: anonymous readers only see confirmed rows,
-  // so missing data simply means no badges.
-  const [
-    logVerifications,
-    skillVerificationCounts,
-    impactMetricVerificationCounts,
-    decisionVerificationCounts,
-    tradeoffVerificationCounts,
-    killVerificationCounts,
-  ] = await Promise.all([
-    logs.length > 0
-      ? supabase
-          .from('impact_verifications')
-          .select('log_id')
-          .in('log_id', logs.map((log) => log.id))
-          .not('verified_at', 'is', null)
-          .then(({ data }) => new Set((data ?? []).map((v) => v.log_id as string)))
-      : Promise.resolve(new Set<string>()),
-    fetchVerificationCounts('skill_verifications', 'skill_id', skills.map((s) => s.id)),
-    fetchVerificationCounts('impact_metric_verifications', 'metric_id', impactMetrics.map((m) => m.id)),
-    fetchVerificationCounts('decision_verifications', 'decision_id', decisions.map((d) => d.id)),
-    fetchVerificationCounts('tradeoff_verifications', 'tradeoff_id', tradeoffs.map((t) => t.id)),
-    fetchVerificationCounts('kill_verifications', 'kill_id', kills.map((k) => k.id)),
-  ]);
+  // Best-effort: the badge RPC ships in a later migration than the cutover,
+  // so an error here just means no verified-log badges — never a 500.
+  const verifiedLogIds = logVerificationsRes.error
+    ? new Set<string>()
+    : new Set((logVerificationsRes.data ?? []) as string[]);
 
   return {
     profile,
     logs,
     products: (productsRes.data ?? []) as PortfolioProduct[],
-    bentoCards: (bentoRes.data?.cards as BentoCardConfig[] | undefined) ?? null,
-    verifiedLogIds: logVerifications,
-    skills,
-    skillVerificationCounts,
-    domains,
+    bentoCards: (bentoRes.data as BentoCardConfig[] | null) ?? null,
+    verifiedLogIds,
+    skills: skillsPayload.skills ?? [],
+    skillVerificationCounts: skillsPayload.verification_counts ?? {},
+    domains: (domainsRes.data ?? []) as PortfolioDomain[],
     impactMetrics,
-    impactMetricVerificationCounts,
-    decisions,
-    decisionVerificationCounts,
-    tradeoffs,
-    tradeoffVerificationCounts,
-    kills,
-    killVerificationCounts,
-    writings,
-    testimonials,
-    beforeAfters,
+    impactMetricVerificationCounts: metricsPayload.verification_counts ?? {},
+    decisions: decisionsPayload.decisions ?? [],
+    decisionVerificationCounts: decisionsPayload.verification_counts ?? {},
+    tradeoffs: tradeoffsPayload.tradeoffs ?? [],
+    tradeoffVerificationCounts: tradeoffsPayload.verification_counts ?? {},
+    kills: killsPayload.kills ?? [],
+    killVerificationCounts: killsPayload.verification_counts ?? {},
+    writings: (writingsRes.data ?? []) as PortfolioWriting[],
+    testimonials: (testimonialsRes.data ?? []) as PortfolioTestimonial[],
+    beforeAfters: (beforeAftersRes.data ?? []) as PortfolioBeforeAfter[],
   };
 }
 
@@ -454,27 +389,14 @@ export async function fetchPortfolio(username: string): Promise<Portfolio | null
  * least QUALITY_BAR_MIN_LOGS public logs. Everyone else renders on demand (ISR).
  */
 export async function getStaticPortfolioUsernames(): Promise<string[]> {
-  const supabase = getSupabase();
+  const { data, error } = await getSupabase().rpc('get_portfolio_usernames', {
+    p_min_logs: QUALITY_BAR_MIN_LOGS,
+  });
 
-  const { data: profiles, error } = await supabase
-    .from('profiles')
-    .select('user_id, username')
-    .not('username', 'is', null)
-    .not('bio', 'is', null)
-    .is('deleted_at', null);
-
+  // Both callers (generateStaticParams, sitemap) already treat a throw as
+  // "render on demand" — an RPC error degrades the same way.
   if (error) throw error;
-
-  const checks = await Promise.all(
-    (profiles ?? []).map(async ({ user_id, username }) => {
-      const { count } = await supabase
-        .from('logs')
-        .select('id', { count: 'exact', head: true })
-        .eq('user_id', user_id)
-        .eq('is_public', true);
-      return (count ?? 0) >= QUALITY_BAR_MIN_LOGS ? (username as string) : null;
-    }),
+  return ((data ?? []) as (string | null)[]).filter(
+    (username): username is string => username !== null,
   );
-
-  return checks.filter((username): username is string => username !== null);
 }
