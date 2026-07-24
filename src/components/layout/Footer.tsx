@@ -1,26 +1,48 @@
 import React from 'react';
 import Link from 'next/link';
 import { RESOURCES_NAV } from '@/src/navigation/resourcesNav';
+import { CookieSettingsButton } from '@/src/components/consent';
 
-export const Footer = () => (
+const Wordmark = ({ className = 'h-6', textClass = 'text-xl' }: { className?: string; textClass?: string }) => (
+  <Link href="/" className="flex items-center gap-2">
+    <img src="/logomark.svg" alt="" className={className} />
+    <span
+      className={`text-primary font-normal ${textClass}`}
+      style={{
+        letterSpacing: '-0.07em',
+        fontFamily: 'var(--font-outfit), sans-serif',
+      }}
+    >
+      Prodlog
+    </span>
+  </Link>
+);
+
+interface FooterProps {
+  /** Portfolio pages: the logo alone, so the site's own links never trail
+   *  somebody else's profile. */
+  minimal?: boolean;
+}
+
+export const Footer = ({ minimal = false }: FooterProps) => {
+  if (minimal) {
+    return (
+      <footer className="py-10 border-t border-divider">
+        <div className="max-w-5xl mx-auto px-8 md:px-12 flex justify-center">
+          <Wordmark />
+        </div>
+      </footer>
+    );
+  }
+
+  return (
   <footer className="py-16 border-t border-divider">
     <div className="max-w-5xl mx-auto px-8 md:px-12">
       {/* Main Footer Content */}
       <div className="flex flex-col md:flex-row justify-between gap-12 mb-12">
         {/* Left - Logo and Tagline */}
         <div className="flex flex-col gap-4">
-          <Link href="/" className="flex items-center gap-2">
-            <img src="/logomark.svg" alt="" className="h-6" />
-            <span
-              className="text-primary font-normal text-xl"
-              style={{
-                letterSpacing: '-0.07em',
-                fontFamily: 'var(--font-outfit), sans-serif',
-              }}
-            >
-              Prodlog
-            </span>
-          </Link>
+          <Wordmark />
           <p className="text-muted text-sm max-w-xs">
             Career infrastructure for product managers.
           </p>
@@ -74,8 +96,10 @@ export const Footer = () => (
           <Link href="/privacy-policy" className="hover:text-primary transition-colors">
             Privacy Policy
           </Link>
+          <CookieSettingsButton className="hover:text-primary transition-colors" />
         </div>
       </div>
     </div>
   </footer>
-);
+  );
+};

@@ -176,7 +176,6 @@ const SkillRow = ({
         {skill.name}
       </span>
       <SkillSegments level={skill.level} />
-      <span className="text-xs text-muted whitespace-nowrap">{label}</span>
       {verified && (
         <span className="ml-auto shrink-0">
           <VerifiedMark count={count} />
@@ -955,101 +954,123 @@ const WritingInternalChip = () => (
   </span>
 );
 
-/** Wraps a row in the external link (sanitized, new tab) when it has one;
- *  mentions stay deliberately inert — never styled as a broken link. */
-const WritingRowShell = ({
+/** Wraps the card body in the external link (sanitized, new tab) when the
+ *  piece has one; mentions stay deliberately inert — never styled as a broken
+ *  link. */
+const WritingShell = ({
   item,
   meta,
+  className,
   children,
 }: {
   item: PortfolioWriting;
   meta: string;
+  className?: string;
   children: React.ReactNode;
 }) => {
   const linkParts = item.type === 'link' ? safeLinkParts(item.url ?? '') : null;
+  const label = `${item.title}${meta ? `, ${meta}` : ''}`;
   if (linkParts) {
     return (
-      <li className="min-w-0">
-        <a
-          href={linkParts.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="block min-w-0 rounded-md hover:bg-charcoal/40 transition-colors -mx-1 px-1 py-1"
-          aria-label={`${item.title}${meta ? `, ${meta}` : ''} (opens in a new tab)`}
-        >
-          {children}
-        </a>
-      </li>
+      <a
+        href={linkParts.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`block h-full hover:bg-charcoal/30 transition-colors ${className ?? ''}`}
+        aria-label={`${label} (opens in a new tab)`}
+      >
+        {children}
+      </a>
     );
   }
   return (
-    <li className="min-w-0 py-1" aria-label={`${item.title}${meta ? `, ${meta}` : ''}, internal`}>
+    <div className={`h-full ${className ?? ''}`} aria-label={`${label}, internal`}>
       {children}
-    </li>
+    </div>
   );
 };
 
-// Compact row (M): a glance — title + meta, no cover or excerpt.
-const WritingRow = ({ item }: { item: PortfolioWriting }) => {
-  const meta = writingMetaLine(item);
-  const isLink = item.type === 'link' && safeLinkParts(item.url ?? '') != null;
-  return (
-    <WritingRowShell item={item} meta={meta}>
-      <p className="flex items-center gap-1.5 min-w-0">
-        <span className="text-sm font-medium text-primary truncate">{item.title}</span>
-        {isLink && <ExternalLinkIcon className="w-3 h-3 text-muted shrink-0 opacity-70" />}
-        {item.type === 'mention' && <WritingInternalChip />}
-      </p>
-      {meta && <p className="text-xs text-muted truncate">{meta}</p>}
-    </WritingRowShell>
-  );
-};
+const WritingTag = () => (
+  <p className="flex items-center gap-1.5 shrink-0 text-muted">
+    <PenLineIcon className="w-3 h-3" />
+    <span className="text-[10px] font-medium uppercase tracking-wider">Writing</span>
+  </p>
+);
 
-// Artifact row (L): cover + series + dominant title + excerpt + meta — the
-// entry as a self-contained piece, not a bare link.
-const WritingArtifactRow = ({ item }: { item: PortfolioWriting }) => {
-  const meta = writingMetaLine(item);
-  const isLink = item.type === 'link' && safeLinkParts(item.url ?? '') != null;
+// One piece per card, mirroring prodlog2's WritingComposition.
+export const WritingCard = ({ writing, size }: { writing: PortfolioWriting; size: Size }) => {
+  const meta = writingMetaLine(writing);
+  const isLink = writing.type === 'link' && safeLinkParts(writing.url ?? '') != null;
+
+  // M: the piece at a glance — cover thumb, title, meta. The excerpt doesn't
+  // survive a 140px row, so the note (the owner's own line) wins the space.
+  if (size !== 'L') {
+    return (
+      <WritingShell item={writing} meta={meta} className="p-4">
+        <div className="h-full flex flex-col overflow-hidden">
+          <WritingTag />
+          <div className="flex-1 min-h-0 flex gap-3 pt-2">
+            <WritingCover coverImageUrl={writing.cover_image_url} title={writing.title} />
+            <div className="flex-1 min-w-0 flex flex-col justify-center gap-0.5">
+              <p className="flex items-start gap-1.5 min-w-0">
+                <span className="text-sm font-semibold text-primary leading-snug line-clamp-2">
+                  {writing.title}
+                </span>
+                {isLink && (
+                  <ExternalLinkIcon className="w-3 h-3 mt-0.5 text-muted shrink-0 opacity-70" />
+                )}
+                {writing.type === 'mention' && <WritingInternalChip />}
+              </p>
+              {meta && <p className="text-xs text-muted truncate">{meta}</p>}
+              {writing.note && (
+                <p className="text-xs text-muted/90 italic line-clamp-1">{writing.note}</p>
+              )}
+            </div>
+          </div>
+        </div>
+      </WritingShell>
+    );
+  }
+
+  // L: the piece as an artifact — cover banner, series, dominant title,
+  // excerpt, meta, and the note that says why it's here.
   return (
-    <WritingRowShell item={item} meta={meta}>
-      <div className="flex gap-3 min-w-0">
-        <WritingCover coverImageUrl={item.cover_image_url} title={item.title} />
-        <div className="flex-1 min-w-0 flex flex-col gap-0.5">
-          {item.series_label && (
+    <WritingShell item={writing} meta={meta} className="p-5">
+      <div className="h-full flex flex-col overflow-hidden gap-2">
+        <div className="flex items-center justify-between gap-2">
+          <WritingTag />
+          {writing.type === 'mention' && <WritingInternalChip />}
+        </div>
+        <WritingCover
+          coverImageUrl={writing.cover_image_url}
+          title={writing.title}
+          variant="banner"
+        />
+        <div className="flex-1 min-h-0 flex flex-col gap-1 overflow-hidden">
+          {writing.series_label && (
             <p className="text-[10px] font-medium uppercase tracking-wider text-muted truncate">
-              {item.series_label}
+              {writing.series_label}
             </p>
           )}
           <p className="flex items-start gap-1.5 min-w-0">
-            <span className="text-sm font-semibold text-primary line-clamp-2">{item.title}</span>
-            {isLink && <ExternalLinkIcon className="w-3 h-3 mt-1 text-muted shrink-0 opacity-70" />}
-            {item.type === 'mention' && <WritingInternalChip />}
+            <span className="text-base font-serif font-semibold text-primary leading-snug line-clamp-2">
+              {writing.title}
+            </span>
+            {isLink && (
+              <ExternalLinkIcon className="w-3.5 h-3.5 mt-1 text-muted shrink-0 opacity-70" />
+            )}
           </p>
-          {item.excerpt && <p className="text-xs text-muted line-clamp-2">{item.excerpt}</p>}
-          {meta && <p className="text-[11px] text-muted/80 truncate">{meta}</p>}
-          {item.note && <p className="text-xs text-muted/90 italic line-clamp-2">{item.note}</p>}
+          {writing.excerpt && <p className="text-xs text-muted line-clamp-2">{writing.excerpt}</p>}
         </div>
-      </div>
-    </WritingRowShell>
-  );
-};
-
-export const WritingCard = ({ writings, size }: { writings: PortfolioWriting[]; size: Size }) => {
-  const isLarge = size === 'L';
-  return (
-    <div className={`h-full flex flex-col overflow-hidden ${isLarge ? 'p-5' : 'p-4'}`}>
-      {/* Small uppercase tag — must not compete with the entry titles */}
-      <p className="flex items-center gap-1.5 mb-2 shrink-0 text-muted">
-        <PenLineIcon className="w-3 h-3" />
-        <span className="text-[10px] font-medium uppercase tracking-wider">Writing</span>
-      </p>
-      <ul
-        className={`flex-1 min-h-0 ${isLarge ? 'overflow-y-auto pr-1 space-y-2' : 'overflow-hidden space-y-1.5'}`}
-      >
-        {writings.map((item) =>
-          isLarge ? <WritingArtifactRow key={item.id} item={item} /> : <WritingRow key={item.id} item={item} />,
+        {(meta || writing.note) && (
+          <div className="shrink-0 space-y-0.5">
+            {meta && <p className="text-[11px] text-muted/80 truncate">{meta}</p>}
+            {writing.note && (
+              <p className="text-xs text-muted/90 italic line-clamp-2">{writing.note}</p>
+            )}
+          </div>
         )}
-      </ul>
-    </div>
+      </div>
+    </WritingShell>
   );
 };

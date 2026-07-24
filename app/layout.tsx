@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter, Outfit, Source_Serif_4 } from 'next/font/google';
-import Script from 'next/script';
 import { Layout } from '@/src/components/layout';
+import { ConsentGate } from '@/src/components/consent';
 import './globals.css';
 
 const GA_MEASUREMENT_ID = 'G-VYKQQTGRNT';
@@ -43,22 +43,13 @@ export default function RootLayout({
     >
       <body>
         <Layout>{children}</Layout>
-        {process.env.NODE_ENV === 'production' && (
-          <>
-            <Script
-              src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-              strategy="afterInteractive"
-            />
-            <Script id="google-analytics" strategy="afterInteractive">
-              {`
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', '${GA_MEASUREMENT_ID}');
-              `}
-            </Script>
-          </>
-        )}
+        {/* Owns both the banner and the Google tag: the tag is mounted only
+            after consent, so a visitor who declines or never answers is never
+            given an analytics cookie. */}
+        <ConsentGate
+          measurementId={GA_MEASUREMENT_ID}
+          analyticsEnabled={process.env.NODE_ENV === 'production'}
+        />
       </body>
     </html>
   );

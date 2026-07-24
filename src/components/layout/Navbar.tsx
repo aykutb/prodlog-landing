@@ -9,9 +9,11 @@ import type { NavItem } from '@/src/lib/content';
 
 interface NavbarProps {
   compareNavItems: NavItem[];
+  /** Portfolio pages: logo + Get Started only, no site navigation. */
+  minimal?: boolean;
 }
 
-export const Navbar = ({ compareNavItems }: NavbarProps) => {
+export const Navbar = ({ compareNavItems, minimal = false }: NavbarProps) => {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -68,55 +70,68 @@ export const Navbar = ({ compareNavItems }: NavbarProps) => {
               </span>
             </Link>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-6">
-              <Link href="/how-it-works" className={navLinkClass('/how-it-works')}>
-                How it works
-              </Link>
-              <ResourcesDropdown
-                isActive={resourcesActive}
-                compareNavItems={compareNavItems}
-                linkClassName={
-                  resourcesActive
-                    ? 'transition-all text-sm text-primary font-medium'
-                    : 'transition-all text-sm text-muted hover:text-primary'
-                }
-                onNavigate={handleLinkClick}
-              />
-              <Link href="/pricing" className={navLinkClass('/pricing')}>
-                Pricing
-              </Link>
+            {/* On a portfolio the CTA is the whole nav, at every width — there
+                is no hamburger left to hide it behind. */}
+            {minimal ? (
               <a
                 href="https://dashboard.prodlog.app/auth"
                 className="bg-deep-ink-blue hover:bg-deep-ink-blue/90 text-white px-4 py-1.5 rounded-lg text-sm transition-all font-medium"
               >
                 Get Started
               </a>
-            </div>
+            ) : (
+              <>
+                {/* Desktop Navigation */}
+                <div className="hidden md:flex items-center gap-6">
+                  <Link href="/how-it-works" className={navLinkClass('/how-it-works')}>
+                    How it works
+                  </Link>
+                  <ResourcesDropdown
+                    isActive={resourcesActive}
+                    compareNavItems={compareNavItems}
+                    linkClassName={
+                      resourcesActive
+                        ? 'transition-all text-sm text-primary font-medium'
+                        : 'transition-all text-sm text-muted hover:text-primary'
+                    }
+                    onNavigate={handleLinkClick}
+                  />
+                  <Link href="/pricing" className={navLinkClass('/pricing')}>
+                    Pricing
+                  </Link>
+                  <a
+                    href="https://dashboard.prodlog.app/auth"
+                    className="bg-deep-ink-blue hover:bg-deep-ink-blue/90 text-white px-4 py-1.5 rounded-lg text-sm transition-all font-medium"
+                  >
+                    Get Started
+                  </a>
+                </div>
 
-            {/* Hamburger Menu Button - Mobile Only */}
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden p-2 text-muted hover:text-primary transition-colors -mr-2"
-              aria-label="Toggle menu"
-              aria-expanded={isMenuOpen}
-            >
-              {isMenuOpen ? (
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              ) : (
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-              )}
-            </button>
+                {/* Hamburger Menu Button - Mobile Only */}
+                <button
+                  onClick={() => setIsMenuOpen(!isMenuOpen)}
+                  className="md:hidden p-2 text-muted hover:text-primary transition-colors -mr-2"
+                  aria-label="Toggle menu"
+                  aria-expanded={isMenuOpen}
+                >
+                  {isMenuOpen ? (
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  ) : (
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                  )}
+                </button>
+              </>
+            )}
           </div>
         </nav>
       </div>
 
       {/* Mobile Menu Overlay */}
-      {isMenuOpen && (
+      {!minimal && isMenuOpen && (
         <div
           className="fixed inset-0 bg-black/20 z-40 md:hidden"
           onClick={() => setIsMenuOpen(false)}
@@ -124,6 +139,7 @@ export const Navbar = ({ compareNavItems }: NavbarProps) => {
       )}
 
       {/* Mobile Menu Panel */}
+      {!minimal && (
       <div
         className={`fixed top-20 left-4 right-4 max-h-[calc(100dvh-6rem)] overflow-y-auto overscroll-contain bg-white border border-divider rounded-2xl shadow-lg z-40 md:hidden transform transition-all duration-200 ease-out ${
           isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'
@@ -161,6 +177,7 @@ export const Navbar = ({ compareNavItems }: NavbarProps) => {
           </div>
         </div>
       </div>
+      )}
     </>
   );
 };

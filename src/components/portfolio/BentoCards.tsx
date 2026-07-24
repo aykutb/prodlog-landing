@@ -558,8 +558,10 @@ const renderCard = (card: BentoCardConfig, portfolio: Portfolio): React.ReactNod
         <BeforeAfterCard beforeAfter={beforeAfter} portfolio={portfolio} size={card.size} />
       ) : null;
     }
-    case 'writing':
-      return <WritingCard writings={portfolio.writings} size={card.size} />;
+    case 'writing': {
+      const writing = portfolio.writings.find((w) => w.id === card.contentId);
+      return writing ? <WritingCard writing={writing} size={card.size} /> : null;
+    }
     case 'embed':
       return <EmbedCard card={card} size={card.size} />;
     case 'rich_text':

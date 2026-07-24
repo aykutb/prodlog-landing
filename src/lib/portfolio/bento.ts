@@ -152,7 +152,7 @@ export function isCardEmpty(card: BentoCardConfig, portfolio: Portfolio): boolea
     case 'before_after':
       return !card.contentId || !portfolio.beforeAfters.some((b) => b.id === card.contentId);
     case 'writing':
-      return portfolio.writings.length === 0;
+      return !card.contentId || !portfolio.writings.some((w) => w.id === card.contentId);
     case 'embed':
       return !card.embedUrl?.trim();
     case 'rich_text':

@@ -2,9 +2,12 @@
 
 import React, { useState } from 'react';
 
-// Cover thumbnail for a writing entry: the image when present (and loadable),
+// Cover art for a writing card: the image when present (and loadable),
 // otherwise a generated accent tile with a monogram — never a broken slot.
-// Mirrors the dashboard's WritingCover (prodlog2 WritingBentoCard).
+// Mirrors the dashboard's Cover (prodlog2 WritingBentoCard): 'thumb' is the
+// square used at M, 'banner' the full-width strip used at L. Publisher CDNs
+// are hotlinked with no referrer; if one refuses, onError falls back to the
+// same tile.
 
 /** Short mark for the generated tile: first number in the title
  *  ("100 products…" → "100"), else initials of the first two words. */
@@ -24,11 +27,17 @@ const coverMonogram = (title: string): string => {
 export const WritingCover = ({
   coverImageUrl,
   title,
+  variant = 'thumb',
 }: {
   coverImageUrl: string | null;
   title: string;
+  variant?: 'thumb' | 'banner';
 }) => {
   const [imgError, setImgError] = useState(false);
+  const box =
+    variant === 'thumb'
+      ? 'w-[72px] h-[72px] rounded-lg shrink-0'
+      : 'w-full h-[104px] rounded-lg shrink-0';
 
   if (coverImageUrl && !imgError) {
     return (
@@ -37,17 +46,21 @@ export const WritingCover = ({
         src={coverImageUrl}
         alt=""
         loading="lazy"
+        referrerPolicy="no-referrer"
         onError={() => setImgError(true)}
-        className="w-[92px] h-[92px] rounded-lg object-cover border border-divider/50 shrink-0"
+        className={`${box} object-cover border border-divider/50 bg-charcoal/40`}
       />
     );
   }
   return (
-    <div
-      aria-hidden="true"
-      className="w-[92px] h-[92px] rounded-lg bg-impact/10 flex items-center justify-center shrink-0"
-    >
-      <span className="text-2xl font-serif font-semibold text-impact">{coverMonogram(title)}</span>
+    <div aria-hidden="true" className={`${box} bg-impact/10 flex items-center justify-center`}>
+      <span
+        className={`font-serif font-semibold text-impact ${
+          variant === 'thumb' ? 'text-xl' : 'text-3xl'
+        }`}
+      >
+        {coverMonogram(title)}
+      </span>
     </div>
   );
 };

@@ -102,9 +102,18 @@ export const PrivacyPolicyPage = () => (
 
       <Section title="6. Cookies and similar technologies">
         <p>
-          We use cookies and similar technologies to remember preferences, maintain sessions, understand
-          how the Service is used, and improve performance. You can control cookies through your browser
-          settings. Disabling certain cookies may limit some functionality.
+          We use two categories of storage. <strong>Strictly necessary</strong> storage keeps the Service
+          working — signing you in, maintaining your session, and remembering your cookie choice. It is
+          always active and cannot be switched off. <strong>Analytics</strong> cookies (Google Analytics)
+          help us understand how people find and use Prodlog. They are optional and are only set after
+          you accept them.
+        </p>
+        <p>
+          We ask for your choice the first time you visit, and we do not load analytics until you accept.
+          If you decline, no analytics cookies are placed on your device. You can change your mind at any
+          time using the <strong>Cookie settings</strong> link in the footer; withdrawing consent also
+          removes the analytics cookies already stored. You can additionally control cookies through your
+          browser settings, though disabling strictly necessary cookies may limit some functionality.
         </p>
       </Section>
 
