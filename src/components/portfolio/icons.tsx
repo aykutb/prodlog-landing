@@ -205,6 +205,41 @@ export const ArrowDownIcon = (props: IconProps) =>
     </>,
   );
 
+export const GitBranchIcon = (props: IconProps) =>
+  lucide(
+    props,
+    <>
+      <line x1="6" x2="6" y1="3" y2="15" />
+      <circle cx="18" cy="6" r="3" />
+      <circle cx="6" cy="18" r="3" />
+      <path d="M18 9a9 9 0 0 1-9 9" />
+    </>,
+  );
+
+export const ScaleIcon = (props: IconProps) =>
+  lucide(
+    props,
+    <>
+      <path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z" />
+      <path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z" />
+      <path d="M7 21h10" />
+      <path d="M12 3v18" />
+      <path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2" />
+    </>,
+  );
+
+export const ScissorsIcon = (props: IconProps) =>
+  lucide(
+    props,
+    <>
+      <circle cx="6" cy="6" r="3" />
+      <path d="M8.12 8.12 12 12" />
+      <path d="M20 4 8.12 15.88" />
+      <circle cx="6" cy="18" r="3" />
+      <path d="M14.8 14.8 20 20" />
+    </>,
+  );
+
 export const ChevronDownIcon = (props: IconProps) =>
   lucide(props, <path d="m6 9 6 6 6-6" />);
 

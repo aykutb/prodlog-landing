@@ -54,8 +54,9 @@ export interface PortfolioProduct {
   id: string;
   name: string;
   type: string | null;
+  /** The owner's role on this product ("Founding PM"). */
+  role: string | null;
   url: string | null;
-  business_model: string | null;
   problem_definition: string | null;
   start_date: string | null;
   end_date: string | null;

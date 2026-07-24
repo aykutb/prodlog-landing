@@ -47,6 +47,25 @@ export function cardSpanClass(card: BentoCardConfig, portfolio: Portfolio): stri
     return L_ROW_SPAN_CLASS[rows];
   }
 
+  // Product cards never scroll internally — M and L grow to fit instead,
+  // mirroring the dashboard's BentoGrid estimates.
+  if (card.type === 'single_product' && card.contentId) {
+    const p = portfolio.products.find((x) => x.id === card.contentId);
+    if (p) {
+      const footer = p.role || p.start_date || p.end_date ? 44 : 0;
+      // M was retired for product cards; layouts saved before that render as L
+      if (card.size === 'L' || card.size === 'M') {
+        // padding + icon header row (name + type chip), then the details stack
+        let estimated = 32 + 84 + footer;
+        if (p.problem_definition) {
+          estimated += Math.ceil(p.problem_definition.length / 60) * 20 + 12;
+        }
+        if (p.screenshots && p.screenshots.length > 0) estimated += 72;
+        return L_ROW_SPAN_CLASS[Math.min(Math.max(2, rowsForHeight(estimated)), MAX_L_ROW_SPAN)];
+      }
+    }
+  }
+
   if (card.size !== 'L') return SIZE_TO_SPAN_CLASS[card.size];
 
   let rows = 2;

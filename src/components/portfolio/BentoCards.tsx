@@ -10,7 +10,6 @@ import {
   differenceInYears,
   formatDateRange,
   formatLongDate,
-  formatMonthYear,
   formatShortDate,
   getFaviconUrl,
   getItemsPerPage,
@@ -226,7 +225,7 @@ const ContributionCard = ({ logs }: { logs: PortfolioLog[] }) => {
 const CompactProduct = ({ product }: { product: PortfolioProduct }) => (
   <div className="flex items-center gap-2 p-2 rounded-lg bg-charcoal/40">
     <ProductFavicon url={product.url} iconUrl={product.icon_url} pixelSize={32} className="w-6 h-6 rounded" fallbackIconClass="w-3 h-3" />
-    <span className="text-sm truncate flex-1">{product.name}</span>
+    <span className="text-sm font-serif font-semibold text-primary line-clamp-2 break-words flex-1">{product.name}</span>
   </div>
 );
 
@@ -236,7 +235,7 @@ const DetailedProduct = ({ product }: { product: PortfolioProduct }) => {
     <div className="flex gap-3 p-3 rounded-lg bg-charcoal/40">
       <ProductFavicon url={product.url} iconUrl={product.icon_url} pixelSize={48} className="w-12 h-12 rounded-lg" fallbackIconClass="w-6 h-6" />
       <div className="flex-1 min-w-0">
-        <p className="font-medium truncate">{product.name}</p>
+        <p className="font-serif font-semibold text-primary line-clamp-2 break-words">{product.name}</p>
         {product.type && (
           <p className="text-xs text-muted flex items-center gap-1">
             <Building2Icon className="w-3 h-3" />
@@ -270,10 +269,11 @@ const ProductGridPage = ({ products }: { products: PortfolioProduct[] }) =>
   );
 
 const SingleProductCard = ({ product, size }: { product: PortfolioProduct; size: Size }) => {
-  const iconSize = size === 'L' ? 'w-16 h-16' : size === 'M' ? 'w-12 h-12' : 'w-8 h-8';
-  const packageIconSize = size === 'L' ? 'w-8 h-8' : size === 'M' ? 'w-6 h-6' : 'w-4 h-4';
-  const faviconPixelSize = size === 'L' ? 64 : size === 'M' ? 48 : 32;
-  const rounding = size === 'L' ? 'rounded-xl' : size === 'M' ? 'rounded-lg' : 'rounded-md';
+  // Single product is S or L only (M was retired; renderCard coerces it to L)
+  const iconSize = size === 'L' ? 'w-16 h-16' : 'w-8 h-8';
+  const packageIconSize = size === 'L' ? 'w-8 h-8' : 'w-4 h-4';
+  const faviconPixelSize = size === 'L' ? 64 : 32;
+  const rounding = size === 'L' ? 'rounded-xl' : 'rounded-md';
 
   const externalLink = product.url && (
     <a
@@ -308,64 +308,47 @@ const SingleProductCard = ({ product, size }: { product: PortfolioProduct; size:
             )}
           </div>
         </div>
-        <div className="flex-1 space-y-3 overflow-auto">
+        {/* Details never scroll; cardSpanClass grows the card to fit */}
+        <div className="flex-1 space-y-3">
           {product.problem_definition && <p className="text-sm text-muted">{product.problem_definition}</p>}
-          {product.business_model && (
-            <div className="flex items-center gap-2 text-sm text-muted">
-              <Building2Icon className="w-4 h-4 shrink-0" />
-              <span>{product.business_model}</span>
-            </div>
-          )}
-          {(product.start_date || product.end_date) && (
-            <div className="flex items-center gap-2 text-sm text-muted">
-              <CalendarIcon className="w-4 h-4 shrink-0" />
-              <span>
-                {product.start_date && formatMonthYear(product.start_date)}
-                {product.start_date && product.end_date && ' — '}
-                {product.end_date ? formatMonthYear(product.end_date) : product.start_date ? 'Present' : ''}
-              </span>
-            </div>
-          )}
         </div>
         {product.screenshots && product.screenshots.length > 0 && (
           <ScreenshotStrip screenshots={product.screenshots} productName={product.name} />
+        )}
+        {/* Role + dates under a hairline divider, testimonial-style */}
+        {(product.role || formatDateRange(product.start_date, product.end_date)) && (
+          <div className="shrink-0 border-t border-divider mt-3 pt-3 flex items-center justify-between gap-3">
+            {product.role && (
+              <p className="text-sm font-medium text-primary line-clamp-2 min-w-0">{product.role}</p>
+            )}
+            {formatDateRange(product.start_date, product.end_date) && (
+              <p className="flex items-center gap-1.5 text-xs text-muted shrink-0 ml-auto">
+                <CalendarIcon className="w-3.5 h-3.5" />
+                {formatDateRange(product.start_date, product.end_date)}
+              </p>
+            )}
+          </div>
         )}
       </div>
     );
   }
 
-  if (size === 'M') {
-    return (
-      <div className="p-4 h-full flex flex-col relative">
-        <div className="flex gap-3 h-full">
-          <div className="shrink-0">
-            <ProductFavicon url={product.url} iconUrl={product.icon_url} pixelSize={faviconPixelSize} className={`${iconSize} ${rounding}`} fallbackIconClass={packageIconSize} />
-          </div>
-          <div className="flex-1 min-w-0 flex flex-col">
-            <div className="flex items-start justify-between gap-2">
-              <h3 className="font-serif font-semibold text-primary truncate">{product.name}</h3>
-              {externalLink}
-            </div>
-            {product.type && <span className="text-xs text-muted">{product.type}</span>}
-            {product.problem_definition && (
-              <p className="text-sm text-muted sm:line-clamp-2 mt-1 flex-1">{product.problem_definition}</p>
-            )}
-            {product.business_model && <p className="text-xs text-muted/70 mt-auto">{product.business_model}</p>}
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="p-4 h-full flex flex-col relative">
       <div className="flex items-start gap-3">
         <ProductFavicon url={product.url} iconUrl={product.icon_url} pixelSize={faviconPixelSize} className={`${iconSize} ${rounding}`} fallbackIconClass={packageIconSize} />
         <div className="flex-1 min-w-0">
-          <h3 className="font-serif font-semibold text-primary truncate text-sm">{product.name}</h3>
+          <h3 className="font-serif font-semibold text-primary line-clamp-2 break-words text-sm">{product.name}</h3>
           {product.type && <span className="text-xs text-muted">{product.type}</span>}
         </div>
       </div>
+      {/* S is too narrow for role + dates side by side; role only */}
+      {product.role && (
+        <div className="mt-auto shrink-0 border-t border-divider pt-2">
+          <p className="text-xs font-medium text-primary line-clamp-1">{product.role}</p>
+        </div>
+      )}
     </div>
   );
 };
@@ -585,7 +568,10 @@ const renderCard = (card: BentoCardConfig, portfolio: Portfolio): React.ReactNod
       ) : null;
     case 'single_product': {
       const product = products.find((p) => p.id === card.contentId);
-      return product ? <SingleProductCard product={product} size={card.size} /> : null;
+      return product ? (
+        // M was retired for product cards; layouts saved before that render as L
+        <SingleProductCard product={product} size={card.size === 'M' ? 'L' : card.size} />
+      ) : null;
     }
     case 'all_products':
       return <ProductListCard products={products} size={card.size} title="Products" />;

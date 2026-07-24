@@ -38,9 +38,12 @@ import {
   CornerDownRightIcon,
   ExternalLinkIcon,
   FileTextIcon,
+  GitBranchIcon,
   LockIcon,
   PackageIcon,
   PenLineIcon,
+  ScaleIcon,
+  ScissorsIcon,
 } from './icons';
 
 // Read-only, server-rendered versions of the dashboard's evidence bento
@@ -71,8 +74,26 @@ const ProductEyebrow = ({ product, size }: { product: PortfolioProduct; size: Si
           <PackageIcon className={`${s.pkg} text-muted`} />
         </div>
       )}
-      <span className={`${s.text} font-medium text-primary/80 truncate`}>{product.name}</span>
+      <span className={`${s.text} font-serif font-semibold text-primary truncate`}>{product.name}</span>
     </div>
+  );
+};
+
+// Card-type eyebrow: says what kind of judgment this is before anything else.
+// Mirrors the dashboard cards' JudgmentTag (prodlog2 Decision/Tradeoff/Kill).
+const JUDGMENT_TAGS = {
+  decision: { label: 'Decision', Icon: GitBranchIcon },
+  tradeoff: { label: 'Tradeoff', Icon: ScaleIcon },
+  kill: { label: 'Kill', Icon: ScissorsIcon },
+} as const;
+
+const JudgmentTag = ({ kind }: { kind: keyof typeof JUDGMENT_TAGS }) => {
+  const { label, Icon } = JUDGMENT_TAGS[kind];
+  return (
+    <p className="flex items-center gap-1.5 mb-1.5 shrink-0 text-muted">
+      <Icon className="w-3 h-3" />
+      <span className="text-[10px] font-medium uppercase tracking-wider">{label}</span>
+    </p>
   );
 };
 
@@ -416,6 +437,7 @@ export const DecisionCard = ({
   if (size === 'M') {
     return (
       <div className="h-full flex flex-col overflow-hidden px-4 py-3">
+        <JudgmentTag kind="decision" />
         <div className="flex items-center justify-between gap-3">
           <ProductEyebrow product={product} size="M" />
           <div className="flex items-center gap-2 shrink-0">
@@ -448,6 +470,7 @@ export const DecisionCard = ({
 
   return (
     <div className="h-full flex flex-col overflow-hidden p-5">
+      <JudgmentTag kind="decision" />
       <div className="flex items-center justify-between gap-2">
         <ProductEyebrow product={product} size="L" />
         {verified && <VerifiedMark count={count} withLabel />}
@@ -509,6 +532,7 @@ export const TradeoffCard = ({
   if (size === 'S') {
     return (
       <div className="h-full flex flex-col overflow-hidden p-4">
+        <JudgmentTag kind="tradeoff" />
         <div className="flex items-center justify-between gap-2">
           <ProductEyebrow product={product} size="S" />
           {verified && <VerifiedMark count={count} />}
@@ -525,6 +549,7 @@ export const TradeoffCard = ({
 
   return (
     <div className="h-full flex flex-col overflow-hidden px-4 py-3">
+      <JudgmentTag kind="tradeoff" />
       <div className="flex items-center justify-between gap-3">
         <ProductEyebrow product={product} size="M" />
         <div className="flex items-center gap-2 shrink-0">
@@ -580,6 +605,7 @@ export const KillCard = ({
 
     return (
       <div className="h-full flex flex-col overflow-hidden px-4 py-3">
+        <JudgmentTag kind="kill" />
         {hasHeader && (
           <div className="flex items-center justify-between gap-3">
             {headerLeft ?? <span />}
@@ -611,6 +637,7 @@ export const KillCard = ({
 
   return (
     <div className="h-full flex flex-col overflow-hidden p-5">
+      <JudgmentTag kind="kill" />
       {(product || verified) && (
         <div className="flex items-center justify-between gap-2">
           {product ? <ProductEyebrow product={product} size="L" /> : <span />}
