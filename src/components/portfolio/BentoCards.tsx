@@ -381,7 +381,47 @@ const logPreview = (log: PortfolioLog): string => log.description || stripHtml(l
 const logHref = (log: PortfolioLog): string | null =>
   log.content ? `${DASHBOARD_ORIGIN}/log/${log.id}` : null;
 
-const SingleLogCard = ({ log, size }: { log: PortfolioLog; size: Size }) => {
+/** The log's product icon when the log is tied to a product; the FileText
+ *  glyph otherwise (and as the fallback when the product has no icon).
+ *  Mirrors the dashboard's LogIcon in LogBentoCard. */
+const LogCardIcon = ({
+  product,
+  containerClass,
+  iconClass,
+  pixelSize = 32,
+}: {
+  product: PortfolioProduct | null;
+  containerClass: string;
+  iconClass: string;
+  pixelSize?: number;
+}) => {
+  const src = product ? product.icon_url || getFaviconUrl(product.url, pixelSize) : null;
+  if (src) {
+    // eslint-disable-next-line @next/next/no-img-element
+    return (
+      <img
+        src={src}
+        alt=""
+        className={`${containerClass} shrink-0 ${product!.icon_url ? 'object-cover' : 'object-contain'}`}
+      />
+    );
+  }
+  return (
+    <div className={`${containerClass} bg-impact/10 flex items-center justify-center shrink-0`}>
+      <FileTextIcon className={`${iconClass} text-impact`} />
+    </div>
+  );
+};
+
+const SingleLogCard = ({
+  log,
+  product,
+  size,
+}: {
+  log: PortfolioLog;
+  product: PortfolioProduct | null;
+  size: Size;
+}) => {
   const previewText = logPreview(log);
   const iconContainerSize = size === 'L' ? 'w-16 h-16' : size === 'M' ? 'w-12 h-12' : 'w-8 h-8';
   const iconSize = size === 'L' ? 'w-8 h-8' : size === 'M' ? 'w-6 h-6' : 'w-4 h-4';
@@ -391,9 +431,12 @@ const SingleLogCard = ({ log, size }: { log: PortfolioLog; size: Size }) => {
       {size === 'L' ? (
         <div className="flex flex-col h-full">
           <div className="flex items-start gap-4 mb-4">
-            <div className={`${iconContainerSize} rounded-xl bg-impact/10 flex items-center justify-center shrink-0`}>
-              <FileTextIcon className={`${iconSize} text-impact`} />
-            </div>
+            <LogCardIcon
+              product={product}
+              containerClass={`${iconContainerSize} rounded-xl`}
+              iconClass={iconSize}
+              pixelSize={64}
+            />
             <div className="flex-1 min-w-0">
               <h3 className="text-xl font-serif font-semibold text-primary">{log.title}</h3>
               <div className="flex items-center gap-1 text-sm text-muted mt-1">
@@ -406,9 +449,11 @@ const SingleLogCard = ({ log, size }: { log: PortfolioLog; size: Size }) => {
         </div>
       ) : size === 'M' ? (
         <div className="flex gap-3 h-full">
-          <div className={`${iconContainerSize} rounded-lg bg-impact/10 flex items-center justify-center shrink-0`}>
-            <FileTextIcon className={`${iconSize} text-impact`} />
-          </div>
+          <LogCardIcon
+            product={product}
+            containerClass={`${iconContainerSize} rounded-lg`}
+            iconClass={iconSize}
+          />
           <div className="flex-1 min-w-0 flex flex-col">
             <h3 className="font-serif font-semibold text-primary line-clamp-2">{log.title}</h3>
             <div className="flex items-center gap-1 text-xs text-muted mt-1">
@@ -420,9 +465,11 @@ const SingleLogCard = ({ log, size }: { log: PortfolioLog; size: Size }) => {
         </div>
       ) : (
         <div className="flex items-start gap-3">
-          <div className={`${iconContainerSize} rounded-full bg-impact/10 flex items-center justify-center shrink-0`}>
-            <FileTextIcon className={`${iconSize} text-impact`} />
-          </div>
+          <LogCardIcon
+            product={product}
+            containerClass={`${iconContainerSize} rounded-full`}
+            iconClass={iconSize}
+          />
           <div className="flex-1 min-w-0">
             <h3 className="font-serif font-semibold text-primary line-clamp-2 text-sm">{log.title}</h3>
             <div className="flex items-center gap-1 text-xs text-muted mt-1">
@@ -445,14 +492,37 @@ const SingleLogCard = ({ log, size }: { log: PortfolioLog; size: Size }) => {
   );
 };
 
-const AllLogsCard = ({ logs, size }: { logs: PortfolioLog[]; size: Size }) => {
+const AllLogsCard = ({
+  logs,
+  products,
+  size,
+}: {
+  logs: PortfolioLog[];
+  products: PortfolioProduct[];
+  size: Size;
+}) => {
   const pages = chunk(logs, getItemsPerPage(size, 1)).map((pageItems, i) => (
     <div key={i} className="space-y-2">
       {pageItems.map((log) => {
         const href = logHref(log);
+        const product = log.product_id
+          ? products.find((p) => p.id === log.product_id) ?? null
+          : null;
+        const productIconSrc = product
+          ? product.icon_url || getFaviconUrl(product.url, 16)
+          : null;
         const row = (
           <>
-            <FileTextIcon className="w-4 h-4 text-impact shrink-0 mt-0.5" />
+            {productIconSrc ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={productIconSrc}
+                alt=""
+                className={`w-4 h-4 rounded shrink-0 mt-0.5 ${product!.icon_url ? 'object-cover' : 'object-contain'}`}
+              />
+            ) : (
+              <FileTextIcon className="w-4 h-4 text-impact shrink-0 mt-0.5" />
+            )}
             <div className="flex-1 min-w-0">
               <p className="text-sm truncate">{log.title}</p>
               <p className="text-xs text-muted">{formatShortDate(log.date)}</p>
@@ -587,10 +657,14 @@ const renderCard = (card: BentoCardConfig, portfolio: Portfolio): React.ReactNod
       );
     case 'single_log': {
       const log = logs.find((l) => l.id === card.contentId);
-      return log ? <SingleLogCard log={log} size={card.size} /> : null;
+      if (!log) return null;
+      const logProduct = log.product_id
+        ? products.find((p) => p.id === log.product_id) ?? null
+        : null;
+      return <SingleLogCard log={log} product={logProduct} size={card.size} />;
     }
     case 'all_logs':
-      return <AllLogsCard logs={logs} size={card.size} />;
+      return <AllLogsCard logs={logs} products={products} size={card.size} />;
     default:
       return null;
   }
