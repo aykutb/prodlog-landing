@@ -1,7 +1,14 @@
 'use client';
 
 import React, { useRef, useState } from 'react';
-import { PreviewEntryCard, type PreviewEntry } from '@/src/components/ui';
+import { PreviewEntryCard } from '@/src/components/ui';
+import {
+  RECRUITER_BULLETS,
+  RESUME_BULLETS,
+  REVIEW_PARAGRAPH,
+  SOURCE_ENTRIES,
+  STAR_STORY,
+} from './outputsContent';
 
 // Four parallel options, deliberately unnumbered: they are not a sequence.
 const OUTPUTS = [
@@ -11,32 +18,6 @@ const OUTPUTS = [
   { lead: 'Interview prep.', rest: 'STAR structure, from things that actually happened.' },
 ];
 
-// The same three entries as Section 1, a few weeks on: the scope call has its
-// outcome filled in now. The input to every tab below is this fixed list.
-const SOURCE_ENTRIES: PreviewEntry[] = [
-  {
-    date: 'Mar 12, 2026',
-    title: 'Shipped the onboarding redesign',
-    ownership: 'Led',
-    outcome: 'Activation up 9% in four weeks',
-    missingOutcome: false,
-  },
-  {
-    date: 'Mar 2026',
-    title: 'Killed the loyalty feature',
-    ownership: 'Decided',
-    outcome: 'Freed an eng pod for the bug backlog',
-    missingOutcome: false,
-  },
-  {
-    date: 'Mar 19, 2026',
-    title: 'Scope call with Maya',
-    ownership: 'Coached',
-    outcome: 'Cut v1 scope by a third, kept the date',
-    missingOutcome: false,
-  },
-];
-
 type TabId = 'review' | 'recruiter' | 'resume' | 'interview';
 
 const TABS: { id: TabId; label: string }[] = [
@@ -44,40 +25,6 @@ const TABS: { id: TabId; label: string }[] = [
   { id: 'recruiter', label: 'Recruiter' },
   { id: 'resume', label: 'Resume' },
   { id: 'interview', label: 'Interview' },
-];
-
-const REVIEW_PARAGRAPH =
-  'In Q1 I led the onboarding redesign through two scope cuts and shipped it in March; activation is up 9% in the four weeks since. The harder call was killing the loyalty feature after discovery came back flat, which freed an eng pod for the bug backlog mid-quarter. I also coached Maya through the enterprise scope call, where we cut v1 by a third and kept the committed date.';
-
-const RECRUITER_BULLETS = [
-  'Led an onboarding redesign that lifted activation 9% within four weeks of launch.',
-  'Killed a loyalty feature that discovery showed was flat, and moved a full eng pod onto the bug backlog.',
-  'Coached a junior PM through an enterprise scope negotiation: v1 cut by a third, date kept.',
-];
-
-const RESUME_BULLETS = [
-  'Led onboarding redesign; activation +9% in 4 weeks.',
-  'Killed flat loyalty feature; recovered one eng pod.',
-  'Cut enterprise v1 scope by a third with no date slip.',
-];
-
-const STAR_STORY = [
-  {
-    label: 'Situation',
-    text: 'Loyalty had been on the roadmap for two quarters and leadership expected it to ship.',
-  },
-  {
-    label: 'Task',
-    text: 'Decide whether to build it anyway or walk it back, with discovery coming back flat.',
-  },
-  {
-    label: 'Action',
-    text: 'Rebuilt the retention model with the data team, presented the kill case to leadership, and redirected the pod to the bug backlog the same week.',
-  },
-  {
-    label: 'Result',
-    text: 'Saved a quarter of eng time, cleared 40% of the bug backlog, and the call held up in the next planning cycle.',
-  },
 ];
 
 const TabPanel = ({ tab }: { tab: TabId }) => {
@@ -149,7 +96,7 @@ export const OutputsSection = () => {
     <section className="py-24 px-4 md:px-12 bg-charcoal border-t border-divider">
       <div className="max-w-5xl mx-auto">
         <h2 className="serif-headline text-2xl md:text-[36px] mb-10 text-primary text-center leading-tight">
-          Write it once. Use it four ways.
+          Two minutes a week. Four ways to use it.
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-10">

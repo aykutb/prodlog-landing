@@ -11,9 +11,9 @@ export const ROUTE_META: Record<string, RouteMeta> = {
       'Your best work is already written down somewhere. Prodlog keeps the same two-minute habit and turns it into your review, your resume bullets, and your interview answers.',
   },
   '/how-it-works': {
-    title: 'How It Works | Prodlog',
+    title: 'How Prodlog works: from a messy note to a review draft',
     description:
-      'See how Prodlog turns the note you already keep into dated entries, then into reviews, resume bullets, and a PM portfolio, without starting from a blank page.',
+      'Start with the notes you already have, keep it going in two minutes a week from Slack, and get back review drafts, resume bullets, and STAR stories.',
   },
   '/privacy': {
     title: 'Privacy-First Career Docs | Prodlog',

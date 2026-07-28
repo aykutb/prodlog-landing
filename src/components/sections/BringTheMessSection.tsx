@@ -96,25 +96,52 @@ export const BringTheMessSection = () => (
         </div>
       </div>
 
-      <p className="text-secondary text-center max-w-2xl mx-auto mb-8 leading-relaxed">
+      {/* The two import sources cover different periods of a career:
+          LinkedIn is the backfill, notes are everything since this job.
+          Stacks LinkedIn first on mobile, since it is chronologically first. */}
+      <div className="mb-10">
+        <h3 className="serif-headline text-xl md:text-2xl text-primary text-center mb-6">
+          Your career is in two places.
+        </h3>
+        <div className="grid md:grid-cols-2 gap-4 md:gap-6 max-w-3xl mx-auto">
+          <div className="bg-white border border-divider rounded-xl p-6 flex flex-col text-center md:text-left">
+            <span className="w-8 h-8 rounded bg-deep-ink-blue/10 flex items-center justify-center mx-auto md:mx-0 mb-3">
+              <span className="text-deep-ink-blue text-sm font-bold">in</span>
+            </span>
+            <p className="text-secondary text-sm leading-relaxed mb-5">
+              Before this job, it&rsquo;s on LinkedIn. Import it once and you have the
+              backfill: the roles, the launches, the things you would put on a resume anyway.
+            </p>
+            <a
+              href="https://dashboard.prodlog.app/auth"
+              className="mt-auto w-full md:w-fit border border-divider bg-white text-primary px-6 py-3 rounded font-medium text-sm hover:border-deep-ink-blue/40 transition-all text-center no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-deep-ink-blue/50 focus-visible:ring-offset-2"
+            >
+              Import from LinkedIn
+            </a>
+          </div>
+
+          <div className="bg-white border border-divider rounded-xl p-6 flex flex-col text-center md:text-left">
+            <span className="w-8 h-8 rounded bg-deep-ink-blue/10 flex items-center justify-center mx-auto md:mx-0 mb-3">
+              <span className="text-sm" aria-hidden="true">📝</span>
+            </span>
+            <p className="text-secondary text-sm leading-relaxed mb-5">
+              Since this job, it&rsquo;s in a note somewhere. A Slack thread to yourself, a
+              phone note, a half-finished doc. Paste it in, then keep going from Friday.
+            </p>
+            <Link
+              href="/try"
+              className="mt-auto w-full md:w-fit bg-deep-ink-blue text-white px-6 py-3 rounded font-medium text-sm hover:opacity-90 transition-all text-center no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-deep-ink-blue/50 focus-visible:ring-offset-2"
+            >
+              Paste a note
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      <p className="text-secondary text-center max-w-2xl mx-auto leading-relaxed">
         Most people arrive with two years of raw notes and leave with a review draft in ten
         minutes.
       </p>
-
-      <div className="flex flex-col md:flex-row justify-center items-center gap-3">
-        <Link
-          href="/try"
-          className="w-full md:w-auto bg-deep-ink-blue text-white px-6 py-3 rounded font-medium text-sm hover:opacity-90 transition-all text-center no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-deep-ink-blue/50 focus-visible:ring-offset-2"
-        >
-          Paste a note
-        </Link>
-        <a
-          href="https://dashboard.prodlog.app/auth"
-          className="w-full md:w-auto border border-divider bg-white text-primary px-6 py-3 rounded font-medium text-sm hover:border-deep-ink-blue/40 transition-all text-center no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-deep-ink-blue/50 focus-visible:ring-offset-2"
-        >
-          Import from LinkedIn
-        </a>
-      </div>
     </div>
   </section>
 );

@@ -6,3 +6,5 @@ export { SupportForm } from './SupportForm';
 export { CopyLinkButton } from './CopyLinkButton';
 export { PreviewTool } from './PreviewTool';
 export { PreviewEntryCard, type PreviewEntry } from './PreviewEntryCard';
+export { SlackPromptMock } from './SlackPromptMock';
+export { PortfolioBentoMock } from './PortfolioBentoMock';
