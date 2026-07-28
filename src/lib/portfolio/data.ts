@@ -96,7 +96,7 @@ export interface PortfolioImpactMetric {
   timeframe: string | null;
   role: MetricRole;
   confound: string | null;
-  log_id: string | null;
+  entry_id: string | null;
 }
 
 export interface PortfolioDecision {
@@ -107,7 +107,7 @@ export interface PortfolioDecision {
   why: string;
   cost: string;
   decided_on: string | null;
-  log_id: string | null;
+  entry_id: string | null;
   aged: AgedVerdict | null;
   aged_note: string | null;
 }
@@ -129,7 +129,7 @@ export interface PortfolioKill {
   freed: string;
   stage: KillStage | null;
   killed_on: string | null;
-  log_id: string | null;
+  entry_id: string | null;
 }
 
 export interface PortfolioWriting {
@@ -149,16 +149,16 @@ export interface PortfolioWriting {
 }
 
 /** Read through testimonials_public — only confirmed rows exist there, and
- *  the verifier's email is structurally absent from the view. */
+ *  the collaborator's email is structurally absent from the view. */
 export interface PortfolioTestimonial {
   id: string;
   quote: string;
-  verifier_name: string;
-  verifier_role: string | null;
-  verifier_company: string | null;
+  collaborator_name: string;
+  collaborator_role: string | null;
+  collaborator_company: string | null;
   relationship: string | null;
   confirmed_at: string | null;
-  edited_by_verifier: boolean;
+  edited_by_collaborator: boolean;
   sort_order: number;
 }
 
@@ -329,14 +329,14 @@ export async function fetchPortfolio(username: string): Promise<Portfolio | null
     supabase.rpc('get_bento_cards', byUser),
     supabase.rpc('get_skills', byUser),
     supabase.rpc('get_domains', byUser),
-    supabase.rpc('get_impact_metrics', byUser),
+    supabase.rpc('get_outcome_metrics', byUser),
     supabase.rpc('get_decisions', byUser),
     supabase.rpc('get_tradeoffs', byUser),
     supabase.rpc('get_kills', byUser),
     supabase.rpc('get_writings', byUser),
     supabase.rpc('get_public_testimonials', byUser),
     supabase.rpc('get_before_afters', byUser),
-    supabase.rpc('get_public_log_verifications', byUser),
+    supabase.rpc('get_public_entry_confirmations', byUser),
   ]);
 
   if (logsRes.error) throw logsRes.error;

@@ -351,7 +351,7 @@ export const ImpactMetricCard = ({
   if (!product) return null;
   const count = portfolio.impactMetricVerificationCounts[metric.id] ?? 0;
   const verified = count > 0;
-  const log = metric.log_id ? portfolio.logs.find((l) => l.id === metric.log_id) ?? null : null;
+  const log = metric.entry_id ? portfolio.logs.find((l) => l.id === metric.entry_id) ?? null : null;
   const measureClass = `leading-snug ${size === 'L' ? 'text-base' : 'text-sm'} ${verified ? 'text-primary' : 'text-muted'}`;
 
   if (size === 'M') {
@@ -438,7 +438,7 @@ export const DecisionCard = ({
   if (!product) return null;
   const count = portfolio.decisionVerificationCounts[decision.id] ?? 0;
   const verified = count > 0;
-  const log = decision.log_id ? portfolio.logs.find((l) => l.id === decision.log_id) ?? null : null;
+  const log = decision.entry_id ? portfolio.logs.find((l) => l.id === decision.entry_id) ?? null : null;
 
   if (size === 'M') {
     return (
@@ -599,7 +599,7 @@ export const KillCard = ({
     : null;
   const count = portfolio.killVerificationCounts[kill.id] ?? 0;
   const verified = count > 0;
-  const log = kill.log_id ? portfolio.logs.find((l) => l.id === kill.log_id) ?? null : null;
+  const log = kill.entry_id ? portfolio.logs.find((l) => l.id === kill.entry_id) ?? null : null;
 
   if (size === 'M') {
     const headerLeft = product ? (
@@ -683,12 +683,12 @@ export const TestimonialCard = ({
   size: Size;
 }) => {
   const isLarge = size === 'L';
-  const meta = [testimonial.verifier_role, testimonial.verifier_company].filter(Boolean).join(' · ');
+  const meta = [testimonial.collaborator_role, testimonial.collaborator_company].filter(Boolean).join(' · ');
 
   return (
     <div
       className={`h-full flex flex-col overflow-hidden ${isLarge ? 'p-5' : 'px-4 py-3'}`}
-      aria-label={`Testimonial from ${testimonial.verifier_name}, confirmed`}
+      aria-label={`Testimonial from ${testimonial.collaborator_name}, confirmed`}
     >
       {/* Accent-tinted verification badge */}
       <span className="inline-flex w-fit shrink-0 items-center gap-1 rounded-full bg-impact/10 px-2 py-0.5 text-impact">
@@ -716,11 +716,11 @@ export const TestimonialCard = ({
                 isLarge ? 'w-9 h-9' : 'w-8 h-8'
               }`}
             >
-              <span className="text-xs font-medium text-impact">{initialsOf(testimonial.verifier_name)}</span>
+              <span className="text-xs font-medium text-impact">{initialsOf(testimonial.collaborator_name)}</span>
             </div>
             <div className="min-w-0">
               <p className="text-sm font-medium text-primary min-w-0 truncate">
-                {testimonial.verifier_name}
+                {testimonial.collaborator_name}
                 <CheckIcon className="inline w-3.5 h-3.5 ml-1 align-[-2px] text-primary" />
               </p>
               {meta && <p className="text-xs text-muted truncate">{meta}</p>}
@@ -729,7 +729,7 @@ export const TestimonialCard = ({
           {testimonial.confirmed_at && (
             <div className="text-right shrink-0">
               <p className="text-xs text-muted">
-                {testimonial.edited_by_verifier ? 'Edited & confirmed' : 'Confirmed'}
+                {testimonial.edited_by_collaborator ? 'Edited & confirmed' : 'Confirmed'}
               </p>
               <p className="text-[11px] text-muted/70">{formatMonthYear(testimonial.confirmed_at)}</p>
             </div>
