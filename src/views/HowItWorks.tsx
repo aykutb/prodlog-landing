@@ -10,7 +10,7 @@ export const HowItWorksPage = () => (
         How Prodlog works
       </h1>
       <p className="text-secondary text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
-        Capture work as you go, get it verified, then turn it into reviews and a portfolio without starting from a blank page.
+        Log as you go, then turn your entries into reviews and a portfolio without starting from a blank page.
       </p>
     </header>
 
@@ -38,7 +38,7 @@ export const HowItWorksPage = () => (
               <div className="flex items-center flex-wrap gap-2 mb-2">
                 <span className="text-[10px] px-2 py-0.5 rounded bg-sage-green/10 text-sage-green font-medium">Done</span>
                 <span className="text-[10px] px-2 py-0.5 rounded bg-sage-green/10 text-sage-green border border-sage-green/20 font-medium">
-                  Verified
+                  Confirmed
                 </span>
                 <span className="text-[10px] text-muted">Dec 15, 2025</span>
               </div>
@@ -73,7 +73,7 @@ export const HowItWorksPage = () => (
         <div className="grid md:grid-cols-2 gap-8 items-start">
           <div>
             <div className="text-deep-ink-blue text-3xl serif-headline mb-4 opacity-30">01</div>
-            <h3 className="text-primary font-semibold text-xl mb-3">Add logs every week from anywhere</h3>
+            <h3 className="text-primary font-semibold text-xl mb-3">Log every week from anywhere</h3>
             <p className="text-secondary text-sm leading-relaxed">
               Jot outcomes while they’re fresh: paste from Slack, send from email, or use assistants like
               Claude, then tidy them in Prodlog. A short weekly habit beats a scramble before review season.
@@ -109,16 +109,16 @@ export const HowItWorksPage = () => (
       </div>
       </ScrollReveal>
 
-      {/* Step 2: Verification */}
+      {/* Step 2: Confirmation */}
       <ScrollReveal>
       <div className="bg-white border border-divider rounded-xl p-8">
         <div className="grid md:grid-cols-2 gap-8 items-start">
           <div>
             <div className="text-deep-ink-blue text-3xl serif-headline mb-4 opacity-30">02</div>
-            <h3 className="text-primary font-semibold text-xl mb-3">Get verification when you need it</h3>
+            <h3 className="text-primary font-semibold text-xl mb-3">Get confirmation when you need it</h3>
             <p className="text-secondary text-sm leading-relaxed">
-              Invite teammates to confirm a log on their own time, whether for calibrations, promotions, or
-              whenever you want proof without oversharing context.
+              Invite collaborators to confirm an entry on their own time, whether for calibrations,
+              promotions, or whenever you want proof without oversharing context.
             </p>
           </div>
           <div className="space-y-3 rounded-lg border border-divider bg-white p-4 shadow-[0_2px_12px_-4px_rgba(31,42,68,0.12)]">
@@ -126,14 +126,14 @@ export const HowItWorksPage = () => (
               <div className="flex items-center flex-wrap gap-2 mb-2">
                 <span className="text-[10px] px-2 py-0.5 rounded bg-sage-green/10 text-sage-green font-medium">Done</span>
                 <span className="text-[10px] px-2 py-0.5 rounded bg-sage-green/10 text-sage-green border border-sage-green/20 font-medium">
-                  Verified
+                  Confirmed
                 </span>
               </div>
               <div className="text-primary text-sm font-medium mb-2">Checkout optimization</div>
-              <p className="text-[10px] text-muted">Verified by Sarah Chen · Dec 16, 2025</p>
+              <p className="text-[10px] text-muted">Confirmed by your design lead · Dec 16, 2025</p>
             </div>
             <div className="rounded border border-divider border-dashed bg-white/80 p-3 shadow-sm">
-              <p className="text-[10px] text-muted mb-1">Request verification</p>
+              <p className="text-[10px] text-muted mb-1">Ask for confirmation</p>
               <p className="text-[10px] text-secondary">We’ll email your teammate a one-tap confirm, no account required.</p>
             </div>
           </div>
@@ -149,7 +149,7 @@ export const HowItWorksPage = () => (
             <div className="text-deep-ink-blue text-3xl serif-headline mb-4 opacity-30">03</div>
             <h3 className="text-primary font-semibold text-xl mb-3">Generate quarterly summaries and show up prepared</h3>
             <p className="text-secondary text-sm leading-relaxed">
-              Turn your logs into a review-ready narrative each quarter: themes, outcomes, and receipts in
+              Turn your entries into a review-ready narrative each quarter: themes, outcomes, and receipts in
               one place. Export or tweak for resumes and interviews when you need a different angle.
             </p>
           </div>
@@ -161,7 +161,7 @@ export const HowItWorksPage = () => (
               </div>
               <div className="flex flex-wrap gap-2">
                 <span className="text-[10px] px-2 py-0.5 rounded bg-deep-ink-blue/10 text-deep-ink-blue">Quarterly</span>
-                <span className="text-[10px] text-muted">Built from 8 logs</span>
+                <span className="text-[10px] text-muted">Built from 8 entries</span>
               </div>
             </div>
             <div className="rounded border border-divider bg-white p-3 shadow-sm">
@@ -202,7 +202,7 @@ export const HowItWorksPage = () => (
             <div className="grid grid-cols-3 gap-3 mb-4">
               <div className="rounded border border-divider bg-white p-3 text-center shadow-sm">
                 <div className="text-primary font-semibold">12</div>
-                <div className="text-[10px] text-muted">Logs</div>
+                <div className="text-[10px] text-muted">Entries</div>
               </div>
               <div className="rounded border border-divider bg-white p-3 text-center shadow-sm">
                 <div className="text-primary font-semibold">3</div>
@@ -210,7 +210,7 @@ export const HowItWorksPage = () => (
               </div>
               <div className="rounded border border-divider bg-white p-3 text-center shadow-sm">
                 <div className="text-primary font-semibold">2</div>
-                <div className="text-[10px] text-muted">Stories</div>
+                <div className="text-[10px] text-muted">Case studies</div>
               </div>
             </div>
             <div className="text-[10px] text-muted text-center">prodlog.app/@janedoe</div>

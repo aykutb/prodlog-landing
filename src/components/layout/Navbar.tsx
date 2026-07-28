@@ -9,7 +9,7 @@ import type { NavItem } from '@/src/lib/content';
 
 interface NavbarProps {
   compareNavItems: NavItem[];
-  /** Portfolio pages: logo + Get Started only, no site navigation. */
+  /** Portfolio pages: logo + Start free only, no site navigation. */
   minimal?: boolean;
 }
 
@@ -77,7 +77,7 @@ export const Navbar = ({ compareNavItems, minimal = false }: NavbarProps) => {
                 href="https://dashboard.prodlog.app/auth"
                 className="bg-deep-ink-blue hover:bg-deep-ink-blue/90 text-white px-4 py-1.5 rounded-lg text-sm transition-all font-medium"
               >
-                Get Started
+                Start free
               </a>
             ) : (
               <>
@@ -96,6 +96,9 @@ export const Navbar = ({ compareNavItems, minimal = false }: NavbarProps) => {
                     }
                     onNavigate={handleLinkClick}
                   />
+                  <Link href="/try" className={navLinkClass('/try')}>
+                    Try it
+                  </Link>
                   <Link href="/pricing" className={navLinkClass('/pricing')}>
                     Pricing
                   </Link>
@@ -103,7 +106,7 @@ export const Navbar = ({ compareNavItems, minimal = false }: NavbarProps) => {
                     href="https://dashboard.prodlog.app/auth"
                     className="bg-deep-ink-blue hover:bg-deep-ink-blue/90 text-white px-4 py-1.5 rounded-lg text-sm transition-all font-medium"
                   >
-                    Get Started
+                    Start free
                   </a>
                 </div>
 
@@ -161,6 +164,13 @@ export const Navbar = ({ compareNavItems, minimal = false }: NavbarProps) => {
             onNavigate={handleLinkClick}
           />
           <Link
+            href="/try"
+            className={mobileNavLinkClass('/try')}
+            onClick={handleLinkClick}
+          >
+            Try it
+          </Link>
+          <Link
             href="/pricing"
             className={mobileNavLinkClass('/pricing')}
             onClick={handleLinkClick}
@@ -172,7 +182,7 @@ export const Navbar = ({ compareNavItems, minimal = false }: NavbarProps) => {
               href="https://dashboard.prodlog.app/auth"
               className="block w-full bg-deep-ink-blue hover:bg-deep-ink-blue/90 text-white px-5 py-2.5 rounded-lg text-sm transition-all font-medium text-center"
             >
-              Get Started
+              Start free
             </a>
           </div>
         </div>

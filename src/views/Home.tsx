@@ -1,27 +1,22 @@
 import React from 'react';
 import {
   HeroSection,
-  ProblemSection,
-  ThreePillarsSection,
-  LogFromAnywhereSection,
-  ValidationSection,
-  SummariesSection,
+  BringTheMessSection,
+  TriggerSection,
+  OutputsSection,
   PortfolioSection,
+  ObjectionsSection,
   FinalCTASection,
 } from '@/src/components/sections';
 
 export const HomePage = () => (
   <>
     <HeroSection />
-    <ProblemSection />
-    <ThreePillarsSection />
-    <LogFromAnywhereSection />
-    <ValidationSection />
-    {/* <UseCasesSection /> */}
-    <SummariesSection />
+    <BringTheMessSection />
+    <TriggerSection />
+    <OutputsSection />
     <PortfolioSection />
-    {/* <SocialProofSection /> */}
-    {/* <DifferentiationSection /> */}
+    <ObjectionsSection />
     <FinalCTASection />
   </>
 );

@@ -58,7 +58,7 @@ function buildMetadata({
           url: ogImage,
           width: OG_IMAGE_WIDTH,
           height: OG_IMAGE_HEIGHT,
-          alt: 'Prodlog — PM portfolio and impact logs',
+          alt: 'Prodlog: the note about your work that actually produces something',
         },
       ],
     },

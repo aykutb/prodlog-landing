@@ -103,7 +103,7 @@ export const PrivacyPolicyPage = () => (
       <Section title="6. Cookies and similar technologies">
         <p>
           We use two categories of storage. <strong>Strictly necessary</strong> storage keeps the Service
-          working — signing you in, maintaining your session, and remembering your cookie choice. It is
+          working: signing you in, maintaining your session, and remembering your cookie choice. It is
           always active and cannot be switched off. <strong>Analytics</strong> cookies (Google Analytics)
           help us understand how people find and use Prodlog. They are optional and are only set after
           you accept them.

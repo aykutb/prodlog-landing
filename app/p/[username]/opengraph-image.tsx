@@ -50,7 +50,7 @@ export default async function Image({
                   color: '#6FAF8E',
                 }}
               >
-                {`${logCount} impact log${logCount === 1 ? '' : 's'}`}
+                {`${logCount} ${logCount === 1 ? 'entry' : 'entries'}`}
               </div>
             )}
             {verifiedCount > 0 && (
@@ -64,7 +64,7 @@ export default async function Image({
                   color: '#1F2A44',
                 }}
               >
-                {`${verifiedCount} verified`}
+                {`${verifiedCount} confirmed`}
               </div>
             )}
           </div>

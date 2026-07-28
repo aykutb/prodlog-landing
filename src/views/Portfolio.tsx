@@ -63,9 +63,9 @@ export const PortfolioPage = ({
             href="https://dashboard.prodlog.app/auth"
             className="inline-block bg-impact hover:opacity-90 text-white px-6 py-3 rounded font-medium transition-all"
           >
-            Start logging
+            Start free
           </a>
-          <p className="text-muted text-sm mt-3">Free to start. No credit card required.</p>
+          <p className="text-muted text-sm mt-3">Free forever. Unlimited entries, no card.</p>
         </div>
       </div>
     </div>

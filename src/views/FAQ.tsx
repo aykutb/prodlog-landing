@@ -6,7 +6,11 @@ const FAQ_SECTIONS = [
     category: 'Getting Started',
     questions: [
       {
-        q: 'How often should I log impact?',
+        q: 'I already keep a note like this. Why switch?',
+        a: "You don't have to switch, you have to paste. Bring what you've got and see what comes out the other side. If it isn't better than your note, close the tab.",
+      },
+      {
+        q: 'How often should I log?',
         a: 'Whenever it happens. For most PMs, this is 1-2 times a week. It takes less than five minutes.',
       },
       {
@@ -27,8 +31,8 @@ const FAQ_SECTIONS = [
         a: 'Absolutely. Many of our users use Prodlog purely as a personal career ledger to track their own growth and decision-making logic.',
       },
       {
-        q: 'How does validation work?',
-        a: "You can send a 'Validation Request' to a collaborator. They get a simple link to confirm the accuracy of your impact card. It's a quiet way to build a third-party audit trail for your claims.",
+        q: 'Can a collaborator confirm an entry?',
+        a: 'Yes. You send them a link and they confirm the entry with one click, no account required.',
       },
       {
         q: 'Can I export everything?',
@@ -40,16 +44,12 @@ const FAQ_SECTIONS = [
     category: 'Product Fit',
     questions: [
       {
-        q: 'Is this only for PMs?',
-        a: 'While built for PMs, anyone in a role where outcomes are more important than outputs (Designers, Engineering Leads, Product Marketers) will find it useful.',
-      },
-      {
         q: 'Will this make me overthink my work?',
-        a: "Ideally, yes. Reflection is a core part of the senior PM craft. Taking five minutes to ask 'What was the actual impact here?' makes you a better strategist.",
+        a: "Ideally, yes. Reflection is a core part of the senior PM craft. Taking five minutes to ask 'What actually moved here?' makes you a better strategist.",
       },
       {
         q: 'What happens if I stop using Prodlog?',
-        a: 'Your data remains private and accessible. We believe career infrastructure should be permanent, even if your usage is seasonal.',
+        a: 'Your data remains private and accessible. Your log should outlast any stretch where you stop adding to it.',
       },
     ],
   },
@@ -82,9 +82,9 @@ export const FAQPage = () => (
       <div className="text-[10px] text-deep-ink-blue uppercase tracking-wider mb-3 font-semibold">Most Asked</div>
       <h3 className="text-primary font-semibold text-lg mb-4">What if my work doesn't feel impressive?</h3>
       <p className="text-secondary leading-relaxed">
-        Most important product work is invisible. It's the meeting where you prevented a bad decision, 
-        or the document that aligned three teams. Prodlog helps you recognize that these are the 
-        moments that actually drive outcomes. You don't need to ship a feature to have impact.
+        Most important product work is invisible. It's the meeting where you prevented a bad decision,
+        or the document that aligned three teams. Prodlog helps you recognize that these are the
+        moments that actually drive outcomes. You don't need to ship a feature to have something worth logging.
       </p>
     </div>
 

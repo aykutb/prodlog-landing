@@ -23,7 +23,7 @@ const portfolioUrl = (username: string) => `${PORTFOLIO_ORIGIN}/p/${username}`;
 /** ~155 chars for the meta description, cut on a word boundary. */
 const metaDescription = (portfolio: Portfolio): string => {
   const bio = portfolio.profile.bio?.trim();
-  const fallback = `${displayName(portfolio.profile)}'s product management portfolio on Prodlog — ${portfolio.logs.length} public impact logs.`;
+  const fallback = `${displayName(portfolio.profile)}'s product management portfolio on Prodlog: ${portfolio.logs.length} public ${portfolio.logs.length === 1 ? 'entry' : 'entries'}.`;
   const text = bio || fallback;
   if (text.length <= 155) return text;
   const cut = text.slice(0, 152);
@@ -50,7 +50,7 @@ export async function generateMetadata({
   if (!portfolio) return {};
 
   const name = displayName(portfolio.profile);
-  const title = `${name} — ${portfolio.profile.title || 'Product Manager'} Portfolio`;
+  const title = `${name}: ${portfolio.profile.title || 'Product Manager'} Portfolio`;
   const description = metaDescription(portfolio);
   const canonical = portfolioUrl(portfolio.profile.username);
 

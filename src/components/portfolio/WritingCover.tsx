@@ -11,10 +11,10 @@ import React, { useState } from 'react';
 
 /** Short mark for the generated tile: first number in the title
  *  ("100 products…" → "100"), else initials of the first two words. */
-const coverMonogram = (title: string): string => {
-  const num = title.match(/\d{1,3}/)?.[0];
+const coverMonogram = (title: string | null | undefined): string => {
+  const num = title?.match(/\d{1,3}/)?.[0];
   if (num) return num;
-  const initials = title
+  const initials = (title ?? '')
     .trim()
     .split(/\s+/)
     .filter((w) => /[A-Za-z0-9]/.test(w))

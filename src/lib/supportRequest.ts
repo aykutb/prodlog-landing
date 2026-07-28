@@ -38,7 +38,7 @@ async function sendConfirmationEmail(email: string, title: string) {
           '',
           'We review every request personally and will get back to you at this address as soon as we can.',
           '',
-          '— The Prodlog team',
+          'The Prodlog team',
           'https://prodlog.app',
         ].join('\n'),
       }),
@@ -73,7 +73,7 @@ export async function submitSupportRequest(
     return { status: 'error', message: 'Please describe your issue or question.' };
   }
   if (title.length > TITLE_MAX || details.length > DETAILS_MAX) {
-    return { status: 'error', message: 'Your message is too long — please shorten it.' };
+    return { status: 'error', message: 'Your message is too long. Please shorten it.' };
   }
 
   const { error } = await getSupabase()
@@ -81,7 +81,7 @@ export async function submitSupportRequest(
     .insert({ email, title, details, source: 'landing:support' });
 
   if (error) {
-    return { status: 'error', message: 'Something went wrong — please try again.' };
+    return { status: 'error', message: 'Something went wrong. Please try again.' };
   }
 
   await sendConfirmationEmail(email, title);

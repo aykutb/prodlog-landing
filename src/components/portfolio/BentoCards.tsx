@@ -116,8 +116,7 @@ const StatsCard = ({ portfolio, size }: { portfolio: Portfolio; size: Size }) =>
   const allStats = [
     { label: 'Years Exp', value: yearsOfExperience ?? '—' },
     { label: 'Products', value: products.length },
-    { label: 'Impacts', value: logs.length },
-    { label: 'Reflections', value: 0 },
+    { label: 'Entries', value: logs.length },
   ];
 
   if (size === 'S') {
@@ -133,7 +132,7 @@ const StatsCard = ({ portfolio, size }: { portfolio: Portfolio; size: Size }) =>
     return (
       <div className="p-6 h-full flex flex-col">
         <h3 className="text-sm font-serif font-medium text-muted mb-4">Stats</h3>
-        <div className="flex-1 grid grid-cols-2 grid-rows-2 gap-4">
+        <div className="flex-1 grid grid-cols-3 gap-4">
           {allStats.map((stat) => (
             <div key={stat.label} className="flex flex-col items-center justify-center bg-charcoal/40 rounded-lg">
               <p className="text-4xl font-semibold text-primary">{stat.value}</p>
@@ -148,7 +147,7 @@ const StatsCard = ({ portfolio, size }: { portfolio: Portfolio; size: Size }) =>
   return (
     <div className="p-4 h-full flex flex-col">
       <h3 className="text-sm font-serif font-medium text-muted mb-3">Stats</h3>
-      <div className="flex-1 grid grid-cols-4 gap-2 items-center">
+      <div className="flex-1 grid grid-cols-3 gap-2 items-center">
         {allStats.map((stat) => (
           <div key={stat.label} className="text-center">
             <p className="text-xl font-semibold text-primary">{stat.value}</p>

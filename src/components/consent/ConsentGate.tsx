@@ -93,7 +93,7 @@ export const ConsentGate = ({ measurementId, analyticsEnabled }: ConsentGateProp
               </p>
               <p id="cookie-consent-body" className="text-sm text-white/70 mt-1">
                 Analytics cookies help us understand how people find and use Prodlog. They&rsquo;re
-                optional — decline and nothing is stored on your device beyond what the site needs to
+                optional: decline and nothing is stored on your device beyond what the site needs to
                 work. See our{' '}
                 <Link
                   href="/privacy-policy"

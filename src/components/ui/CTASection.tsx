@@ -7,22 +7,25 @@ interface CTASectionProps {
 }
 
 export const CTASection = ({ centered = true, showSecondary = true }: CTASectionProps) => (
-  <div className={`flex flex-col ${centered ? 'items-center' : 'items-start'} my-8`}>
+  <div className={`flex flex-col ${centered ? 'items-center' : 'items-start'} my-6`}>
     <div className={`flex flex-col md:flex-row ${centered ? 'justify-center' : 'justify-start'} items-center gap-3 w-full`}>
       <a
         href="https://dashboard.prodlog.app/auth"
-        className="mdx-btn-primary w-full md:w-auto bg-deep-ink-blue text-white px-6 py-3 rounded font-medium text-sm hover:opacity-90 transition-all text-center no-underline"
+        className="mdx-btn-primary w-full md:w-auto bg-deep-ink-blue text-white px-6 py-3 rounded font-medium text-sm hover:opacity-90 transition-all text-center no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-deep-ink-blue/50 focus-visible:ring-offset-2"
       >
-        Start logging free
+        Start free
       </a>
       {showSecondary && (
         <Link
-          href="/sample"
-          className="mdx-btn-secondary w-full md:w-auto border border-divider text-primary px-6 py-3 rounded font-medium text-sm hover:bg-charcoal transition-all text-center no-underline"
+          href="/try"
+          className="mdx-btn-secondary w-full md:w-auto border border-deep-ink-blue/40 bg-white text-deep-ink-blue px-6 py-3 rounded font-medium text-sm hover:border-deep-ink-blue hover:bg-charcoal/40 transition-all text-center no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-deep-ink-blue/50 focus-visible:ring-offset-2"
         >
-          See a sample log page
+          Paste in your notes and see what comes out
         </Link>
       )}
     </div>
+    <p className={`text-muted text-xs mt-4 ${centered ? 'text-center' : 'text-left'}`}>
+      Free forever. Unlimited entries, no card.
+    </p>
   </div>
 );

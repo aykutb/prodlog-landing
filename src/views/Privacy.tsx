@@ -4,11 +4,11 @@ import { CTASection } from '@/src/components/ui';
 const PRIVACY_FEATURES = [
   {
     title: 'Private by default',
-    description: 'Every impact you capture begins its life as a private record. No one can see it without your explicit action.',
+    description: 'Every entry begins its life as a private record. No one can see it without your explicit action.',
   },
   {
     title: 'Anonymized by design',
-    description: 'Strip away sensitive identifiers before sharing. Share the patterns of your impact without exposing trade secrets.',
+    description: 'Strip away sensitive identifiers before sharing. Share the shape of your work without exposing trade secrets.',
   },
   {
     title: 'Sharing is deliberate',
@@ -19,8 +19,8 @@ const PRIVACY_FEATURES = [
     description: 'We do not sell your data or train models on your reflections. Export or delete anytime.',
   },
   {
-    title: 'Verified, not exposed',
-    description: 'Collaborators can verify your impact without seeing sensitive details. Quiet credibility.',
+    title: 'Confirmed, not exposed',
+    description: 'Collaborators can confirm an entry without seeing sensitive details. Quiet credibility.',
   },
 ];
 

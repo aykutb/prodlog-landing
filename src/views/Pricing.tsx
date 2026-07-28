@@ -23,7 +23,7 @@ const PlanFeature = ({ children }: { children: React.ReactNode }) => (
 
 const EARLY_ACCESS_NOTES = [
   'Founding members keep Pro free for 12 months from signup',
-  'Your entries are always yours — export anytime, no lock-in',
+  'Your entries are always yours: export anytime, no lock-in',
   'The free tier stays free, forever',
 ];
 
@@ -34,19 +34,19 @@ const PRICING_FAQ = [
   },
   {
     q: "What happens to my entries if I don't upgrade?",
-    a: 'Nothing. Entries are unlimited on the free plan, so everything you logged stays right where it is. You only lose Pro features like unlimited AI summaries — never your entries.',
+    a: 'Nothing. Entries are unlimited on the free plan, so everything you logged stays right where it is. You only lose Pro features like unlimited AI summaries, never your entries.',
   },
   {
     q: 'Is my log really private?',
-    a: "Yes. Every entry is private by default. Nothing becomes public unless you explicitly make it so — publishing your portfolio, sharing an entry link, or sending a validation request. Until you take one of those actions, you are the only person who can see your log.",
+    a: 'Yes. Every entry is private by default. Nothing becomes public unless you explicitly make it so: publishing your portfolio, sharing an entry link, or asking a collaborator to confirm an entry. Until you take one of those actions, you are the only person who can see your log.',
   },
   {
     q: 'What counts as an AI summary?',
-    a: 'Each generated output — a review-ready writeup, resume bullets, or a STAR story — counts as one summary. Writing and editing entries never counts. Free includes 3 per month; Pro is unlimited.',
+    a: 'Each generated output (a review-ready writeup, resume bullets, or a STAR story) counts as one summary. Writing and editing entries never counts. Free includes 3 per month; Pro is unlimited.',
   },
   {
     q: 'Can I export everything?',
-    a: 'Yes, always. Markdown and CSV export are on the free plan, and Pro adds PDF. Your entries are yours — no lock-in.',
+    a: 'Yes, always. Markdown and CSV export are on the free plan, and Pro adds PDF. Your entries are yours, no lock-in.',
   },
   {
     q: 'What happens when the 1,000 spots run out?',
@@ -88,7 +88,7 @@ export const PricingPage = ({ spotsRemaining }: PricingPageProps) => (
           href={SIGNUP_URL}
           className="w-full py-3 border border-divider rounded-lg text-primary text-sm hover:bg-charcoal transition-colors font-medium text-center block"
         >
-          Start logging
+          Start free
         </a>
       </div>
 
@@ -104,7 +104,6 @@ export const PricingPage = ({ spotsRemaining }: PricingPageProps) => (
         <ul className="space-y-4 my-8 text-secondary text-sm flex-1">
           <PlanFeature>Unlimited entries</PlanFeature>
           <PlanFeature>Unlimited AI summaries</PlanFeature>
-          <PlanFeature>Validation requests</PlanFeature>
           <PlanFeature>Public portfolio</PlanFeature>
           <PlanFeature>PDF export, resume bullets, STAR story bank</PlanFeature>
           <PlanFeature>Priority support</PlanFeature>

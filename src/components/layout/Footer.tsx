@@ -44,7 +44,8 @@ export const Footer = ({ minimal = false }: FooterProps) => {
         <div className="flex flex-col gap-4">
           <Wordmark />
           <p className="text-muted text-sm max-w-xs">
-            Career infrastructure for product managers.
+            Built by a product manager who kept the note for fifteen years and finally made it
+            do something.
           </p>
         </div>
 

@@ -10,7 +10,7 @@ export const PILLARS_NAV: ResourceNavItem[] = [
   {
     label: 'Brag Document',
     href: '/brag-document',
-    description: 'Track wins and impact over time',
+    description: 'Keep a running log of your work',
     icon: '/icons/log.svg',
     accent: 'amber',
   },
@@ -75,9 +75,9 @@ export const HUBS: Record<HubKey, HubConfig> = {
     path: '/templates',
     title: 'PM Career Templates | Prodlog',
     description:
-      'Free templates for PM brag documents, resume bullets, and quarterly review prep—built for product managers.',
+      'Free templates for PM brag documents, resume bullets, and quarterly review prep, built for product managers.',
     subtitle:
-      'Ready-to-use formats for the career moments that matter. Copy, adapt, and pair with your impact logs.',
+      'Ready-to-use formats for the career moments that matter. Copy, adapt, and pair with your log.',
   },
   blog: {
     path: '/blog',
@@ -85,13 +85,13 @@ export const HUBS: Record<HubKey, HubConfig> = {
     description:
       'Articles on PM interviews, STAR method examples, performance reviews, and building your product manager portfolio.',
     subtitle:
-      'Practical guides for documenting impact, preparing for reviews, and telling your PM story.',
+      'Practical guides for documenting your work, preparing for reviews, and telling your PM story.',
   },
   compare: {
     path: '/compare',
     title: 'Compare Prodlog | vs Notion, BragBook & More',
     description:
-      'See how Prodlog compares to Notion, BragBook, and other tools for PM impact logs, brag documents, and portfolios.',
+      'See how Prodlog compares to Notion, BragBook, and other tools for PM brag documents, work logs, and portfolios.',
     subtitle:
       'Honest comparisons to help you choose the right career documentation setup.',
   },

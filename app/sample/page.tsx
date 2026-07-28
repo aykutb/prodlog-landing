@@ -1,9 +1,6 @@
-import { SampleImpactPage } from '@/src/views';
-import { createRouteMetadata } from '@/src/seo/metadata';
+import { permanentRedirect } from 'next/navigation';
 
-export const metadata = createRouteMetadata('/sample');
-export const dynamic = 'force-static';
-
+// The fictional sample profile is gone; the live portfolio is the example now.
 export default function Page() {
-  return <SampleImpactPage />;
+  permanentRedirect('/p/aykutbal');
 }

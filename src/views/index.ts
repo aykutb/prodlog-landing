@@ -5,7 +5,6 @@ export { PrivacyPage } from './Privacy';
 export { PrivacyPolicyPage } from './PrivacyPolicy';
 export { PricingPage } from './Pricing';
 export { FAQPage } from './FAQ';
-export { SampleImpactPage } from './SampleImpactPage';
 export { SupportPage } from './Support';
 export { PortfolioPage } from './Portfolio';
 export { TermsOfServicePage } from './TermsOfService';

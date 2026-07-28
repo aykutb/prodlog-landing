@@ -20,14 +20,14 @@ const STEPS = [
     body: 'A short form opens in Slack: what shipped, your role, who you worked with, and the outcome. Thirty seconds while the details are fresh.',
     placeholder: {
       label: 'Prodlog modal open in Slack with fields for what shipped, role, collaborators, and outcome',
-      caption: 'Capture the win in a structured form without leaving Slack.',
+      caption: 'Log the entry in a structured form without leaving Slack.',
       alt: 'Prodlog modal in Slack with fields for what shipped, your role, collaborators, and outcome',
       src: '/images/slack-log-modal.png',
     },
   },
   {
     title: 'Entry lands in your Prodlog timeline',
-    body: 'The log appears in your private timeline alongside everything else you have shipped — ready for review season, promo packets, and interviews.',
+    body: 'The entry appears in your private timeline alongside everything else you have shipped, ready for review season, promo packets, and interviews.',
     placeholder: {
       label: 'Prodlog timeline showing the new entry that was just logged from Slack',
       caption: 'Every Slack log lands in your timeline, ready for review season.',
@@ -47,10 +47,10 @@ export const IntegrationsSlackPage = () => (
         className="mx-auto mb-6 h-12 w-12"
       />
       <h1 className="serif-headline text-3xl md:text-[48px] mb-6 text-primary leading-tight">
-        Log your wins without leaving Slack
+        Log your work without leaving Slack
       </h1>
       <p className="text-secondary text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
-        One slash command captures what you shipped — straight into your Prodlog
+        One slash command logs what you shipped, straight into your Prodlog
         timeline, ready for review season.
       </p>
       <div className="my-8 flex justify-center">
@@ -97,9 +97,9 @@ export const IntegrationsSlackPage = () => (
           The work already happened in Slack
         </h2>
         <p className="text-secondary text-sm md:text-base leading-relaxed max-w-2xl mx-auto">
-          The launch thread, the metrics screenshot, the congrats emoji — it is all
-          right there. Capturing it takes 30 seconds and zero context switching, so
-          the win gets logged instead of forgotten.
+          The launch thread, the metrics screenshot, the congrats emoji: it is all
+          right there. Logging it takes 30 seconds and zero context switching, so
+          the entry gets written instead of forgotten.
         </p>
       </div>
     </ScrollReveal>
@@ -108,10 +108,10 @@ export const IntegrationsSlackPage = () => (
     <ScrollReveal>
       <div className="pt-12 border-t border-divider text-center">
         <h2 className="serif-headline text-2xl md:text-[36px] mb-4 text-primary leading-tight">
-          Never lose a win to the scrollback again
+          Never lose a week to the scrollback again
         </h2>
         <p className="text-secondary max-w-xl mx-auto">
-          Start free, connect Slack, and log your first win today.
+          Start free, connect Slack, and log your first entry today.
         </p>
         <div className="my-8 flex flex-col md:flex-row justify-center items-center gap-3">
           <a
@@ -124,7 +124,7 @@ export const IntegrationsSlackPage = () => (
             href="https://dashboard.prodlog.app/auth"
             className="w-full md:w-auto border border-divider text-primary px-6 py-3 rounded font-medium text-sm hover:bg-charcoal transition-all text-center no-underline"
           >
-            Start logging free
+            Start free
           </a>
         </div>
       </div>

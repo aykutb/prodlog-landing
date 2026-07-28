@@ -104,11 +104,11 @@ const JudgmentTag = ({ kind }: { kind: keyof typeof JUDGMENT_TAGS }) => {
   );
 };
 
-// Quiet verification mark — never a loud badge.
+// Quiet confirmation mark — never a loud badge.
 const VerifiedMark = ({ count, withLabel }: { count: number; withLabel?: boolean }) => (
   <span className="inline-flex items-center gap-1 text-[11px] text-muted">
     <CheckIcon className="w-3.5 h-3.5 text-primary shrink-0" />
-    {withLabel ? (count > 1 ? `Verified by ${count}` : 'Verified') : count}
+    {withLabel ? (count > 1 ? `Confirmed by ${count}` : 'Confirmed') : count}
   </span>
 );
 
@@ -169,7 +169,7 @@ const SkillRow = ({
   const verified = count > 0;
   return (
     <li
-      aria-label={`${skill.name}, ${label}${verified ? `, verified by ${count} collaborator${count === 1 ? '' : 's'}` : ''}`}
+      aria-label={`${skill.name}, ${label}${verified ? `, confirmed by ${count} collaborator${count === 1 ? '' : 's'}` : ''}`}
       className="flex items-center gap-2 min-w-0"
     >
       <span className={`text-sm truncate ${verified ? 'font-medium text-primary' : 'text-primary'}`}>
@@ -667,8 +667,9 @@ export const KillCard = ({
 
 // ─── verified_testimonial ────────────────────────────────────────────
 
-const initialsOf = (name: string): string =>
-  name
+// Rows are owner-writable: the name can arrive null despite the type.
+const initialsOf = (name: string | null | undefined): string =>
+  (name ?? '')
     .split(/\s+/)
     .filter(Boolean)
     .slice(0, 2)
@@ -693,7 +694,7 @@ export const TestimonialCard = ({
       {/* Accent-tinted verification badge */}
       <span className="inline-flex w-fit shrink-0 items-center gap-1 rounded-full bg-impact/10 px-2 py-0.5 text-impact">
         <BadgeCheckIcon className="w-3 h-3 shrink-0" />
-        <span className="text-[10px] font-medium uppercase tracking-wider">Verified testimonial</span>
+        <span className="text-[10px] font-medium uppercase tracking-wider">Confirmed testimonial</span>
       </span>
 
       {/* The quote is the hero: serif voice, larger than body text */}

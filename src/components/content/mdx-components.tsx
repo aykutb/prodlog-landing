@@ -108,7 +108,7 @@ type ArticleCTAProps = {
 };
 
 export function ArticleCTA({
-  message = 'Start logging your wins in Prodlog — free, takes 30 seconds, no credit card.',
+  message = 'Start your log in Prodlog: free, takes 30 seconds, no card.',
   showPricing = true,
 }: ArticleCTAProps) {
   return (

@@ -1,166 +1,131 @@
 import React from 'react';
+import Link from 'next/link';
+
+// Mini bento tile. Real card type names from prodlog2's cardRegistry
+// (available only, no coming-soon); the sample content inside is illustrative
+// and continues the loyalty-feature story running through the page.
+const Tile = ({
+  label,
+  span,
+  children,
+}: {
+  label: string;
+  span?: string;
+  children: React.ReactNode;
+}) => (
+  <div className={`bg-white border border-divider rounded-lg p-3 min-w-0 ${span ?? ''}`}>
+    <p className="text-[9px] text-muted uppercase tracking-wider mb-1.5">{label}</p>
+    {children}
+  </div>
+);
+
+const SkillRow = ({ name, level }: { name: string; level: number }) => (
+  <div className="flex items-center justify-between gap-2">
+    <span className="text-[10px] text-primary truncate">{name}</span>
+    <span className="flex gap-0.5 shrink-0" aria-hidden="true">
+      {[0, 1, 2, 3].map((i) => (
+        <span
+          key={i}
+          className={`w-2.5 h-1.5 rounded-sm ${i < level ? 'bg-deep-ink-blue/70' : 'bg-divider'}`}
+        />
+      ))}
+    </span>
+  </div>
+);
+
+const HEATMAP_ON = [1, 4, 6, 9, 12, 13, 17, 20, 24, 26];
+const HEATMAP_DIM = [2, 8, 15, 19, 22, 27];
 
 export const PortfolioSection = () => (
-  <section className="py-24 px-8 md:px-12 bg-charcoal border-t border-divider">
-    <div className="max-w-5xl mx-auto">
-      <div className="text-center mb-12">
-        <h2 className="serif-headline text-2xl md:text-[36px] mb-4 text-primary leading-tight">
-          Your public portfolio
+  <section className="py-24 px-8 md:px-12 border-t border-divider">
+    <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-10 md:gap-14 items-center">
+      <div className="text-center md:text-left">
+        <h2 className="serif-headline text-2xl md:text-[36px] mb-6 text-primary leading-tight">
+          Your log is already a portfolio.
         </h2>
-        <p className="text-secondary max-w-2xl mx-auto">
-          A professional portfolio that showcases your work. Import from LinkedIn, customize your layout, share your story.
+        <p className="text-secondary leading-relaxed mb-4">
+          Entries are the raw material. The portfolio is what you build from them: decisions
+          you made, features you killed, metrics you moved, tradeoffs you chose, skills, case
+          studies, writing you published. Twenty-two card types, because fifteen years of work
+          does not fit in a list of bullet points.
         </p>
+        <p className="text-secondary leading-relaxed mb-8">
+          Everything stays private until you publish it.
+        </p>
+        <Link
+          href="/p/aykutbal"
+          className="inline-block border border-deep-ink-blue/40 bg-white text-deep-ink-blue px-6 py-3 rounded font-medium text-sm hover:border-deep-ink-blue transition-all no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-deep-ink-blue/50 focus-visible:ring-offset-2"
+        >
+          See a real one
+        </Link>
       </div>
 
-      {/* Bento Profile Visual */}
-      <div className="bg-white border border-divider rounded-xl p-4 md:p-6 text-left shadow-[0_4px_40px_-10px_rgba(31,42,68,0.15)] hover:shadow-[0_8px_50px_-10px_rgba(31,42,68,0.25)] hover:border-deep-ink-blue/20 transition-all duration-500 ease-out">
-        {/* Browser Chrome */}
-        <div className="flex items-center justify-between mb-4 md:mb-6 pb-3 md:pb-4 border-b border-divider">
-          <div className="flex items-center gap-1.5 md:gap-2">
-            <div className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-[#FF5F56]"></div>
-            <div className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-[#FFBD2E]"></div>
-            <div className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-[#27CA40]"></div>
-          </div>
-          <div className="text-muted text-[8px] md:text-[10px] bg-white px-2 md:px-3 py-1 rounded border border-divider shadow-sm">
-            prodlog.app/@sarahchen
-          </div>
-          <div className="w-8 md:w-16"></div>
-        </div>
+      {/* Small-scale bento grid: the variety of card types is the point, not
+          the legibility of any one card. */}
+      <div className="grid grid-cols-3 gap-2 md:gap-2.5" aria-hidden="true">
+        <Tile label="Decision" span="col-span-2">
+          <p className="text-primary text-xs font-medium font-serif leading-snug">
+            Cut v1 scope to keep the date
+          </p>
+          <p className="text-muted text-[10px] mt-1 truncate">Enterprise onboarding · Mar 2026</p>
+        </Tile>
 
-        {/* Profile Header */}
-        <div className="flex flex-col items-center text-center mb-4 md:mb-8">
-          <div className="mb-2 md:mb-4 h-14 w-14 shrink-0 overflow-hidden rounded-full border-2 border-divider md:h-20 md:w-20 md:border-4">
-            <img
-              src="/sarah.svg"
-              alt=""
-              className="h-full w-full object-cover"
-            />
+        <Tile label="Contributions">
+          <div className="grid grid-cols-7 gap-0.5 w-fit">
+            {Array.from({ length: 28 }).map((_, i) => (
+              <span
+                key={i}
+                className={`w-1.5 h-1.5 rounded-[2px] ${
+                  HEATMAP_ON.includes(i)
+                    ? 'bg-sage-green'
+                    : HEATMAP_DIM.includes(i)
+                      ? 'bg-sage-green/40'
+                      : 'bg-divider'
+                }`}
+              />
+            ))}
           </div>
-          <h2 className="text-base md:text-xl font-semibold text-primary">Sarah Chen</h2>
-          <p className="text-[10px] md:text-xs text-muted mb-0.5 md:mb-1">@sarahchen</p>
-          <p className="text-xs md:text-sm text-secondary">Senior PM at Stripe</p>
-        </div>
+        </Tile>
 
-        {/* Bento Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">
-          {/* Bio Card */}
-          <div className="col-span-2 bg-white border border-divider rounded-lg shadow-[0_2px_12px_-4px_rgba(31,42,68,0.12)] p-3 md:p-4">
-            <div className="text-[9px] md:text-[10px] text-muted uppercase tracking-wider mb-1.5 md:mb-2">Bio</div>
-            <p className="text-secondary text-[10px] md:text-xs leading-relaxed line-clamp-3 md:line-clamp-none">
-              Building payments infrastructure. Previously at Notion and Figma. I care about developer experience.
-            </p>
+        <Tile label="Kill">
+          <p className="text-primary text-xs font-medium font-serif leading-snug">Loyalty v2</p>
+          <span className="inline-block text-[9px] px-1.5 py-0.5 mt-1.5 rounded bg-warm-amber/10 text-warm-amber border border-warm-amber/20">
+            Killed at discovery
+          </span>
+        </Tile>
+
+        <Tile label="Skills Matrix" span="col-span-2">
+          <div className="space-y-1.5">
+            <SkillRow name="Discovery" level={4} />
+            <SkillRow name="Stakeholder alignment" level={3} />
+            <SkillRow name="Pricing" level={2} />
           </div>
+        </Tile>
 
-          {/* Stats Card */}
-          <div className="col-span-1 bg-white border border-divider rounded-lg shadow-[0_2px_12px_-4px_rgba(31,42,68,0.12)] p-3 md:p-4">
-            <div className="text-[9px] md:text-[10px] text-muted uppercase tracking-wider mb-2 md:mb-3">Stats</div>
-            <div className="space-y-1.5 md:space-y-2">
-              <div className="flex justify-between">
-                <span className="text-[9px] md:text-[10px] text-muted">Years</span>
-                <span className="text-[10px] md:text-xs text-primary font-semibold">6</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-[9px] md:text-[10px] text-muted">Impacts</span>
-                <span className="text-[10px] md:text-xs text-primary font-semibold">24</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-[9px] md:text-[10px] text-muted">Stories</span>
-                <span className="text-[10px] md:text-xs text-primary font-semibold">8</span>
-              </div>
+        <Tile label="Writing" span="col-span-2">
+          <div className="flex items-center gap-2.5">
+            <span className="w-8 h-10 shrink-0 rounded bg-deep-ink-blue/10 flex items-center justify-center text-[10px] font-semibold text-deep-ink-blue font-serif">
+              W
+            </span>
+            <div className="min-w-0">
+              <p className="text-primary text-xs font-medium font-serif truncate">
+                Why we killed loyalty v2
+              </p>
+              <p className="text-muted text-[10px] mt-0.5">Published · 6 min read</p>
             </div>
           </div>
+        </Tile>
 
-          {/* Social Links */}
-          <div className="col-span-1 bg-white border border-divider rounded-lg shadow-[0_2px_12px_-4px_rgba(31,42,68,0.12)] p-3 md:p-4">
-            <div className="text-[9px] md:text-[10px] text-muted uppercase tracking-wider mb-2 md:mb-3">Links</div>
-            <div className="flex flex-wrap gap-1.5 md:gap-2">
-              <div className="w-6 h-6 md:w-7 md:h-7 rounded bg-white border border-divider flex items-center justify-center">
-                <span className="text-[9px] md:text-[10px] text-muted">in</span>
-              </div>
-              <div className="w-6 h-6 md:w-7 md:h-7 rounded bg-white border border-divider flex items-center justify-center">
-                <span className="text-[9px] md:text-[10px] text-muted">𝕏</span>
-              </div>
-              <div className="w-6 h-6 md:w-7 md:h-7 rounded bg-white border border-divider flex items-center justify-center">
-                <span className="text-[9px] md:text-[10px] text-muted">◉</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Activity Grid - Desktop only */}
-          <div className="hidden md:block col-span-2 row-span-2 bg-white border border-divider rounded-lg shadow-[0_2px_12px_-4px_rgba(31,42,68,0.12)] p-4">
-            <div className="text-[10px] text-muted uppercase tracking-wider mb-3">Activity</div>
-            <div className="grid grid-cols-12 gap-1">
-              {Array.from({ length: 48 }).map((_, i) => (
-                <div 
-                  key={i} 
-                  className={`w-2 h-2 rounded-sm ${
-                    [3,7,12,15,19,22,25,28,31,35,38,41,44].includes(i) 
-                      ? 'bg-sage-green' 
-                      : [1,5,9,17,24,33,40,47].includes(i)
-                        ? 'bg-sage-green/40'
-                        : 'bg-divider'
-                  }`}
-                />
-              ))}
-            </div>
-            <div className="flex items-center gap-2 mt-3">
-              <span className="text-[9px] text-muted">Less</span>
-              <div className="flex gap-1">
-                <div className="w-2 h-2 rounded-sm bg-divider"></div>
-                <div className="w-2 h-2 rounded-sm bg-sage-green/40"></div>
-                <div className="w-2 h-2 rounded-sm bg-sage-green/70"></div>
-                <div className="w-2 h-2 rounded-sm bg-sage-green"></div>
-              </div>
-              <span className="text-[9px] text-muted">More</span>
-            </div>
-          </div>
-
-          {/* Products */}
-          <div className="col-span-2 bg-white border border-divider rounded-lg shadow-[0_2px_12px_-4px_rgba(31,42,68,0.12)] p-3 md:p-4">
-            <div className="text-[9px] md:text-[10px] text-muted uppercase tracking-wider mb-2 md:mb-3">Products</div>
-            <div className="space-y-2">
-              <div className="flex items-center gap-2">
-                <div className="w-5 h-5 md:w-6 md:h-6 rounded bg-[#635BFF]/10 flex items-center justify-center text-[9px] md:text-[10px] font-bold text-[#635BFF] shrink-0">S</div>
-                <div className="min-w-0">
-                  <div className="text-[10px] md:text-xs text-primary font-medium truncate">Stripe Checkout</div>
-                  <div className="text-[9px] md:text-[10px] text-muted">2022 - Present</div>
-                </div>
-              </div>
-              <div className="flex items-center gap-2 opacity-60">
-                <div className="w-5 h-5 md:w-6 md:h-6 rounded bg-primary/5 flex items-center justify-center text-[9px] md:text-[10px] font-bold text-primary shrink-0">N</div>
-                <div className="min-w-0">
-                  <div className="text-[10px] md:text-xs text-primary font-medium truncate">Notion API</div>
-                  <div className="text-[9px] md:text-[10px] text-muted">2020 - 2022</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Featured Impact */}
-          <div className="col-span-1 md:col-span-2 bg-white border border-divider rounded-lg shadow-[0_2px_12px_-4px_rgba(31,42,68,0.12)] p-3 md:p-4">
-            <div className="flex items-center justify-between mb-1.5 md:mb-2">
-              <div className="text-[9px] md:text-[10px] text-muted uppercase tracking-wider">Impact</div>
-              <span className="text-[8px] md:text-[9px] px-1 md:px-1.5 py-0.5 rounded bg-sage-green/20 text-sage-green font-medium">Done</span>
-            </div>
-            <div className="text-[10px] md:text-sm text-primary font-medium mb-1 line-clamp-2">Reduced abandonment by 22%</div>
-            <p className="text-[9px] md:text-[11px] text-secondary leading-relaxed line-clamp-2 hidden md:block">Redesigned payment flow with Apple Pay</p>
-            <div className="flex gap-1 md:gap-2 mt-1.5 md:mt-2">
-              <span className="text-[8px] md:text-[9px] px-1.5 md:px-2 py-0.5 rounded bg-sage-green/10 text-sage-green border border-sage-green/20 font-medium">+$2.4M</span>
-            </div>
-          </div>
-
-          {/* Featured Story */}
-          <div className="col-span-1 md:col-span-2 bg-white border border-divider rounded-lg shadow-[0_2px_12px_-4px_rgba(31,42,68,0.12)] p-3 md:p-4">
-            <div className="flex items-center justify-between mb-1.5 md:mb-2">
-              <div className="text-[9px] md:text-[10px] text-muted uppercase tracking-wider">Story</div>
-              <span className="text-[8px] md:text-[9px] px-1 md:px-1.5 py-0.5 rounded bg-muted-plum/20 text-muted-plum font-medium">Published</span>
-            </div>
-            <div className="text-[10px] md:text-sm text-primary font-medium mb-1 line-clamp-2">Leading my first 0→1</div>
-            <p className="text-[9px] md:text-[11px] text-secondary leading-relaxed line-clamp-2 hidden md:block">
-              Learning when to push back and when to listen...
-            </p>
-          </div>
-        </div>
+        <Tile label="Tradeoff">
+          <p className="text-[10px] leading-snug">
+            <span className="text-sage-green font-medium">Chose</span>{' '}
+            <span className="text-primary">3 markets</span>
+          </p>
+          <p className="text-[10px] leading-snug mt-1">
+            <span className="text-muted font-medium">Passed</span>{' '}
+            <span className="text-muted">all 12</span>
+          </p>
+        </Tile>
       </div>
     </div>
   </section>
