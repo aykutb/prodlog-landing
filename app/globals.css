@@ -66,6 +66,10 @@ body {
     transform: none;
     transition: none;
   }
+
+  .fade-in {
+    animation: none;
+  }
 }
 
 .serif-headline {

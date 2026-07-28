@@ -50,6 +50,11 @@ export const ROUTE_META: Record<string, RouteMeta> = {
     description:
       'Need help with Prodlog? Send us a support request and we will get back to you by email, or reach us directly at support@prodlog.app.',
   },
+  '/try': {
+    title: 'Try Prodlog | Paste Your Notes, See Entries | Prodlog',
+    description:
+      'Paste a messy note and see it come out as clean entries: date, title, ownership, outcome. Nothing is saved and nothing is shared. No signup needed.',
+  },
   '/sample': {
     title: 'Sample PM Impact Logs | Examples | Prodlog',
     description:

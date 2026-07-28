@@ -9,3 +9,4 @@ export { SampleImpactPage } from './SampleImpactPage';
 export { SupportPage } from './Support';
 export { PortfolioPage } from './Portfolio';
 export { TermsOfServicePage } from './TermsOfService';
+export { TryPage } from './Try';
