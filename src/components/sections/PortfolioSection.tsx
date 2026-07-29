@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { PortfolioBentoMock } from '@/src/components/ui';
 
 export const PortfolioSection = () => (
@@ -27,6 +28,15 @@ export const PortfolioSection = () => (
       </div>
 
       <PortfolioBentoMock />
+    </div>
+
+    <div className="mt-8 mx-auto max-w-4xl rounded-2xl overflow-hidden shadow-xl border border-neutral-200">
+      <Image
+        src="/images/screenshots/06-portfolio-page-hero.png"
+        width={2858}
+        height={1680}
+        alt="Sample Prodlog PM portfolio showing skills, experience, and recent work"
+      />
     </div>
   </section>
 );

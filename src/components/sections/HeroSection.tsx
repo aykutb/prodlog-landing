@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { CTASection } from '@/src/components/ui';
 
 // The hero visual shows the mess (the "somewheres" of the headline), never
@@ -20,6 +21,16 @@ export const HeroSection = () => (
     </p>
 
     <CTASection />
+
+    <div className="mt-10 mx-auto max-w-5xl rounded-2xl shadow-2xl overflow-hidden border border-neutral-200">
+      <Image
+        src="/images/screenshots/01-hero-dashboard-entry-list.png"
+        width={2858}
+        height={1680}
+        priority={true}
+        alt="Prodlog dashboard showing work entries with dates and outcomes"
+      />
+    </div>
 
     {/* The somewheres: a phone note, a Slack self-DM, a Notion-ish page. */}
     <div className="mt-4 mb-2 flex justify-center items-start" aria-hidden="true">
