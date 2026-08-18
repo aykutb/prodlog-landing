@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   PortfolioBentoMock,
   PreviewEntryCard,
@@ -45,11 +46,13 @@ const StepCard = ({
   title,
   children,
   visual,
+  footer,
 }: {
   number: string;
   title: string;
   children: React.ReactNode;
   visual: React.ReactNode;
+  footer?: React.ReactNode;
 }) => (
   <ScrollReveal>
     <div className="bg-white border border-divider rounded-xl p-8">
@@ -61,6 +64,7 @@ const StepCard = ({
         </div>
         <div>{visual}</div>
       </div>
+      {footer}
     </div>
   </ScrollReveal>
 );
@@ -161,6 +165,16 @@ export const HowItWorksPage = () => (
                 ))}
               </dl>
             </MiniOutput>
+          </div>
+        }
+        footer={
+          <div className="mt-8 w-full max-w-5xl mx-auto rounded-2xl overflow-hidden shadow-xl border border-neutral-200">
+            <Image
+              src="/images/screenshots/03-summaries-page-with-tabs.png"
+              width={2858}
+              height={1680}
+              alt="Prodlog summaries page showing four output tabs: Review, Resume Bullets, Recruiter Brief, Interview Prep"
+            />
           </div>
         }
       >
