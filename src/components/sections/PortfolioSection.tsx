@@ -33,8 +33,8 @@ export const PortfolioSection = () => (
     <div className="mt-8 mx-auto max-w-4xl rounded-2xl overflow-hidden shadow-xl border border-neutral-200">
       <Image
         src="/images/screenshots/06-portfolio-page-hero.png"
-        width={2858}
-        height={1680}
+        width={2530}
+        height={1800}
         alt="Sample Prodlog PM portfolio showing skills, experience, and recent work"
       />
     </div>

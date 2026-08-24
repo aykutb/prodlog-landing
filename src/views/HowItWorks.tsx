@@ -171,8 +171,8 @@ export const HowItWorksPage = () => (
           <div className="mt-8 w-full max-w-5xl mx-auto rounded-2xl overflow-hidden shadow-xl border border-neutral-200">
             <Image
               src="/images/screenshots/03-summaries-page-with-tabs.png"
-              width={2858}
-              height={1680}
+              width={2530}
+              height={1912}
               alt="Prodlog summaries page showing four output tabs: Review, Resume Bullets, Recruiter Brief, Interview Prep"
             />
           </div>
