@@ -99,6 +99,17 @@ export const OutputsSection = () => {
           Two minutes a week. Four ways to use it.
         </h2>
 
+        {/*
+          IMAGE SLOT. A single image is intended to replace the four cards
+          below entirely. When that asset exists, swap this whole grid for one
+          <Image /> at the same max-w-5xl width and drop the OUTPUTS array.
+          Nothing is referenced yet on purpose: no placeholder file, no src
+          pointing at an asset that does not exist.
+
+          Grid left as is. It already resolves to four across at lg, two at
+          sm through md, and one below sm, which is what a compact grid for
+          these four needs to do.
+        */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-10">
           {OUTPUTS.map((item) => (
             <div key={item.lead} className="p-4 md:p-5 border border-divider rounded-xl bg-white">

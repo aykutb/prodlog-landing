@@ -108,16 +108,10 @@ export const BringTheMessSection = () => (
             <span className="w-8 h-8 rounded bg-deep-ink-blue/10 flex items-center justify-center mx-auto md:mx-0 mb-3">
               <span className="text-deep-ink-blue text-sm font-bold">in</span>
             </span>
-            <p className="text-secondary text-sm leading-relaxed mb-5">
+            <p className="text-secondary text-sm leading-relaxed">
               Before this job, it&rsquo;s on LinkedIn. Import it once and you have the
               backfill: the roles, the launches, the things you would put on a resume anyway.
             </p>
-            <a
-              href="https://dashboard.prodlog.app/auth"
-              className="mt-auto w-full md:w-fit border border-divider bg-white text-primary px-6 py-3 rounded font-medium text-sm hover:border-deep-ink-blue/40 transition-all text-center no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-deep-ink-blue/50 focus-visible:ring-offset-2"
-            >
-              Import from LinkedIn
-            </a>
           </div>
 
           <div className="bg-white border border-divider rounded-xl p-6 flex flex-col text-center md:text-left">

@@ -8,3 +8,4 @@ export { PreviewTool } from './PreviewTool';
 export { PreviewEntryCard, type PreviewEntry } from './PreviewEntryCard';
 export { SlackPromptMock } from './SlackPromptMock';
 export { PortfolioBentoMock } from './PortfolioBentoMock';
+export { AppStoreBadge } from './AppStoreBadge';

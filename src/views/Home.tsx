@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   HeroSection,
-  BringTheMessSection,
   TriggerSection,
   OutputsSection,
   PortfolioSection,
@@ -12,11 +11,10 @@ import {
 export const HomePage = () => (
   <>
     <HeroSection />
-    <BringTheMessSection />
+    <ObjectionsSection />
     <TriggerSection />
     <OutputsSection />
     <PortfolioSection />
-    <ObjectionsSection />
     <FinalCTASection />
   </>
 );

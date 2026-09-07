@@ -3,6 +3,7 @@ import { Inter, Outfit, Source_Serif_4 } from 'next/font/google';
 import { Layout } from '@/src/components/layout';
 import { ConsentGate } from '@/src/components/consent';
 import './globals.css';
+import { APP_STORE_ID } from '@/src/lib/appStore';
 
 const GA_MEASUREMENT_ID = 'G-VYKQQTGRNT';
 
@@ -28,6 +29,11 @@ export const metadata: Metadata = {
   icons: {
     icon: '/logomark.svg',
     apple: '/logomark.svg',
+  },
+  // Safari Smart App Banner. Root layout metadata merges into every route,
+  // so the tag is site wide.
+  other: {
+    'apple-itunes-app': `app-id=${APP_STORE_ID}`,
   },
 };
 

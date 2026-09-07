@@ -20,7 +20,7 @@ export const HeroSection = () => (
       and your interview answers.
     </p>
 
-    <CTASection />
+    <CTASection pastePrimary />
 
     <div className="mt-10 mx-auto max-w-5xl rounded-2xl shadow-2xl overflow-hidden border border-neutral-200">
       <Image

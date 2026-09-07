@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { RESOURCES_NAV } from '@/src/navigation/resourcesNav';
 import { CookieSettingsButton } from '@/src/components/consent';
+import { APP_STORE_URL } from '@/src/lib/appStore';
 
 const Wordmark = ({ className = 'h-6', textClass = 'text-xl' }: { className?: string; textClass?: string }) => (
   <Link href="/" className="flex items-center gap-2">
@@ -62,6 +63,9 @@ export const Footer = ({ minimal = false }: FooterProps) => {
             <Link href="/faq" className="text-muted text-sm hover:text-primary transition-colors">
               FAQ
             </Link>
+            <a href={APP_STORE_URL} className="text-muted text-sm hover:text-primary transition-colors">
+              iOS app
+            </a>
           </div>
           <div className="flex flex-col gap-3">
             <span className="text-primary font-semibold text-sm">Resources</span>

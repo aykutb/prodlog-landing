@@ -3,6 +3,7 @@
 import React, { useId, useState } from 'react';
 import { trackEvent } from '@/src/lib/analytics';
 import { PreviewEntryCard, type PreviewEntry } from './PreviewEntryCard';
+import { AppStoreBadge } from './AppStoreBadge';
 
 const PARSE_URL = 'https://api.prodlog.app/api/preview/parse';
 const MAX_CHARS = 8000;
@@ -162,6 +163,16 @@ export const PreviewTool = () => {
                 These aren&rsquo;t saved yet. Signing up takes a few seconds, then you can
                 paste again.
               </p>
+
+              {/* Secondary action. Quiet on purpose: a divider, one line of
+                  secondary text, and the badge. "Start free" stays the only
+                  button. */}
+              <div className="mt-10 pt-8 border-t border-divider flex flex-col items-center gap-4">
+                <p className="text-secondary text-sm max-w-md">
+                  Keep it going in thirty seconds a week. Log by voice from your phone.
+                </p>
+                <AppStoreBadge />
+              </div>
             </div>
           </div>
         )}
