@@ -28,7 +28,27 @@ const ERROR_RATE_LIMITED =
 const ERROR_TOO_LONG = 'Paste is a bit long. Trim it to 8000 characters or fewer.';
 const ERROR_GENERIC = "That didn't work. Try again in a moment.";
 
-export const PreviewTool = () => {
+interface PreviewToolProps {
+  /**
+   * Density. `page` is /try as it stands: a ten-row textarea, the wrapper's
+   * own horizontal padding on small screens, and a left-aligned button.
+   * `compact` is for mounting inside a section that already pads and centres
+   * its content: four rows, no wrapper padding, centred button. Nothing about
+   * the request, the counter, or the result rendering differs.
+   */
+  variant?: 'page' | 'compact';
+  /**
+   * Whether the sign-up block renders after a successful parse: the "Keep
+   * these" heading, the "Start free" button, and the App Store badge. On by
+   * default for /try. The homepage hero turns it off because it already has
+   * its own "Start free" link beneath the input and must keep exactly one
+   * primary action; there the entries alone are the result.
+   */
+  showSignup?: boolean;
+}
+
+export const PreviewTool = ({ variant = 'page', showSignup = true }: PreviewToolProps) => {
+  const compact = variant === 'compact';
   const [text, setText] = useState('');
   const [state, setState] = useState<ToolState>({ status: 'idle' });
   const textareaId = useId();
@@ -85,7 +105,7 @@ export const PreviewTool = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto px-4 md:px-0">
+    <div className={compact ? 'max-w-2xl mx-auto' : 'max-w-2xl mx-auto px-4 md:px-0'}>
       <form onSubmit={handleSubmit} className="flex flex-col gap-3">
         <label htmlFor={textareaId} className="sr-only">
           Your notes
@@ -95,9 +115,9 @@ export const PreviewTool = () => {
           value={text}
           onChange={(e) => setText(e.target.value)}
           placeholder={PLACEHOLDER}
-          rows={10}
+          rows={compact ? 4 : 10}
           aria-describedby={counterId}
-          className="w-full border border-divider rounded-lg px-4 py-3 text-sm bg-white text-primary placeholder:text-muted resize-y leading-relaxed focus:outline-none focus-visible:ring-2 focus-visible:ring-deep-ink-blue/50 focus:border-deep-ink-blue/50"
+          className="w-full border border-divider rounded-lg px-4 py-3 text-sm text-left bg-white text-primary placeholder:text-muted resize-y leading-relaxed focus:outline-none focus-visible:ring-2 focus-visible:ring-deep-ink-blue/50 focus:border-deep-ink-blue/50"
         />
 
         <div className="flex items-center justify-between gap-4">
@@ -113,7 +133,7 @@ export const PreviewTool = () => {
         <button
           type="submit"
           disabled={!submittable}
-          className="self-start bg-deep-ink-blue text-white px-6 py-3 rounded font-medium text-sm hover:opacity-90 transition-all disabled:opacity-60 focus:outline-none focus-visible:ring-2 focus-visible:ring-deep-ink-blue/50 focus-visible:ring-offset-2"
+          className={`${compact ? 'self-center' : 'self-start'} bg-deep-ink-blue text-white px-6 py-3 rounded font-medium text-sm hover:opacity-90 transition-all disabled:opacity-60 focus:outline-none focus-visible:ring-2 focus-visible:ring-deep-ink-blue/50 focus-visible:ring-offset-2`}
         >
           {state.status === 'loading' ? 'Reading your notes…' : 'See what comes out'}
         </button>
@@ -145,35 +165,37 @@ export const PreviewTool = () => {
               <p className="text-muted text-xs mt-3">Showing the first 12. There were more.</p>
             )}
 
-            <div className="mt-12 text-center">
-              <h2 className="serif-headline text-xl md:text-2xl text-primary mb-4">
-                Keep these, and add to them.
-              </h2>
-              <a
-                href="https://dashboard.prodlog.app/auth"
-                onClick={() => trackEvent('preview_signup_click')}
-                className="inline-block bg-deep-ink-blue text-white px-6 py-3 rounded font-medium text-sm hover:opacity-90 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-deep-ink-blue/50 focus-visible:ring-offset-2"
-              >
-                Start free
-              </a>
-              <p className="text-secondary text-sm mt-3">
-                Free forever. Unlimited entries, no card.
-              </p>
-              <p className="text-muted text-xs mt-2">
-                These aren&rsquo;t saved yet. Signing up takes a few seconds, then you can
-                paste again.
-              </p>
-
-              {/* Secondary action. Quiet on purpose: a divider, one line of
-                  secondary text, and the badge. "Start free" stays the only
-                  button. */}
-              <div className="mt-10 pt-8 border-t border-divider flex flex-col items-center gap-4">
-                <p className="text-secondary text-sm max-w-md">
-                  Keep it going in thirty seconds a week. Log by voice from your phone.
+            {showSignup && (
+              <div className="mt-12 text-center">
+                <h2 className="serif-headline text-xl md:text-2xl text-primary mb-4">
+                  Keep these, and add to them.
+                </h2>
+                <a
+                  href="https://dashboard.prodlog.app/auth"
+                  onClick={() => trackEvent('preview_signup_click')}
+                  className="inline-block bg-deep-ink-blue text-white px-6 py-3 rounded font-medium text-sm hover:opacity-90 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-deep-ink-blue/50 focus-visible:ring-offset-2"
+                >
+                  Start free
+                </a>
+                <p className="text-secondary text-sm mt-3">
+                  Free forever. Unlimited entries, no card.
                 </p>
-                <AppStoreBadge />
+                <p className="text-muted text-xs mt-2">
+                  These aren&rsquo;t saved yet. Signing up takes a few seconds, then you can
+                  paste again.
+                </p>
+
+                {/* Secondary action. Quiet on purpose: a divider, one line of
+                    secondary text, and the badge. "Start free" stays the only
+                    button. */}
+                <div className="mt-10 pt-8 border-t border-divider flex flex-col items-center gap-4">
+                  <p className="text-secondary text-sm max-w-md">
+                    Keep it going in thirty seconds a week. Log by voice from your phone.
+                  </p>
+                  <AppStoreBadge />
+                </div>
               </div>
-            </div>
+            )}
           </div>
         )}
       </div>

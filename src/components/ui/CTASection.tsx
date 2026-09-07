@@ -5,10 +5,11 @@ interface CTASectionProps {
   centered?: boolean;
   showSecondary?: boolean;
   /**
-   * Homepage hero only. Makes the paste path the single primary button and
-   * drops "Start free" to a text link beneath it. Every other surface (FAQ,
-   * privacy, MDX pages) keeps "Start free" as the primary button, so this
-   * defaults off. Ignored together with showSecondary when on.
+   * Homepage hero only. The hero mounts the paste input itself as the single
+   * primary action, so this branch renders only what sits beneath it:
+   * "Start free" as a text link and the "Free forever" line. Every other
+   * surface (FAQ, privacy, MDX pages) keeps "Start free" as the primary
+   * button, so this defaults off. Ignored together with showSecondary when on.
    */
   pastePrimary?: boolean;
 }
@@ -26,17 +27,12 @@ export const CTASection = ({
 }: CTASectionProps) => (
   <div className={`flex flex-col ${centered ? 'items-center' : 'items-start'} my-6`}>
     {pastePrimary ? (
-      <>
-        <Link href="/try" className={PRIMARY_CLASS}>
-          Paste in your notes and see what comes out
-        </Link>
-        <a
-          href="https://dashboard.prodlog.app/auth"
-          className="mt-3 text-deep-ink-blue text-sm underline underline-offset-2 hover:opacity-80 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-deep-ink-blue/50 focus-visible:ring-offset-2"
-        >
-          Start free
-        </a>
-      </>
+      <a
+        href="https://dashboard.prodlog.app/auth"
+        className="text-deep-ink-blue text-sm underline underline-offset-2 hover:opacity-80 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-deep-ink-blue/50 focus-visible:ring-offset-2"
+      >
+        Start free
+      </a>
     ) : (
       <div
         className={`flex flex-col md:flex-row ${centered ? 'justify-center' : 'justify-start'} items-center gap-3 w-full`}

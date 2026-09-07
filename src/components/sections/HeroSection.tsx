@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import { CTASection } from '@/src/components/ui';
+import { CTASection, PreviewTool } from '@/src/components/ui';
 
 // The hero visual carries the whole arc in one frame: the "somewheres" of the
 // headline on the left, the same entries as a structured log on the right. No
@@ -15,10 +15,16 @@ export const HeroSection = () => (
     </h2>
 
     <p className="text-secondary text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
-      A Slack thread to yourself. A note on your phone. A doc you started in March. Prodlog
-      keeps the same two-minute habit, then turns it into your review, your resume bullets,
-      and your interview answers.
+      A Slack thread to yourself. A note on your phone. A doc you started in March. Paste any
+      of it in and it comes back as dated entries, with your role on each one and the missing
+      outcomes flagged.
     </p>
+
+    {/* The paste input is the hero's one primary action. Same component as
+        /try, compact density; the section supplies padding and centring. */}
+    <div className="mt-6">
+      <PreviewTool variant="compact" showSignup={false} />
+    </div>
 
     <CTASection pastePrimary />
 
