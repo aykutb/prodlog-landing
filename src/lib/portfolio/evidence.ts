@@ -43,7 +43,7 @@ const DOMAIN_DEPTH_LABELS: Record<DomainDepth, string> = {
 export const getDomainDepthLabel = (depth: DomainDepth): string =>
   DOMAIN_DEPTH_LABELS[depth] ?? '';
 
-// ─── Impact Metric ───────────────────────────────────────────────────
+// ─── Outcome Metric ───────────────────────────────────────────────────
 
 export type MetricUnit = 'percent' | 'absolute' | 'currency' | 'duration' | 'multiple';
 export type MetricDirection = 'up' | 'down';

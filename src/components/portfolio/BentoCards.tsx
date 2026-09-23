@@ -545,7 +545,7 @@ const AllLogsCard = ({
   return (
     <div className="p-4 h-full flex flex-col">
       <div className="flex items-center justify-between mb-3">
-        <h3 className="text-sm font-serif font-medium text-muted">Logs</h3>
+        <h3 className="text-sm font-serif font-medium text-muted">Entries</h3>
       </div>
       <PaginatedCardPages pages={pages} />
     </div>

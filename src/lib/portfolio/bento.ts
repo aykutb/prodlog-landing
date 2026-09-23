@@ -157,8 +157,15 @@ export function isCardEmpty(card: BentoCardConfig, portfolio: Portfolio): boolea
       return !card.embedUrl?.trim();
     case 'rich_text':
       return isRichTextEmpty(card.richTextBody);
+    case 'stats':
+      // Years of experience is the card's headline number; without a career
+      // start it would show a dash.
+      return !profile.career_start_date;
+    case 'contribution':
+      // An empty grid says nothing; hide it until there is a public entry.
+      return logs.length === 0;
     default:
-      return false; // stats, contribution are never hidden
+      return false;
   }
 }
 
