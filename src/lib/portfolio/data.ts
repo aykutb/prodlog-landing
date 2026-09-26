@@ -40,7 +40,6 @@ export interface PortfolioMetric {
 export interface PortfolioLog {
   id: string;
   title: string;
-  description: string | null;
   content: string | null;
   change_description: string | null;
   metrics: PortfolioMetric[] | null;

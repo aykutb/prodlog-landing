@@ -374,7 +374,7 @@ const ProductListCard = ({
 
 // ─── single_log / all_logs ───────────────────────────────────────────
 
-const logPreview = (log: PortfolioLog): string => log.description || stripHtml(log.content);
+const logPreview = (log: PortfolioLog): string => stripHtml(log.content);
 
 /** Public logs with content are readable on the dashboard's log page. */
 const logHref = (log: PortfolioLog): string | null =>
