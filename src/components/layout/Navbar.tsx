@@ -57,17 +57,9 @@ export const Navbar = ({ compareNavItems, minimal = false }: NavbarProps) => {
       <div className="fixed top-0 left-0 right-0 z-50 px-4 pt-4">
         <nav className="max-w-4xl mx-auto bg-white/80 backdrop-blur-xl border border-divider rounded-2xl shadow-sm">
           <div className="px-4 md:px-6 h-12 flex items-center justify-between">
-            <Link href="/" className="cursor-pointer flex items-center gap-2">
-              <img src="/logomark.svg" alt="" className="h-5" />
-              <span
-                className="text-primary font-normal text-lg"
-                style={{
-                  letterSpacing: '-0.07em',
-                  fontFamily: 'var(--font-outfit), sans-serif',
-                }}
-              >
-                Prodlog
-              </span>
+            <Link href="/" className="cursor-pointer flex items-center">
+              {/* The lockup from prodlog2's logomark definition (public/brand/logo.svg). */}
+              <img src="/brand/logo.svg" alt="Prodlog" className="h-5 w-auto" />
             </Link>
 
             {/* On a portfolio the CTA is the whole nav, at every width — there

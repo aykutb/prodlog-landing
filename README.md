@@ -54,6 +54,22 @@ Next.js marketing site for [Prodlog](https://prodlog.app). Content (pillars, blo
 
 **Publishing workflow (v1):** Edit in Studio → publish → rebuild/redeploy the site. Changes are not live until the next build.
 
+## Brand assets
+
+The logo files are generated in prodlog2 from its one logomark definition
+(`src/brand/definition.ts`, run `npm run brand:assets` there) and copied
+here unchanged. Never edit or redraw them in this repo; regenerate in
+prodlog2 and copy again.
+
+| Here | From prodlog2 |
+|---|---|
+| `public/logomark.svg` | `public/logomark.svg` |
+| `public/favicon.svg`, `public/favicon-16x16.png`, `public/favicon-32x32.png`, `public/apple-touch-icon.png` | the same paths in `public/` |
+| `public/brand/logo.svg` (the lockup in the Navbar and Footer) | `public/brand/logo.svg` |
+| `public/email/prodlog-logo.png` (the header of prodlog2's emails) | `public/brand/email-logo.png` |
+
+`public/og-default.png` is not generated yet.
+
 ## Project structure
 
 | Path | Purpose |

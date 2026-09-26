@@ -4,18 +4,10 @@ import { RESOURCES_NAV } from '@/src/navigation/resourcesNav';
 import { CookieSettingsButton } from '@/src/components/consent';
 import { APP_STORE_URL } from '@/src/lib/appStore';
 
-const Wordmark = ({ className = 'h-6', textClass = 'text-xl' }: { className?: string; textClass?: string }) => (
-  <Link href="/" className="flex items-center gap-2">
-    <img src="/logomark.svg" alt="" className={className} />
-    <span
-      className={`text-primary font-normal ${textClass}`}
-      style={{
-        letterSpacing: '-0.07em',
-        fontFamily: 'var(--font-outfit), sans-serif',
-      }}
-    >
-      Prodlog
-    </span>
+/** The lockup from prodlog2's logomark definition (public/brand/logo.svg). */
+const Wordmark = () => (
+  <Link href="/" className="flex items-center">
+    <img src="/brand/logo.svg" alt="Prodlog" className="h-6 w-auto" />
   </Link>
 );
 

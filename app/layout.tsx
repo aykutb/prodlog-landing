@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter, Outfit, Source_Serif_4 } from 'next/font/google';
+import { Inter, Source_Serif_4 } from 'next/font/google';
 import { Layout } from '@/src/components/layout';
 import { ConsentGate } from '@/src/components/consent';
 import './globals.css';
@@ -13,12 +13,6 @@ const inter = Inter({
   display: 'swap',
 });
 
-const outfit = Outfit({
-  subsets: ['latin'],
-  variable: '--font-outfit',
-  display: 'swap',
-});
-
 const sourceSerif = Source_Serif_4({
   subsets: ['latin'],
   variable: '--font-source-serif',
@@ -26,9 +20,15 @@ const sourceSerif = Source_Serif_4({
 });
 
 export const metadata: Metadata = {
+  // Generated in prodlog2 (npm run brand:assets) from the one logomark
+  // definition; copied here, never edited by hand.
   icons: {
-    icon: '/logomark.svg',
-    apple: '/logomark.svg',
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+    ],
+    apple: '/apple-touch-icon.png',
   },
   // Safari Smart App Banner. Root layout metadata merges into every route,
   // so the tag is site wide.
@@ -45,7 +45,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${outfit.variable} ${sourceSerif.variable}`}
+      className={`${inter.variable} ${sourceSerif.variable}`}
     >
       <body>
         <Layout>{children}</Layout>

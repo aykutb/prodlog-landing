@@ -29,7 +29,7 @@ export const SlackPromptMock = () => (
       {/* App message */}
       <div className="flex items-start gap-2.5">
         <span className="w-8 h-8 rounded bg-deep-ink-blue/10 flex items-center justify-center shrink-0">
-          <img src="/logomark.svg" alt="" className="h-4 w-4" />
+          <img src="/logomark.svg" alt="" className="h-4 w-auto" />
         </span>
         <div className="min-w-0">
           <p className="flex items-baseline gap-1.5 flex-wrap leading-none">
