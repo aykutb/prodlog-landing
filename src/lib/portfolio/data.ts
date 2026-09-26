@@ -41,7 +41,6 @@ export interface PortfolioLog {
   id: string;
   title: string;
   content: string | null;
-  change_description: string | null;
   metrics: PortfolioMetric[] | null;
   date: string;
   quarter: string | null;
