@@ -100,8 +100,8 @@ export const HowItWorksPage = () => {
             </li>
           </ul>
           <p>
-            You don&rsquo;t have to remember. The day before your 1:1, Prodlog asks in Slack what else happened, and every Friday at 4pm it asks what
-            shipped. Skip a few weeks and it just asks again.
+            You don&rsquo;t have to remember. The day before your 1:1, Prodlog asks in Slack what else happened. Turn on the Friday prompt and it
+            also asks at 4pm what shipped. Skip a few weeks and it just asks again.
           </p>
         </Step>
 

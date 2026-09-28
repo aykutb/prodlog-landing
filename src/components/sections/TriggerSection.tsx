@@ -28,7 +28,7 @@ export const TriggerSection = () => (
           <h3 className={`${PANEL_HEADING_CLASS} text-on-ink`}>On your phone.</h3>
           <p className={`${PANEL_BODY_CLASS} text-on-ink-muted`}>
             Hold the quick action, say what happened, put the phone away. A rambling thirty second voice note comes back as a dated entry with the
-            initiative, your role, and the outcome. No punctuation required, no format to remember. Your speech is transcribed on the device, never
+            product and any numbers you said, ready to check before it saves. No punctuation required, no format to remember. Your speech is transcribed on the device, never
             uploaded.
           </p>
           <p className={`${PANEL_BODY_CLASS} mt-3 text-on-ink`}>Your next 1:1 sits right above your entries.</p>
@@ -51,7 +51,7 @@ export const TriggerSection = () => (
           <p className={`${PANEL_BODY_CLASS} text-muted-foreground`}>
             Reply to the day-before message, type{' '}
             <code className="text-[0.85em] px-1 py-0.5 rounded bg-muted border border-border">/log</code> the moment something happens, or log any
-            message from its menu. Every Friday at 4pm it also asks what shipped.
+            message from its menu. Turn on the Friday prompt and it also asks at 4pm what shipped.
           </p>
           <div className="mt-5 -mb-8 -mx-2">
             <SlackPromptMock />
