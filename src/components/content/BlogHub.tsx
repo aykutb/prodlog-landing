@@ -16,10 +16,10 @@ interface BlogHubProps {
 }
 
 const tileAccents = [
-  { bg: 'bg-sage-green/12', letter: 'text-sage-green/70' },
-  { bg: 'bg-muted-plum/12', letter: 'text-muted-plum/70' },
-  { bg: 'bg-warm-amber/15', letter: 'text-warm-amber/80' },
-  { bg: 'bg-deep-ink-blue/8', letter: 'text-deep-ink-blue/60' },
+  { bg: 'bg-sage/12', letter: 'text-sage-strong/70' },
+  { bg: 'bg-mauve/12', letter: 'text-mauve-strong/70' },
+  { bg: 'bg-mustard/15', letter: 'text-mustard-strong/80' },
+  { bg: 'bg-ink/8', letter: 'text-ink/60' },
 ];
 
 function displayTitle(entry: LoadedContent): string {
@@ -74,7 +74,7 @@ function MetaRow({ entry }: { entry: LoadedContent }) {
   ].filter(Boolean);
 
   return (
-    <p className="flex flex-wrap items-center gap-x-2 text-xs text-muted">
+    <p className="flex flex-wrap items-center gap-x-2 text-xs text-muted-foreground">
       {parts.map((part, i) => (
         <React.Fragment key={part}>
           {i > 0 && <span aria-hidden="true">·</span>}
@@ -95,17 +95,17 @@ function FeaturedCard({
   return (
     <Link
       href={sectionEntryPath(section, entry.slug)}
-      className="group grid overflow-hidden rounded-2xl border border-divider bg-white transition-all hover:border-deep-ink-blue/30 hover:shadow-[0_12px_40px_-12px_rgba(31,42,68,0.18)] md:grid-cols-[2fr_3fr]"
+      className="group grid overflow-hidden rounded-xl border border-border bg-surface transition-all hover:border-ink/30 md:grid-cols-[2fr_3fr]"
     >
       <CardTile entry={entry} index={0} className="h-48 md:h-full md:min-h-[16rem]" />
       <div className="flex flex-col justify-center gap-3 p-6 md:p-10">
-        <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-muted">
+        <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
           Featured
         </p>
-        <h2 className="serif-headline text-2xl leading-snug text-primary transition-colors group-hover:text-deep-ink-blue md:text-3xl">
+        <h2 className="serif-headline text-2xl leading-snug text-ink transition-colors group-hover:text-ink md:text-3xl">
           {displayTitle(entry)}
         </h2>
-        <p className="text-sm leading-relaxed text-secondary md:text-base">
+        <p className="text-sm leading-relaxed text-muted-foreground md:text-base">
           {entry.frontmatter.description}
         </p>
         <MetaRow entry={entry} />
@@ -126,14 +126,14 @@ function BlogCard({
   return (
     <Link
       href={sectionEntryPath(section, entry.slug)}
-      className="group flex flex-col overflow-hidden rounded-xl border border-divider bg-white transition-all hover:border-deep-ink-blue/30 hover:shadow-[0_8px_28px_-10px_rgba(31,42,68,0.16)]"
+      className="group flex flex-col overflow-hidden rounded-xl border border-border bg-surface transition-all hover:border-ink/30"
     >
       <CardTile entry={entry} index={index} className="h-44" />
       <div className="flex flex-1 flex-col gap-2 p-6">
-        <h2 className="text-lg font-semibold text-primary transition-colors group-hover:text-deep-ink-blue">
+        <h2 className="text-lg font-semibold text-ink transition-colors group-hover:text-ink">
           {displayTitle(entry)}
         </h2>
-        <p className="flex-1 text-sm leading-relaxed text-secondary">
+        <p className="flex-1 text-sm leading-relaxed text-muted-foreground">
           {entry.frontmatter.description}
         </p>
         <MetaRow entry={entry} />

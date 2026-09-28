@@ -6,6 +6,7 @@ import {
   canonicalUrl,
   getOgImageUrl,
 } from '@/src/seo/siteUrl';
+import { OG_CARDS, ogCardFor } from '@/src/og/cards';
 
 export function createContentMetadata({
   title,
@@ -38,7 +39,8 @@ function buildMetadata({
   pathname: string;
 }): Metadata {
   const canonical = canonicalUrl(pathname);
-  const ogImage = getOgImageUrl();
+  const card = ogCardFor(pathname);
+  const ogImage = getOgImageUrl(card);
 
   return {
     title,
@@ -58,7 +60,7 @@ function buildMetadata({
           url: ogImage,
           width: OG_IMAGE_WIDTH,
           height: OG_IMAGE_HEIGHT,
-          alt: 'Prodlog: the note about your work that actually produces something',
+          alt: OG_CARDS[card].alt,
         },
       ],
     },

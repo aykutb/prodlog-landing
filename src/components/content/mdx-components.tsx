@@ -38,11 +38,11 @@ type FAQItemProps = {
 
 export function FAQItem({ question, answer }: FAQItemProps) {
   return (
-    <details className="group bg-white border border-divider rounded-lg overflow-hidden transition-colors open:border-deep-ink-blue/30">
-      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 p-5 text-primary font-medium text-sm md:text-base [&::-webkit-details-marker]:hidden">
+    <details className="group bg-surface border border-border rounded-lg overflow-hidden transition-colors open:border-ink/30">
+      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 p-5 text-ink font-medium text-sm md:text-base [&::-webkit-details-marker]:hidden">
         <span>{question}</span>
         <svg
-          className="h-4 w-4 shrink-0 text-muted transition-transform group-open:rotate-180"
+          className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-open:rotate-180"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -51,8 +51,8 @@ export function FAQItem({ question, answer }: FAQItemProps) {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
         </svg>
       </summary>
-      <div className="border-t border-divider px-5 pb-5 pt-4">
-        <p className="text-secondary text-sm md:text-base leading-relaxed">{answer}</p>
+      <div className="border-t border-border px-5 pb-5 pt-4">
+        <p className="text-muted-foreground text-sm md:text-base leading-relaxed">{answer}</p>
       </div>
     </details>
   );
@@ -91,12 +91,12 @@ export function TemplateDownloadCTA({
       <a
         href={fileUrl ?? href}
         download={fileLabel ?? download}
-        className="inline-block bg-deep-ink-blue !text-white px-6 py-3 rounded font-medium text-sm hover:opacity-90 transition-all no-underline mdx-btn-primary"
+        className="inline-block bg-ink !text-on-ink px-6 py-3 rounded font-medium text-sm hover:opacity-90 transition-all no-underline mdx-btn-primary"
       >
         {title ?? children}
       </a>
       {description && (
-        <p className="mt-2 text-xs text-muted">{description}</p>
+        <p className="mt-2 text-xs text-muted-foreground">{description}</p>
       )}
     </div>
   );
@@ -108,18 +108,18 @@ type ArticleCTAProps = {
 };
 
 export function ArticleCTA({
-  message = 'Start your log in Prodlog: free, takes 30 seconds, no card.',
+  message = 'Keep your own work log in Prodlog. It preps your 1:1s and drafts your reviews. Free to start, no card.',
   showPricing = true,
 }: ArticleCTAProps) {
   return (
-    <div className="not-prose border-t border-divider pt-12 mt-12 text-center">
-      <p className="text-secondary text-base leading-relaxed mb-6 max-w-xl mx-auto">{message}</p>
+    <div className="not-prose border-t border-border pt-12 mt-12 text-center">
+      <p className="text-muted-foreground text-base leading-relaxed mb-6 max-w-xl mx-auto">{message}</p>
       <CTASection centered showSecondary />
       {showPricing && (
         <p className="mt-4 text-sm">
           <Link
             href="/pricing"
-            className="text-deep-ink-blue underline hover:opacity-80"
+            className="text-ink underline hover:opacity-80"
           >
             Compare free and paid plans
           </Link>

@@ -28,3 +28,8 @@ next-env.d.ts
 
 # TypeScript incremental build info
 tsconfig.tsbuildinfo
+
+# Check builds (NEXT_DIST_DIR=.next-check npm run build)
+.next-check/
+.next-preview/
+.next-2027/

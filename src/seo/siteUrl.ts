@@ -15,17 +15,16 @@ export function canonicalUrl(pathname: string): string {
   return `${base}${path}`;
 }
 
-const DEFAULT_OG_IMAGE_PATH = '/og-default.png';
-
-/** Must match `public/og-default.png` pixel size (used in og:image:width / height). */
-export const OG_IMAGE_WIDTH = 1376;
-export const OG_IMAGE_HEIGHT = 768;
+/** The OG cards are rendered by app/og/[name]/route.tsx at this size. */
+export const OG_IMAGE_WIDTH = 1200;
+export const OG_IMAGE_HEIGHT = 630;
 
 /**
- * Absolute URL for social previews. Override with NEXT_PUBLIC_OG_IMAGE (full URL); otherwise uses /og-default.png on this site.
+ * Absolute URL of a page's social preview: its card from src/og/cards.ts.
+ * NEXT_PUBLIC_OG_IMAGE (a full URL), when set, replaces the default card only.
  */
-export function getOgImageUrl(): string {
+export function getOgImageUrl(card: string = 'default.png'): string {
   const override = process.env.NEXT_PUBLIC_OG_IMAGE?.trim();
-  if (override) return override;
-  return `${getSiteUrl()}${DEFAULT_OG_IMAGE_PATH}`;
+  if (override && card === 'default.png') return override;
+  return `${getSiteUrl()}/og/${card}`;
 }

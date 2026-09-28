@@ -1,7 +1,9 @@
 import { ImageResponse } from 'next/og';
 import { displayName, fetchPortfolio } from '@/src/lib/portfolio/data';
+import { HEX } from '@/src/og/tokens';
+import { Lockup, ogFonts } from '@/src/og/OgCard';
 
-export const alt = 'Prodlog portfolio';
+export const alt = 'A product manager portfolio on Prodlog';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
@@ -28,14 +30,14 @@ export default async function Image({
           flexDirection: 'column',
           justifyContent: 'space-between',
           padding: '72px 80px',
-          backgroundColor: '#1F2A44',
-          color: '#F6F7F9',
-          fontFamily: 'Georgia, serif',
+          backgroundColor: HEX.ink,
+          color: HEX.onInk,
+          fontFamily: 'Source Serif 4',
         }}
       >
         <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <div style={{ fontSize: 72, fontWeight: 600, lineHeight: 1.1 }}>{name}</div>
-          <div style={{ fontSize: 36, marginTop: 20, color: '#D8DAE0' }}>{title}</div>
+          <div style={{ fontSize: 72, fontWeight: 400, lineHeight: 1.1 }}>{name}</div>
+          <div style={{ fontSize: 36, marginTop: 20, color: HEX.onInkMuted }}>{title}</div>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <div style={{ display: 'flex', gap: 16 }}>
@@ -46,8 +48,8 @@ export default async function Image({
                   fontSize: 26,
                   padding: '12px 24px',
                   borderRadius: 999,
-                  border: '2px solid #6FAF8E',
-                  color: '#6FAF8E',
+                  border: `2px solid ${HEX.sageOnInk}`,
+                  color: HEX.sageOnInk,
                 }}
               >
                 {`${logCount} ${logCount === 1 ? 'entry' : 'entries'}`}
@@ -60,18 +62,18 @@ export default async function Image({
                   fontSize: 26,
                   padding: '12px 24px',
                   borderRadius: 999,
-                  backgroundColor: '#6FAF8E',
-                  color: '#1F2A44',
+                  backgroundColor: HEX.sageOnInk,
+                  color: HEX.ink,
                 }}
               >
                 {`${verifiedCount} confirmed`}
               </div>
             )}
           </div>
-          <div style={{ display: 'flex', fontSize: 32, color: '#E1A948' }}>prodlog.app</div>
+          <Lockup height={36} />
         </div>
       </div>
     ),
-    size,
+    { ...size, fonts: ogFonts() },
   );
 }

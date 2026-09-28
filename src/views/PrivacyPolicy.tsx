@@ -4,8 +4,8 @@ import { PageHeader } from '@/src/components/ui';
 
 const Section = ({ title, children }: { title: string; children: React.ReactNode }) => (
   <section className="space-y-3">
-    <h2 className="text-lg font-semibold text-primary">{title}</h2>
-    <div className="text-secondary text-sm leading-relaxed space-y-3">{children}</div>
+    <h2 className="text-lg font-semibold text-ink">{title}</h2>
+    <div className="text-muted-foreground text-sm leading-relaxed space-y-3">{children}</div>
   </section>
 );
 
@@ -17,14 +17,14 @@ export const PrivacyPolicyPage = () => (
     />
 
     <div className="space-y-10 text-left">
-      <p className="text-xs text-muted">Last updated: March 26, 2025</p>
+      <p className="text-xs text-muted-foreground">Last updated: March 26, 2025</p>
 
       <Section title="1. Who we are">
         <p>
           Prodlog Inc. (“Prodlog,” “we,” “us,” or “our”) operates the Prodlog websites, applications,
           and related services (collectively, the “Service”). This Privacy Policy explains how we handle
           personal information when you use the Service. For contractual terms, see our{' '}
-          <Link href="/terms" className="text-deep-ink-blue underline hover:opacity-80">
+          <Link href="/terms" className="text-ink underline hover:opacity-80">
             Terms of Service
           </Link>
           .
@@ -33,20 +33,20 @@ export const PrivacyPolicyPage = () => (
 
       <Section title="2. Information we collect">
         <p>
-          <strong className="text-primary font-medium">Information you provide.</strong> We collect
+          <strong className="text-ink font-medium">Information you provide.</strong> We collect
           information you submit when you create an account, use the Service, contact us, or otherwise
           communicate with us. This may include your name, email address, password or authentication
           credentials, profile details, and any content you choose to enter into the Service (such as
           notes, logs, summaries, or attachments).
         </p>
         <p>
-          <strong className="text-primary font-medium">Information collected automatically.</strong> We
+          <strong className="text-ink font-medium">Information collected automatically.</strong> We
           may collect device and usage information such as IP address, browser type, operating system,
           approximate location derived from IP, pages viewed, referring URLs, and timestamps. We may
           use cookies and similar technologies as described below.
         </p>
         <p>
-          <strong className="text-primary font-medium">Information from third parties.</strong> If you
+          <strong className="text-ink font-medium">Information from third parties.</strong> If you
           sign in through a third-party identity provider or connect integrations, we may receive
           information from those services as permitted by your settings and their policies.
         </p>
@@ -80,20 +80,20 @@ export const PrivacyPolicyPage = () => (
         </p>
         <ul className="list-disc pl-5 space-y-2">
           <li>
-            <strong className="text-primary font-medium">Service providers.</strong> With vendors who
+            <strong className="text-ink font-medium">Service providers.</strong> With vendors who
             help us host, analyze, secure, or operate the Service, subject to appropriate safeguards.
           </li>
           <li>
-            <strong className="text-primary font-medium">Legal and safety.</strong> When required by
+            <strong className="text-ink font-medium">Legal and safety.</strong> When required by
             law, legal process, or government request, or to protect the rights, safety, and security of
             Prodlog, our users, or others.
           </li>
           <li>
-            <strong className="text-primary font-medium">Business transfers.</strong> In connection
+            <strong className="text-ink font-medium">Business transfers.</strong> In connection
             with a merger, acquisition, financing, or sale of assets, subject to appropriate safeguards.
           </li>
           <li>
-            <strong className="text-primary font-medium">With your direction.</strong> When you choose
+            <strong className="text-ink font-medium">With your direction.</strong> When you choose
             to share content or visibility settings (for example, with collaborators or via a link you
             configure).
           </li>
@@ -178,7 +178,7 @@ export const PrivacyPolicyPage = () => (
       <Section title="14. Contact us">
         <p>
           For questions about this Privacy Policy or our privacy practices, contact us at{' '}
-          <a href="mailto:support@prodlog.app" className="text-deep-ink-blue underline hover:opacity-80">
+          <a href="mailto:support@prodlog.app" className="text-ink underline hover:opacity-80">
             support@prodlog.app
           </a>
           .

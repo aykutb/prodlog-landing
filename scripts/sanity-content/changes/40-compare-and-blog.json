@@ -1,0 +1,484 @@
+[
+  {
+    "docId": "contentPage-compare-notion",
+    "changes": [
+      {
+        "field": "description",
+        "before": "for PM impact logs, brag documents",
+        "after": "for PM work logs, brag documents",
+        "why": "glossary"
+      },
+      {
+        "field": "body",
+        "before": "isn't \"which tool is better\" — it's whether",
+        "after": "isn't \"which tool is better,\" it's whether",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "nothing in Notion prompts you to log a win the week it happens.",
+        "after": "nothing in Notion prompts you to log anything the week it happens.",
+        "why": "glossary"
+      },
+      {
+        "field": "body",
+        "before": "Prodlog is narrower on purpose. It does one job — a running log of PM impact that turns into summaries and a shareable portfolio — and optimizes everything around the thirty seconds after something ships.",
+        "after": "Prodlog centers on the log and what it gives back every week: prep before each 1:1, drafts at review time, and a portfolio when you move. It is narrower than Notion on purpose, and everything in it is built around the thirty seconds after something ships.",
+        "why": "brief"
+      },
+      {
+        "field": "body",
+        "before": "left=\"One job: a PM impact log with summaries and a portfolio on top.\"",
+        "after": "left=\"One job: a PM work log that preps your 1:1s, drafts your reviews, and becomes a portfolio.\"",
+        "why": "glossary"
+      },
+      {
+        "field": "body",
+        "before": "project tracking — you design the system.",
+        "after": "project tracking. You design the system.",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "label=\"Capturing a win\"",
+        "after": "label=\"Logging an entry\"",
+        "why": "glossary"
+      },
+      {
+        "field": "body",
+        "before": "As fast as you make it — but the structure",
+        "after": "As fast as you make it, but the structure",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "left=\"Purpose-built flow keeps logging a habit rather than a project.\"",
+        "after": "left=\"The log pays back before every 1:1, so logging stays a habit rather than a project.\"",
+        "why": "brief"
+      },
+      {
+        "field": "body",
+        "before": "left=\"Generates summaries from your log — quarter or cycle, ready to edit.\"",
+        "after": "left=\"Drafts your review summary from your log for the quarter or cycle, ready to edit.\"",
+        "why": "glossary"
+      },
+      {
+        "field": "body",
+        "before": "Share a page or export — polish and structure are up to you.",
+        "after": "Share a page or export. Polish and structure are up to you.",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "maintain them — a well-kept Notion brag doc",
+        "after": "maintain them. A well-kept Notion brag doc",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "The value isn't the format — it's that capture stays effortless enough to still be happening in month six, which is what makes the summaries and portfolio possible at all.",
+        "after": "The value isn't the format. It's that the log gives something back every week (prep before each 1:1), so it's still alive in month six, which is what makes review drafts and a portfolio possible at all.",
+        "why": "brief"
+      },
+      {
+        "field": "body",
+        "before": "their impact log in Prodlog.",
+        "after": "their work log in Prodlog.",
+        "why": "glossary"
+      },
+      {
+        "field": "body",
+        "before": "Try the workflow Notion can't enforce: log one win in Prodlog — it takes about 30 seconds.",
+        "after": "Try the workflow Notion can't enforce: log one entry in Prodlog and see what your next 1:1 prep looks like.",
+        "why": "brief"
+      }
+    ]
+  },
+  {
+    "docId": "contentPage-compare-bragbook",
+    "changes": [
+      {
+        "field": "description",
+        "before": "for brag documents, impact tracking, and PM interview prep.",
+        "after": "for brag documents, work logs, 1:1 prep, and PM interview prep.",
+        "why": "glossary"
+      },
+      {
+        "field": "body",
+        "before": "BragBook centers on the brag document itself — assembling your accomplishments into a polished document you maintain and share. Prodlog centers on the capture habit: a running log of quick, structured entries that the document, the review summary, and the portfolio are generated *from*. One starts with the artifact; the other starts with the workflow that feeds it.",
+        "after": "BragBook centers on the brag document itself: your accomplishments in one document you maintain, with export and a public profile when you want to share it. Prodlog centers on the log and what it gives back every week: prep before each 1:1, drafts at review time, and a portfolio when you move. Both let you share your work; the difference is that Prodlog is built for PM work and pays back on the 1:1 cadence, not only at review time.",
+        "why": "brief"
+      },
+      {
+        "field": "body",
+        "before": "left=\"The capture habit — quick structured entries logged as work ships.\"",
+        "after": "left=\"The log and what it gives back every week: 1:1 prep, review drafts, a portfolio.\"",
+        "why": "brief"
+      },
+      {
+        "field": "body",
+        "before": "The brag document — a curated artifact you build and maintain.",
+        "after": "The brag document: a curated artifact you build and maintain.",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "label=\"Logging a win\"",
+        "after": "label=\"Logging an entry\"",
+        "why": "glossary"
+      },
+      {
+        "field": "body",
+        "before": "tags — then back to work.",
+        "after": "tags. Then back to work.",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "right=\"Entries are written with the document in mind, so capture carries more weight.\"",
+        "after": "right=\"Entries are written into your brag document.\"",
+        "why": "brief"
+      },
+      {
+        "field": "body",
+        "before": "left=\"Summaries generated from the log for any period, ready to edit.\"",
+        "after": "left=\"Review drafts generated from the log for any period, ready to edit.\"",
+        "why": "glossary"
+      },
+      {
+        "field": "body",
+        "before": "Your brag document is the summary — you curate it as you go.",
+        "after": "Your brag document is the summary: you curate it as you go.",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "right=\"Share the brag document itself.\"",
+        "after": "right=\"Export your brag document or share it through a public profile.\"",
+        "why": "brief"
+      },
+      {
+        "field": "body",
+        "before": "left=\"PMs who want documentation as a byproduct of a tiny habit.\"",
+        "after": "left=\"PMs who want a log built for PM work that pays back before every 1:1.\"",
+        "why": "brief"
+      },
+      {
+        "field": "body",
+        "before": "if you think in documents — you want",
+        "after": "if you think in documents: you want",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "if you think in entries — you want capture to take seconds in the moment, and you'd rather have summaries and a portfolio generated from the log than maintain a document by hand.",
+        "after": "if you think in entries: you want logging to take seconds in the moment, prep ready before every 1:1, and review drafts and a portfolio generated from the log rather than a document you maintain by hand.",
+        "why": "brief"
+      },
+      {
+        "field": "body",
+        "before": "See how the capture-first approach feels: log one win in Prodlog — it takes about 30 seconds.",
+        "after": "Try it: log one entry in Prodlog and see what your next 1:1 prep looks like.",
+        "why": "brief"
+      }
+    ]
+  },
+  {
+    "docId": "contentPage-blog-star-method-examples",
+    "changes": [
+      {
+        "field": "description",
+        "before": "product managers—structure",
+        "after": "product managers: structure",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "for PM interviews — every candidate",
+        "after": "for PM interviews. Every candidate",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "judgment can't — and the fastest",
+        "after": "judgment can't, and the fastest",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "title=\"Situation — one sentence",
+        "after": "title=\"Situation: one sentence",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "title=\"Task — your specific",
+        "after": "title=\"Task: your specific",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "title=\"Action — the decisions",
+        "after": "title=\"Action: the decisions",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "title=\"Result — the number",
+        "after": "title=\"Result: the number",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "invert it — two minutes",
+        "after": "invert it: two minutes",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "with escalation — and whether",
+        "after": "with escalation, and whether",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "first — a six-week detour — before",
+        "after": "first (a six-week detour) before",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "His case was real — the old system",
+        "after": "His case was real: the old system",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "in PM loops — some interviewers",
+        "after": "in PM loops. Some interviewers",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "by 12% — a metric",
+        "after": "by 12%, a metric",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "and documented — mine was",
+        "after": "and documented. Mine was",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "right reasons — and how",
+        "after": "right reasons, and how",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "deciding anything — not to validate",
+        "after": "deciding anything, not to validate",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "consumer app — my proposal",
+        "after": "consumer app: my proposal",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "with a plan — silence",
+        "after": "with a plan: silence",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "most feared — support volume from a half-working assistant — on the slide",
+        "after": "most feared (support volume from a half-working assistant) on the slide",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "my idea — because",
+        "after": "my idea, because",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "read as edited — and get",
+        "after": "read as edited, and get",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "to remember — and by the time",
+        "after": "to remember, and by the time",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "A [brag document](/brag-document) — a running log of what you shipped, the metrics that moved, and the messy tradeoffs behind each call — is the difference",
+        "after": "A [brag document](/brag-document) (a running log of what you shipped, the metrics that moved, and the messy tradeoffs behind each call) is the difference",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "behavioral questions — 'tell me",
+        "after": "behavioral questions: 'tell me",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "the real interview — that's where",
+        "after": "the real interview. That's where",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "answer=\"Use it — deliberately.",
+        "after": "answer=\"Use it, deliberately.",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "distinct stories — which is",
+        "after": "distinct stories, which is",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "Prodlog is where PMs log the wins, the numbers, and the messy tradeoffs they'll need to talk about next time.",
+        "after": "Prodlog is where PMs log what they shipped, the numbers, and the messy tradeoffs, and it turns them into STAR stories when the next loop comes.",
+        "why": "glossary"
+      }
+    ]
+  },
+  {
+    "docId": "contentPage-blog-performance-review-examples-pm",
+    "changes": [
+      {
+        "field": "description",
+        "before": "and phrasing—how to present",
+        "after": "and phrasing: how to present",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "all year — and most PMs",
+        "after": "all year, and most PMs",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "in that room — and your self-review",
+        "after": "in that room, and your self-review",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "to the final rating — with callouts",
+        "after": "to the final rating, with callouts",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "\"exercised judgment\" — only one",
+        "after": "\"exercised judgment\": only one",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "to hold the date — saved-cards v2 moved",
+        "after": "to hold the date: saved-cards v2 moved",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "project shipped — claiming it",
+        "after": "project shipped. Claiming it",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "during the quarter — not in review week.",
+        "after": "during the quarter, not in review week.",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "**Weak:** — this category",
+        "after": "**Weak:** this category",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "too late in Q1 — I flagged",
+        "after": "too late in Q1: I flagged",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "humility theater — a non-answer",
+        "after": "humility theater: a non-answer",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "numbers and tradeoffs — conversion +14%",
+        "after": "numbers and tradeoffs: conversion +14%",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "written two ways — the right column",
+        "after": "written two ways. The right column",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "rating too — if you can",
+        "after": "rating too, if you can",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "\"The team shipped X\" — calibration",
+        "after": "\"The team shipped X\": calibration",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "isn't the phrasing — it's the raw material.",
+        "after": "isn't the phrasing. It's the raw material.",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "role=\"Lead PM — scope calls",
+        "after": "role=\"Lead PM: scope calls",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "Revisit in Q3 — flagged",
+        "after": "Revisit in Q3, flagged",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "the whole trick — a [brag",
+        "after": "the whole trick: a [brag",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "Prodlog is the running log of wins, numbers, and tradeoffs that writes your next self-review for you.",
+        "after": "Prodlog is the work log of what you shipped, the numbers, and the tradeoffs, and it drafts your next self-review for you.",
+        "why": "glossary"
+      }
+    ]
+  }
+]

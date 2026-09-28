@@ -9,7 +9,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "migrate:sanity": "tsx scripts/migrate-mdx-to-sanity.ts"
+    "migrate:sanity": "tsx scripts/migrate-mdx-to-sanity.ts",
+    "test": "tsx --test tests/*.test.ts",
+    "typecheck": "tsc --noEmit -p .",
+    "content:patch": "tsx --env-file=.env.local scripts/sanity-content-patch.ts"
   },
   "dependencies": {
     "@sanity/client": "^7.23.0",

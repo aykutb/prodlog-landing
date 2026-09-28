@@ -9,11 +9,11 @@ export const SupportPage = () => (
     />
     <div className="max-w-xl mx-auto px-8 md:px-12">
       <SupportForm />
-      <p className="text-muted text-xs text-center mt-8">
+      <p className="text-muted-foreground text-xs text-center mt-8">
         Prefer email? Reach us directly at{' '}
         <a
           href="mailto:support@prodlog.app"
-          className="text-deep-ink-blue underline underline-offset-2 hover:opacity-80"
+          className="text-ink underline underline-offset-2 hover:opacity-80"
         >
           support@prodlog.app
         </a>

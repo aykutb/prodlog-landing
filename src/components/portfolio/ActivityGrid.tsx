@@ -8,9 +8,10 @@ const CELL = 7;
 const GAP = 1;
 const ROWS = 4;
 
-const EMPTY = 'bg-[#ebedf0]';
-const FILLED = 'bg-[#40c463]';
-const OVERFLOW = 'bg-[#216e39]';
+// Same classes as prodlog2 src/components/dashboard/ActivityGrid.tsx.
+const EMPTY = 'bg-border';
+const FILLED = 'bg-mauve/50';
+const OVERFLOW = 'bg-mauve';
 
 const MONTHS_SHORT = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
@@ -68,7 +69,7 @@ export const ActivityGrid = ({ logDates }: { logDates: string[] }) => {
         {weeks.map((week, i) => (
           <div key={i} className="shrink-0 relative" style={{ width: CELL, height: 10 }}>
             {week.monthLabel && (
-              <span className="absolute left-0 top-0 text-[9px] leading-none text-muted font-medium whitespace-nowrap">
+              <span className="absolute left-0 top-0 text-[9px] leading-none text-muted-foreground font-medium whitespace-nowrap">
                 {week.monthLabel}
               </span>
             )}
@@ -92,7 +93,7 @@ export const ActivityGrid = ({ logDates }: { logDates: string[] }) => {
       </div>
 
       {/* Legend */}
-      <div className="flex items-center gap-1.5 text-[9px] text-muted pt-1">
+      <div className="flex items-center gap-1.5 text-[9px] text-muted-foreground pt-1">
         <span>Less</span>
         <div className={`rounded-[2px] ${EMPTY}`} style={{ width: 7, height: 7 }} />
         <div className={`rounded-[2px] ${FILLED}`} style={{ width: 7, height: 7 }} />

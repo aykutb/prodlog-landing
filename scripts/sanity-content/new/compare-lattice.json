@@ -1,0 +1,14 @@
+{
+  "_id": "contentPage-compare-lattice",
+  "_type": "contentPage",
+  "section": "compare",
+  "slug": {
+    "_type": "slug",
+    "current": "lattice"
+  },
+  "title": "Prodlog vs Lattice and 15Five",
+  "headline": "Prodlog vs your company's review tool",
+  "description": "How Prodlog works alongside Lattice or 15Five: keep the official review in your company's tool, and keep your 1:1 prep, review drafts and your own record in Prodlog.",
+  "order": 3,
+  "body": "Your company's review tool keeps your history for your company. Prodlog keeps it for you.\n\nIf your company runs reviews in Lattice or 15Five, keep using it. That's where the official review lives, where your manager writes their assessment, and where the process your company chose actually happens. Both now offer AI-assisted review drafting inside the company's instance. Prodlog doesn't replace any of that.\n\nProdlog covers the part around it: you log as things happen, walk into every 1:1 prepared, write that review from evidence instead of memory, and keep the record when you leave.\n\n## Side by side\n\n<ComparisonColumns leftTitle=\"Prodlog\" rightTitle=\"Your company's review tool\">\n  <ComparisonRow\n    label=\"Whose record it is\"\n    left=\"Yours. Private by default: nothing leaves your log unless you copy it, send it or publish it.\"\n    right=\"Your company's. It lives in the company's instance.\"\n  />\n  <ComparisonRow\n    label=\"When you leave\"\n    left=\"It comes with you: every entry, plus resume bullets, STAR stories and a portfolio.\"\n    right=\"It stays with the company.\"\n  />\n  <ComparisonRow\n    label=\"The 1:1 cadence\"\n    left=\"Before every 1:1, everything you logged since the last one, ready to paste into your 1:1 doc. Free, never metered.\"\n    right=\"Whatever your company has set up.\"\n  />\n  <ComparisonRow\n    label=\"Review drafts\"\n    left=\"A draft for each of your company's review questions, built from your own entries, showing the entries each one drew on.\"\n    right=\"AI-assisted drafting inside the company's instance.\"\n  />\n  <ComparisonRow\n    label=\"Portfolio\"\n    left=\"A public portfolio from the entries you choose. Publishing is free.\"\n    right=\"Not what it's for.\"\n  />\n</ComparisonColumns>\n\n## How to use both\n\n- Keep the official review, your goals and your feedback in your company's tool.\n- Log in Prodlog as things happen, from Slack, email, your phone or the web.\n- Before each 1:1, copy the prep into your 1:1 doc.\n- At review time, draft your answers in Prodlog from your entries, then paste the final version into your company's form.\n- When you change jobs, your log comes with you.\n\n<ArticleCTA message=\"Keep your own record. Log one entry in Prodlog and see what your next 1:1 prep looks like.\" />\n"
+}

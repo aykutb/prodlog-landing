@@ -23,16 +23,17 @@ Next.js marketing site for [Prodlog](https://prodlog.app). Content (pillars, blo
 3. Set Sanity credentials in `.env.local`:
    - `NEXT_PUBLIC_SANITY_PROJECT_ID` — from [sanity.io/manage](https://sanity.io/manage)
    - `NEXT_PUBLIC_SANITY_DATASET` — usually `production`
-   - `SANITY_API_WRITE_TOKEN` — only needed for the one-time migration script
+   - `SANITY_API_WRITE_TOKEN` (Editor), only needed to apply content changes (`npm run content:patch -- --apply`)
 
    Optional site SEO vars:
    - `NEXT_PUBLIC_SITE_URL` (defaults to `https://prodlog.app`)
-   - `NEXT_PUBLIC_OG_IMAGE`
+   - `NEXT_PUBLIC_OG_IMAGE`: replaces the default OG card only (leave unset to use `/og/default.png`)
 
-4. **First-time setup:** migrate existing MDX files into Sanity:
-   ```bash
-   npm run migrate:sanity
-   ```
+4. **Content lives in Sanity.** Change it in the Studio (`/studio`) or with exact, reviewable swaps:
+   `scripts/sanity-content/` holds the change lists, `npm run content:patch` checks them against the
+   live dataset, `CONTENT_PREVIEW=1 npm run dev` previews them, and `npm run content:patch -- --apply`
+   writes them. Don't run `npm run migrate:sanity`: `content/` is a stale copy and it would
+   overwrite Sanity.
    This imports everything from `content/` into your Sanity dataset. After verifying in Studio, you can remove the `content/**/*.mdx` files from the repo (keep until migration succeeds).
 
 5. Run the dev server:
@@ -68,7 +69,7 @@ prodlog2 and copy again.
 | `public/brand/logo.svg` (the lockup in the Navbar and Footer) | `public/brand/logo.svg` |
 | `public/email/prodlog-logo.png` (the header of prodlog2's emails) | `public/brand/email-logo.png` |
 
-`public/og-default.png` is not generated yet.
+OG images are drawn in code: `app/og/[name]/route.tsx` renders the cards in `src/og/cards.ts` at build (served at `/og/<name>.png`), and `app/p/[username]/opengraph-image.tsx` renders each portfolio's. Checks: `npm test`, `npm run typecheck`, `npm run build`.
 
 ## Project structure
 

@@ -48,9 +48,8 @@ import {
 } from './icons';
 
 // Read-only server-rendered versions of the dashboard's bento cards
-// (prodlog2 src/components/bento). Visual parity via the shared palette:
-// foreground→primary, muted-foreground→muted, border→divider, card→white,
-// accent (deep ink blue)→impact, muted fills→charcoal.
+// (prodlog2 src/components/bento). Visual parity via the shared tokens:
+// app/globals.css mirrors prodlog2 src/index.css under the same names.
 
 const DASHBOARD_ORIGIN = 'https://dashboard.prodlog.app';
 
@@ -88,8 +87,8 @@ const ProductFavicon = ({
     return <img src={favicon} alt="" className={`${className} shrink-0 object-contain`} />;
   }
   return (
-    <div className={`${className} bg-charcoal/50 flex items-center justify-center shrink-0`}>
-      <PackageIcon className={`${fallbackIconClass} text-muted`} />
+    <div className={`${className} bg-muted/50 flex items-center justify-center shrink-0`}>
+      <PackageIcon className={`${fallbackIconClass} text-muted-foreground`} />
     </div>
   );
 };
@@ -98,8 +97,8 @@ const ProductFavicon = ({
 
 const ProfileCard = ({ bio, size }: { bio: string; size: Size }) => (
   <div className="p-4 h-full flex flex-col relative">
-    <h3 className="text-sm font-serif font-medium text-muted mb-2">About</h3>
-    <p className={`text-primary ${size === 'S' ? 'text-sm sm:line-clamp-3' : size === 'M' ? 'sm:line-clamp-4' : ''}`}>
+    <h3 className="text-sm font-serif font-medium text-muted-foreground mb-2">About</h3>
+    <p className={`text-ink ${size === 'S' ? 'text-sm sm:line-clamp-3' : size === 'M' ? 'sm:line-clamp-4' : ''}`}>
       {bio}
     </p>
   </div>
@@ -114,7 +113,7 @@ const StatsCard = ({ portfolio, size }: { portfolio: Portfolio; size: Size }) =>
     : null;
 
   const allStats = [
-    { label: 'Years Exp', value: yearsOfExperience ?? '—' },
+    { label: 'Years Exp', value: yearsOfExperience ?? 'n/a' },
     { label: 'Products', value: products.length },
     { label: 'Entries', value: logs.length },
   ];
@@ -122,8 +121,8 @@ const StatsCard = ({ portfolio, size }: { portfolio: Portfolio; size: Size }) =>
   if (size === 'S') {
     return (
       <div className="p-4 h-full flex flex-col items-center justify-center">
-        <p className="text-3xl font-semibold text-primary">{yearsOfExperience ?? '—'}</p>
-        <p className="text-xs text-muted uppercase tracking-wide mt-1">Years Experience</p>
+        <p className="text-3xl font-semibold text-ink">{yearsOfExperience ?? 'n/a'}</p>
+        <p className="text-xs text-muted-foreground uppercase tracking-wide mt-1">Years Experience</p>
       </div>
     );
   }
@@ -131,12 +130,12 @@ const StatsCard = ({ portfolio, size }: { portfolio: Portfolio; size: Size }) =>
   if (size === 'L') {
     return (
       <div className="p-6 h-full flex flex-col">
-        <h3 className="text-sm font-serif font-medium text-muted mb-4">Stats</h3>
+        <h3 className="text-sm font-serif font-medium text-muted-foreground mb-4">Stats</h3>
         <div className="flex-1 grid grid-cols-3 gap-4">
           {allStats.map((stat) => (
-            <div key={stat.label} className="flex flex-col items-center justify-center bg-charcoal/40 rounded-lg">
-              <p className="text-4xl font-semibold text-primary">{stat.value}</p>
-              <p className="text-sm text-muted uppercase tracking-wide mt-2">{stat.label}</p>
+            <div key={stat.label} className="flex flex-col items-center justify-center bg-muted/40 rounded-lg">
+              <p className="text-4xl font-semibold text-ink">{stat.value}</p>
+              <p className="text-sm text-muted-foreground uppercase tracking-wide mt-2">{stat.label}</p>
             </div>
           ))}
         </div>
@@ -146,12 +145,12 @@ const StatsCard = ({ portfolio, size }: { portfolio: Portfolio; size: Size }) =>
 
   return (
     <div className="p-4 h-full flex flex-col">
-      <h3 className="text-sm font-serif font-medium text-muted mb-3">Stats</h3>
+      <h3 className="text-sm font-serif font-medium text-muted-foreground mb-3">Stats</h3>
       <div className="flex-1 grid grid-cols-3 gap-2 items-center">
         {allStats.map((stat) => (
           <div key={stat.label} className="text-center">
-            <p className="text-xl font-semibold text-primary">{stat.value}</p>
-            <p className="text-xs text-muted uppercase tracking-wide">{stat.label}</p>
+            <p className="text-xl font-semibold text-ink">{stat.value}</p>
+            <p className="text-xs text-muted-foreground uppercase tracking-wide">{stat.label}</p>
           </div>
         ))}
       </div>
@@ -191,7 +190,7 @@ const SocialLinksCard = ({ portfolio, size }: { portfolio: Portfolio; size: Size
             href={link.url!}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 text-muted hover:text-primary transition-colors"
+            className="flex items-center gap-2 text-muted-foreground hover:text-ink transition-colors"
             title={link.label}
           >
             <link.icon className={iconSize} />
@@ -211,7 +210,7 @@ const ContributionCard = ({ logs }: { logs: PortfolioLog[] }) => {
 
   return (
     <div className="p-4 h-full flex flex-col overflow-hidden">
-      <h3 className="text-sm font-serif font-medium text-muted mb-2 shrink-0">
+      <h3 className="text-sm font-serif font-medium text-muted-foreground mb-2 shrink-0">
         {yearCount} contribution{yearCount !== 1 ? 's' : ''} in the last year
       </h3>
       <ActivityGrid logDates={logs.map((log) => log.date)} />
@@ -222,27 +221,27 @@ const ContributionCard = ({ logs }: { logs: PortfolioLog[] }) => {
 // ─── single_product / all_products / product_list ────────────────────
 
 const CompactProduct = ({ product }: { product: PortfolioProduct }) => (
-  <div className="flex items-center gap-2 p-2 rounded-lg bg-charcoal/40">
+  <div className="flex items-center gap-2 p-2 rounded-lg bg-muted/40">
     <ProductFavicon url={product.url} iconUrl={product.icon_url} pixelSize={32} className="w-6 h-6 rounded" fallbackIconClass="w-3 h-3" />
-    <span className="text-sm font-serif font-semibold text-primary line-clamp-2 break-words flex-1">{product.name}</span>
+    <span className="text-sm font-serif font-semibold text-ink line-clamp-2 break-words flex-1">{product.name}</span>
   </div>
 );
 
 const DetailedProduct = ({ product }: { product: PortfolioProduct }) => {
   const dateRange = formatDateRange(product.start_date, product.end_date);
   return (
-    <div className="flex gap-3 p-3 rounded-lg bg-charcoal/40">
+    <div className="flex gap-3 p-3 rounded-lg bg-muted/40">
       <ProductFavicon url={product.url} iconUrl={product.icon_url} pixelSize={48} className="w-12 h-12 rounded-lg" fallbackIconClass="w-6 h-6" />
       <div className="flex-1 min-w-0">
-        <p className="font-serif font-semibold text-primary line-clamp-2 break-words">{product.name}</p>
+        <p className="font-serif font-semibold text-ink line-clamp-2 break-words">{product.name}</p>
         {product.type && (
-          <p className="text-xs text-muted flex items-center gap-1">
+          <p className="text-xs text-muted-foreground flex items-center gap-1">
             <Building2Icon className="w-3 h-3" />
             {product.type}
           </p>
         )}
         {dateRange && (
-          <p className="text-xs text-muted flex items-center gap-1 mt-0.5">
+          <p className="text-xs text-muted-foreground flex items-center gap-1 mt-0.5">
             <CalendarIcon className="w-3 h-3" />
             {dateRange}
           </p>
@@ -279,7 +278,7 @@ const SingleProductCard = ({ product, size }: { product: PortfolioProduct; size:
       href={product.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="text-muted hover:text-primary shrink-0"
+      className="text-muted-foreground hover:text-ink shrink-0"
       aria-label={`Visit ${product.name}`}
     >
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={size === 'L' ? 'w-5 h-5 mt-1' : 'w-4 h-4'} aria-hidden="true">
@@ -297,11 +296,11 @@ const SingleProductCard = ({ product, size }: { product: PortfolioProduct; size:
           <ProductFavicon url={product.url} iconUrl={product.icon_url} pixelSize={faviconPixelSize} className={`${iconSize} ${rounding}`} fallbackIconClass={packageIconSize} />
           <div className="flex-1 min-w-0">
             <div className="flex items-start justify-between gap-2">
-              <h3 className="text-xl font-serif font-semibold text-primary">{product.name}</h3>
+              <h3 className="text-xl font-serif font-semibold text-ink">{product.name}</h3>
               {externalLink}
             </div>
             {product.type && (
-              <span className="inline-block text-sm text-muted bg-charcoal/50 px-2 py-0.5 rounded mt-1">
+              <span className="inline-block text-sm text-muted-foreground bg-muted/50 px-2 py-0.5 rounded mt-1">
                 {product.type}
               </span>
             )}
@@ -309,19 +308,19 @@ const SingleProductCard = ({ product, size }: { product: PortfolioProduct; size:
         </div>
         {/* Details never scroll; cardSpanClass grows the card to fit */}
         <div className="flex-1 space-y-3">
-          {product.problem_definition && <p className="text-sm text-muted">{product.problem_definition}</p>}
+          {product.problem_definition && <p className="text-sm text-muted-foreground">{product.problem_definition}</p>}
         </div>
         {product.screenshots && product.screenshots.length > 0 && (
           <ScreenshotStrip screenshots={product.screenshots} productName={product.name} />
         )}
         {/* Role + dates under a hairline divider, testimonial-style */}
         {(product.role || formatDateRange(product.start_date, product.end_date)) && (
-          <div className="shrink-0 border-t border-divider mt-3 pt-3 flex items-center justify-between gap-3">
+          <div className="shrink-0 border-t border-border mt-3 pt-3 flex items-center justify-between gap-3">
             {product.role && (
-              <p className="text-sm font-medium text-primary line-clamp-2 min-w-0">{product.role}</p>
+              <p className="text-sm font-medium text-ink line-clamp-2 min-w-0">{product.role}</p>
             )}
             {formatDateRange(product.start_date, product.end_date) && (
-              <p className="flex items-center gap-1.5 text-xs text-muted shrink-0 ml-auto">
+              <p className="flex items-center gap-1.5 text-xs text-muted-foreground shrink-0 ml-auto">
                 <CalendarIcon className="w-3.5 h-3.5" />
                 {formatDateRange(product.start_date, product.end_date)}
               </p>
@@ -338,14 +337,14 @@ const SingleProductCard = ({ product, size }: { product: PortfolioProduct; size:
       <div className="flex items-start gap-3">
         <ProductFavicon url={product.url} iconUrl={product.icon_url} pixelSize={faviconPixelSize} className={`${iconSize} ${rounding}`} fallbackIconClass={packageIconSize} />
         <div className="flex-1 min-w-0">
-          <h3 className="font-serif font-semibold text-primary line-clamp-2 break-words text-sm">{product.name}</h3>
-          {product.type && <span className="text-xs text-muted">{product.type}</span>}
+          <h3 className="font-serif font-semibold text-ink line-clamp-2 break-words text-sm">{product.name}</h3>
+          {product.type && <span className="text-xs text-muted-foreground">{product.type}</span>}
         </div>
       </div>
       {/* S is too narrow for role + dates side by side; role only */}
       {product.role && (
-        <div className="mt-auto shrink-0 border-t border-divider pt-2">
-          <p className="text-xs font-medium text-primary line-clamp-1">{product.role}</p>
+        <div className="mt-auto shrink-0 border-t border-border pt-2">
+          <p className="text-xs font-medium text-ink line-clamp-1">{product.role}</p>
         </div>
       )}
     </div>
@@ -366,7 +365,7 @@ const ProductListCard = ({
   ));
   return (
     <div className="p-4 h-full flex flex-col relative">
-      <h3 className="text-sm font-serif font-medium text-muted mb-3">{title}</h3>
+      <h3 className="text-sm font-serif font-medium text-muted-foreground mb-3">{title}</h3>
       <PaginatedCardPages pages={pages} />
     </div>
   );
@@ -406,8 +405,8 @@ const LogCardIcon = ({
     );
   }
   return (
-    <div className={`${containerClass} bg-impact/10 flex items-center justify-center shrink-0`}>
-      <FileTextIcon className={`${iconClass} text-impact`} />
+    <div className={`${containerClass} bg-ink/10 flex items-center justify-center shrink-0`}>
+      <FileTextIcon className={`${iconClass} text-ink`} />
     </div>
   );
 };
@@ -437,14 +436,14 @@ const SingleLogCard = ({
               pixelSize={64}
             />
             <div className="flex-1 min-w-0">
-              <h3 className="text-xl font-serif font-semibold text-primary">{log.title}</h3>
-              <div className="flex items-center gap-1 text-sm text-muted mt-1">
+              <h3 className="text-xl font-serif font-semibold text-ink">{log.title}</h3>
+              <div className="flex items-center gap-1 text-sm text-muted-foreground mt-1">
                 <CalendarIcon className="w-4 h-4" />
                 {formatLongDate(log.date)}
               </div>
             </div>
           </div>
-          {previewText && <p className="text-sm text-muted sm:line-clamp-4 flex-1">{previewText}</p>}
+          {previewText && <p className="text-sm text-muted-foreground sm:line-clamp-4 flex-1">{previewText}</p>}
         </div>
       ) : size === 'M' ? (
         <div className="flex gap-3 h-full">
@@ -454,12 +453,12 @@ const SingleLogCard = ({
             iconClass={iconSize}
           />
           <div className="flex-1 min-w-0 flex flex-col">
-            <h3 className="font-serif font-semibold text-primary line-clamp-2">{log.title}</h3>
-            <div className="flex items-center gap-1 text-xs text-muted mt-1">
+            <h3 className="font-serif font-semibold text-ink line-clamp-2">{log.title}</h3>
+            <div className="flex items-center gap-1 text-xs text-muted-foreground mt-1">
               <CalendarIcon className="w-3 h-3" />
               {formatShortDate(log.date)}
             </div>
-            {previewText && <p className="text-sm text-muted sm:line-clamp-2 mt-1 flex-1">{previewText}</p>}
+            {previewText && <p className="text-sm text-muted-foreground sm:line-clamp-2 mt-1 flex-1">{previewText}</p>}
           </div>
         </div>
       ) : (
@@ -470,8 +469,8 @@ const SingleLogCard = ({
             iconClass={iconSize}
           />
           <div className="flex-1 min-w-0">
-            <h3 className="font-serif font-semibold text-primary line-clamp-2 text-sm">{log.title}</h3>
-            <div className="flex items-center gap-1 text-xs text-muted mt-1">
+            <h3 className="font-serif font-semibold text-ink line-clamp-2 text-sm">{log.title}</h3>
+            <div className="flex items-center gap-1 text-xs text-muted-foreground mt-1">
               <CalendarIcon className="w-3 h-3" />
               {formatShortDate(log.date)}
             </div>
@@ -483,7 +482,7 @@ const SingleLogCard = ({
 
   const href = logHref(log);
   return href ? (
-    <a href={href} rel="nofollow noopener" className="block h-full hover:bg-charcoal/40 transition-colors">
+    <a href={href} rel="nofollow noopener" className="block h-full hover:bg-muted/40 transition-colors">
       {content}
     </a>
   ) : (
@@ -520,17 +519,17 @@ const AllLogsCard = ({
                 className={`w-4 h-4 rounded shrink-0 mt-0.5 ${product!.icon_url ? 'object-cover' : 'object-contain'}`}
               />
             ) : (
-              <FileTextIcon className="w-4 h-4 text-impact shrink-0 mt-0.5" />
+              <FileTextIcon className="w-4 h-4 text-ink shrink-0 mt-0.5" />
             )}
             <div className="flex-1 min-w-0">
               <p className="text-sm truncate">{log.title}</p>
-              <p className="text-xs text-muted">{formatShortDate(log.date)}</p>
+              <p className="text-xs text-muted-foreground">{formatShortDate(log.date)}</p>
             </div>
           </>
         );
-        const rowClass = 'flex items-start gap-2 p-2 rounded-lg bg-charcoal/40';
+        const rowClass = 'flex items-start gap-2 p-2 rounded-lg bg-muted/40';
         return href ? (
-          <a key={log.id} href={href} rel="nofollow noopener" className={`${rowClass} hover:bg-charcoal/60 transition-colors`}>
+          <a key={log.id} href={href} rel="nofollow noopener" className={`${rowClass} hover:bg-muted/60 transition-colors`}>
             {row}
           </a>
         ) : (
@@ -545,7 +544,7 @@ const AllLogsCard = ({
   return (
     <div className="p-4 h-full flex flex-col">
       <div className="flex items-center justify-between mb-3">
-        <h3 className="text-sm font-serif font-medium text-muted">Entries</h3>
+        <h3 className="text-sm font-serif font-medium text-muted-foreground">Entries</h3>
       </div>
       <PaginatedCardPages pages={pages} />
     </div>
@@ -561,7 +560,7 @@ const RichTextCard = ({ card }: { card: BentoCardConfig }) => {
   const title = card.richTextTitle?.trim();
   return (
     <div className="p-4 h-full flex flex-col">
-      {title && <h3 className="text-sm font-serif font-medium text-muted mb-2 shrink-0">{title}</h3>}
+      {title && <h3 className="text-sm font-serif font-medium text-muted-foreground mb-2 shrink-0">{title}</h3>}
       <RichTextContent doc={card.richTextBody!} />
     </div>
   );
@@ -573,8 +572,8 @@ const RichTextCard = ({ card }: { card: BentoCardConfig }) => {
 // bottom-anchored so the empty space above reads as section separation.
 const SectionHeaderCard = ({ title }: { title: string }) => (
   <div className="h-full flex flex-col justify-end pb-2">
-    <div className="border-b border-divider pb-2">
-      <h2 className="text-lg sm:text-xl font-serif font-semibold text-primary truncate">{title}</h2>
+    <div className="border-b border-border pb-2">
+      <h2 className="text-lg sm:text-xl font-serif font-semibold text-ink truncate">{title}</h2>
     </div>
   </div>
 );
@@ -686,7 +685,7 @@ export const PortfolioBentoGrid = ({ portfolio }: { portfolio: Portfolio }) => {
             className={
               isSectionHeader
                 ? 'col-span-full relative overflow-hidden'
-                : `${cardSpanClass(card, portfolio)} relative rounded-xl border border-divider bg-white overflow-hidden transition-all`
+                : `${cardSpanClass(card, portfolio)} relative rounded-xl border border-border bg-surface overflow-hidden transition-all`
             }
           >
             {renderCard(card, portfolio)}

@@ -1,0 +1,126 @@
+[
+  {
+    "docId": "contentPage-pillar-brag-document",
+    "changes": [
+      {
+        "field": "body",
+        "before": "alt=\"Prodlog sample log page showing a quarterly timeline of impact entries with dates, status, verified badges, metrics, and collaborators\"",
+        "after": "alt=\"Priya's log in Prodlog: entries with dates, outcomes, and the collaborators who confirmed them\"",
+        "why": "glossary"
+      },
+      {
+        "field": "body",
+        "before": "caption=\"A living brag document: quarterly impact entries with the initiative",
+        "after": "caption=\"A living brag document: entries with the initiative",
+        "why": "glossary"
+      },
+      {
+        "field": "body",
+        "before": "PRDs, and tickets — versus one structured, prompted log entry.",
+        "after": "PRDs, and tickets, versus one structured, prompted entry.",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "who can confirm the work — captured in the moment, not reconstructed.",
+        "after": "who can confirm the work. Logged in the moment, not reconstructed.",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "## Free brag document template",
+        "after": "### Bring it to your 1:1s\n\nRead the doc the day before every 1:1 and bring the two or three entries your manager should hear about. Or let Prodlog lay them out for you: see [1:1 prep](/1-1-prep).\n\n## Free brag document template",
+        "why": "brief"
+      },
+      {
+        "field": "body",
+        "before": "## Brag document vs. dedicated tools - when a doc isn't enough",
+        "after": "## Brag document vs. dedicated tools: when a doc isn't enough",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "In Prodlog, **Logs** handle continuous capture, **Verification** gives lightweight proof through collaborator confirmation, and **Summaries** turn raw entries into usable formats when deadlines hit.",
+        "after": "In Prodlog, you log as things happen, from Slack, email, your phone or the web. Before every 1:1 it shows what you've logged since the last one, at review time it drafts your answers from those entries, and when you move it becomes your resume bullets, STAR stories and portfolio.",
+        "why": "brief"
+      }
+    ]
+  },
+  {
+    "docId": "contentPage-templates-brag-document",
+    "changes": [
+      {
+        "field": "description",
+        "before": "for product managers — quarterly sections,",
+        "after": "for product managers: quarterly sections,",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "One quarter of the template — the six-field",
+        "after": "One quarter of the template: the six-field",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "same six fields — structured enough",
+        "after": "same six fields, structured enough",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "**Initiative** — named",
+        "after": "**Initiative**: named",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "**Your role** — with",
+        "after": "**Your role**: with",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "**Collaborators** — by",
+        "after": "**Collaborators**: by",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "**Outcome** — a metric",
+        "after": "**Outcome**: a metric",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "**Date** — quarter",
+        "after": "**Date**: quarter",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "**What you said no to** — the most",
+        "after": "**What you said no to**: the most",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "nothing prompts the update — tie it to",
+        "after": "nothing prompts the update. Tie it to",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "collaborator verification, and summaries generated from the log.",
+        "after": "confirmations from collaborators, and review drafts, resume bullets and STAR stories written from your log.",
+        "why": "glossary"
+      },
+      {
+        "field": "body",
+        "before": "Free download — quarterly structure,",
+        "after": "Free download: quarterly structure,",
+        "why": "dash"
+      }
+    ]
+  }
+]

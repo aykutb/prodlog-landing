@@ -1,6 +1,6 @@
 import { permanentRedirect } from 'next/navigation';
 
-// The fictional sample profile is gone; the live portfolio is the example now.
+// The site's example is the demo persona's live portfolio (src/content/demo/priya.ts).
 export default function Page() {
-  permanentRedirect('/p/aykutbal');
+  permanentRedirect('/p/priya_r');
 }

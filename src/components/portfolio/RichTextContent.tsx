@@ -20,7 +20,7 @@ const renderMarks = (node: RichTextNode, key: number): React.ReactNode => {
         break;
       case 'code':
         element = (
-          <code className="rounded bg-charcoal/60 px-1 py-0.5 font-mono text-[0.85em]">
+          <code className="rounded bg-muted/60 px-1 py-0.5 font-mono text-[0.85em]">
             {element}
           </code>
         );
@@ -33,7 +33,7 @@ const renderMarks = (node: RichTextNode, key: number): React.ReactNode => {
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-impact underline underline-offset-2 hover:opacity-80"
+              className="text-ink underline underline-offset-2 hover:opacity-80"
             >
               {element}
             </a>
@@ -61,7 +61,7 @@ const renderNode = (node: RichTextNode, key: number): React.ReactNode => {
       );
     case 'heading':
       return (
-        <h3 key={key} className="mt-3 mb-1 font-serif text-base font-semibold text-primary first:mt-0">
+        <h3 key={key} className="mt-3 mb-1 font-serif text-base font-semibold text-ink first:mt-0">
           {children}
         </h3>
       );
@@ -85,7 +85,7 @@ const renderNode = (node: RichTextNode, key: number): React.ReactNode => {
       );
     case 'blockquote':
       return (
-        <blockquote key={key} className="my-2 border-l-2 border-divider pl-3 italic text-muted [&>p]:my-0">
+        <blockquote key={key} className="my-2 border-l-2 border-border pl-3 italic text-muted-foreground [&>p]:my-0">
           {children}
         </blockquote>
       );
@@ -95,7 +95,7 @@ const renderNode = (node: RichTextNode, key: number): React.ReactNode => {
 };
 
 export const RichTextContent = ({ doc }: { doc: RichTextDoc }) => (
-  <div className="text-sm leading-relaxed text-primary break-words">
+  <div className="text-sm leading-relaxed text-ink break-words">
     {(doc.content ?? []).map(renderNode)}
   </div>
 );

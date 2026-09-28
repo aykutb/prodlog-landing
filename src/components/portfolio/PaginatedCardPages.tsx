@@ -36,7 +36,7 @@ export const PaginatedCardPages = ({ pages }: { pages: React.ReactNode[] }) => {
 
   const arrowClass = (disabled: boolean) =>
     `rounded-full p-0.5 transition-colors ${
-      disabled ? 'text-muted/20 cursor-default' : 'text-muted hover:text-primary hover:bg-charcoal/50'
+      disabled ? 'text-muted-foreground/20 cursor-default' : 'text-muted-foreground hover:text-ink hover:bg-muted/50'
     }`;
 
   return (
@@ -67,7 +67,7 @@ export const PaginatedCardPages = ({ pages }: { pages: React.ReactNode[] }) => {
               type="button"
               onClick={() => setPage(p)}
               className={`rounded-full transition-all duration-200 ${
-                p === page ? 'w-1.5 h-1.5 bg-impact' : 'w-1 h-1 bg-muted/30 hover:bg-muted/50'
+                p === page ? 'w-1.5 h-1.5 bg-ink' : 'w-1 h-1 bg-muted-foreground/30 hover:bg-muted-foreground/50'
               }`}
               aria-label={`Go to page ${p + 1}`}
             />

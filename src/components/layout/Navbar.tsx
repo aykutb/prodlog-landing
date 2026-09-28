@@ -5,7 +5,15 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { isResourcePath } from '@/src/navigation/resourcesNav';
 import { ResourcesDropdown } from './ResourcesDropdown';
+import { UseCasesDropdown } from './UseCasesDropdown';
+import { isUseCasePath } from '@/src/navigation/useCasesNav';
 import type { NavItem } from '@/src/lib/content';
+
+// The dashboard's active top-bar link: ink text with the logo's mauve strip
+// under it (prodlog2 TopBar.tsx, StripMarker: 16x4px, fully rounded), sitting
+// 4px above the nav's bottom edge.
+const ACTIVE_LINK =
+  "relative text-ink font-medium after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-2.5 after:h-1 after:w-4 after:rounded-full after:bg-mauve-strong after:content-['']";
 
 interface NavbarProps {
   compareNavItems: NavItem[];
@@ -18,17 +26,13 @@ export const Navbar = ({ compareNavItems, minimal = false }: NavbarProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navLinkClass = (path: string) =>
-    `transition-all text-sm ${
-      pathname === path
-        ? 'text-primary font-medium'
-        : 'text-muted hover:text-primary'
-    }`;
+    `transition-all text-sm ${pathname === path ? ACTIVE_LINK : 'text-muted-foreground hover:text-ink'}`;
 
   const mobileNavLinkClass = (path: string) =>
     `block py-4 px-6 transition-colors text-base ${
       pathname === path
-        ? 'text-primary font-medium bg-charcoal/30'
-        : 'text-muted hover:text-primary hover:bg-charcoal/20'
+        ? 'text-ink font-medium bg-muted/30'
+        : 'text-muted-foreground hover:text-ink hover:bg-muted/20'
     }`;
 
   useEffect(() => {
@@ -49,13 +53,14 @@ export const Navbar = ({ compareNavItems, minimal = false }: NavbarProps) => {
     setIsMenuOpen(false);
   };
 
-  const resourcesActive = isResourcePath(pathname);
+  const useCasesActive = isUseCasePath(pathname);
+  const resourcesActive = !useCasesActive && isResourcePath(pathname);
 
   return (
     <>
       {/* Navbar Container - Fixed, Centered, Not Full Width */}
       <div className="fixed top-0 left-0 right-0 z-50 px-4 pt-4">
-        <nav className="max-w-4xl mx-auto bg-white/80 backdrop-blur-xl border border-divider rounded-2xl shadow-sm">
+        <nav className="max-w-5xl mx-auto bg-surface/80 backdrop-blur-xl border border-border rounded-xl">
           <div className="px-4 md:px-6 h-12 flex items-center justify-between">
             <Link href="/" className="cursor-pointer flex items-center">
               {/* The lockup from prodlog2's logomark definition (public/brand/logo.svg). */}
@@ -67,7 +72,7 @@ export const Navbar = ({ compareNavItems, minimal = false }: NavbarProps) => {
             {minimal ? (
               <a
                 href="https://dashboard.prodlog.app/auth"
-                className="bg-deep-ink-blue hover:bg-deep-ink-blue/90 text-white px-4 py-1.5 rounded-lg text-sm transition-all font-medium"
+                className="bg-ink hover:bg-ink/90 text-on-ink px-4 py-1.5 rounded-lg text-sm transition-all font-medium"
               >
                 Start free
               </a>
@@ -75,28 +80,31 @@ export const Navbar = ({ compareNavItems, minimal = false }: NavbarProps) => {
               <>
                 {/* Desktop Navigation */}
                 <div className="hidden md:flex items-center gap-6">
-                  <Link href="/how-it-works" className={navLinkClass('/how-it-works')}>
+                  <Link href="/how-it-works" className={navLinkClass('/how-it-works')} aria-current={pathname === '/how-it-works' ? 'page' : undefined}>
                     How it works
                   </Link>
+                  <UseCasesDropdown
+                    isActive={useCasesActive}
+                    linkClassName={`transition-all text-sm ${useCasesActive ? ACTIVE_LINK : 'text-muted-foreground hover:text-ink'}`}
+                    onNavigate={handleLinkClick}
+                  />
                   <ResourcesDropdown
                     isActive={resourcesActive}
                     compareNavItems={compareNavItems}
-                    linkClassName={
-                      resourcesActive
-                        ? 'transition-all text-sm text-primary font-medium'
-                        : 'transition-all text-sm text-muted hover:text-primary'
-                    }
+                    linkClassName={`transition-all text-sm ${
+                      resourcesActive ? ACTIVE_LINK : 'text-muted-foreground hover:text-ink'
+                    }`}
                     onNavigate={handleLinkClick}
                   />
-                  <Link href="/try" className={navLinkClass('/try')}>
+                  <Link href="/try" className={navLinkClass('/try')} aria-current={pathname === '/try' ? 'page' : undefined}>
                     Try it
                   </Link>
-                  <Link href="/pricing" className={navLinkClass('/pricing')}>
+                  <Link href="/pricing" className={navLinkClass('/pricing')} aria-current={pathname === '/pricing' ? 'page' : undefined}>
                     Pricing
                   </Link>
                   <a
                     href="https://dashboard.prodlog.app/auth"
-                    className="bg-deep-ink-blue hover:bg-deep-ink-blue/90 text-white px-4 py-1.5 rounded-lg text-sm transition-all font-medium"
+                    className="bg-ink hover:bg-ink/90 text-on-ink px-4 py-1.5 rounded-lg text-sm transition-all font-medium"
                   >
                     Start free
                   </a>
@@ -105,7 +113,7 @@ export const Navbar = ({ compareNavItems, minimal = false }: NavbarProps) => {
                 {/* Hamburger Menu Button - Mobile Only */}
                 <button
                   onClick={() => setIsMenuOpen(!isMenuOpen)}
-                  className="md:hidden p-2 text-muted hover:text-primary transition-colors -mr-2"
+                  className="md:hidden p-2 text-muted-foreground hover:text-ink transition-colors -mr-2"
                   aria-label="Toggle menu"
                   aria-expanded={isMenuOpen}
                 >
@@ -136,7 +144,7 @@ export const Navbar = ({ compareNavItems, minimal = false }: NavbarProps) => {
       {/* Mobile Menu Panel */}
       {!minimal && (
       <div
-        className={`fixed top-20 left-4 right-4 max-h-[calc(100dvh-6rem)] overflow-y-auto overscroll-contain bg-white border border-divider rounded-2xl shadow-lg z-40 md:hidden transform transition-all duration-200 ease-out ${
+        className={`fixed top-20 left-4 right-4 max-h-[calc(100dvh-6rem)] overflow-y-auto overscroll-contain bg-surface rounded-xl shadow-overlay z-40 md:hidden transform transition-all duration-200 ease-out ${
           isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'
         }`}
       >
@@ -148,6 +156,7 @@ export const Navbar = ({ compareNavItems, minimal = false }: NavbarProps) => {
           >
             How it works
           </Link>
+          <UseCasesDropdown variant="mobile" isActive={useCasesActive} linkClassName="" onNavigate={handleLinkClick} />
           <ResourcesDropdown
             variant="mobile"
             isActive={resourcesActive}
@@ -169,10 +178,10 @@ export const Navbar = ({ compareNavItems, minimal = false }: NavbarProps) => {
           >
             Pricing
           </Link>
-          <div className="px-6 py-4 border-t border-divider">
+          <div className="px-6 py-4 border-t border-border">
             <a
               href="https://dashboard.prodlog.app/auth"
-              className="block w-full bg-deep-ink-blue hover:bg-deep-ink-blue/90 text-white px-5 py-2.5 rounded-lg text-sm transition-all font-medium text-center"
+              className="block w-full bg-ink hover:bg-ink/90 text-on-ink px-5 py-2.5 rounded-lg text-sm transition-all font-medium text-center"
             >
               Start free
             </a>

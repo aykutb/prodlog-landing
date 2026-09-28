@@ -4,8 +4,8 @@ import { PageHeader } from '@/src/components/ui';
 
 const Section = ({ title, children }: { title: string; children: React.ReactNode }) => (
   <section className="space-y-3">
-    <h2 className="text-lg font-semibold text-primary">{title}</h2>
-    <div className="text-secondary text-sm leading-relaxed space-y-3">{children}</div>
+    <h2 className="text-lg font-semibold text-ink">{title}</h2>
+    <div className="text-muted-foreground text-sm leading-relaxed space-y-3">{children}</div>
   </section>
 );
 
@@ -17,7 +17,7 @@ export const TermsOfServicePage = () => (
     />
 
     <div className="space-y-10 text-left">
-      <p className="text-xs text-muted">
+      <p className="text-xs text-muted-foreground">
         Last updated: March 26, 2025
       </p>
 
@@ -72,7 +72,7 @@ export const TermsOfServicePage = () => (
       <Section title="6. Privacy">
         <p>
           Our collection and use of personal information is described in our{' '}
-          <Link href="/privacy-policy" className="text-deep-ink-blue underline hover:opacity-80">
+          <Link href="/privacy-policy" className="text-ink underline hover:opacity-80">
             Privacy Policy
           </Link>
           . By using the Service, you acknowledge that we may process information as described there.
@@ -159,7 +159,7 @@ export const TermsOfServicePage = () => (
         </p>
         <p>
           For questions about these Terms, contact us at{' '}
-          <a href="mailto:support@prodlog.app" className="text-deep-ink-blue underline hover:opacity-80">
+          <a href="mailto:support@prodlog.app" className="text-ink underline hover:opacity-80">
             support@prodlog.app
           </a>
           .

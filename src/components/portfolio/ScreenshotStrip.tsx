@@ -38,7 +38,7 @@ const Lightbox = ({
   }, [go, onClose]);
 
   const navButton =
-    'absolute rounded-full bg-white/10 p-2 text-white/90 transition-colors hover:bg-white/20';
+    'absolute rounded-full bg-surface/10 p-2 text-on-ink/90 transition-colors hover:bg-surface/20';
 
   return createPortal(
     <div
@@ -73,7 +73,7 @@ const Lightbox = ({
         src={images[index]}
         alt={`${altPrefix} screenshot ${index + 1}`}
         onClick={(e) => e.stopPropagation()}
-        className="max-h-[90vh] max-w-[90vw] rounded-lg object-contain shadow-2xl"
+        className="max-h-[90vh] max-w-[90vw] rounded-lg object-contain"
       />
 
       {count > 1 && (
@@ -90,7 +90,7 @@ const Lightbox = ({
       )}
 
       {count > 1 && (
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-white/10 px-3 py-1 text-sm text-white/90">
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-surface/10 px-3 py-1 text-sm text-on-ink/90">
           {index + 1} / {count}
         </div>
       )}
@@ -119,7 +119,7 @@ export const ScreenshotStrip = ({
             type="button"
             onClick={() => setLightboxIndex(i)}
             aria-label={`Open ${productName} screenshot ${i + 1}`}
-            className="shrink-0 overflow-hidden rounded-md border border-divider transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-impact"
+            className="shrink-0 overflow-hidden rounded-md border border-border transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img

@@ -36,10 +36,10 @@ export const PrivacyPage = () => (
           />
         </div>
         <div className="flex min-w-0 flex-1 flex-col justify-center text-center md:text-left">
-          <h1 className="serif-headline text-3xl md:text-[48px] mb-4 md:mb-6 text-primary leading-tight">
+          <h1 className="serif-headline text-3xl md:text-[48px] mb-4 md:mb-6 text-ink leading-tight">
             Privacy is the foundation
           </h1>
-          <p className="text-secondary text-base md:text-lg leading-relaxed max-w-2xl md:max-w-none mx-auto md:mx-0">
+          <p className="text-muted-foreground text-base md:text-lg leading-relaxed max-w-2xl md:max-w-none mx-auto md:mx-0">
             Your career documentation deserves a private place to live. Prodlog is built around this principle.
           </p>
         </div>
@@ -48,37 +48,37 @@ export const PrivacyPage = () => (
 
     <div className="grid md:grid-cols-2 gap-8 mb-16">
       {/* Privacy Controls Visual */}
-      <div className="bg-white border border-divider rounded-xl p-6 shadow-[0_4px_20px_-5px_rgba(31,42,68,0.1)]">
-        <div className="text-[10px] text-muted uppercase tracking-wider mb-4 font-semibold">Visibility Controls</div>
+      <div className="bg-surface border border-border rounded-xl p-6">
+        <div className="text-[10px] text-muted-foreground uppercase tracking-wider mb-4 font-semibold">Visibility Controls</div>
         
         <div className="space-y-4">
-          <div className="p-4 bg-charcoal rounded-lg border border-divider">
+          <div className="p-4 bg-muted rounded-lg border border-border">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-primary text-sm font-medium">Checkout Optimization</span>
+              <span className="text-ink text-sm font-medium">Checkout Optimization</span>
               <div className="flex items-center gap-2">
-                <span className="text-[10px] px-2 py-1 rounded bg-sage-green/10 text-sage-green border border-sage-green/20">Private</span>
+                <span className="text-[10px] px-2 py-1 rounded bg-sage/10 text-sage-strong border border-sage/20">Private</span>
               </div>
             </div>
             <div className="flex gap-2 mt-3">
-              <button className="text-[10px] px-3 py-1.5 rounded border border-divider text-muted bg-white">Make Shareable</button>
-              <button className="text-[10px] px-3 py-1.5 rounded border border-divider text-muted bg-white">Anonymize</button>
+              <button className="text-[10px] px-3 py-1.5 rounded border border-border text-muted-foreground bg-surface">Make Shareable</button>
+              <button className="text-[10px] px-3 py-1.5 rounded border border-border text-muted-foreground bg-surface">Anonymize</button>
             </div>
           </div>
 
-          <div className="p-4 bg-charcoal rounded-lg border border-divider opacity-70">
+          <div className="p-4 bg-muted rounded-lg border border-border opacity-70">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-primary text-sm font-medium">Platform Migration</span>
+              <span className="text-ink text-sm font-medium">Platform Migration</span>
               <div className="flex items-center gap-2">
-                <span className="text-[10px] px-2 py-1 rounded bg-deep-ink-blue/10 text-deep-ink-blue border border-deep-ink-blue/20">Shareable</span>
+                <span className="text-[10px] px-2 py-1 rounded bg-ink/10 text-ink border border-ink/20">Shareable</span>
               </div>
             </div>
-            <div className="text-[10px] text-muted mt-2">Shared with: 2 people</div>
+            <div className="text-[10px] text-muted-foreground mt-2">Shared with: 2 people</div>
           </div>
 
-          <div className="p-4 bg-charcoal rounded-lg border border-divider opacity-50">
+          <div className="p-4 bg-muted rounded-lg border border-border opacity-50">
             <div className="flex items-center justify-between">
-              <span className="text-primary text-sm font-medium">Q3 Resume Bullets</span>
-              <span className="text-[10px] px-2 py-1 rounded bg-muted-plum/10 text-muted-plum border border-muted-plum/20">Anonymized</span>
+              <span className="text-ink text-sm font-medium">Q3 Resume Bullets</span>
+              <span className="text-[10px] px-2 py-1 rounded bg-mauve/10 text-mauve-strong border border-mauve/20">Anonymized</span>
             </div>
           </div>
         </div>
@@ -87,15 +87,15 @@ export const PrivacyPage = () => (
       {/* Privacy Features List */}
       <div className="space-y-4">
         {PRIVACY_FEATURES.map((feature, i) => (
-          <div key={i} className="p-4 bg-white border border-divider rounded-lg hover:border-deep-ink-blue/30 transition-colors">
-            <h3 className="text-primary font-medium mb-1">{feature.title}</h3>
-            <p className="text-secondary text-sm leading-relaxed">{feature.description}</p>
+          <div key={i} className="p-4 bg-surface border border-border rounded-lg hover:border-ink/30 transition-colors">
+            <h3 className="text-ink font-medium mb-1">{feature.title}</h3>
+            <p className="text-muted-foreground text-sm leading-relaxed">{feature.description}</p>
           </div>
         ))}
       </div>
     </div>
 
-    <div className="pt-12 border-t border-divider text-center">
+    <div className="pt-12 border-t border-border text-center">
       <CTASection showSecondary={false} />
     </div>
   </div>
