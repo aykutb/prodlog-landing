@@ -21,6 +21,7 @@ missing.
 - 2026-09-28: `slack-day-before.png` captured from the owner's own workspace (the Prodlog Slack workspace, the owner signed in with an email code), not Priya's, with the owner's OK to keep "Maya" as the 1:1 name. The empty-DM intro and the frame's rounded corner were hidden in CSS; the message is untouched. No thread reply, so no personal name shows.
 - 2026-09-28: `slack-message-shortcut.png` and `slack-log-modal.png` captured in the owner's workspace, #general, from a message the owner approved posting ("Cut the manual refund review step, tickets down 34%"). The form was filled and then discarded with Leave, so no entry was saved. The owner's Slack handle shows as the message author in the shortcut shot.
 - 2026-09-28: `slack-log-command.png` captured with `/log` typed. After the rename Slack's client listed the command twice from its cache (the app has one `/log`, owner checked), so the repeated row was hidden in CSS for the capture.
+- 2026-09-28: `ios-log.png` captured as Priya (the owner signed in) on the `prodlog-393x852` simulator, iOS 26.5, from a development build of prodlog-mobile's `feat/one-on-one-card` branch (not yet on the App Store). Status bar overridden to 9:41 and a full battery; Expo's dev tools button hidden. The seed's `demo-log-first` tag shows on each entry.
 - The seed was not re-run: Priya's recent entries are dated Sep 25 (the seed day), which still gives "3 entries since your last 1:1 on Sep 24".
 - Crops on the site: `log-home.png` is cropped to the ledger in the habit card and on the Slack page, `one-on-one-prep.png` to its content column (`ProductShot` `crop.region`).
 
@@ -52,7 +53,7 @@ missing.
 | `slack-log-command.png` | 1600 x 900 | /integrations/slack step 1 | Captured |
 | `slack-message-shortcut.png` | 1600 x 900 | /integrations/slack step 2 | Captured |
 | `slack-log-modal.png` | 1600 x 1000 | /integrations/slack step 3 | Captured |
-| `ios-log.png` | 1179 x 2556 | Homepage (habit: On your phone) | Waiting: the iOS 1:1 card |
+| `ios-log.png` | 1179 x 2556 | Homepage (habit: On your phone) | Captured |
 | `og-*` backgrounds | 2400 x 1260 | See "OG backgrounds" below | Not needed (drawn in code) |
 
 ### `log-home.png`: the Log home
