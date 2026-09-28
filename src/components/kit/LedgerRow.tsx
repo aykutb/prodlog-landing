@@ -27,6 +27,8 @@ export interface LedgerRowProps {
    * never ask (DECISIONS 2026-09-26); its 1:1, review and entry screens do.
    */
   askOutcome?: boolean;
+  /** Extra classes for the outcome's strip marker, e.g. to draw it in. */
+  outcomeClassName?: string;
   /** The row whose panel is open: mauve-soft. */
   active?: boolean;
   /** The title's element. `h3` as in the dashboard; `p` where no h2 precedes the row. */
@@ -41,7 +43,7 @@ export interface LedgerRowProps {
  * right, an optional image frame. Static: nothing here is a control.
  * Use inside `LedgerRows`, which draws the hairlines between rows.
  */
-export const LedgerRow = ({ date, dateTime, label, title, preview, image, outcome, askOutcome = false, active = false, titleAs: Title = 'h3', className = '', style }: LedgerRowProps) => (
+export const LedgerRow = ({ date, dateTime, label, title, preview, image, outcome, outcomeClassName, askOutcome = false, active = false, titleAs: Title = 'h3', className = '', style }: LedgerRowProps) => (
   <li
     style={style}
     className={`relative grid grid-cols-[auto_minmax(0,1fr)] gap-x-4 px-2 py-3.5 sm:grid-cols-[auto_minmax(0,1fr)_auto] ${
@@ -64,7 +66,7 @@ export const LedgerRow = ({ date, dateTime, label, title, preview, image, outcom
       {outcome ? (
         <div className="flex min-h-5 items-center">
           <span className="inline-flex max-w-full items-center gap-2 text-meta text-sage-strong">
-            <StripMarker tone="sage" />
+            <StripMarker tone="sage" className={outcomeClassName} />
             <span className="truncate">{outcome}</span>
           </span>
         </div>

@@ -10,7 +10,9 @@ export interface OccasionCardProps {
   context?: React.ReactNode;
   /** The strip chart under the header. */
   windows?: StackWindow[];
-  caption?: string | null;
+  caption?: React.ReactNode;
+  /** Hold the chart at this many strips tall, so strips a scene adds never move the card. */
+  stackMinStrips?: number;
   /** The white button: "Prep my 1:1". A string renders a non-interactive button shape; pass an element for a real link. */
   action?: React.ReactNode;
   /** Anything else under the header, such as weekday chips. */
@@ -28,7 +30,7 @@ export const INK_BUTTON =
  * date on its right, one muted line of context, the week stack and a white
  * button. The one dark surface on a product mock.
  */
-export const OccasionCard = ({ title, aside, context, windows, caption, action, children, className = '' }: OccasionCardProps) => (
+export const OccasionCard = ({ title, aside, context, windows, caption, stackMinStrips, action, children, className = '' }: OccasionCardProps) => (
   <div className={`rounded-xl bg-ink p-5 text-on-ink sm:p-6 ${className}`}>
     <div className="space-y-1">
       <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
@@ -37,7 +39,7 @@ export const OccasionCard = ({ title, aside, context, windows, caption, action, 
       </div>
       {context && <p className="text-body text-on-ink-muted">{context}</p>}
     </div>
-    {windows && <WeekStack windows={windows} caption={caption} />}
+    {windows && <WeekStack windows={windows} caption={caption} minStrips={stackMinStrips} />}
     {children}
     {action &&
       (typeof action === 'string' ? (

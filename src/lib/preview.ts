@@ -12,18 +12,17 @@ export const SIGNUP_URL = 'https://dashboard.prodlog.app/auth';
 export const MAX_CHARS = 8000;
 export const MAX_CHARS_LABEL = MAX_CHARS.toLocaleString('en-US');
 
-export const PLACEHOLDER = `shipped onboarding redesign finally, activation looks up
-killed the loyalty feature, freed up eng for the bug backlog
-talked maya through the scope call`;
+/** The log's own first-line prompt (prodlog2 LedgerLine), as the dashboard words it. */
+export const PLACEHOLDER = 'What moved today?';
 
 /**
- * Filled in by "Use a sample note". Same register as the placeholder,
- * different content, so the two never read as the same thing twice.
+ * Filled in by "Use a sample note": the messy register people actually
+ * write in, from the Refunds and Disputes work the rest of the site shows.
  */
-export const SAMPLE = `pricing page finally out, tues i think, billing tickets dropped right after
-said no to the enterprise sso ask again, wrote up why for leadership
-q2 roadmap review went ok, cut two things nobody fought for
-priya took over the analytics spec, should check in on that`;
+export const SAMPLE = `refund status emails finally out, tues i think, merchant tickets dropped after
+said no to the custom dispute export again, wrote up why for elena
+q4 roadmap review went ok, cut two things nobody fought for
+new dispute analyst shadowing cases, should check in thurs`;
 
 export interface PreviewEntry {
   /** YYYY-MM-DD, only when the note states one. */

@@ -214,3 +214,34 @@ Each phase ends with a report and a stop for approval.
 - **Content changes go through reviewed swaps.** Sanity copy changes as
   exact before/after pairs (`scripts/sanity-content/`), checked against the
   live dataset before anything is written.
+
+## 2026-09-28: The homepage hero plays a scripted demo
+
+- **Why.** The Log miniature sat still until someone typed, so most
+  visitors never saw a note become entries or a 1:1 get prepped. A 16.5 s
+  loop now shows the whole promise: a messy note becomes two entries, the
+  1:1 card counts them, and the 1:1 prep gets copied.
+- **Built from the product, not a video.** Live DOM from the tokens, the kit
+  and Priya's seed; no new dependency. A small timeline
+  (`src/lib/scene/timeline.ts`, pure state steps, one rAF clock) that the
+  other homepage sections can reuse. Brief and tracker:
+  `docs/hero-loop-prompt.md`, `docs/hero-loop.md`.
+- **The first frame is the server HTML** and complete; the hero no longer
+  fades in. Fixed frame heights (850px from sm, 940px below), CLS 0.
+- **It gets out of the way.** It pauses when paused, under 20% visible, in
+  a hidden tab and while the paste box has focus; reduced motion shows a
+  still until Play. Pressing, typing or pasting in the box, "Use a sample
+  note" and the new "Paste your notes" button hand the frame to the
+  visitor; the paste flow is unchanged. Replay asks before clearing a note.
+- **Homepage-only changes.** `autoplay` on LedgerHero (default off); the
+  card reads "1:1 with Elena Vasquez" and the dividers "1:1 with Elena
+  Vasquez, Sep 24", as the dashboard writes them; no pricing line in the
+  hero; "Paste your notes" and "Start free" under the copy.
+- **Site-wide.** The paste box placeholder is "What moved today?"; the
+  sample note no longer names Priya; ⌘/Ctrl+Enter sends the note.
+- **Follow-up (prodlog-api).** The scene shows "went live fri" dated to
+  the previous Friday and "support already using it" kept out of the
+  outcome. The public parser does neither today (no reference date is
+  sent; the outcome rule is broad): the change list is in
+  `docs/hero-loop.md`, "Cross-repo follow-up".
+
