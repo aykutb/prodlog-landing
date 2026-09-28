@@ -3,6 +3,7 @@ import { groq } from 'next-sanity';
 export type SanityContentSection = 'pillar' | 'blog' | 'templates' | 'compare';
 
 export type SanityContentPage = {
+  _id: string;
   slug: string;
   title: string;
   description: string;
@@ -17,6 +18,7 @@ export type SanityContentPage = {
 
 export const contentPagesBySectionQuery = groq`
   *[_type == "contentPage" && section == $section] | order(order asc, title asc) {
+    _id,
     "slug": slug.current,
     title,
     description,
@@ -32,6 +34,7 @@ export const contentPagesBySectionQuery = groq`
 
 export const contentPageBySectionAndSlugQuery = groq`
   *[_type == "contentPage" && section == $section && slug.current == $slug][0] {
+    _id,
     "slug": slug.current,
     title,
     description,

@@ -1,0 +1,542 @@
+[
+  {
+    "docId": "contentPage-templates-first-90-days",
+    "changes": [
+      {
+        "field": "description",
+        "before": "for product managers starting a new role — week-by-week structure, stakeholder map, and an early-wins log built in.",
+        "after": "for product managers starting a new role: week-by-week structure, stakeholder map, and an early results log built in.",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "starting a new PM role — learn, align, deliver — with a stakeholder map and an early-wins log built in.",
+        "after": "starting a new PM role (learn, align, deliver) with a stakeholder map and an early results log built in.",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "with stakeholder map and early wins log\"",
+        "after": "with stakeholder map and early results log\"",
+        "why": "brief"
+      },
+      {
+        "field": "body",
+        "before": "caption=\"Three phases — learn (0–30), align (30–60), deliver (60–90) — with the stakeholder map and early-wins log that",
+        "after": "caption=\"Three phases: learn (days 0 to 30), align (30 to 60), deliver (60 to 90), with the stakeholder map and early results log that",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "point-of-view worksheet, early-wins log. No email",
+        "after": "point-of-view worksheet, early results log. No email",
+        "why": "brief"
+      },
+      {
+        "field": "body",
+        "before": "isn't moving too slowly — it's shipping",
+        "after": "isn't moving too slowly. It's shipping",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "**Days 0–30: Learn.**",
+        "after": "**Days 0 to 30: Learn.**",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "**Days 30–60: Align.** A point-of-view worksheet — the top 3 problems worth solving *and* the 2–3 things you're deliberately not touching yet — socialized",
+        "after": "**Days 30 to 60: Align.** A point-of-view worksheet (the top 3 problems worth solving *and* the 2 to 3 things you're deliberately not touching yet), socialized",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "**Days 60–90: Deliver.**",
+        "after": "**Days 60 to 90: Deliver.**",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "what you told me\" — nobody does this",
+        "after": "what you told me\": nobody does this",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "and review the early-wins log with your manager.",
+        "after": "and review the early results log with your manager.",
+        "why": "brief"
+      },
+      {
+        "field": "body",
+        "before": "and an **early-wins log** with",
+        "after": "and an **early results log** with",
+        "why": "brief"
+      },
+      {
+        "field": "body",
+        "before": "**Start the impact log on day one, not day ninety.** The habits you set in the first two weeks are the ones that survive — and your first review cycle will be built from this record. The early-wins log uses",
+        "after": "**Start the early results log on day one, not day ninety.** The habits you set in the first two weeks are the ones that survive, and your first review cycle will be built from this record. The early results log uses",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "The map isn't a formality — the \"what they need",
+        "after": "The map isn't a formality: the \"what they need",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "documentation habits reset — for better or worse.",
+        "after": "documentation habits reset, for better or worse.",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "log from Slack or the browser as things happen, get early wins verified by your new collaborators (which doubles as relationship-building), and walk into your first review with a complete, confirmed record.",
+        "after": "log from Slack or the web as things happen, ask your new collaborators to confirm your entries (which doubles as relationship-building), and walk into your first review with a complete log of confirmed entries.",
+        "why": "glossary"
+      },
+      {
+        "field": "body",
+        "before": "description=\"Free download — three phases, stakeholder map, early-wins log.\"",
+        "after": "description=\"Free download: three phases, stakeholder map, early results log.\"",
+        "why": "dash"
+      }
+    ]
+  },
+  {
+    "docId": "contentPage-templates-manager-1-1",
+    "changes": [
+      {
+        "field": "description",
+        "before": "for product managers — shipped, decided",
+        "after": "for product managers: shipped, decided",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "visible upward — in ten minutes of prep.",
+        "after": "visible upward, in ten minutes of prep.",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "The weekly structure — shipped",
+        "after": "The weekly structure: shipped",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "**Shipped / moved** — what",
+        "after": "**Shipped / moved**: what",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "**Decided** — decisions",
+        "after": "**Decided**: decisions",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "**Blocked / need** — specific",
+        "after": "**Blocked / need**: specific",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "**Visibility** — the work no dashboard shows: alignment brokered, conflicts defused, mentoring done.",
+        "after": "**Visibility**: the work no dashboard shows (alignment brokered, conflicts defused, mentoring done).",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "**Looking ahead** — next week",
+        "after": "**Looking ahead**: next week",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "same time every week — the consistency",
+        "after": "same time every week. The consistency",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "pre-written — and each week's",
+        "after": "pre-written, and each week's",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "every documentation habit — it survives",
+        "after": "every documentation habit: it survives",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "closes that loop: log a win once from Slack or the browser extension in the moment it happens, and it's ready for both your 1:1 doc and your quarterly summary — no reconstruction.",
+        "after": "closes that loop: log each entry once, from Slack, email, iOS or the web, as it happens. Before every 1:1, Prodlog fills this in from your log: entries since the last one, gaps, and what you need from your manager. The same entries draft your review later, with no reconstruction. 1:1 prep is free and never metered.",
+        "why": "glossary"
+      },
+      {
+        "field": "body",
+        "before": "description=\"Free download — weekly",
+        "after": "description=\"Free download: weekly",
+        "why": "dash"
+      },
+      {
+        "field": "order",
+        "before": 2,
+        "after": 0,
+        "why": "brief"
+      }
+    ]
+  },
+  {
+    "docId": "contentPage-templates-promotion-packet",
+    "changes": [
+      {
+        "field": "description",
+        "before": "for product managers — scope summary",
+        "after": "for product managers: scope summary",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "your next level — scope, impact, next-level behaviors, and endorsements — built",
+        "after": "your next level (scope, impact, next-level behaviors, and endorsements), built",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "The core move — every",
+        "after": "The core move: every",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "**The one-paragraph case** — target",
+        "after": "**The one-paragraph case**: target",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "**Scope summary** — what",
+        "after": "**Scope summary**: what",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "**Impact evidence** — your 4–6 strongest",
+        "after": "**Impact evidence**: your 4 to 6 strongest",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "**Next-level behaviors** — one",
+        "after": "**Next-level behaviors**: one",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "**Gaps and plan** — name",
+        "after": "**Gaps and plan**: name",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "**Endorsements** — 2–4 one-line",
+        "after": "**Endorsements**: 2 to 4 one-line",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "what to go do — that only works",
+        "after": "what to go do, and that only works",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "it's archaeology — and archaeology",
+        "after": "it's archaeology, and archaeology",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "have receipts — collaborators on record",
+        "after": "have receipts: collaborators on record",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "every logged entry can be verified by the collaborators involved via a one-click email,",
+        "after": "collaborators can confirm every entry you log with one click from an email,",
+        "why": "glossary"
+      },
+      {
+        "field": "body",
+        "before": "description=\"Free download — six",
+        "after": "description=\"Free download: six",
+        "why": "dash"
+      }
+    ]
+  },
+  {
+    "docId": "contentPage-templates-quarterly-review",
+    "changes": [
+      {
+        "field": "description",
+        "before": "for product managers — initiatives, evidence, collaboration, growth — with a worked example",
+        "after": "for product managers (initiatives, evidence, collaboration, growth) with a worked example",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "self-review structure — initiatives, evidence, collaboration, growth — with",
+        "after": "self-review structure (initiatives, evidence, collaboration, growth) with",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "from the template — initiative, your role, outcome, and the one-line 'so what' — shown",
+        "after": "from the template (initiative, your role, outcome, and the one-line 'so what'), shown",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "**Key initiatives (3–5 max)** — initiative",
+        "after": "**Key initiatives (3 to 5 max)**: initiative",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "\"Checkout conversion optimization — led; conversion +14%, +$2.4M ARR — largest",
+        "after": "\"Checkout conversion optimization: led; conversion +14%, +$2.4M ARR; largest",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "**Evidence** — a metric",
+        "after": "**Evidence**: a metric",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "**Collaboration and leadership** — mentorship, alignment, process improvements: the work",
+        "after": "**Collaboration and leadership**: mentorship, alignment, process improvements, the work",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "**Growth and next quarter** — one",
+        "after": "**Growth and next quarter**: one",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "pre-submission checklist — every initiative",
+        "after": "pre-submission checklist: every initiative",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "demonstrates judgment — the thing",
+        "after": "demonstrates judgment, the thing",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "through the quarter — and a weekend",
+        "after": "through the quarter, and a weekend",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "keeps that log and generates the quarterly summary from it.",
+        "after": "keeps that log and drafts your review summary from it.",
+        "why": "glossary"
+      },
+      {
+        "field": "body",
+        "before": "description=\"Free download — four",
+        "after": "description=\"Free download: four",
+        "why": "dash"
+      }
+    ]
+  },
+  {
+    "docId": "contentPage-templates-resume-bullets",
+    "changes": [
+      {
+        "field": "description",
+        "before": "for product managers — the what-how-result",
+        "after": "for product managers: the what-how-result",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "not tasks — with a verb bank",
+        "after": "not tasks, with a verb bank",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "The before/after section — twelve",
+        "after": "The before/after section: twelve",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "**The verb bank** — verbs",
+        "after": "**The verb bank**: verbs",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "isn't missing metrics — it's vague verbs.",
+        "after": "isn't missing metrics. It's vague verbs.",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "**Twelve before/after rewrites** — across",
+        "after": "**Twelve before/after rewrites** across",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "\"Led checkout redesign — cut form",
+        "after": "\"Led checkout redesign: cut form",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "**A drafting worksheet** — one bullet",
+        "after": "**A drafting worksheet**: one bullet",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "Keep 4–6 per role.",
+        "after": "Keep 4 to 6 per role.",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "**Ordering guidance** — lead",
+        "after": "**Ordering guidance**: lead",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "didn't decide, say so — the honest verb",
+        "after": "didn't decide, say so. The honest verb",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "levels of compression — both distill",
+        "after": "levels of compression: both distill",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "keeps them: log wins as they happen and generate resume-ready bullet drafts from your entries.",
+        "after": "keeps them: log entries as they happen, and when you change jobs Prodlog drafts your resume bullets from them.",
+        "why": "glossary"
+      },
+      {
+        "field": "body",
+        "before": "description=\"Free download — formula",
+        "after": "description=\"Free download: formula",
+        "why": "dash"
+      }
+    ]
+  },
+  {
+    "docId": "contentPage-templates-star-story-bank",
+    "changes": [
+      {
+        "field": "description",
+        "before": "for PM interviews — 10 question",
+        "after": "for PM interviews: 10 question",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "loops ask 8–12 behavioral",
+        "after": "loops ask 8 to 12 behavioral",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "Build the bank once — stop improvising",
+        "after": "Build the bank once and stop improvising",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "The category map — ten",
+        "after": "The category map: ten",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "**The category map** — the ten",
+        "after": "**The category map**: the ten",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "**A timed story structure** — Situation",
+        "after": "**A timed story structure**: Situation",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "**A worked example** — a full",
+        "after": "**A worked example**: a full",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "**A rehearsal checklist** — including",
+        "after": "**A rehearsal checklist**, including",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "Pick your 8–10 strongest entries from the last 2–3 years.",
+        "after": "Pick your 8 to 10 strongest entries from the last 2 to 3 years.",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "covers 2–3 categories — mark the overlaps",
+        "after": "covers 2 to 3 categories, so mark the overlaps",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "isn't the STAR format — it's having",
+        "after": "isn't the STAR format. It's having",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "generates STAR-format interview stories directly from your logged entries, with those details already attached — and its Summaries do the first draft of the 90-second version for you.",
+        "after": "drafts STAR stories directly from your entries, with those details already attached, including a first draft of the 90-second version.",
+        "why": "summaries-place"
+      },
+      {
+        "field": "body",
+        "before": "description=\"Free download — category",
+        "after": "description=\"Free download: category",
+        "why": "dash"
+      }
+    ]
+  }
+]

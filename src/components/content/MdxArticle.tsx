@@ -35,7 +35,7 @@ export const MdxArticle = ({
     <article className="pb-24">
       <PageHeader title={pageTitle(frontmatter)} subtitle={frontmatter.description} />
       {parts.length > 0 && (
-        <p className="-mt-10 mb-12 text-center text-sm text-muted">
+        <p className="-mt-10 mb-12 text-center text-sm text-muted-foreground">
           {parts.join(' · ')}
         </p>
       )}

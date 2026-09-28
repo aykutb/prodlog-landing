@@ -20,14 +20,15 @@ export const HubPage = ({ hub, section, entries }: HubPageProps) => (
           <Link
             key={entry.slug}
             href={sectionEntryPath(section, entry.slug)}
-            className="block p-6 border border-divider rounded-xl bg-white hover:border-deep-ink-blue/30 hover:shadow-[0_4px_20px_-5px_rgba(31,42,68,0.1)] transition-all"
+            className="block p-6 border border-border rounded-xl bg-surface hover:border-ink/30 transition-all"
           >
-            <h2 className="text-primary font-semibold text-lg mb-2">
+            <h2 className="text-ink font-semibold text-lg mb-2">
               {entry.frontmatter.headline ?? entry.frontmatter.title}
             </h2>
-            <p className="text-secondary text-sm leading-relaxed">
+            <p className="text-muted-foreground text-sm leading-relaxed">
               {entry.frontmatter.description}
             </p>
+            {hub.cardNotes?.[entry.slug] && <p className="mt-2 text-sm font-medium text-ink">{hub.cardNotes[entry.slug]}</p>}
           </Link>
         ))}
       </div>

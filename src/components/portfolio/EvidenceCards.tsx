@@ -47,9 +47,8 @@ import {
 } from './icons';
 
 // Read-only, server-rendered versions of the dashboard's evidence bento
-// cards (prodlog2 src/components/bento/cards). Same palette mapping as
-// BentoCards.tsx: foreground→primary, muted-foreground→muted,
-// border→divider, accent→impact, muted fills→charcoal.
+// cards (prodlog2 src/components/bento/cards). They use the dashboard's
+// token names directly (app/globals.css mirrors prodlog2 src/index.css).
 
 type Size = BentoCardConfig['size'];
 
@@ -77,11 +76,11 @@ const ProductEyebrow = ({ product, size }: { product: PortfolioProduct; size: Si
           className={`${s.box} rounded-md shrink-0 ${product.icon_url ? 'object-cover' : 'object-contain'}`}
         />
       ) : (
-        <div className={`${s.box} rounded-md bg-charcoal/50 flex items-center justify-center shrink-0`}>
-          <PackageIcon className={`${s.pkg} text-muted`} />
+        <div className={`${s.box} rounded-md bg-muted/50 flex items-center justify-center shrink-0`}>
+          <PackageIcon className={`${s.pkg} text-muted-foreground`} />
         </div>
       )}
-      <span className={`${s.text} font-serif font-semibold text-primary truncate`}>{product.name}</span>
+      <span className={`${s.text} font-serif font-semibold text-ink truncate`}>{product.name}</span>
     </div>
   );
 };
@@ -97,7 +96,7 @@ const JUDGMENT_TAGS = {
 const JudgmentTag = ({ kind }: { kind: keyof typeof JUDGMENT_TAGS }) => {
   const { label, Icon } = JUDGMENT_TAGS[kind];
   return (
-    <p className="flex items-center gap-1.5 mb-1.5 shrink-0 text-muted">
+    <p className="flex items-center gap-1.5 mb-1.5 shrink-0 text-muted-foreground">
       <Icon className="w-3 h-3" />
       <span className="text-[10px] font-medium uppercase tracking-wider">{label}</span>
     </p>
@@ -106,16 +105,16 @@ const JudgmentTag = ({ kind }: { kind: keyof typeof JUDGMENT_TAGS }) => {
 
 // Quiet confirmation mark — never a loud badge.
 const VerifiedMark = ({ count, withLabel }: { count: number; withLabel?: boolean }) => (
-  <span className="inline-flex items-center gap-1 text-[11px] text-muted">
-    <CheckIcon className="w-3.5 h-3.5 text-primary shrink-0" />
+  <span className="inline-flex items-center gap-1 text-[11px] text-muted-foreground">
+    <CheckIcon className="w-3.5 h-3.5 text-ink shrink-0" />
     {withLabel ? (count > 1 ? `Confirmed by ${count}` : 'Confirmed') : count}
   </span>
 );
 
 const Chip = ({ children, heavy }: { children: React.ReactNode; heavy?: boolean }) => (
   <span
-    className={`rounded-full bg-charcoal/50 px-2 py-0.5 text-[11px] whitespace-nowrap ${
-      heavy ? 'font-semibold text-primary' : 'font-medium text-muted'
+    className={`rounded-full bg-muted/50 px-2 py-0.5 text-[11px] whitespace-nowrap ${
+      heavy ? 'font-semibold text-ink' : 'font-medium text-muted-foreground'
     }`}
   >
     {children}
@@ -123,7 +122,7 @@ const Chip = ({ children, heavy }: { children: React.ReactNode; heavy?: boolean 
 );
 
 const LinkedLogLine = ({ log }: { log: PortfolioLog }) => (
-  <div className="flex items-center gap-1.5 text-xs text-muted/80 min-w-0">
+  <div className="flex items-center gap-1.5 text-xs text-muted-foreground/80 min-w-0">
     <FileTextIcon className="w-3.5 h-3.5 shrink-0" />
     <span className="truncate">{log.title}</span>
   </div>
@@ -133,13 +132,13 @@ const LinkedLogLine = ({ log }: { log: PortfolioLog }) => (
 
 export const NowCard = ({ card, size }: { card: BentoCardConfig; size: Size }) => (
   <div className="p-4 h-full flex flex-col relative">
-    <h3 className="text-sm font-serif font-medium text-muted mb-2">Now</h3>
-    <p className={`text-primary text-sm ${size === 'S' ? 'sm:line-clamp-2' : 'sm:line-clamp-3'}`}>
+    <h3 className="text-sm font-serif font-medium text-muted-foreground mb-2">Now</h3>
+    <p className={`text-ink text-sm ${size === 'S' ? 'sm:line-clamp-2' : 'sm:line-clamp-3'}`}>
       {card.nowText?.trim()}
     </p>
     {card.nowUpdatedAt && (
       <div className="mt-auto pt-2">
-        <p className="text-xs text-muted">{formatUpdatedStamp(card.nowUpdatedAt)}</p>
+        <p className="text-xs text-muted-foreground">{formatUpdatedStamp(card.nowUpdatedAt)}</p>
       </div>
     )}
   </div>
@@ -152,7 +151,7 @@ const SkillSegments = ({ level }: { level: number }) => (
     {[1, 2, 3, 4].map((step) => (
       <span
         key={step}
-        className={`h-1.5 w-3 rounded-sm ${step <= level ? 'bg-primary' : 'border border-divider'}`}
+        className={`h-1.5 w-3 rounded-sm ${step <= level ? 'bg-ink' : 'border border-border'}`}
       />
     ))}
   </span>
@@ -172,7 +171,7 @@ const SkillRow = ({
       aria-label={`${skill.name}, ${label}${verified ? `, confirmed by ${count} collaborator${count === 1 ? '' : 's'}` : ''}`}
       className="flex items-center gap-2 min-w-0"
     >
-      <span className={`text-sm truncate ${verified ? 'font-medium text-primary' : 'text-primary'}`}>
+      <span className={`text-sm truncate ${verified ? 'font-medium text-ink' : 'text-ink'}`}>
         {skill.name}
       </span>
       <SkillSegments level={skill.level} />
@@ -196,11 +195,11 @@ export const SkillsMatrixCard = ({ portfolio, size }: { portfolio: Portfolio; si
 
     return (
       <div className="p-5 h-full flex flex-col overflow-hidden">
-        <h3 className="text-sm font-serif font-medium text-muted mb-2 shrink-0">Skills</h3>
+        <h3 className="text-sm font-serif font-medium text-muted-foreground mb-2 shrink-0">Skills</h3>
         <div className="flex-1 min-h-0 overflow-hidden space-y-2.5">
           {groups.map((group) => (
             <section key={group.category}>
-              <h4 className="text-[11px] uppercase tracking-wide text-muted/70 mb-1">{group.category}</h4>
+              <h4 className="text-[11px] uppercase tracking-wide text-muted-foreground/70 mb-1">{group.category}</h4>
               <ul className="space-y-1">
                 {group.items.map((skill) => (
                   <SkillRow key={skill.id} skill={skill} count={counts[skill.id] ?? 0} />
@@ -224,13 +223,13 @@ export const SkillsMatrixCard = ({ portfolio, size }: { portfolio: Portfolio; si
 
   return (
     <div className="px-4 py-3 h-full flex flex-col overflow-hidden">
-      <h3 className="text-sm font-serif font-medium text-muted mb-1.5 shrink-0">Skills</h3>
+      <h3 className="text-sm font-serif font-medium text-muted-foreground mb-1.5 shrink-0">Skills</h3>
       <ul className="flex-1 min-h-0 overflow-hidden space-y-1">
         {top.map((skill) => (
           <SkillRow key={skill.id} skill={skill} count={counts[skill.id] ?? 0} />
         ))}
       </ul>
-      {remaining > 0 && <p className="text-[11px] text-muted/70 shrink-0 mt-1">+{remaining} more</p>}
+      {remaining > 0 && <p className="text-[11px] text-muted-foreground/70 shrink-0 mt-1">+{remaining} more</p>}
     </div>
   );
 };
@@ -247,12 +246,12 @@ export const DomainExpertiseCard = ({
   if (size === 'S') {
     return (
       <div className="p-4 h-full flex flex-col overflow-hidden">
-        <h3 className="text-sm font-serif font-medium text-muted mb-2 shrink-0">Domains</h3>
+        <h3 className="text-sm font-serif font-medium text-muted-foreground mb-2 shrink-0">Domains</h3>
         <div className="flex flex-wrap gap-1.5 content-start overflow-hidden">
           {domains.slice(0, 4).map((domain) => (
             <span
               key={domain.id}
-              className="rounded-full bg-charcoal/50 px-2 py-0.5 text-xs font-medium text-primary whitespace-nowrap"
+              className="rounded-full bg-muted/50 px-2 py-0.5 text-xs font-medium text-ink whitespace-nowrap"
             >
               {domain.name}
             </span>
@@ -264,7 +263,7 @@ export const DomainExpertiseCard = ({
 
   return (
     <div className="px-4 py-3 h-full flex flex-col overflow-hidden">
-      <h3 className="text-sm font-serif font-medium text-muted mb-1.5 shrink-0">Domain Expertise</h3>
+      <h3 className="text-sm font-serif font-medium text-muted-foreground mb-1.5 shrink-0">Domain Expertise</h3>
       <ul className="flex-1 min-h-0 overflow-hidden space-y-1">
         {domains.map((domain) => {
           const label = getDomainDepthLabel(domain.depth);
@@ -274,8 +273,8 @@ export const DomainExpertiseCard = ({
               aria-label={`${domain.name}, ${label}, ${domain.years} year${domain.years === 1 ? '' : 's'}`}
               className="flex items-baseline min-w-0 leading-snug"
             >
-              <span className="text-sm font-medium text-primary truncate">{domain.name}</span>
-              <span className="text-xs text-muted shrink-0 whitespace-nowrap">
+              <span className="text-sm font-medium text-ink truncate">{domain.name}</span>
+              <span className="text-xs text-muted-foreground shrink-0 whitespace-nowrap">
                 {' · '}
                 {label} · {domain.years} yr{domain.years === 1 ? '' : 's'}
               </span>
@@ -308,14 +307,14 @@ const MetricNumber = ({
   const Arrow = metric.direction === 'down' ? ArrowDownIcon : ArrowUpIcon;
   return (
     <div
-      className={`flex items-center leading-none tabular-nums tracking-tight text-primary shrink-0 ${
+      className={`flex items-center leading-none tabular-nums tracking-tight text-ink shrink-0 ${
         verified ? 'font-semibold' : 'font-medium'
       } ${numberSizeClass[size]}`}
     >
-      {prefix && <span className="text-[0.42em] text-muted mr-[0.06em]">{prefix}</span>}
+      {prefix && <span className="text-[0.42em] text-muted-foreground mr-[0.06em]">{prefix}</span>}
       <span>{main}</span>
-      {suffix && <span className="text-[0.42em] text-muted ml-[0.08em]">{suffix}</span>}
-      <Arrow className="w-[0.4em] h-[0.4em] text-muted ml-[0.12em] shrink-0" />
+      {suffix && <span className="text-[0.42em] text-muted-foreground ml-[0.08em]">{suffix}</span>}
+      <Arrow className="w-[0.4em] h-[0.4em] text-muted-foreground ml-[0.12em] shrink-0" />
     </div>
   );
 };
@@ -327,13 +326,13 @@ const MetricBeforeAfterLine = ({ metric, size }: { metric: PortfolioImpactMetric
     <div className={`flex items-center gap-1.5 min-w-0 shrink-0 ${size === 'L' ? 'text-sm' : 'text-xs'}`}>
       {hasBeforeAfter && (
         <span className="inline-flex items-center gap-1 tabular-nums shrink-0">
-          <span className="text-muted">{formatMetricString(metric.before_value as number, metric.unit)}</span>
-          <ArrowRightIcon className="w-3 h-3 text-muted/70 shrink-0" />
-          <span className="text-primary font-medium">{formatMetricString(metric.after_value as number, metric.unit)}</span>
+          <span className="text-muted-foreground">{formatMetricString(metric.before_value as number, metric.unit)}</span>
+          <ArrowRightIcon className="w-3 h-3 text-muted-foreground/70 shrink-0" />
+          <span className="text-ink font-medium">{formatMetricString(metric.after_value as number, metric.unit)}</span>
         </span>
       )}
-      {hasBeforeAfter && metric.timeframe && <span className="text-muted/50 shrink-0">·</span>}
-      {metric.timeframe && <span className="text-muted truncate">{metric.timeframe}</span>}
+      {hasBeforeAfter && metric.timeframe && <span className="text-muted-foreground/50 shrink-0">·</span>}
+      {metric.timeframe && <span className="text-muted-foreground truncate">{metric.timeframe}</span>}
     </div>
   );
 };
@@ -352,7 +351,7 @@ export const ImpactMetricCard = ({
   const count = portfolio.impactMetricVerificationCounts[metric.id] ?? 0;
   const verified = count > 0;
   const log = metric.entry_id ? portfolio.logs.find((l) => l.id === metric.entry_id) ?? null : null;
-  const measureClass = `leading-snug ${size === 'L' ? 'text-base' : 'text-sm'} ${verified ? 'text-primary' : 'text-muted'}`;
+  const measureClass = `leading-snug ${size === 'L' ? 'text-base' : 'text-sm'} ${verified ? 'text-ink' : 'text-muted-foreground'}`;
 
   if (size === 'M') {
     return (
@@ -402,11 +401,11 @@ export const ImpactMetricCard = ({
           <MetricBeforeAfterLine metric={metric} size="L" />
         </div>
       </div>
-      <div className="border-t border-divider pt-2.5 space-y-1.5">
-        <span className="block text-sm font-medium text-primary">{getMetricRoleLabel(metric.role)}</span>
+      <div className="border-t border-border pt-2.5 space-y-1.5">
+        <span className="block text-sm font-medium text-ink">{getMetricRoleLabel(metric.role)}</span>
         {metric.confound && (
-          <p className="text-sm text-muted sm:line-clamp-2">
-            <span className="text-[11px] uppercase tracking-wide text-muted/70 mr-1.5">Not mine</span>
+          <p className="text-sm text-muted-foreground sm:line-clamp-2">
+            <span className="text-[11px] uppercase tracking-wide text-muted-foreground/70 mr-1.5">Not mine</span>
             {metric.confound}
           </p>
         )}
@@ -419,9 +418,9 @@ export const ImpactMetricCard = ({
 // ─── decision ────────────────────────────────────────────────────────
 
 const InsteadOf = ({ alternative, className }: { alternative: string; className?: string }) => (
-  <p className={`text-muted ${className ?? ''}`}>
+  <p className={`text-muted-foreground ${className ?? ''}`}>
     <span>instead of </span>
-    <span className="line-through decoration-muted/60">{alternative}</span>
+    <span className="line-through decoration-muted-foreground/60">{alternative}</span>
   </p>
 );
 
@@ -456,15 +455,15 @@ export const DecisionCard = ({
           hideLabel="The call"
           face={
             <>
-              <p className="text-sm font-semibold text-primary leading-snug line-clamp-2">{decision.decision}</p>
+              <p className="text-sm font-semibold text-ink leading-snug line-clamp-2">{decision.decision}</p>
               <InsteadOf alternative={decision.alternative} className="text-xs mt-0.5 line-clamp-1" />
             </>
           }
           reveal={
             <div className="space-y-1">
-              <p className="text-sm text-primary line-clamp-2">{decision.why}</p>
-              <p className="text-xs text-muted line-clamp-2">
-                <span className="text-[11px] uppercase tracking-wide text-muted/70 mr-1.5">What it cost</span>
+              <p className="text-sm text-ink line-clamp-2">{decision.why}</p>
+              <p className="text-xs text-muted-foreground line-clamp-2">
+                <span className="text-[11px] uppercase tracking-wide text-muted-foreground/70 mr-1.5">What it cost</span>
                 {decision.cost}
               </p>
             </div>
@@ -482,13 +481,13 @@ export const DecisionCard = ({
         {verified && <VerifiedMark count={count} withLabel />}
       </div>
       <div className="flex-1 min-h-0 overflow-hidden pt-3">
-        <p className="text-lg font-semibold text-primary leading-snug sm:line-clamp-2">{decision.decision}</p>
+        <p className="text-lg font-semibold text-ink leading-snug sm:line-clamp-2">{decision.decision}</p>
         <InsteadOf alternative={decision.alternative} className="text-sm mt-1 sm:line-clamp-2" />
-        <p className="text-sm text-primary/80 mt-2.5 sm:line-clamp-2">{decision.why}</p>
+        <p className="text-sm text-ink/80 mt-2.5 sm:line-clamp-2">{decision.why}</p>
       </div>
-      <div className="border-t border-divider pt-2.5 space-y-1.5">
-        <p className="text-sm text-muted sm:line-clamp-2">
-          <span className="text-[11px] uppercase tracking-wide text-muted/70 mr-1.5">What it cost</span>
+      <div className="border-t border-border pt-2.5 space-y-1.5">
+        <p className="text-sm text-muted-foreground sm:line-clamp-2">
+          <span className="text-[11px] uppercase tracking-wide text-muted-foreground/70 mr-1.5">What it cost</span>
           {decision.cost}
         </p>
         {(decision.aged || log) && (
@@ -502,7 +501,7 @@ export const DecisionCard = ({
           </div>
         )}
         {decision.aged && decision.aged_note && (
-          <p className="text-sm text-muted sm:line-clamp-1">{decision.aged_note}</p>
+          <p className="text-sm text-muted-foreground sm:line-clamp-1">{decision.aged_note}</p>
         )}
       </div>
     </div>
@@ -513,10 +512,10 @@ export const DecisionCard = ({
 
 const ChoseOver = ({ tradeoff, size }: { tradeoff: PortfolioTradeoff; size: Size }) => (
   <div>
-    <p className="text-sm font-semibold text-primary leading-snug sm:line-clamp-2">{tradeoff.chose}</p>
-    <p className={`text-muted mt-0.5 text-xs ${size === 'S' ? 'sm:line-clamp-2' : 'sm:line-clamp-1'}`}>
+    <p className="text-sm font-semibold text-ink leading-snug sm:line-clamp-2">{tradeoff.chose}</p>
+    <p className={`text-muted-foreground mt-0.5 text-xs ${size === 'S' ? 'sm:line-clamp-2' : 'sm:line-clamp-1'}`}>
       <span>over </span>
-      <span className="line-through decoration-muted/60">{tradeoff.over}</span>
+      <span className="line-through decoration-muted-foreground/60">{tradeoff.over}</span>
     </p>
   </div>
 );
@@ -547,7 +546,7 @@ export const TradeoffCard = ({
           showLabel="Why"
           hideLabel="The choice"
           face={<ChoseOver tradeoff={tradeoff} size="S" />}
-          reveal={<p className="text-xs text-primary line-clamp-4">{tradeoff.because}</p>}
+          reveal={<p className="text-xs text-ink line-clamp-4">{tradeoff.because}</p>}
         />
       </div>
     );
@@ -565,7 +564,7 @@ export const TradeoffCard = ({
       </div>
       <div className="flex-1 flex flex-col justify-center min-h-0">
         <ChoseOver tradeoff={tradeoff} size="M" />
-        <p className="text-xs text-muted mt-1.5 sm:line-clamp-2">{tradeoff.because}</p>
+        <p className="text-xs text-muted-foreground mt-1.5 sm:line-clamp-2">{tradeoff.because}</p>
       </div>
     </div>
   );
@@ -576,11 +575,11 @@ export const TradeoffCard = ({
 const FreedLine = ({ freed, size, className }: { freed: string; size: Size; className?: string }) => (
   <p className={`flex items-start gap-1.5 min-w-0 ${size === 'L' ? 'text-sm' : 'text-xs'} ${className ?? ''}`}>
     <CornerDownRightIcon
-      className={`shrink-0 text-muted ${size === 'L' ? 'w-4 h-4 mt-0.5' : 'w-3.5 h-3.5'}`}
+      className={`shrink-0 text-muted-foreground ${size === 'L' ? 'w-4 h-4 mt-0.5' : 'w-3.5 h-3.5'}`}
     />
     <span className="min-w-0 sm:line-clamp-2">
-      <span className="text-muted">freed </span>
-      <span className="font-medium text-primary">{freed}</span>
+      <span className="text-muted-foreground">freed </span>
+      <span className="font-medium text-ink">{freed}</span>
     </span>
   </p>
 );
@@ -626,11 +625,11 @@ export const KillCard = ({
           hideLabel="The kill"
           face={
             <>
-              <p className="text-sm font-semibold text-primary leading-snug line-clamp-2">{kill.killed}</p>
+              <p className="text-sm font-semibold text-ink leading-snug line-clamp-2">{kill.killed}</p>
               <FreedLine freed={kill.freed} size="M" className="mt-1" />
             </>
           }
-          reveal={<p className="text-sm text-primary line-clamp-3">{kill.why}</p>}
+          reveal={<p className="text-sm text-ink line-clamp-3">{kill.why}</p>}
         />
       </div>
     );
@@ -651,13 +650,13 @@ export const KillCard = ({
         </div>
       )}
       <div className="flex-1 min-h-0 overflow-hidden pt-3">
-        <p className="text-lg font-semibold text-primary leading-snug sm:line-clamp-2">{kill.killed}</p>
+        <p className="text-lg font-semibold text-ink leading-snug sm:line-clamp-2">{kill.killed}</p>
         <FreedLine freed={kill.freed} size="L" className="mt-1.5" />
-        <p className="text-sm text-primary/80 mt-2.5 sm:line-clamp-3">{kill.why}</p>
+        <p className="text-sm text-ink/80 mt-2.5 sm:line-clamp-3">{kill.why}</p>
       </div>
       {(metadata.length > 0 || log) && (
-        <div className="border-t border-divider pt-2.5 space-y-1.5">
-          {metadata.length > 0 && <p className="text-xs text-muted">{metadata.join(' · ')}</p>}
+        <div className="border-t border-border pt-2.5 space-y-1.5">
+          {metadata.length > 0 && <p className="text-xs text-muted-foreground">{metadata.join(' · ')}</p>}
           {log && <LinkedLogLine log={log} />}
         </div>
       )}
@@ -692,14 +691,14 @@ export const TestimonialCard = ({
       aria-label={`Testimonial from ${testimonial.collaborator_name}, confirmed`}
     >
       {/* Accent-tinted verification badge */}
-      <span className="inline-flex w-fit shrink-0 items-center gap-1 rounded-full bg-impact/10 px-2 py-0.5 text-impact">
+      <span className="inline-flex w-fit shrink-0 items-center gap-1 rounded-full bg-ink/10 px-2 py-0.5 text-ink">
         <BadgeCheckIcon className="w-3 h-3 shrink-0" />
         <span className="text-[10px] font-medium uppercase tracking-wider">Confirmed testimonial</span>
       </span>
 
       {/* The quote is the hero: serif voice, larger than body text */}
       <blockquote
-        className={`flex-1 min-h-0 overflow-hidden font-serif text-primary leading-snug ${
+        className={`flex-1 min-h-0 overflow-hidden font-serif text-ink leading-snug ${
           // L never clamps — cardSpanClass gives the card extra grid rows to
           // fit the full quote. M stays the deliberately compact variant.
           isLarge ? 'mt-2.5 text-xl' : 'mt-2 text-base sm:line-clamp-2'
@@ -709,35 +708,35 @@ export const TestimonialCard = ({
       </blockquote>
 
       {/* Credential block under a hairline divider */}
-      <div className={`shrink-0 border-t border-divider ${isLarge ? 'mt-3 pt-3' : 'mt-2 pt-2'}`}>
+      <div className={`shrink-0 border-t border-border ${isLarge ? 'mt-3 pt-3' : 'mt-2 pt-2'}`}>
         <div className="flex items-center justify-between gap-3 min-w-0">
           <div className="flex items-center gap-2.5 min-w-0">
             <div
-              className={`rounded-full bg-impact/10 flex items-center justify-center shrink-0 ${
+              className={`rounded-full bg-ink/10 flex items-center justify-center shrink-0 ${
                 isLarge ? 'w-9 h-9' : 'w-8 h-8'
               }`}
             >
-              <span className="text-xs font-medium text-impact">{initialsOf(testimonial.collaborator_name)}</span>
+              <span className="text-xs font-medium text-ink">{initialsOf(testimonial.collaborator_name)}</span>
             </div>
             <div className="min-w-0">
-              <p className="text-sm font-medium text-primary min-w-0 truncate">
+              <p className="text-sm font-medium text-ink min-w-0 truncate">
                 {testimonial.collaborator_name}
-                <CheckIcon className="inline w-3.5 h-3.5 ml-1 align-[-2px] text-primary" />
+                <CheckIcon className="inline w-3.5 h-3.5 ml-1 align-[-2px] text-ink" />
               </p>
-              {meta && <p className="text-xs text-muted truncate">{meta}</p>}
+              {meta && <p className="text-xs text-muted-foreground truncate">{meta}</p>}
             </div>
           </div>
           {testimonial.confirmed_at && (
             <div className="text-right shrink-0">
-              <p className="text-xs text-muted">
+              <p className="text-xs text-muted-foreground">
                 {testimonial.edited_by_collaborator ? 'Edited & confirmed' : 'Confirmed'}
               </p>
-              <p className="text-[11px] text-muted/70">{formatMonthYear(testimonial.confirmed_at)}</p>
+              <p className="text-[11px] text-muted-foreground/70">{formatMonthYear(testimonial.confirmed_at)}</p>
             </div>
           )}
         </div>
         {isLarge && testimonial.relationship && (
-          <p className="mt-1.5 text-xs text-muted sm:line-clamp-1">{testimonial.relationship}</p>
+          <p className="mt-1.5 text-xs text-muted-foreground sm:line-clamp-1">{testimonial.relationship}</p>
         )}
       </div>
     </div>
@@ -749,12 +748,12 @@ export const TestimonialCard = ({
 const ImagePairCell = ({ path, label }: { path: string; label: string }) => {
   const src = portfolioImageUrl(path);
   return (
-    <div className="relative overflow-hidden rounded-lg bg-charcoal/40 h-full">
+    <div className="relative overflow-hidden rounded-lg bg-muted/40 h-full">
       {src && (
         // eslint-disable-next-line @next/next/no-img-element
         <img src={src} alt={label} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
       )}
-      <span className="absolute bottom-1.5 left-1.5 rounded-full border border-divider bg-white/85 px-2 py-0.5 text-[10px] font-medium text-primary">
+      <span className="absolute bottom-1.5 left-1.5 rounded-full border border-border bg-surface/85 px-2 py-0.5 text-[10px] font-medium text-ink">
         {label}
       </span>
     </div>
@@ -796,7 +795,7 @@ export const BeforeAfterCard = ({
         {header}
         {pair}
         {beforeAfter.caption && (
-          <p className="text-sm text-muted sm:line-clamp-2 shrink-0">{beforeAfter.caption}</p>
+          <p className="text-sm text-muted-foreground sm:line-clamp-2 shrink-0">{beforeAfter.caption}</p>
         )}
       </div>
     );
@@ -810,7 +809,7 @@ export const BeforeAfterCard = ({
           showLabel="What changed"
           hideLabel="The images"
           face={pair}
-          reveal={<p className="text-sm text-primary line-clamp-3">{beforeAfter.caption}</p>}
+          reveal={<p className="text-sm text-ink line-clamp-3">{beforeAfter.caption}</p>}
         />
       ) : (
         pair
@@ -839,8 +838,8 @@ export const EmbedCard = ({ card, size }: { card: BentoCardConfig; size: Size })
         <div
           className={
             isLarge
-              ? 'relative w-full max-h-full overflow-hidden rounded-lg bg-charcoal/40'
-              : 'relative w-full h-full overflow-hidden rounded-lg bg-charcoal/40'
+              ? 'relative w-full max-h-full overflow-hidden rounded-lg bg-muted/40'
+              : 'relative w-full h-full overflow-hidden rounded-lg bg-muted/40'
           }
           style={isLarge ? { aspectRatio: provider.aspectRatio } : undefined}
         >
@@ -855,7 +854,7 @@ export const EmbedCard = ({ card, size }: { card: BentoCardConfig; size: Size })
           />
         </div>
         {isLarge && (
-          <span className="absolute top-2 right-2 rounded-full border border-divider bg-white/85 px-2 py-0.5 text-[10px] font-medium text-primary pointer-events-none">
+          <span className="absolute top-2 right-2 rounded-full border border-border bg-surface/85 px-2 py-0.5 text-[10px] font-medium text-ink pointer-events-none">
             {provider.name}
           </span>
         )}
@@ -867,15 +866,15 @@ export const EmbedCard = ({ card, size }: { card: BentoCardConfig; size: Size })
         href={linkParts.href}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex flex-col justify-center gap-1 flex-1 min-h-0 rounded-lg border border-divider p-3 hover:bg-charcoal/40 transition-colors"
+        className="flex flex-col justify-center gap-1 flex-1 min-h-0 rounded-lg border border-border p-3 hover:bg-muted/40 transition-colors"
       >
         <div className="flex items-center gap-2">
-          <ExternalLinkIcon className="w-4 h-4 text-muted shrink-0" />
-          <span className="font-medium text-sm text-primary truncate">{title}</span>
+          <ExternalLinkIcon className="w-4 h-4 text-muted-foreground shrink-0" />
+          <span className="font-medium text-sm text-ink truncate">{title}</span>
         </div>
-        <p className="text-xs text-muted truncate">{linkParts.hostname}</p>
+        <p className="text-xs text-muted-foreground truncate">{linkParts.hostname}</p>
         {isLarge && card.embedCaption && (
-          <p className="text-xs text-muted line-clamp-2">{card.embedCaption}</p>
+          <p className="text-xs text-muted-foreground line-clamp-2">{card.embedCaption}</p>
         )}
       </a>
     );
@@ -883,10 +882,10 @@ export const EmbedCard = ({ card, size }: { card: BentoCardConfig; size: Size })
 
   return (
     <div className="p-4 h-full flex flex-col relative">
-      <h3 className="text-sm font-serif font-medium text-muted mb-2 truncate">{title}</h3>
+      <h3 className="text-sm font-serif font-medium text-muted-foreground mb-2 truncate">{title}</h3>
       {body}
       {isLarge && card.embedCaption?.trim() && resolved && resolved.provider !== 'link' && (
-        <p className="text-xs text-muted mt-2 line-clamp-2">{card.embedCaption}</p>
+        <p className="text-xs text-muted-foreground mt-2 line-clamp-2">{card.embedCaption}</p>
       )}
     </div>
   );
@@ -949,7 +948,7 @@ const writingMetaLine = (item: PortfolioWriting): string =>
     .join(' · ');
 
 const WritingInternalChip = () => (
-  <span className="rounded-full bg-charcoal/50 px-1.5 py-0.5 text-[10px] font-medium text-muted whitespace-nowrap shrink-0 inline-flex items-center gap-1">
+  <span className="rounded-full bg-muted/50 px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground whitespace-nowrap shrink-0 inline-flex items-center gap-1">
     <LockIcon className="w-2.5 h-2.5" />
     Internal
   </span>
@@ -977,7 +976,7 @@ const WritingShell = ({
         href={linkParts.href}
         target="_blank"
         rel="noopener noreferrer"
-        className={`block h-full hover:bg-charcoal/30 transition-colors ${className ?? ''}`}
+        className={`block h-full hover:bg-muted/30 transition-colors ${className ?? ''}`}
         aria-label={`${label} (opens in a new tab)`}
       >
         {children}
@@ -992,7 +991,7 @@ const WritingShell = ({
 };
 
 const WritingTag = () => (
-  <p className="flex items-center gap-1.5 shrink-0 text-muted">
+  <p className="flex items-center gap-1.5 shrink-0 text-muted-foreground">
     <PenLineIcon className="w-3 h-3" />
     <span className="text-[10px] font-medium uppercase tracking-wider">Writing</span>
   </p>
@@ -1014,17 +1013,17 @@ export const WritingCard = ({ writing, size }: { writing: PortfolioWriting; size
             <WritingCover coverImageUrl={writing.cover_image_url} title={writing.title} />
             <div className="flex-1 min-w-0 flex flex-col justify-center gap-0.5">
               <p className="flex items-start gap-1.5 min-w-0">
-                <span className="text-sm font-semibold text-primary leading-snug line-clamp-2">
+                <span className="text-sm font-semibold text-ink leading-snug line-clamp-2">
                   {writing.title}
                 </span>
                 {isLink && (
-                  <ExternalLinkIcon className="w-3 h-3 mt-0.5 text-muted shrink-0 opacity-70" />
+                  <ExternalLinkIcon className="w-3 h-3 mt-0.5 text-muted-foreground shrink-0 opacity-70" />
                 )}
                 {writing.type === 'mention' && <WritingInternalChip />}
               </p>
-              {meta && <p className="text-xs text-muted truncate">{meta}</p>}
+              {meta && <p className="text-xs text-muted-foreground truncate">{meta}</p>}
               {writing.note && (
-                <p className="text-xs text-muted/90 italic line-clamp-1">{writing.note}</p>
+                <p className="text-xs text-muted-foreground/90 italic line-clamp-1">{writing.note}</p>
               )}
             </div>
           </div>
@@ -1049,25 +1048,25 @@ export const WritingCard = ({ writing, size }: { writing: PortfolioWriting; size
         />
         <div className="flex-1 min-h-0 flex flex-col gap-1 overflow-hidden">
           {writing.series_label && (
-            <p className="text-[10px] font-medium uppercase tracking-wider text-muted truncate">
+            <p className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground truncate">
               {writing.series_label}
             </p>
           )}
           <p className="flex items-start gap-1.5 min-w-0">
-            <span className="text-base font-serif font-semibold text-primary leading-snug line-clamp-2">
+            <span className="text-base font-serif font-semibold text-ink leading-snug line-clamp-2">
               {writing.title}
             </span>
             {isLink && (
-              <ExternalLinkIcon className="w-3.5 h-3.5 mt-1 text-muted shrink-0 opacity-70" />
+              <ExternalLinkIcon className="w-3.5 h-3.5 mt-1 text-muted-foreground shrink-0 opacity-70" />
             )}
           </p>
-          {writing.excerpt && <p className="text-xs text-muted line-clamp-2">{writing.excerpt}</p>}
+          {writing.excerpt && <p className="text-xs text-muted-foreground line-clamp-2">{writing.excerpt}</p>}
         </div>
         {(meta || writing.note) && (
           <div className="shrink-0 space-y-0.5">
-            {meta && <p className="text-[11px] text-muted/80 truncate">{meta}</p>}
+            {meta && <p className="text-[11px] text-muted-foreground/80 truncate">{meta}</p>}
             {writing.note && (
-              <p className="text-xs text-muted/90 italic line-clamp-2">{writing.note}</p>
+              <p className="text-xs text-muted-foreground/90 italic line-clamp-2">{writing.note}</p>
             )}
           </div>
         )}

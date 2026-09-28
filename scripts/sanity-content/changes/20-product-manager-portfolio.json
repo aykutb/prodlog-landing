@@ -1,0 +1,241 @@
+[
+  {
+    "docId": "contentPage-pillar-product-manager-portfolio",
+    "changes": [
+      {
+        "field": "title",
+        "before": "Build One | Prodlog",
+        "after": "Build One",
+        "why": "brief"
+      },
+      {
+        "field": "body",
+        "before": "collection of your work — the problems",
+        "after": "collection of your work: the problems",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "has one — and it is specific, current, and credible — hiring",
+        "after": "has one, and it is specific, current, and credible, hiring",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "looks like](/sample)",
+        "after": "looks like](/p/priya_r)",
+        "why": "link"
+      },
+      {
+        "field": "body",
+        "before": "a featured impact with metrics",
+        "after": "a featured entry with metrics",
+        "why": "glossary"
+      },
+      {
+        "field": "body",
+        "before": "a metric-backed impact, activity",
+        "after": "a metric-backed entry, activity",
+        "why": "glossary"
+      },
+      {
+        "field": "body",
+        "before": "a published story — one shareable page.",
+        "after": "a published story, all on one shareable page.",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "another function — you need",
+        "after": "another function: you need",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "written work samples** — product",
+        "after": "written work samples**: product",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "public profile** — speaking",
+        "after": "public profile**: speaking",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "foundation here — private",
+        "after": "foundation here: private",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "Not a biography — interviewers want",
+        "after": "Not a biography. Interviewers want",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "proof on top — flowing",
+        "after": "proof on top, flowing",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "a deprioritization — the alternatives considered, the opportunity cost, the revisit criteria — tells",
+        "after": "a deprioritization (the alternatives considered, the opportunity cost, the revisit criteria) tells",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "and a verified collaborator badge",
+        "after": "and a collaborator confirmation badge",
+        "why": "glossary"
+      },
+      {
+        "field": "body",
+        "before": "and a verified collaborator is what",
+        "after": "and a collaborator's confirmation is what",
+        "why": "glossary"
+      },
+      {
+        "field": "body",
+        "before": "entry types — not real people.",
+        "after": "entry types, not real people.",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "metric moved — the win was",
+        "after": "metric moved. The win was",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "brag-document-template) — the format",
+        "after": "brag-document-template): the format",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "your 5–8 strongest",
+        "after": "your 5 to 8 strongest",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "Expand 2–3 into",
+        "after": "Expand 2 to 3 into",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "specific claim — the scope call",
+        "after": "specific claim: the scope call",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "the container — but the container",
+        "after": "the container, but the container",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "## PM portfolio formats — which",
+        "after": "## PM portfolio formats: which",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "**LinkedIn \"Featured\" section.**",
+        "after": "**A profile's \"Featured\" section.**",
+        "why": "linkedin"
+      },
+      {
+        "field": "body",
+        "before": "LinkedIn Featured low effort",
+        "after": "a profile Featured section low effort",
+        "why": "linkedin"
+      },
+      {
+        "field": "body",
+        "before": "## The maintenance problem — why",
+        "after": "## The maintenance problem: why",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "need one — which is exactly",
+        "after": "need one, which is exactly",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "generates itself — case studies",
+        "after": "generates itself: case studies",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "That is the problem Prodlog is built around. **Logs** solve the capture and habit problem — web, mobile, Slack, browser extension, or Claude MCP, so you can record impact where work already happens. **Verification** solves the credibility problem — collaborators can endorse an entry via a one-click email link, no signup required. **Summaries** and a public **@username** portfolio page solve the \"I need to share this by Friday\" problem. If you want the mechanics, [see how it works](/how-it-works). If you want to inspect the output first, [browse a sample](/sample).",
+        "after": "That is the problem Prodlog is built around. You log entries from the web, Slack, email, or iOS, in a line or two, where work already happens. Collaborators can confirm an entry, so your account is corroborated, not just claimed. The same entries prep your 1:1s and draft your reviews, and when you change jobs, your log becomes your portfolio. Publishing it is free. If you want the mechanics, [see how it works](/how-it-works). If you want to inspect the output first, [see a real one](/p/priya_r).",
+        "why": "brief"
+      },
+      {
+        "field": "body",
+        "before": "screening artifact — one page",
+        "after": "screening artifact: one page",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "and the result — without proprietary screenshots, internal tool names, or unreleased roadmap details — is standard",
+        "after": "and the result (without proprietary screenshots, internal tool names, or unreleased roadmap details) is standard",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "your audience — startup loops",
+        "after": "your audience: startup loops",
+        "why": "dash"
+      },
+      {
+        "field": "body",
+        "before": "Capture impact as it happens, then share a finished page when you need one — free to start, no credit card.",
+        "after": "Log your work as it happens, and when you change jobs, your log becomes your portfolio. Publishing it is free, and so is getting started.",
+        "why": "brief"
+      },
+      {
+        "field": "body",
+        "before": "href=\"/sample\"",
+        "after": "href=\"/p/priya_r\"",
+        "why": "link"
+      },
+      {
+        "field": "body",
+        "before": "See a sample portfolio",
+        "after": "See a real one",
+        "why": "link"
+      },
+      {
+        "field": "body",
+        "before": "<ProcessStep title=\"Get at least one entry verified or endorsed by a collaborator\">",
+        "after": "<ProcessStep title=\"Get at least one entry confirmed by a collaborator\">",
+        "why": "glossary"
+      },
+      {
+        "field": "body",
+        "before": "with a flow from log entry to case stu",
+        "after": "with a flow from entry to case stu",
+        "why": "glossary"
+      },
+      {
+        "field": "body",
+        "before": "flowing from log entry to a public portfolio.",
+        "after": "flowing from entry to a public portfolio.",
+        "why": "glossary"
+      }
+    ]
+  }
+]

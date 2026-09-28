@@ -2,6 +2,7 @@ import { compileMDX } from 'next-mdx-remote/rsc';
 import type { ReactElement } from 'react';
 import { mdxComponents } from '@/src/components/content/mdx-components';
 import { getSanityClient } from '@/src/lib/sanity/client';
+import { applyChanges, loadChanges, loadNewDocs } from '@/src/lib/sanity/contentChanges';
 import {
   contentPageBySectionAndSlugQuery,
   contentPageSlugsBySectionQuery,
@@ -41,6 +42,28 @@ const SECTION_MAP: Record<ContentSection, SanityContentSection> = {
   blog: 'blog',
   compare: 'compare',
 };
+
+// ── Development preview of pending content changes ──────────────────────
+// CONTENT_PREVIEW=1 npm run dev renders the Sanity pages with the change
+// lists in scripts/sanity-content/ applied in memory, and the new documents
+// added, so they can be reviewed before `npm run content:patch -- --apply`.
+// Never on in production.
+const PREVIEW = process.env.CONTENT_PREVIEW === '1' && process.env.NODE_ENV !== 'production';
+
+function preview(page: SanityContentPage): SanityContentPage;
+function preview(page: SanityContentPage | null): SanityContentPage | null;
+function preview(page: SanityContentPage | null): SanityContentPage | null {
+  if (!PREVIEW || !page) return page;
+  const doc = loadChanges().find((d) => d.docId === page._id);
+  return doc ? { ...page, ...(applyChanges(page, doc.changes).next as Partial<SanityContentPage>) } : page;
+}
+
+function previewNewPages(section: SanityContentSection): SanityContentPage[] {
+  if (!PREVIEW) return [];
+  return loadNewDocs()
+    .filter((d) => d.section === section)
+    .map((d) => ({ _id: d._id, slug: d.slug.current, title: d.title, description: d.description, headline: d.headline, order: d.order, body: d.body }));
+}
 
 function toFrontmatter(page: SanityContentPage): ContentFrontmatter {
   return {
@@ -93,17 +116,19 @@ async function fetchContentPage(
   slug: string,
 ): Promise<SanityContentPage | null> {
   const client = getSanityClient();
-  return client.fetch<SanityContentPage | null>(contentPageBySectionAndSlugQuery, {
+  const page = await client.fetch<SanityContentPage | null>(contentPageBySectionAndSlugQuery, {
     section,
     slug,
   });
+  return preview(page) ?? previewNewPages(section).find((p) => p.slug === slug) ?? null;
 }
 
 export async function getSectionSlugs(section: ContentSection): Promise<string[]> {
   const client = getSanityClient();
-  return client.fetch<string[]>(contentPageSlugsBySectionQuery, {
+  const slugs = await client.fetch<string[]>(contentPageSlugsBySectionQuery, {
     section: SECTION_MAP[section],
   });
+  return [...slugs, ...previewNewPages(SECTION_MAP[section]).map((p) => p.slug).filter((s) => !slugs.includes(s))];
 }
 
 export async function getPillarSlugs(): Promise<string[]> {
@@ -142,9 +167,10 @@ export async function getAllSectionEntries(
   section: ContentSection,
 ): Promise<LoadedContent[]> {
   const client = getSanityClient();
-  const pages = await client.fetch<SanityContentPage[]>(contentPagesBySectionQuery, {
+  const fetched = await client.fetch<SanityContentPage[]>(contentPagesBySectionQuery, {
     section: SECTION_MAP[section],
   });
+  const pages = [...fetched.map((p) => preview(p)), ...previewNewPages(SECTION_MAP[section]).filter((n) => !fetched.some((p) => p.slug === n.slug))];
 
   const entries = await Promise.all(
     pages.map((page) =>
@@ -174,12 +200,19 @@ export type NavItem = {
 
 export async function getCompareNavItems(): Promise<NavItem[]> {
   const client = getSanityClient();
-  const pages = await client.fetch<{ slug: string; title: string }[]>(
+  const fetched = await client.fetch<{ _id: string; slug: string; title: string; order?: number }[]>(
     `*[_type == "contentPage" && section == "compare"] | order(order asc) {
+      _id,
       "slug": slug.current,
-      title
+      title,
+      order
     }`,
   );
+  const pages = PREVIEW
+    ? [...fetched.map((p) => ({ ...p, ...(preview(p as SanityContentPage) as { title: string }) })), ...previewNewPages('compare').filter((n) => !fetched.some((p) => p.slug === n.slug))].sort(
+        (a, b) => (a.order ?? 99) - (b.order ?? 99),
+      )
+    : fetched;
 
   return pages.map((page) => ({
     label: page.title.replace(/\s*\|\s*Prodlog\s*$/i, '').trim(),

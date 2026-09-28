@@ -20,10 +20,10 @@ interface ResourcesDropdownProps {
 }
 
 const accentStyles: Record<NonNullable<ResourceNavItem['accent']>, string> = {
-  sage: 'bg-sage-green/12 border-sage-green/25',
-  plum: 'bg-muted-plum/12 border-muted-plum/25',
-  amber: 'bg-warm-amber/12 border-warm-amber/25',
-  ink: 'bg-deep-ink-blue/8 border-deep-ink-blue/15',
+  sage: 'bg-sage/12 border-sage/25',
+  plum: 'bg-mauve/12 border-mauve/25',
+  amber: 'bg-mustard/12 border-mustard/25',
+  ink: 'bg-ink/8 border-ink/15',
 };
 
 function ChevronRight({ className }: { className?: string }) {
@@ -75,7 +75,7 @@ function CompareIcon() {
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <p className="mb-3 px-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-muted">
+    <p className="mb-3 px-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
       {children}
     </p>
   );
@@ -98,17 +98,17 @@ function GuideCard({
     <Link
       href={item.href}
       onClick={onNavigate}
-      className={`group flex items-start gap-3 rounded-xl border border-transparent ${itemPadding} transition-all hover:border-divider hover:bg-charcoal/35 hover:shadow-[0_4px_16px_-6px_rgba(31,42,68,0.12)]`}
+      className={`group flex items-start gap-3 rounded-xl border border-transparent ${itemPadding} transition-all hover:border-border hover:bg-muted/35`}
     >
       <div className={`${iconBoxClass} ${accentStyles[accent]}`}>
         {item.icon && <img src={item.icon} alt="" className="h-5 w-5 object-contain" />}
       </div>
       <div className="min-w-0 flex-1 pt-0.5">
-        <p className="text-sm font-medium text-primary transition-colors group-hover:text-deep-ink-blue">
+        <p className="text-sm font-medium text-ink transition-colors group-hover:text-ink">
           {item.label}
         </p>
         {item.description && (
-          <p className="mt-0.5 text-xs leading-relaxed text-muted">{item.description}</p>
+          <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">{item.description}</p>
         )}
       </div>
     </Link>
@@ -126,19 +126,19 @@ function HubRow({
     <Link
       href={item.href}
       onClick={onNavigate}
-      className={`group flex items-start gap-3 rounded-xl border border-transparent ${itemPadding} transition-all hover:border-divider hover:bg-charcoal/35`}
+      className={`group flex items-start gap-3 rounded-xl border border-transparent ${itemPadding} transition-all hover:border-border hover:bg-muted/35`}
     >
       <div
-        className={`${iconBoxClass} border-divider bg-charcoal/50 text-muted transition-colors group-hover:border-deep-ink-blue/20 group-hover:text-deep-ink-blue`}
+        className={`${iconBoxClass} border-border bg-muted/50 text-muted-foreground transition-colors group-hover:border-ink/20 group-hover:text-ink`}
       >
         <HubIcon type={item.hubIcon} />
       </div>
       <div className="min-w-0 flex-1 pt-0.5">
-        <p className="text-sm font-medium text-primary group-hover:text-deep-ink-blue">
+        <p className="text-sm font-medium text-ink group-hover:text-ink">
           {item.label}
         </p>
         {item.description && (
-          <p className="mt-0.5 text-xs leading-relaxed text-muted">{item.description}</p>
+          <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">{item.description}</p>
         )}
       </div>
     </Link>
@@ -208,14 +208,14 @@ export const ResourcesDropdown = ({
 
   if (variant === 'mobile') {
     return (
-      <div className="border-b border-divider">
+      <div className="border-b border-border">
         <button
           type="button"
           onClick={() => setIsOpen(!isOpen)}
           className={`flex w-full items-center justify-between px-6 py-4 text-left text-base transition-colors ${
             isActive
-              ? 'bg-charcoal/30 font-medium text-primary'
-              : 'text-muted hover:bg-charcoal/20 hover:text-primary'
+              ? 'bg-muted/30 font-medium text-ink'
+              : 'text-muted-foreground hover:bg-muted/20 hover:text-ink'
           }`}
           aria-expanded={isOpen}
         >
@@ -252,22 +252,22 @@ export const ResourcesDropdown = ({
                 <button
                   type="button"
                   onClick={() => setCompareOpen(!compareOpen)}
-                  className="group flex w-full items-center gap-3 rounded-xl px-2.5 py-2 text-left transition-all hover:border-divider hover:bg-charcoal/35"
+                  className="group flex w-full items-center gap-3 rounded-xl px-2.5 py-2 text-left transition-all hover:border-border hover:bg-muted/35"
                   aria-expanded={compareOpen}
                 >
-                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-divider bg-charcoal/50 text-muted group-hover:text-deep-ink-blue">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-border bg-muted/50 text-muted-foreground group-hover:text-ink">
                     <CompareIcon />
                   </div>
-                  <span className="flex-1 text-sm font-medium text-primary">Compare</span>
+                  <span className="flex-1 text-sm font-medium text-ink">Compare</span>
                   <ChevronRight
-                    className={`h-4 w-4 text-muted transition-transform ${compareOpen ? 'rotate-90' : ''}`}
+                    className={`h-4 w-4 text-muted-foreground transition-transform ${compareOpen ? 'rotate-90' : ''}`}
                   />
                 </button>
                 {compareOpen && (
-                  <div className="ml-11 mt-1 space-y-0.5 border-l border-divider pl-3">
+                  <div className="ml-11 mt-1 space-y-0.5 border-l border-border pl-3">
                     <Link
                       href={COMPARE_HUB.href}
-                      className="block rounded-lg py-2 pr-2 text-sm text-muted transition-colors hover:text-primary"
+                      className="block rounded-lg py-2 pr-2 text-sm text-muted-foreground transition-colors hover:text-ink"
                       onClick={handleLinkClick}
                     >
                       All comparisons
@@ -276,7 +276,7 @@ export const ResourcesDropdown = ({
                       <Link
                         key={item.href}
                         href={item.href}
-                        className="block rounded-lg py-2 pr-2 text-sm text-muted transition-colors hover:text-primary"
+                        className="block rounded-lg py-2 pr-2 text-sm text-muted-foreground transition-colors hover:text-ink"
                         onClick={handleLinkClick}
                       >
                         {item.label}
@@ -349,7 +349,7 @@ export const ResourcesDropdown = ({
 
       {isOpen && (
         <div className="absolute left-1/2 top-full z-50 -translate-x-1/2 pt-3">
-          <div className="w-[560px] overflow-visible rounded-2xl border border-divider bg-white p-6 shadow-[0_24px_60px_-16px_rgba(31,42,68,0.22)]">
+          <div className="w-[560px] overflow-visible rounded-xl bg-surface p-6 shadow-overlay">
             <div className="grid grid-cols-2 gap-x-14">
               <div className="space-y-2">
                 <SectionLabel>Guides</SectionLabel>
@@ -367,8 +367,8 @@ export const ResourcesDropdown = ({
               </div>
             </div>
 
-            <div className="mt-5 flex flex-wrap items-center gap-2 border-t border-divider pt-4">
-              <span className="flex items-center gap-2 pr-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-muted">
+            <div className="mt-5 flex flex-wrap items-center gap-2 border-t border-border pt-4">
+              <span className="flex items-center gap-2 pr-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
                 <CompareIcon />
                 Compare
               </span>
@@ -377,7 +377,7 @@ export const ResourcesDropdown = ({
                   key={item.href}
                   href={item.href}
                   onClick={handleLinkClick}
-                  className="rounded-lg border border-divider bg-charcoal/30 px-3 py-1.5 text-xs font-medium text-secondary transition-colors hover:border-deep-ink-blue/25 hover:bg-charcoal/50 hover:text-primary"
+                  className="rounded-lg border border-border bg-muted/30 px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:border-ink/25 hover:bg-muted/50 hover:text-ink"
                 >
                   {item.label}
                 </Link>
@@ -385,7 +385,7 @@ export const ResourcesDropdown = ({
               <Link
                 href={COMPARE_HUB.href}
                 onClick={handleLinkClick}
-                className="ml-auto text-xs font-medium text-muted transition-colors hover:text-deep-ink-blue"
+                className="ml-auto text-xs font-medium text-muted-foreground transition-colors hover:text-ink"
               >
                 All comparisons →
               </Link>

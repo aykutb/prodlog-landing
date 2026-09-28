@@ -1,20 +1,25 @@
 import React from 'react';
 import {
   HeroSection,
+  SocialProofStrip,
+  BeforeYouAskSection,
+  MomentsSection,
+  OneOnOneSection,
   TriggerSection,
-  OutputsSection,
-  PortfolioSection,
-  ObjectionsSection,
+  ChangeJobsSection,
   FinalCTASection,
 } from '@/src/components/sections';
+import { todayIso } from '@/src/content/demo/priya';
 
 export const HomePage = () => (
   <>
     <HeroSection />
-    <ObjectionsSection />
+    <SocialProofStrip />
+    <BeforeYouAskSection />
+    <MomentsSection today={todayIso()} />
+    <OneOnOneSection />
     <TriggerSection />
-    <OutputsSection />
-    <PortfolioSection />
+    <ChangeJobsSection />
     <FinalCTASection />
   </>
 );

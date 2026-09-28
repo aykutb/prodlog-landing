@@ -26,7 +26,7 @@ export const LayoutClient = ({ children, compareNavItems }: LayoutClientProps) =
   }, [pathname]);
 
   return (
-    <div className="bg-ink min-h-screen text-primary selection:bg-impact/30 selection:text-white">
+    <div className="bg-background min-h-screen text-ink selection:bg-ink/30 selection:text-on-ink">
       <Navbar compareNavItems={compareNavItems} minimal={minimal} />
       <main>{children}</main>
       <Footer minimal={minimal} />

@@ -34,17 +34,17 @@ export const PortfolioPage = ({
             <img
               src={profile.avatar_url}
               alt={fullName}
-              className="w-24 h-24 rounded-full object-cover border-4 border-divider"
+              className="w-24 h-24 rounded-full object-cover border-4 border-border"
             />
           ) : (
-            <div className="w-24 h-24 rounded-full bg-impact/10 border-4 border-divider flex items-center justify-center">
-              <span className="text-3xl font-medium text-impact">{initials(portfolio)}</span>
+            <div className="w-24 h-24 rounded-full bg-ink/10 border-4 border-border flex items-center justify-center">
+              <span className="text-3xl font-medium text-ink">{initials(portfolio)}</span>
             </div>
           )}
           <div>
-            <h1 className="text-3xl font-serif font-semibold text-primary">{fullName}</h1>
-            <p className="text-sm text-muted">@{profile.username}</p>
-            {profile.title && <p className="text-lg text-muted mt-1">{profile.title}</p>}
+            <h1 className="text-3xl font-serif font-semibold text-ink">{fullName}</h1>
+            <p className="text-sm text-muted-foreground">@{profile.username}</p>
+            {profile.title && <p className="text-lg text-muted-foreground mt-1">{profile.title}</p>}
           </div>
         </div>
 
@@ -58,14 +58,15 @@ export const PortfolioPage = ({
 
         {/* CTA for visitors */}
         <div className="pt-8 pb-4 text-center">
-          <p className="text-secondary mb-4">Build your own PM portfolio</p>
+          <p className="mx-auto mb-4 max-w-md text-muted-foreground">
+            Keep your own work log. Prep your 1:1s, draft your reviews, and publish a page like this one.
+          </p>
           <a
             href="https://dashboard.prodlog.app/auth"
-            className="inline-block bg-impact hover:opacity-90 text-white px-6 py-3 rounded font-medium transition-all"
+            className="inline-block rounded-lg bg-ink px-6 py-3 font-medium text-on-ink transition-all hover:opacity-90"
           >
             Start free
           </a>
-          <p className="text-muted text-sm mt-3">Free forever. Unlimited entries, no card.</p>
         </div>
       </div>
     </div>

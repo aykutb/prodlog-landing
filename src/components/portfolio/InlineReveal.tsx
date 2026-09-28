@@ -30,7 +30,7 @@ export const InlineReveal = ({
         type="button"
         aria-expanded={expanded}
         onClick={() => setExpanded((e) => !e)}
-        className="self-start inline-flex items-center gap-1 text-xs text-muted hover:text-primary transition-colors shrink-0"
+        className="self-start inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-ink transition-colors shrink-0"
       >
         {expanded ? (
           <>

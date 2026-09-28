@@ -10,7 +10,7 @@ import { APP_STORE_URL } from '@/src/lib/appStore';
 export const AppStoreBadge = ({ className = '' }: { className?: string }) => (
   <a
     href={APP_STORE_URL}
-    className={`inline-block shrink-0 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-deep-ink-blue/50 focus-visible:ring-offset-2 ${className}`}
+    className={`inline-block shrink-0 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/50 focus-visible:ring-offset-2 ${className}`}
   >
     <img
       src="/badges/app-store-badge.svg"

@@ -7,8 +7,8 @@ interface SectionProps {
 
 export const Section = ({ title, children }: SectionProps) => (
   <div className="mb-20">
-    <h2 className="text-primary font-semibold text-xl mb-4">{title}</h2>
-    <div className="text-secondary text-base leading-relaxed space-y-4">
+    <h2 className="text-ink font-semibold text-xl mb-4">{title}</h2>
+    <div className="text-muted-foreground text-base leading-relaxed space-y-4">
       {children}
     </div>
   </div>

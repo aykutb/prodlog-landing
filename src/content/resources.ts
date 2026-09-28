@@ -68,6 +68,8 @@ export type HubConfig = {
   title: string;
   description: string;
   subtitle: string;
+  /** An extra line under a card's description, by entry slug. */
+  cardNotes?: Record<string, string>;
 };
 
 export const HUBS: Record<HubKey, HubConfig> = {
@@ -75,9 +77,10 @@ export const HUBS: Record<HubKey, HubConfig> = {
     path: '/templates',
     title: 'PM Career Templates | Prodlog',
     description:
-      'Free templates for PM brag documents, resume bullets, and quarterly review prep, built for product managers.',
+      'Free templates for PM 1:1s, brag documents, resume bullets, and review prep, built for product managers.',
     subtitle:
       'Ready-to-use formats for the career moments that matter. Copy, adapt, and pair with your log.',
+    cardNotes: { 'manager-1-1': 'Or let Prodlog fill it in from your log before every 1:1.' },
   },
   blog: {
     path: '/blog',
@@ -89,9 +92,9 @@ export const HUBS: Record<HubKey, HubConfig> = {
   },
   compare: {
     path: '/compare',
-    title: 'Compare Prodlog | vs Notion, BragBook & More',
+    title: 'Compare Prodlog | vs Notion, BragBook, Lattice & More',
     description:
-      'See how Prodlog compares to Notion, BragBook, and other tools for PM brag documents, work logs, and portfolios.',
+      'See how Prodlog compares to Notion, BragBook and your company\'s review tool for keeping a PM work log, prepping 1:1s and writing reviews.',
     subtitle:
       'Honest comparisons to help you choose the right career documentation setup.',
   },

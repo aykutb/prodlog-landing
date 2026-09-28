@@ -1,15 +1,10 @@
 import React from 'react';
+import { FREE_SUMMARIES_PER_MONTH, pricingLines, type PricingLines } from '@/src/lib/pricing';
 
 const SIGNUP_URL = 'https://dashboard.prodlog.app/auth';
 
 const CheckIcon = () => (
-  <svg
-    className="mt-0.5 h-4 w-4 shrink-0 text-sage-green"
-    fill="none"
-    stroke="currentColor"
-    viewBox="0 0 24 24"
-    aria-hidden="true"
-  >
+  <svg className="mt-0.5 h-4 w-4 shrink-0 text-sage-strong" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
   </svg>
 );
@@ -21,125 +16,108 @@ const PlanFeature = ({ children }: { children: React.ReactNode }) => (
   </li>
 );
 
-const EARLY_ACCESS_NOTES = [
-  'Founding members keep Pro free for 12 months from signup',
-  'Your entries are always yours: export anytime, no lock-in',
-  'The free tier stays free, forever',
+// Only what the product gates today (docs/landing-log-first-phase0.md, 0.7):
+// the one plan gate is the monthly summary quota. Everything else is free.
+const FREE_FEATURES = [
+  'Unlimited entries',
+  '1:1 prep and weekly recaps, never metered',
+  'Public portfolio',
+  `${FREE_SUMMARIES_PER_MONTH} summaries a month`,
+  'CSV and PDF export',
+  'Collaborator confirmations',
+  'Private by default',
 ];
+const PRO_FEATURES = ['Everything in Free', 'Unlimited summaries: review drafts, resume bullets, STAR stories'];
 
-const PRICING_FAQ = [
-  {
-    q: 'Will you raise the price?',
-    a: 'After early access, Pro will cost $19/mo for new members. Founding members keep Pro free for 12 months from signup, and the free tier stays free forever.',
-  },
-  {
-    q: "What happens to my entries if I don't upgrade?",
-    a: 'Nothing. Entries are unlimited on the free plan, so everything you logged stays right where it is. You only lose Pro features like unlimited AI summaries, never your entries.',
-  },
-  {
-    q: 'Is my log really private?',
-    a: 'Yes. Every entry is private by default. Nothing becomes public unless you explicitly make it so: publishing your portfolio, sharing an entry link, or asking a collaborator to confirm an entry. Until you take one of those actions, you are the only person who can see your log.',
-  },
-  {
-    q: 'What counts as an AI summary?',
-    a: 'Each generated output (a review-ready writeup, resume bullets, or a STAR story) counts as one summary. Writing and editing entries never counts. Free includes 3 per month; Pro is unlimited.',
-  },
-  {
-    q: 'Can I export everything?',
-    a: 'Yes, always. Markdown and CSV export are on the free plan, and Pro adds PDF. Your entries are yours, no lock-in.',
-  },
-  {
-    q: 'What happens when the 1,000 spots run out?',
-    a: 'New members start on the free plan and can upgrade to Pro at the regular price. If you claimed a founding spot, you keep Pro free for 12 months from your signup, no matter when the spots run out.',
-  },
-];
+const faq = (lines: PricingLines) =>
+  [
+    lines.faqJanuary && { q: 'What happens on January 1?', a: lines.faqJanuary },
+    {
+      q: "What happens to my entries if I don't upgrade?",
+      a: 'Nothing. Entries are unlimited on the free plan, so everything you logged stays right where it is. You only lose Pro features like unlimited AI summaries, never your entries.',
+    },
+    {
+      q: 'Is my log really private?',
+      a: 'Yes. Every entry is private by default. Nothing becomes public unless you explicitly make it so: publishing your portfolio, sharing an entry link, or asking a collaborator to confirm an entry. Until you take one of those actions, you are the only person who can see your log.',
+    },
+    {
+      q: 'What counts as a summary?',
+      a: `Each generated output (a review draft, resume bullets or a STAR story) counts as one. 1:1 prep, weekly recaps, and writing or editing entries never count. Free includes ${FREE_SUMMARIES_PER_MONTH} a month; Pro is unlimited.`,
+    },
+    { q: 'Can I export everything?', a: 'Yes, always. CSV and PDF export are on the free plan. Your entries are yours, no lock-in.' },
+    { q: 'Do I need a card?', a: lines.faqCard },
+  ].filter((item): item is { q: string; a: string } => Boolean(item));
 
-interface PricingPageProps {
-  /** Founding spots left; null hides the counter sentence (error/unknown). */
-  spotsRemaining: number | null;
-}
+const PRIMARY_BUTTON = 'block w-full rounded-lg bg-ink py-3 text-center text-sm font-medium text-on-ink transition-colors hover:bg-ink/90';
+const SECONDARY_BUTTON = 'block w-full rounded-lg border border-border py-3 text-center text-sm font-medium text-ink transition-colors hover:bg-muted';
 
-export const PricingPage = ({ spotsRemaining }: PricingPageProps) => (
-  <div className="max-w-5xl mx-auto px-8 md:px-12 pb-24">
-    <header className="pt-32 pb-16 fade-in text-center">
+export const PricingPage = ({ lines = pricingLines() }: { lines?: PricingLines }) => (
+  <div className="mx-auto max-w-5xl px-4 pb-24 sm:px-8 md:px-12">
+    <header className="fade-in pb-16 pt-32 text-center">
       <img src="/pricing.svg" alt="" className="mx-auto mb-6 h-12 w-12" />
-      <h1 className="serif-headline text-3xl md:text-[48px] mb-6 text-primary leading-tight">
-        Free while we're in early access.
-      </h1>
-      <p className="text-secondary text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
-        The first 1,000 members get Pro free for a year.
-        {spotsRemaining !== null && spotsRemaining > 0 && (
-          <> {spotsRemaining} spots left.</>
-        )}
-      </p>
+      <h1 className="serif-headline mb-6 text-3xl leading-tight text-ink md:text-[48px]">{lines.pricingTitle}</h1>
+      <p className="mx-auto max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">{lines.pricingSub}</p>
     </header>
 
-    <div className="grid md:grid-cols-2 gap-8 mb-20">
-      <div className="p-8 border border-divider rounded-xl bg-white flex flex-col">
-        <div className="text-primary font-semibold text-xl mb-1">Free</div>
-        <div className="text-secondary text-sm font-medium mb-4">$0 forever</div>
-        <ul className="space-y-4 my-8 text-secondary text-sm flex-1">
-          <PlanFeature>Unlimited entries</PlanFeature>
-          <PlanFeature>Private by default</PlanFeature>
-          <PlanFeature>3 AI summaries per month</PlanFeature>
-          <PlanFeature>Markdown &amp; CSV export</PlanFeature>
+    <div className="mb-20 grid gap-8 md:grid-cols-2">
+      <div className="flex flex-col rounded-xl border border-border bg-surface p-8">
+        <div className="mb-1 text-xl font-semibold text-ink">Free</div>
+        <div className="mb-4 text-sm font-medium text-muted-foreground">$0 forever</div>
+        <ul className="my-8 flex-1 space-y-4 text-sm text-muted-foreground">
+          {FREE_FEATURES.map((f) => (
+            <PlanFeature key={f}>{f}</PlanFeature>
+          ))}
         </ul>
-        <a
-          href={SIGNUP_URL}
-          className="w-full py-3 border border-divider rounded-lg text-primary text-sm hover:bg-charcoal transition-colors font-medium text-center block"
-        >
+        <a href={SIGNUP_URL} className={SECONDARY_BUTTON}>
           Start free
         </a>
       </div>
 
-      <div className="p-8 border-2 border-deep-ink-blue rounded-xl bg-deep-ink-blue/5 flex flex-col relative shadow-[0_4px_20px_-5px_rgba(31,42,68,0.15)]">
-        <div className="absolute top-4 right-4 text-[10px] bg-deep-ink-blue text-white px-2 py-1 rounded-md uppercase tracking-widest font-semibold">
-          Included in early access
+      <div className="flex flex-col rounded-xl border-2 border-ink bg-surface p-8">
+        <div className="mb-1 text-xl font-semibold text-ink">Pro</div>
+        <div className="mb-4 text-sm font-medium">
+          {lines.proFreeNote ? (
+            <>
+              <s className="text-muted-foreground">
+                <span className="sr-only">Normally </span>
+                {lines.proPrice}
+              </s>{' '}
+              <span className="text-ink">{lines.proFreeNote}</span>
+            </>
+          ) : (
+            <span className="text-ink">{lines.proPrice}</span>
+          )}
         </div>
-        <div className="text-primary font-semibold text-xl mb-1">Pro</div>
-        <div className="text-sm font-medium mb-4">
-          <s className="text-muted">$19/mo</s>{' '}
-          <span className="text-deep-ink-blue">Free for founding members</span>
-        </div>
-        <ul className="space-y-4 my-8 text-secondary text-sm flex-1">
-          <PlanFeature>Unlimited entries</PlanFeature>
-          <PlanFeature>Unlimited AI summaries</PlanFeature>
-          <PlanFeature>Public portfolio</PlanFeature>
-          <PlanFeature>PDF export, resume bullets, STAR story bank</PlanFeature>
-          <PlanFeature>Priority support</PlanFeature>
+        <ul className="my-8 flex-1 space-y-4 text-sm text-muted-foreground">
+          {PRO_FEATURES.map((f) => (
+            <PlanFeature key={f}>{f}</PlanFeature>
+          ))}
         </ul>
-        <a
-          href={SIGNUP_URL}
-          className="w-full py-3 bg-deep-ink-blue text-white rounded-lg text-sm hover:opacity-90 transition-colors font-medium text-center block"
-        >
-          Claim founding access
+        {/* During the free period both plans lead to the same place, so there is one primary path. */}
+        <a href={SIGNUP_URL} className={PRIMARY_BUTTON}>
+          {lines.proCta}
         </a>
       </div>
     </div>
 
-    <section className="mb-20">
-      <h2 className="serif-headline text-2xl md:text-[36px] mb-8 text-center text-primary">
-        What happens after early access?
-      </h2>
-      <ul className="space-y-4 text-secondary text-base leading-relaxed max-w-2xl mx-auto text-center">
-        {EARLY_ACCESS_NOTES.map((note) => (
-          <li key={note}>{note}</li>
-        ))}
-      </ul>
-    </section>
+    {lines.afterFreePeriod && (
+      <section className="mb-20">
+        <h2 className="serif-headline mb-8 text-center text-2xl text-ink md:text-[36px]">{lines.afterFreePeriod.title}</h2>
+        <ul className="mx-auto max-w-2xl space-y-4 text-center text-base leading-relaxed text-muted-foreground">
+          {lines.afterFreePeriod.items.map((note) => (
+            <li key={note}>{note}</li>
+          ))}
+        </ul>
+      </section>
+    )}
 
     <section className="mb-12">
-      <h2 className="serif-headline text-2xl md:text-[36px] mb-12 text-center text-primary">
-        Pricing questions
-      </h2>
+      <h2 className="serif-headline mb-12 text-center text-2xl text-ink md:text-[36px]">Pricing questions</h2>
       <div className="space-y-6">
-        {PRICING_FAQ.map((faq) => (
-          <div
-            key={faq.q}
-            className="bg-white border border-divider rounded-lg p-6 hover:border-deep-ink-blue/30 transition-colors"
-          >
-            <h3 className="text-primary font-medium mb-3">{faq.q}</h3>
-            <p className="text-secondary text-base leading-relaxed">{faq.a}</p>
+        {faq(lines).map((item) => (
+          <div key={item.q} className="rounded-lg border border-border bg-surface p-6 transition-colors hover:border-ink/30">
+            <h3 className="mb-3 font-medium text-ink">{item.q}</h3>
+            <p className="text-base leading-relaxed text-muted-foreground">{item.a}</p>
           </div>
         ))}
       </div>

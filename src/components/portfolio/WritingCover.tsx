@@ -48,14 +48,14 @@ export const WritingCover = ({
         loading="lazy"
         referrerPolicy="no-referrer"
         onError={() => setImgError(true)}
-        className={`${box} object-cover border border-divider/50 bg-charcoal/40`}
+        className={`${box} object-cover border border-border/50 bg-muted/40`}
       />
     );
   }
   return (
-    <div aria-hidden="true" className={`${box} bg-impact/10 flex items-center justify-center`}>
+    <div aria-hidden="true" className={`${box} bg-ink/10 flex items-center justify-center`}>
       <span
-        className={`font-serif font-semibold text-impact ${
+        className={`font-serif font-semibold text-ink ${
           variant === 'thumb' ? 'text-xl' : 'text-3xl'
         }`}
       >
