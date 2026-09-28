@@ -4,16 +4,74 @@
     {
       "name": "dev",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
+      "runtimeArgs": [
+        "run",
+        "dev"
+      ],
       "port": 3000,
       "autoPort": true
     },
     {
       "name": "prodlog2-app",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev", "--prefix", "/Users/aykutbal/Documents/GitHub/prodlog2"],
+      "runtimeArgs": [
+        "run",
+        "dev",
+        "--prefix",
+        "/Users/aykutbal/Documents/GitHub/prodlog2"
+      ],
       "port": 3000,
       "autoPort": true
+    },
+    {
+      "name": "dev-content-preview",
+      "runtimeExecutable": "env",
+      "runtimeArgs": [
+        "CONTENT_PREVIEW=1",
+        "NEXT_DIST_DIR=.next-preview",
+        "npm",
+        "run",
+        "dev"
+      ],
+      "port": 3002,
+      "autoPort": true
+    },
+    {
+      "name": "prod-check",
+      "runtimeExecutable": "env",
+      "runtimeArgs": [
+        "NEXT_DIST_DIR=.next-check",
+        "npx",
+        "next",
+        "start",
+        "-p",
+        "3005"
+      ],
+      "port": 3005
+    },
+    {
+      "name": "dev-2027",
+      "runtimeExecutable": "env",
+      "runtimeArgs": [
+        "PRICING_NOW=2027-01-02",
+        "NEXT_DIST_DIR=.next-2027",
+        "npm",
+        "run",
+        "dev",
+        "--",
+        "-p",
+        "3003"
+      ],
+      "port": 3003
+    },
+    {
+      "name": "mobile-metro",
+      "runtimeExecutable": "bash",
+      "runtimeArgs": [
+        "-c",
+        "cd /Users/aykutbal/Documents/GitHub/prodlog-mobile && bunx expo start --dev-client --port 8081 --clear"
+      ],
+      "port": 8081
     }
   ]
 }
