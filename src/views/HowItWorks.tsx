@@ -37,7 +37,6 @@ export const HowItWorksPage = () => {
   return (
     <div className="mx-auto max-w-6xl px-4 pb-24 sm:px-8 md:px-12">
       <header className="fade-in pb-16 pt-32 text-center">
-        <img src="/flow-arrows-icon.svg" alt="" className="mx-auto mb-6 h-12 w-12" />
         <h1 className="serif-headline mb-6 text-3xl leading-tight text-ink md:text-[48px]">How Prodlog works</h1>
         <p className="mx-auto max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
           Start with the notes you already have. Log as things happen. Get it back before every 1:1, every review, and every job change.
@@ -160,10 +159,11 @@ export const HowItWorksPage = () => {
           shot={
             <ProductShot
               name="career-move.png"
-              alt="Priya's Career page with I'm getting ready to move switched on, her portfolio published, and the portfolio preview"
+              alt="Priya's Career page with I'm getting ready to move switched on and her published portfolio: domain expertise, a year of contributions, her results as metric cards, a story and her skills"
               width={2880}
-              height={1800}
+              height={3600}
               url="dashboard.prodlog.app/career/portfolio"
+              crop={{ region: { x: 0.125, y: 0, w: 0.75, h: 0.735 } }}
             />
           }
         >

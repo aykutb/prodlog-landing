@@ -22,6 +22,7 @@ missing.
 - 2026-09-28: `slack-message-shortcut.png` and `slack-log-modal.png` captured in the owner's workspace, #general, from a message the owner approved posting ("Cut the manual refund review step, tickets down 34%"). The form was filled and then discarded with Leave, so no entry was saved. The owner's Slack handle shows as the message author in the shortcut shot.
 - 2026-09-28: `slack-log-command.png` captured with `/log` typed. After the rename Slack's client listed the command twice from its cache (the app has one `/log`, owner checked), so the repeated row was hidden in CSS for the capture.
 - 2026-09-28: `ios-log.png` captured as Priya (the owner signed in) on the `prodlog-393x852` simulator, iOS 26.5, from a development build of prodlog-mobile's `feat/one-on-one-card` branch (not yet on the App Store). Status bar overridden to 9:41 and a full battery; Expo's dev tools button hidden. The seed's `demo-log-first` tag shows on each entry.
+- 2026-09-28: `career-move.png` recaptured at 1440 x 1800 so the portfolio preview reaches the metric cards; both pages crop it from the Career header to the skills row. The move switch was turned on for the capture and off again after.
 - The seed was not re-run: Priya's recent entries are dated Sep 25 (the seed day), which still gives "3 entries since your last 1:1 on Sep 24".
 - Crops on the site: `log-home.png` is cropped to the ledger in the habit card and on the Slack page, `one-on-one-prep.png` to its content column (`ProductShot` `crop.region`).
 
@@ -47,7 +48,7 @@ missing.
 | `log-home-mobile.png` | 780 x 1688 | Homepage and /how-it-works at 375px | Captured 2026-09-28 |
 | `one-on-one-prep.png` | 2880 x 2200 | Homepage (Before every 1:1), /how-it-works step 3, /1-1-prep | Captured 2026-09-28 |
 | `review-draft.png` | 2880 x 2200 | /how-it-works step 4, /self-review | Captured 2026-09-28 (after the prompt fix) |
-| `career-move.png` | 2880 x 1800 | Homepage (When you change jobs), /how-it-works step 5 | Captured 2026-09-28 |
+| `career-move.png` | 2880 x 3600 | Homepage (When you change jobs), /how-it-works step 5 | Captured 2026-09-28 |
 | `paste-import.png` | 2880 x 1800 | /how-it-works step 1 | Captured 2026-09-28 |
 | `slack-day-before.png` | 1600 x 1000 | Homepage (Before every 1:1), /1-1-prep, /integrations/slack | Captured |
 | `slack-log-command.png` | 1600 x 900 | /integrations/slack step 1 | Captured |

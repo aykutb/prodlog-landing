@@ -23,13 +23,14 @@ export const ChangeJobsSection = () => {
         </Link>
       </div>
 
-      <div className="mt-12 mx-auto max-w-5xl">
+      <div className="mt-12 mx-auto max-w-4xl">
         <ProductShot
           name="career-move.png"
-          alt="Priya's Career page with I'm getting ready to move switched on, her portfolio published, and the portfolio preview"
+          alt="Priya's Career page with I'm getting ready to move switched on and her published portfolio: domain expertise, a year of contributions, her results as metric cards, a story and her skills"
           width={2880}
-          height={1800}
+          height={3600}
           url="dashboard.prodlog.app/career/portfolio"
+          crop={{ region: { x: 0.125, y: 0, w: 0.75, h: 0.735 } }}
         />
         <p className="mt-3 text-center text-meta text-muted-foreground">
           Priya&rsquo;s public page, live at{' '}

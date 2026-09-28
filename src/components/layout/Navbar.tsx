@@ -60,7 +60,7 @@ export const Navbar = ({ compareNavItems, minimal = false }: NavbarProps) => {
     <>
       {/* Navbar Container - Fixed, Centered, Not Full Width */}
       <div className="fixed top-0 left-0 right-0 z-50 px-4 pt-4">
-        <nav className="max-w-4xl mx-auto bg-surface/80 backdrop-blur-xl border border-border rounded-xl">
+        <nav className="max-w-5xl mx-auto bg-surface/80 backdrop-blur-xl border border-border rounded-xl">
           <div className="px-4 md:px-6 h-12 flex items-center justify-between">
             <Link href="/" className="cursor-pointer flex items-center">
               {/* The lockup from prodlog2's logomark definition (public/brand/logo.svg). */}

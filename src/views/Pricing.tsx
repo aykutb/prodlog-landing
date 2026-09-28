@@ -54,7 +54,6 @@ const SECONDARY_BUTTON = 'block w-full rounded-lg border border-border py-3 text
 export const PricingPage = ({ lines = pricingLines() }: { lines?: PricingLines }) => (
   <div className="mx-auto max-w-5xl px-4 pb-24 sm:px-8 md:px-12">
     <header className="fade-in pb-16 pt-32 text-center">
-      <img src="/pricing.svg" alt="" className="mx-auto mb-6 h-12 w-12" />
       <h1 className="serif-headline mb-6 text-3xl leading-tight text-ink md:text-[48px]">{lines.pricingTitle}</h1>
       <p className="mx-auto max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">{lines.pricingSub}</p>
     </header>
