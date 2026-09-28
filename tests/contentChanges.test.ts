@@ -23,6 +23,15 @@ test('a change already in place is recognized, and a repeated `before` is refuse
   assert.deepEqual(outcomes, ['applied-already', 'ambiguous']);
 });
 
+test('an insert that keeps its anchor is applied once, never twice', () => {
+  const insert = { field: 'body', before: '## Template', after: '### New section\n\nText.\n\n## Template', why: 'insert' };
+  const first = applyChanges({ body: 'Intro\n\n## Template' }, [insert]);
+  assert.deepEqual(first.outcomes, ['ok']);
+  const second = applyChanges({ body: String(first.next.body) }, [insert]);
+  assert.deepEqual(second.outcomes, ['applied-already']);
+  assert.deepEqual(second.next, {});
+});
+
 test('the pending content changes add no dash and no LinkedIn', () => {
   const texts = [
     ...loadChanges().flatMap((d) => d.changes.filter((c) => c.field !== 'order').map((c) => String(c.after))),

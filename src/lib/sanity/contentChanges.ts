@@ -58,7 +58,8 @@ export type Outcome = 'ok' | 'applied-already' | 'missing' | 'ambiguous';
 /**
  * Applies one document's changes to its current field values. Pure: returns
  * the changed fields and an outcome per change. A change whose `before` is
- * gone but whose `after` is present counts as already applied.
+ * gone but whose `after` is present counts as already applied, and so does
+ * an insert (an `after` that contains its `before`) whose `after` is present.
  */
 export function applyChanges(current: Record<string, unknown>, changes: ContentChange[]) {
   const next: Record<string, unknown> = {};
@@ -71,6 +72,10 @@ export function applyChanges(current: Record<string, unknown>, changes: ContentC
       return 'ok';
     }
     const text = String(value(change.field) ?? '');
+    // An insert keeps its `before` (new text placed around an anchor), so
+    // finding `before` does not mean it is still to do: if the whole `after`
+    // is already there, it was applied, and applying again would duplicate it.
+    if (change.after.includes(change.before) && text.includes(change.after)) return 'applied-already';
     const hits = count(text, change.before);
     if (hits === 1) {
       next[change.field] = text.replace(change.before, () => change.after);
