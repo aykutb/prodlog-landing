@@ -127,7 +127,9 @@ export const LedgerHero = ({ variant = 'home', today, pricingLine }: LedgerHeroP
     ? `${plural(entries.length, 'entry', 'entries')} ready for your next 1:1.`
     : `${plural(log.sinceLast.length, 'entry', 'entries')} since your last 1:1 on ${formatShort(log.lastOneOnOne, today)}.`;
 
-  const priyaRows = log.ledger.slice(0, 5);
+  // Two of Priya's rows: enough to show what an entry looks like, short enough
+  // that the log sits level with the headline beside it.
+  const priyaRows = log.ledger.slice(0, 2);
 
   const form = (
     <form onSubmit={handleSubmit} aria-label="Paste your notes">
@@ -145,7 +147,8 @@ export const LedgerHero = ({ variant = 'home', today, pricingLine }: LedgerHeroP
           rows={variant === 'try' ? 6 : 3}
           maxLength={MAX_CHARS}
           aria-describedby={counterId}
-          className="min-h-0 min-w-0 flex-1 resize-y bg-transparent py-1.5 text-body leading-relaxed text-ink placeholder:text-muted-foreground focus:outline-none"
+          // A visible field, so the example note reads as an example: lighter and italic until the visitor types.
+          className="min-h-0 min-w-0 flex-1 resize-y rounded-lg border border-border bg-surface px-3 py-2 text-body leading-relaxed text-ink shadow-sm transition-colors placeholder:italic placeholder:text-muted-foreground/60 hover:border-ink/30 focus:border-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/15"
         />
       </LedgerLine>
       <div className="mt-2 flex items-center justify-between gap-4 px-2 sm:pl-[calc(var(--spacing-gutter)+1.5rem)]">

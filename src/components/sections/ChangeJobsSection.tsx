@@ -1,14 +1,12 @@
 import React from 'react';
 import Link from 'next/link';
 import { ProductShot } from '@/src/components/kit/ProductShot';
-import { PortfolioBentoGrid } from '@/src/components/portfolio/BentoCards';
-import { fetchPortfolio } from '@/src/lib/portfolio/data';
 import { PRIYA } from '@/src/content/demo/priya';
 
-// Career mode, then Priya's real public portfolio, rendered from the same
-// data and components as prodlog.app/p/priya_r and clipped to its first rows.
-export const ChangeJobsSection = async () => {
-  const portfolio = await fetchPortfolio(PRIYA.handle).catch(() => null);
+// Career mode: the move switch, the tabs and the portfolio preview in one
+// shot, with a link to Priya's live public page under it. (The live page used
+// to render here too, but it repeated the preview already in the shot.)
+export const ChangeJobsSection = () => {
   return (
     <section className="py-24 px-4 sm:px-8 md:px-12 border-t border-border">
       <div className="max-w-2xl mx-auto text-center">
@@ -33,22 +31,13 @@ export const ChangeJobsSection = async () => {
           height={1800}
           url="dashboard.prodlog.app/career/portfolio"
         />
+        <p className="mt-3 text-center text-meta text-muted-foreground">
+          Priya&rsquo;s public page, live at{' '}
+          <Link href={PRIYA.portfolioPath} className="text-ink underline underline-offset-4">
+            prodlog.app{PRIYA.portfolioPath}
+          </Link>
+        </p>
       </div>
-
-      {portfolio && (
-        <div className="mt-10 mx-auto max-w-5xl">
-          <p className="mb-3 text-center text-meta text-muted-foreground">
-            Priya&rsquo;s public page, live at{' '}
-            <Link href={PRIYA.portfolioPath} className="text-ink underline underline-offset-4">
-              prodlog.app{PRIYA.portfolioPath}
-            </Link>
-          </p>
-          <div className="relative max-h-[560px] overflow-hidden rounded-xl border border-border bg-background p-4 sm:p-6">
-            <PortfolioBentoGrid portfolio={portfolio} />
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent" />
-          </div>
-        </div>
-      )}
     </section>
   );
 };

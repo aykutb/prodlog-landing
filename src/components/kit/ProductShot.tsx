@@ -25,8 +25,11 @@ interface ProductShotProps {
    * `region`: a rectangle of the image as fractions (x, y, width, height from
    * the top left); the frame takes its shape and the image is scaled to fill
    * it. Or `aspect` + `position`: an object-cover crop ("4 / 3", "50% 60%").
+   * Or `fill` + `position`: an object-cover crop of whatever box the parent
+   * gives the figure (give it a height, e.g. `absolute inset-0`), for a shot
+   * that has to reach the edge of a card of unknown height.
    */
-  crop?: { region: { x: number; y: number; w: number; h: number } } | { aspect: string; position?: string };
+  crop?: { region: { x: number; y: number; w: number; h: number } } | { aspect: string; position?: string } | { fill: true; position?: string };
   className?: string;
 }
 
@@ -40,6 +43,7 @@ export const ProductShot = ({ name, alt, width, height, chrome = 'browser', url 
   const region = crop && 'region' in crop ? crop.region : null;
   // A region is drawn larger than its frame, so the image needs a bigger source than the frame's size suggests.
   const regionSizes = region ? sizes.replace(/(\d+(?:\.\d+)?)(px|vw)/g, (_, n: string, unit: string) => `${Math.round(Number(n) / region.w)}${unit}`) : sizes;
+  const fill = crop && 'fill' in crop ? crop : null;
   const frameAspect = region ? `${region.w * width} / ${region.h * height}` : crop && 'aspect' in crop ? crop.aspect : `${width} / ${height}`;
   const missing = !existsSync(file);
   if (missing && process.env.NODE_ENV === 'production') {
@@ -80,6 +84,10 @@ export const ProductShot = ({ name, alt, width, height, chrome = 'browser', url 
             className="absolute left-0 top-0 max-w-none"
             style={{ width: `${100 / region.w}%`, height: 'auto', transform: `translate(${-region.x * 100}%, ${-region.y * 100}%)` }}
           />
+        </div>
+      ) : fill ? (
+        <div className="relative h-full w-full">
+          <Image src={`/${SHOTS_DIR}/${name}`} alt={alt} fill sizes={sizes} priority={priority} className="object-cover" style={{ objectPosition: fill.position ?? '50% 0%' }} />
         </div>
       ) : crop && 'aspect' in crop ? (
         <div className="relative w-full" style={{ aspectRatio: crop.aspect }}>
