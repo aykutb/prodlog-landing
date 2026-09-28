@@ -95,6 +95,8 @@
   --animate-strip-drop: strip-drop 250ms ease-out both;
   /* A parsed entry settling into the ledger (marketing only; staggered by the caller). */
   --animate-ledger-in: ledger-in 320ms ease-out both;
+  /* The hero scene's caret (src/components/ledger-hero/heroTimeline.ts). Its other motion is transitions, so a seek never replays it. */
+  --animate-caret: caret 1s steps(1) infinite;
 
   /* Fonts (loaded by next/font in app/layout.tsx) */
   --font-serif: var(--font-source-serif), Georgia, serif;
@@ -121,6 +123,20 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+@keyframes caret {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* A frame the scene rendered by seeking: land on the state, no motion. */
+[data-scene-instant] *,
+[data-scene-instant] *::before,
+[data-scene-instant] *::after {
+  transition: none !important;
+  animation: none !important;
 }
 
 body {
