@@ -145,6 +145,22 @@ export const LedgerHero = ({ variant = 'home', today, pricingLine, autoplay = fa
     scene.seekAndPlay(t);
   };
   const { state: shot } = scene;
+  // The scene's new rows: mounted after hydration (invisible until their beat) so their heights are known
+  // before they open; Priya's rows then move down by exactly the open rows' height.
+  const [sceneReady, setSceneReady] = useState(false);
+  useEffect(() => setSceneReady(home), [home]);
+  const newRowsRef = useRef<HTMLUListElement>(null);
+  const [newRowHeights, setNewRowHeights] = useState<number[]>([]);
+  useEffect(() => {
+    const list = newRowsRef.current;
+    if (!list) return;
+    const measure = () => setNewRowHeights([...list.children].map((li) => (li as HTMLElement).offsetHeight));
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(list);
+    return () => observer.disconnect();
+  }, [sceneReady]);
+  const pushed = newRowHeights.slice(0, shot.rowsOpen).reduce((sum, h) => sum + h, 0);
   const sceneTypingRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const el = sceneTypingRef.current;
@@ -274,8 +290,14 @@ export const LedgerHero = ({ variant = 'home', today, pricingLine, autoplay = fa
       {/* Scrolls to the newest line as it types, as the textarea would; from sm the right padding keeps words clear of the key hints. */}
       <div ref={sceneTypingRef} className="absolute inset-0 overflow-hidden px-3 py-2 sm:pr-24">
         <span className="whitespace-pre-wrap break-words">
-          <span className={`transition-[opacity,filter] duration-[400ms] ease-out ${shot.dissolving ? 'opacity-25 blur-[1.5px]' : ''}`}>{HERO_NOTE.slice(0, shot.typedChars)}</span>
-          {shot.lineFocus && <span className="ml-px inline-block h-4 w-px translate-y-[3px] animate-caret bg-ink" />}
+          {/* The caret is the text's own right border, so typing moves no box (no layout shift). */}
+          <span
+            className={`transition-[opacity,filter] duration-[400ms] ease-out ${shot.dissolving ? 'opacity-25 blur-[1.5px]' : ''} ${
+              shot.lineFocus ? 'animate-caret-border border-r-[1.5px] border-ink pr-px' : ''
+            }`}
+          >
+            {HERO_NOTE.slice(0, shot.typedChars)}
+          </span>
         </span>
       </div>
       {/* Keyboard hints from sm only: a phone has no ⌘ Enter, so there the scene presses "See what comes out" instead. */}
@@ -442,7 +464,7 @@ export const LedgerHero = ({ variant = 'home', today, pricingLine, autoplay = fa
       {/* The Log page in miniature: the top bar, then the page. */}
       <div
         ref={frameRef}
-        className={`overflow-hidden rounded-xl border border-border bg-background ${home ? 'relative h-[var(--hero-frame-h)] [--hero-frame-h:940px] sm:[--hero-frame-h:850px]' : ''}`}
+        className={`overflow-hidden rounded-xl border border-border bg-background ${home ? 'hero-frame relative h-[var(--hero-frame-h)] [--hero-frame-h:860px] sm:[--hero-frame-h:736px]' : ''}`}
         {...(home ? { role: 'group', 'aria-label': HERO_SCENE_LABEL, 'data-scene-instant': scene.instant ? '' : undefined } : {})}
       >
         <div className="flex h-11 items-center gap-2 border-b border-border px-3 sm:gap-4 sm:px-4" aria-hidden="true">
@@ -458,7 +480,7 @@ export const LedgerHero = ({ variant = 'home', today, pricingLine, autoplay = fa
         <div
           className={`space-y-6 px-3 py-5 sm:px-6 sm:py-6 ${
             home
-              ? `h-[calc(var(--hero-frame-h)-2.75rem-2px)] ${scene.visitor ? 'overflow-y-auto overscroll-contain' : 'overflow-hidden [mask-image:linear-gradient(#000_88%,transparent)]'}`
+              ? `h-[calc(var(--hero-frame-h)-2.75rem-2px)] ${scene.visitor ? 'overflow-y-auto overscroll-contain' : 'overflow-hidden [mask-image:linear-gradient(#000_calc(100%-40px),transparent)]'}`
               : ''
           }`}
         >
@@ -479,6 +501,7 @@ export const LedgerHero = ({ variant = 'home', today, pricingLine, autoplay = fa
               }
               windows={windows}
               stackMinStrips={4}
+              actionBesideCaption
               caption={shot.counted ? data.caption.after : data.caption.before}
               action={
                 <span
@@ -499,26 +522,24 @@ export const LedgerHero = ({ variant = 'home', today, pricingLine, autoplay = fa
               <LogFilter className="hidden sm:inline-flex" />
             </div>
             {form}
-            {startFree}
+            {/* On the homepage the copy beside the frame has "Start free"; here it returns once the visitor has taken over, carrying their note. */}
+            {(!home || scene.visitor) && startFree}
             {status}
             {visitorRows}
             {truncatedNote}
 
             {data && (
-              <LedgerRows className="mt-2 border-t border-border" aria-label="An example log: Priya's recent entries">
-                {/* The scene's two entries open in at the top, then fold away before the loop restarts. */}
-                {shot.rowsMounted &&
-                  data.newRows.map((row, i) => {
-                    const open = shot.rowsOpen > i;
-                    return (
+              // The scene's two entries sit in a layer over the top of the log; Priya's rows slide down under
+              // them by transform, so nothing in the frame shifts layout while the scene plays.
+              <div className="relative mt-2 overflow-hidden border-t border-border">
+                {sceneReady && (
+                  <ul ref={newRowsRef} aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 z-[1]">
+                    {data.newRows.map((row, i) => (
                       <li
                         key={row.id}
-                        aria-hidden="true"
-                        className={`grid transition-[grid-template-rows,opacity] duration-[550ms] ease-out ${
-                          open ? 'grid-rows-[1fr] opacity-100 starting:grid-rows-[0fr] starting:opacity-0' : 'grid-rows-[0fr] border-b-0 opacity-0'
-                        }`}
+                        className={`border-b border-border bg-background transition-[opacity,transform] duration-[550ms] ease-out ${shot.rowsOpen > i ? 'opacity-100' : '-translate-y-2 opacity-0'}`}
                       >
-                        <ul className="min-h-0 overflow-hidden">
+                        <ul>
                           <LedgerRow
                             date={formatShort(row.date, data.day)}
                             dateTime={row.date}
@@ -530,24 +551,31 @@ export const LedgerHero = ({ variant = 'home', today, pricingLine, autoplay = fa
                           />
                         </ul>
                       </li>
-                    );
-                  })}
-                {data.ledger.map((item) =>
-                  item.type === 'entry' ? (
-                    <LedgerRow
-                      key={item.entry.id}
-                      date={formatShort(item.entry.date, data.day)}
-                      dateTime={item.entry.date}
-                      label={HERO_LABEL}
-                      title={item.entry.title}
-                      preview={item.entry.preview}
-                      outcome={item.entry.outcome}
-                    />
-                  ) : (
-                    <LedgerDivider key={item.date} label={item.label} />
-                  ),
+                    ))}
+                  </ul>
                 )}
-              </LedgerRows>
+                <LedgerRows
+                  aria-label="An example log: Priya's recent entries"
+                  className="transition-transform duration-[550ms] ease-out"
+                  style={pushed ? { transform: `translateY(${pushed}px)` } : undefined}
+                >
+                  {data.ledger.map((item) =>
+                    item.type === 'entry' ? (
+                      <LedgerRow
+                        key={item.entry.id}
+                        date={formatShort(item.entry.date, data.day)}
+                        dateTime={item.entry.date}
+                        label={HERO_LABEL}
+                        title={item.entry.title}
+                        preview={item.entry.preview}
+                        outcome={item.entry.outcome}
+                      />
+                    ) : (
+                      <LedgerDivider key={item.date} label={item.label} />
+                    ),
+                  )}
+                </LedgerRows>
+              </div>
             )}
           </section>
 

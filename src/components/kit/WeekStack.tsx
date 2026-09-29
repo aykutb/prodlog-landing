@@ -26,13 +26,19 @@ export interface StackWindow {
 const MAX_STRIPS = 8;
 
 /** One strip is 12px tall with 3px between; the stack has 4px above, 3px below and a 1px baseline. */
+/** How many of a window's incoming strips are on the stack (the dashed slot sits above them). */
+const landed = (w: StackWindow) => w.incoming?.filter((s) => s.phase === 'bright' || s.phase === 'settled').length ?? 0;
+
 const stackHeight = (items: number) => `${items * 12 + (items - 1) * 3 + 8}px`;
 
+/** One strip and the gap above it. */
+const STRIP_PITCH = 15;
+
 const INCOMING: Record<IncomingStrip['phase'], string> = {
-  off: 'hidden',
-  // Drops 16px onto the stack as it mounts; the fill eases from on-ink to its tone once it settles.
-  bright: 'starting:-translate-y-4 starting:opacity-0 [&_path]:fill-on-ink',
-  settled: 'starting:-translate-y-4 starting:opacity-0',
+  off: '-translate-y-4 opacity-0',
+  // Drops 16px onto the stack; the fill eases from on-ink to its tone once it settles.
+  bright: '[&_path]:fill-on-ink',
+  settled: '',
   lifted: '-translate-y-4 opacity-0',
 };
 
@@ -44,7 +50,9 @@ const INCOMING: Record<IncomingStrip['phase'], string> = {
  * the words, so color is never the only signal.
  *
  * `minStrips` holds the stacks at a fixed height (counting the dashed slot),
- * so strips a scene adds never move what is under the chart.
+ * so strips a scene adds never move what is under the chart. Those strips
+ * are placed absolutely and the dashed slot rises by transform, so the
+ * scene never shifts layout.
  */
 export const WeekStack = ({ windows, caption, minStrips }: { windows: StackWindow[]; caption?: React.ReactNode; minStrips?: number }) => {
   if (windows.length === 0) return null;
@@ -56,7 +64,7 @@ export const WeekStack = ({ windows, caption, minStrips }: { windows: StackWindo
           return (
             <li key={w.key} className="flex min-w-0 flex-1 flex-col items-center">
               <div
-                className="flex min-h-9 w-full flex-1 flex-col-reverse items-center gap-[3px] rounded-t-sm border-b border-on-ink-muted px-1 pb-[3px] pt-1"
+                className="relative flex min-h-9 w-full flex-1 flex-col-reverse items-center gap-[3px] rounded-t-sm border-b border-on-ink-muted px-1 pb-[3px] pt-1"
                 style={minStrips ? { minHeight: stackHeight(minStrips) } : undefined}
               >
                 {shown.map((outcome, i) => (
@@ -72,10 +80,18 @@ export const WeekStack = ({ windows, caption, minStrips }: { windows: StackWindo
                     key={`incoming-${i}`}
                     shape={shown.length + i + w.key.charCodeAt(w.key.length - 1)}
                     tone={strip.outcome ? 'sage' : 'mauve'}
-                    className={`h-3 w-full max-w-9 transition-[opacity,transform] duration-[550ms] ease-out [&_path]:transition-[fill] [&_path]:duration-[1200ms] ${INCOMING[strip.phase]}`}
+                    className={`absolute inset-x-1 mx-auto h-3 max-w-9 transition-[opacity,transform] duration-[550ms] ease-out [&_path]:transition-[fill] [&_path]:duration-[1200ms] ${INCOMING[strip.phase]}`}
+                    style={{ bottom: 3 + (shown.length + i) * STRIP_PITCH }}
                   />
                 ))}
-                {w.current && <LogoStrip shape={shown.length + 1} tone="dashed" className="h-3 w-full max-w-9" />}
+                {w.current && (
+                  <LogoStrip
+                    shape={shown.length + 1}
+                    tone="dashed"
+                    className="h-3 w-full max-w-9 transition-transform duration-[550ms] ease-out"
+                    style={landed(w) ? { transform: `translateY(${-landed(w) * STRIP_PITCH}px)` } : undefined}
+                  />
+                )}
               </div>
               <span className="h-1.5 w-px bg-on-ink-muted" />
               <span className={`h-4 whitespace-nowrap text-meta leading-4 ${w.current ? 'text-on-ink' : 'text-on-ink-muted'}`}>{w.axisLabel ?? ''}</span>

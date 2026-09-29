@@ -130,6 +130,31 @@ Each phase ends with a report and a stop for approval.
   without the loop having played, `fetch` stubbed) all pass. /try,
   /1-1-prep and /self-review: only the placeholder differs from HEAD.
 
+## Follow-up: fit the first screen (2026-09-29)
+
+Owner: the whole animation must be visible at first glance on a MacBook.
+It overflowed 150 to 320px at 1440x760 to 1280x700.
+
+- From lg the frame is a scaled miniature (`.hero-frame` in
+  `app/globals.css`): zoom 0.8, 0.9 from 900px tall, 0.7 below 736px.
+  Design height 736px (so 589px on screen at 0.8). Frame and controls now
+  end at y=727 of 760 (1440x760) and 654 of 700 (1280x700).
+- Trimmed: hero top padding (lg:pt-24); "Prep my 1:1" beside the chart
+  caption (`OccasionCard actionBesideCaption`); the in-frame "or Start
+  free" shows only after a take-over (it carries the note to signup);
+  the prep sheet uses the panel title, 20px gaps, tighter rows and a
+  76px fixed ask box. Phones 860px, from sm 736px.
+- Found and fixed: the scene itself caused layout shifts while playing
+  (CLS 0.0104 a loop; the Phase 3 Lighthouse run only watched the load).
+  Carets are the text's border, the new rows are a layer over the log
+  with Priya's rows sliding by transform, the new strips are absolute
+  with the dashed slot lifted by transform, and the Copy button keeps
+  its longer label's width. A full live loop now records no layout shift
+  at 1440x760 and 390x844. "Move to another day" hides below 480px
+  (the brief's rule), since the Copy button no longer narrows.
+- Lighthouse on a production build: mobile 95, 100, 100, 100; desktop
+  100 across; CLS 0.
+
 ## Open decisions (Phase 0)
 
 Answered 2026-09-28: go with the recommendations.

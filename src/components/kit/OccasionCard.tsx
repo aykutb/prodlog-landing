@@ -13,6 +13,8 @@ export interface OccasionCardProps {
   caption?: React.ReactNode;
   /** Hold the chart at this many strips tall, so strips a scene adds never move the card. */
   stackMinStrips?: number;
+  /** Put the action on the caption's line, right-aligned, instead of under it (saves a row). */
+  actionBesideCaption?: boolean;
   /** The white button: "Prep my 1:1". A string renders a non-interactive button shape; pass an element for a real link. */
   action?: React.ReactNode;
   /** Anything else under the header, such as weekday chips. */
@@ -30,7 +32,7 @@ export const INK_BUTTON =
  * date on its right, one muted line of context, the week stack and a white
  * button. The one dark surface on a product mock.
  */
-export const OccasionCard = ({ title, aside, context, windows, caption, stackMinStrips, action, children, className = '' }: OccasionCardProps) => (
+export const OccasionCard = ({ title, aside, context, windows, caption, stackMinStrips, actionBesideCaption = false, action, children, className = '' }: OccasionCardProps) => (
   <div className={`rounded-xl bg-ink p-5 text-on-ink sm:p-6 ${className}`}>
     <div className="space-y-1">
       <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
@@ -39,9 +41,16 @@ export const OccasionCard = ({ title, aside, context, windows, caption, stackMin
       </div>
       {context && <p className="text-body text-on-ink-muted">{context}</p>}
     </div>
-    {windows && <WeekStack windows={windows} caption={caption} minStrips={stackMinStrips} />}
+    {windows && <WeekStack windows={windows} caption={actionBesideCaption ? undefined : caption} minStrips={stackMinStrips} />}
+    {actionBesideCaption && (
+      <div className="mt-3 flex items-center justify-between gap-3">
+        <p className="text-meta text-on-ink-muted">{caption}</p>
+        {action}
+      </div>
+    )}
     {children}
-    {action &&
+    {!actionBesideCaption &&
+      action &&
       (typeof action === 'string' ? (
         <span aria-hidden="true" className={`mt-5 ${INK_BUTTON}`}>
           {action}
