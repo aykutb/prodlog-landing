@@ -10,7 +10,7 @@ import { HeroCtas } from './HeroCtas';
 export const HeroSection = () => {
   const today = todayIso();
   return (
-    <section className="pt-24 pb-10 md:pb-14 px-4 md:px-12 max-w-6xl mx-auto lg:grid lg:grid-cols-12 lg:items-center lg:gap-12 lg:pt-32">
+    <section className="pt-24 pb-10 md:pb-14 px-4 md:px-12 max-w-6xl mx-auto lg:grid lg:grid-cols-12 lg:items-center lg:gap-12 lg:pt-24">
       {/* From lg the copy sits beside the log, centred against it, so the paste line is on screen on arrival. */}
       <div className="text-center lg:col-span-5 lg:text-left">
         <h1 className="serif-headline text-3xl md:text-[44px] mb-3 leading-tight text-ink max-w-2xl mx-auto lg:mx-0">

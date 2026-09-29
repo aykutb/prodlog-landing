@@ -28,24 +28,26 @@ const SECONDARY = `${BUTTON} border border-border bg-surface text-ink`;
 /**
  * The 1:1 prep screen (prodlog2 features/occasions/OneOnOnePrep.tsx inside
  * OccasionScreen), slid up over the log below the frame's top bar. Same
- * classes as the dashboard; nothing here is a control. Everything fits
- * from 390px; on narrower phones the rows drop their outcome labels and
- * "Move to another day" goes, rather than the type shrinking.
+ * classes as the dashboard, a little tighter so it fits the frame (panel
+ * title, 20px gaps, 10px row padding, a 64px ask box); nothing here is a control. Everything fits
+ * from 390px except "Move to another day", which goes below 480px (the
+ * Copy button keeps its longer label's width, so the row would wrap twice);
+ * below 380px the rows also drop their outcome labels. Type never shrinks.
  */
 export const PrepSheet = ({ prep, day, state }: { prep: HeroSceneData['prep']; day: string; state: HeroSceneState }) => (
   <div
     aria-hidden="true"
     inert
-    className={`absolute inset-x-0 bottom-0 top-[45px] z-10 overflow-hidden bg-background px-4 py-6 transition-transform ease-out sm:px-6 sm:py-8 ${state.sheetOpen ? 'translate-y-0' : 'translate-y-[102%]'}`}
+    className={`absolute inset-x-0 bottom-0 top-[45px] z-10 overflow-hidden bg-background px-4 py-5 transition-transform ease-out sm:px-6 sm:py-6 ${state.sheetOpen ? 'translate-y-0' : 'translate-y-[102%]'}`}
     style={{ transitionDuration: `${MOTION.SHEET_MS}ms` }}
   >
-    <div className="space-y-6 sm:space-y-8">
+    <div className="space-y-5">
       <span className="-ml-2 inline-flex h-8 items-center gap-2 rounded-lg px-2 text-body font-medium text-ink">
         <Icon d={ICONS.back} />
         Back to your log
       </span>
       <header className="space-y-1">
-        <p className="font-serif text-page-title font-semibold text-ink">{prep.title}</p>
+        <p className="font-serif text-panel-title font-semibold text-ink">{prep.title}</p>
         <p className="text-sm text-muted-foreground">{prep.since}</p>
       </header>
 
@@ -53,7 +55,7 @@ export const PrepSheet = ({ prep, day, state }: { prep: HeroSceneData['prep']; d
         <p className="text-body font-semibold text-ink">Entries</p>
         <ul className="space-y-2">
           {prep.rows.map((row) => (
-            <li key={row.id} className="flex items-start gap-3 rounded-xl border border-border bg-surface px-4 py-3">
+            <li key={row.id} className="flex items-start gap-3 rounded-xl border border-border bg-surface px-4 py-2.5">
               <span className="mt-1 grid h-4 w-4 shrink-0 place-items-center rounded-sm border border-ink bg-ink text-on-ink">
                 <Icon d={ICONS.check} className="h-3 w-3" />
               </span>
@@ -90,35 +92,43 @@ export const PrepSheet = ({ prep, day, state }: { prep: HeroSceneData['prep']; d
         <p className="text-sm font-medium leading-none text-ink">{prep.askLabel}</p>
         <div
           data-scene-target="ask"
-          className={`min-h-[80px] w-full rounded-md border bg-surface px-3 py-2 text-sm text-ink transition-shadow ${
+          className={`h-[4.75rem] w-full overflow-hidden rounded-md border bg-surface px-3 py-2 text-sm text-ink transition-shadow ${
             state.askFocus ? 'border-ink ring-2 ring-ink/15' : 'border-border'
           }`}
         >
           {state.askChars === 0 && !state.askFocus ? (
             <span className="text-muted-foreground">A decision, a resource, a question</span>
           ) : (
-            <span className="whitespace-pre-wrap break-words">
+            <span className={`whitespace-pre-wrap break-words ${state.askFocus ? 'animate-caret-border border-r-[1.5px] border-ink pr-px' : ''}`}>
               {HERO_ASK.slice(0, state.askChars)}
-              {state.askFocus && <span className="ml-px inline-block h-4 w-px translate-y-[3px] animate-caret bg-ink" />}
             </span>
           )}
         </div>
       </section>
 
-      <section className="flex flex-wrap items-center gap-2 border-t border-border pt-6">
+      <section className="flex flex-wrap items-center gap-2 border-t border-border pt-5">
         <span
           data-scene-target="copy"
           className={`${BUTTON} ${state.copied ? 'bg-sage-strong text-on-ink' : 'bg-ink text-on-ink'} ${state.copyPressed ? 'scale-95' : ''}`}
           style={{ transition: 'transform 150ms ease-out, background-color 250ms ease-out' }}
         >
-          <Icon d={state.copied ? ICONS.check : ICONS.copy} />
-          {state.copied ? 'Copied' : 'Copy for your 1:1 doc'}
+          {/* Both labels share one cell, so the button keeps its width and "Skip this 1:1" never moves. */}
+          <span className="grid">
+            <span className={`col-start-1 row-start-1 inline-flex items-center gap-2 ${state.copied ? 'invisible' : ''}`}>
+              <Icon d={ICONS.copy} />
+              Copy for your 1:1 doc
+            </span>
+            <span className={`col-start-1 row-start-1 inline-flex items-center justify-center gap-2 ${state.copied ? '' : 'invisible'}`}>
+              <Icon d={ICONS.check} />
+              Copied
+            </span>
+          </span>
         </span>
         <span className={SECONDARY}>
           <Icon d={ICONS.skip} />
           Skip this 1:1
         </span>
-        <span className={`${SECONDARY} max-[379px]:hidden`}>
+        <span className={`${SECONDARY} max-[479px]:hidden`}>
           <Icon d={ICONS.calendar} />
           Move to another day
         </span>
@@ -143,14 +153,16 @@ export const SceneCursor = ({ frameRef, state, instant, run }: { frameRef: RefOb
       const el = ref.current;
       if (!frame || !el) return;
       const box = frame.getBoundingClientRect();
-      let x = box.width - 64;
-      let y = box.height - 56;
+      // From lg the frame is zoomed; measure on screen, then place in the frame's own units.
+      const scale = frame.offsetWidth ? box.width / frame.offsetWidth : 1;
+      let x = frame.offsetWidth - 64;
+      let y = frame.offsetHeight - 56;
       const aim = target === 'home' ? null : frame.querySelector(`[data-scene-target="${target}"]`);
       if (aim) {
         const r = aim.getBoundingClientRect();
         const inset = target === 'ask' ? 36 : 10;
-        x = r.right - box.left - inset;
-        y = target === 'ask' ? r.bottom - box.top - 18 : r.top - box.top + r.height * 0.6;
+        x = (r.right - box.left) / scale - inset;
+        y = target === 'ask' ? (r.bottom - box.top) / scale - 18 : (r.top - box.top + r.height * 0.6) / scale;
       }
       el.style.transitionDuration = `${animate ? moveMs : 0}ms, ${MOTION.CURSOR_FADE_MS}ms`;
       el.style.transform = `translate3d(${Math.round(x)}px, ${Math.round(y)}px, 0)`;

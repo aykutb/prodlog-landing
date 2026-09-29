@@ -95,8 +95,9 @@
   --animate-strip-drop: strip-drop 250ms ease-out both;
   /* A parsed entry settling into the ledger (marketing only; staggered by the caller). */
   --animate-ledger-in: ledger-in 320ms ease-out both;
-  /* The hero scene's caret (src/components/ledger-hero/heroTimeline.ts). Its other motion is transitions, so a seek never replays it. */
-  --animate-caret: caret 1s steps(1) infinite;
+  /* The hero scene's caret (src/components/ledger-hero/heroTimeline.ts): a blink on the text's right border, so it never
+     moves as a box and never counts as a layout shift. The scene's other motion is transitions, so a seek never replays it. */
+  --animate-caret-border: caret-border 1s steps(1) infinite;
 
   /* Fonts (loaded by next/font in app/layout.tsx) */
   --font-serif: var(--font-source-serif), Georgia, serif;
@@ -125,9 +126,28 @@
   }
 }
 
-@keyframes caret {
+@keyframes caret-border {
   50% {
-    opacity: 0;
+    border-color: transparent;
+  }
+}
+
+/* The homepage hero's frame is a miniature of the Log. From the two-column
+   layout it is scaled as a whole so the frame and its controls fit the first
+   screen of a laptop; shorter screens get a smaller miniature. */
+@media (min-width: 1024px) {
+  .hero-frame {
+    zoom: 0.8;
+  }
+}
+@media (min-width: 1024px) and (min-height: 900px) {
+  .hero-frame {
+    zoom: 0.9;
+  }
+}
+@media (min-width: 1024px) and (max-height: 735px) {
+  .hero-frame {
+    zoom: 0.7;
   }
 }
 
