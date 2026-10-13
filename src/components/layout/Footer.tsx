@@ -16,6 +16,7 @@ const PRODUCT_LINKS = [
   { label: '1:1 prep', href: '/1-1-prep' },
   { label: 'Self-review', href: '/self-review' },
   { label: 'Slack app', href: '/integrations/slack' },
+  { label: 'AI assistants', href: '/integrations/mcp' },
   { label: 'iOS app', href: APP_STORE_URL },
   { label: 'Pricing', href: '/pricing' },
   { label: 'FAQ', href: '/faq' },

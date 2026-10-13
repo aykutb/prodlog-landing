@@ -8,8 +8,8 @@ import { EMAIL_LOG_ADDRESS } from '@/src/lib/channels';
 // Two groups. What reminds you: Slack (with the reminder email for anyone not
 // on Slack) and the phone, whose 1:1 card is the first thing you see. Then
 // the ways to log, which remind no one but make logging take seconds: web,
-// email, voice and, coming soon, an AI assistant over MCP. The download links
-// close the section in a band of their own.
+// email and voice. (Logging from an AI assistant has its own section next,
+// McpSection.) The download links close the section in a band of their own.
 const CARD_CLASS = 'bg-surface border border-border rounded-xl p-6 flex flex-col overflow-hidden';
 const PANEL_HEADING_CLASS = 'serif-headline text-lg md:text-xl leading-snug mb-3';
 const PANEL_BODY_CLASS = 'text-sm leading-relaxed';
@@ -92,22 +92,11 @@ export const TriggerSection = () => (
           </div>
         </div>
 
-        <div className={CARD_CLASS}>
+        <div className={`${CARD_CLASS} md:col-span-2`}>
           <h4 className={`${PANEL_HEADING_CLASS} text-ink`}>By voice.</h4>
           <p className={`${PANEL_BODY_CLASS} text-muted-foreground`}>
             Hold the app&rsquo;s quick action, say what happened, put the phone away. A rambling thirty second voice note comes back as a dated entry
             with the product and any numbers you said, ready to check before it saves. Your speech is transcribed on the device, never uploaded.
-          </p>
-        </div>
-
-        <div className={CARD_CLASS}>
-          <div className="mb-3 flex flex-wrap items-center gap-3">
-            <h4 className={`${PANEL_HEADING_CLASS} mb-0 text-ink`}>In your AI assistant.</h4>
-            <span className="rounded-full border border-border bg-muted px-2.5 py-0.5 text-xs font-medium text-muted-foreground">Coming soon</span>
-          </div>
-          <p className={`${PANEL_BODY_CLASS} text-muted-foreground`}>
-            Tell Claude, or any assistant that supports MCP, what you worked on. It logs the entry in Prodlog for you, in the same place as everything
-            else.
           </p>
         </div>
       </div>

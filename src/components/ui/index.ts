@@ -4,6 +4,7 @@ export { ScrollReveal } from './ScrollReveal';
 export { Section } from './Section';
 export { SupportForm } from './SupportForm';
 export { CopyLinkButton } from './CopyLinkButton';
+export { CopyCodeBlock } from './CopyCodeBlock';
 export { SlackPromptMock } from './SlackPromptMock';
 export { AppStoreBadge } from './AppStoreBadge';
 export { EmailLogMock } from './EmailLogMock';

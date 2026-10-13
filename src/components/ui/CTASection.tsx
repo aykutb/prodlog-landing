@@ -4,6 +4,8 @@ import Link from 'next/link';
 interface CTASectionProps {
   centered?: boolean;
   showSecondary?: boolean;
+  /** Replaces the default secondary link (the paste demo). */
+  secondary?: { href: string; label: string };
 }
 
 const PRIMARY_CLASS =
@@ -12,7 +14,7 @@ const PRIMARY_CLASS =
 const SECONDARY_CLASS =
   'mdx-btn-secondary w-full md:w-auto border border-ink/40 bg-surface text-ink px-6 py-3 rounded font-medium text-sm hover:border-ink hover:bg-muted/40 transition-all text-center no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/50 focus-visible:ring-offset-2';
 
-export const CTASection = ({ centered = true, showSecondary = true }: CTASectionProps) => (
+export const CTASection = ({ centered = true, showSecondary = true, secondary }: CTASectionProps) => (
   <div className={`flex flex-col ${centered ? 'items-center' : 'items-start'} my-6`}>
     <div
       className={`flex flex-col md:flex-row ${centered ? 'justify-center' : 'justify-start'} items-center gap-3 w-full`}
@@ -20,11 +22,16 @@ export const CTASection = ({ centered = true, showSecondary = true }: CTASection
       <a href="https://dashboard.prodlog.app/auth" className={PRIMARY_CLASS}>
         Start free
       </a>
-      {showSecondary && (
-        <Link href="/try" className={SECONDARY_CLASS}>
-          Paste in your notes and see what comes out
-        </Link>
-      )}
+      {showSecondary &&
+        (secondary ? (
+          <a href={secondary.href} className={SECONDARY_CLASS}>
+            {secondary.label}
+          </a>
+        ) : (
+          <Link href="/try" className={SECONDARY_CLASS}>
+            Paste in your notes and see what comes out
+          </Link>
+        ))}
     </div>
     <p className={`text-muted-foreground text-xs mt-4 ${centered ? 'text-center' : 'text-left'}`}>
       Free forever. Unlimited entries, no card.

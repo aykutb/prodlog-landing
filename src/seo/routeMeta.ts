@@ -45,6 +45,11 @@ export const ROUTE_META: Record<string, RouteMeta> = {
     description:
       'Log from any Slack channel or DM with /log or the message menu, and get your 1:1 prep the day before, right in Slack.',
   },
+  '/integrations/mcp': {
+    title: 'Connect Prodlog to Claude and other AI assistants | Prodlog',
+    description:
+      'Log entries from your AI chats. Connect Prodlog to Claude, Claude Code, ChatGPT or any MCP client in two minutes, and let a weekly scheduled task log your week.',
+  },
   '/pricing': {
     // The live title and description come from pricingLines() (app/pricing/page.tsx); this entry lists the route in the sitemap.
     title: 'Pricing | Prodlog',

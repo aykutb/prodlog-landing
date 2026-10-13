@@ -1,6 +1,7 @@
 export { HomePage } from './Home';
 export { HowItWorksPage } from './HowItWorks';
 export { IntegrationsSlackPage } from './IntegrationsSlack';
+export { IntegrationsMcpPage } from './IntegrationsMcp';
 export { PrivacyPage } from './Privacy';
 export { PrivacyPolicyPage } from './PrivacyPolicy';
 export { PricingPage } from './Pricing';
