@@ -83,12 +83,51 @@ const Chart = () => (
   </div>
 );
 
+/** Part of a real screenshot in public/, as a region of fractions (like ProductShot's crop). */
+export interface OgVisual {
+  file: string;
+  width: number;
+  height: number;
+  region: { x: number; y: number; w: number; h: number };
+}
+
+const VISUAL_WIDTH = 460;
+
+/** The region in a light frame, drawn by scaling the whole image and shifting it inside a clipped box. */
+const Visual = ({ file, width, height, region }: OgVisual) => {
+  const src = `data:image/png;base64,${fs.readFileSync(path.join(process.cwd(), 'public', file)).toString('base64')}`;
+  const imageWidth = VISUAL_WIDTH / region.w;
+  const imageHeight = (imageWidth * height) / width;
+  return (
+    <div
+      style={{
+        display: 'flex',
+        position: 'relative',
+        overflow: 'hidden',
+        width: VISUAL_WIDTH,
+        height: Math.round(imageHeight * region.h),
+        borderRadius: 16,
+        border: `2px solid ${HEX.onInkMuted}`,
+        backgroundColor: '#FFFFFF',
+      }}
+    >
+      <img
+        src={src}
+        width={imageWidth}
+        height={imageHeight}
+        style={{ position: 'absolute', left: -region.x * imageWidth, top: -region.y * imageHeight, width: imageWidth, height: imageHeight }}
+      />
+    </div>
+  );
+};
+
 /**
  * The shared OG card: the ink occasion card as a motif. The lockup on top,
  * a serif headline (400 at display size) with one muted line, and the strip
- * chart along the bottom.
+ * chart along the bottom. With a `visual`, the headline shares its row with
+ * a screenshot.
  */
-export const OgCard = ({ headline, sub }: { headline: string; sub?: string }) => (
+export const OgCard = ({ headline, sub, visual }: { headline: string; sub?: string; visual?: OgVisual }) => (
   <div
     style={{
       width: '100%',
@@ -103,10 +142,20 @@ export const OgCard = ({ headline, sub }: { headline: string; sub?: string }) =>
     }}
   >
     <Lockup height={44} />
-    <div style={{ display: 'flex', flexDirection: 'column', maxWidth: 1000 }}>
-      <div style={{ display: 'flex', fontSize: 64, lineHeight: 1.12, fontWeight: 400 }}>{headline}</div>
-      {sub && <div style={{ display: 'flex', fontSize: 30, lineHeight: 1.35, marginTop: 20, color: HEX.onInkMuted }}>{sub}</div>}
-    </div>
+    {visual ? (
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 48 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+          <div style={{ display: 'flex', fontSize: 64, lineHeight: 1.12, fontWeight: 400 }}>{headline}</div>
+          {sub && <div style={{ display: 'flex', fontSize: 30, lineHeight: 1.35, marginTop: 20, color: HEX.onInkMuted }}>{sub}</div>}
+        </div>
+        <Visual {...visual} />
+      </div>
+    ) : (
+      <div style={{ display: 'flex', flexDirection: 'column', maxWidth: 1000 }}>
+        <div style={{ display: 'flex', fontSize: 64, lineHeight: 1.12, fontWeight: 400 }}>{headline}</div>
+        {sub && <div style={{ display: 'flex', fontSize: 30, lineHeight: 1.35, marginTop: 20, color: HEX.onInkMuted }}>{sub}</div>}
+      </div>
+    )}
     <Chart />
   </div>
 );

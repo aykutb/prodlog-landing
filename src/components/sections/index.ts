@@ -4,5 +4,6 @@ export { BeforeYouAskSection } from './BeforeYouAskSection';
 export { MomentsSection } from './MomentsSection';
 export { OneOnOneSection } from './OneOnOneSection';
 export { TriggerSection } from './TriggerSection';
+export { McpSection } from './McpSection';
 export { ChangeJobsSection } from './ChangeJobsSection';
 export { FinalCTASection } from './FinalCTASection';

@@ -5,10 +5,14 @@ import Image from 'next/image';
 
 /** Real product screenshots live here; docs/landing-shots.md lists every one. */
 export const SHOTS_DIR = 'shots';
+/** The MCP shots (Claude's own UI and the log they fill), for `dir`. */
+export const MCP_SHOTS_DIR = 'images/mcp';
 
 interface ProductShotProps {
-  /** File name in public/shots/, e.g. "log-home.png". */
+  /** File name in public/<dir>/, e.g. "log-home.png". */
   name: string;
+  /** The folder under public/ (default: SHOTS_DIR), e.g. MCP_SHOTS_DIR. */
+  dir?: string;
   alt: string;
   /** The file's pixel size (from docs/landing-shots.md). */
   width: number;
@@ -38,8 +42,8 @@ interface ProductShotProps {
  * no shadow, no 3D. Server component. A missing file renders a loud
  * "MISSING SHOT" frame in development and fails the production build.
  */
-export const ProductShot = ({ name, alt, width, height, chrome = 'browser', url = 'dashboard.prodlog.app', sizes = '(min-width: 1024px) 960px, 100vw', priority = false, crop, className = '' }: ProductShotProps) => {
-  const file = path.join(process.cwd(), 'public', SHOTS_DIR, name);
+export const ProductShot = ({ name, dir = SHOTS_DIR, alt, width, height, chrome = 'browser', url = 'dashboard.prodlog.app', sizes = '(min-width: 1024px) 960px, 100vw', priority = false, crop, className = '' }: ProductShotProps) => {
+  const file = path.join(process.cwd(), 'public', dir, name);
   const region = crop && 'region' in crop ? crop.region : null;
   // A region is drawn larger than its frame, so the image needs a bigger source than the frame's size suggests.
   const regionSizes = region ? sizes.replace(/(\d+(?:\.\d+)?)(px|vw)/g, (_, n: string, unit: string) => `${Math.round(Number(n) / region.w)}${unit}`) : sizes;
@@ -47,7 +51,7 @@ export const ProductShot = ({ name, alt, width, height, chrome = 'browser', url 
   const frameAspect = region ? `${region.w * width} / ${region.h * height}` : crop && 'aspect' in crop ? crop.aspect : `${width} / ${height}`;
   const missing = !existsSync(file);
   if (missing && process.env.NODE_ENV === 'production') {
-    throw new Error(`ProductShot: public/${SHOTS_DIR}/${name} is missing. Capture it (docs/landing-shots.md) before building.`);
+    throw new Error(`ProductShot: public/${dir}/${name} is missing. Capture it (docs/landing-shots.md) before building.`);
   }
 
   return (
@@ -75,7 +79,7 @@ export const ProductShot = ({ name, alt, width, height, chrome = 'browser', url 
       ) : region ? (
         <div className="relative w-full overflow-hidden" style={{ aspectRatio: frameAspect }}>
           <Image
-            src={`/${SHOTS_DIR}/${name}`}
+            src={`/${dir}/${name}`}
             alt={alt}
             width={width}
             height={height}
@@ -87,14 +91,14 @@ export const ProductShot = ({ name, alt, width, height, chrome = 'browser', url 
         </div>
       ) : fill ? (
         <div className="relative h-full w-full">
-          <Image src={`/${SHOTS_DIR}/${name}`} alt={alt} fill sizes={sizes} priority={priority} className="object-cover" style={{ objectPosition: fill.position ?? '50% 0%' }} />
+          <Image src={`/${dir}/${name}`} alt={alt} fill sizes={sizes} priority={priority} className="object-cover" style={{ objectPosition: fill.position ?? '50% 0%' }} />
         </div>
       ) : crop && 'aspect' in crop ? (
         <div className="relative w-full" style={{ aspectRatio: crop.aspect }}>
-          <Image src={`/${SHOTS_DIR}/${name}`} alt={alt} fill sizes={sizes} priority={priority} className="object-cover" style={{ objectPosition: crop.position ?? '50% 0%' }} />
+          <Image src={`/${dir}/${name}`} alt={alt} fill sizes={sizes} priority={priority} className="object-cover" style={{ objectPosition: crop.position ?? '50% 0%' }} />
         </div>
       ) : (
-        <Image src={`/${SHOTS_DIR}/${name}`} alt={alt} width={width} height={height} sizes={sizes} priority={priority} className="block h-auto w-full" />
+        <Image src={`/${dir}/${name}`} alt={alt} width={width} height={height} sizes={sizes} priority={priority} className="block h-auto w-full" />
       )}
     </figure>
   );

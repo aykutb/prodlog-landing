@@ -6,6 +6,7 @@ import {
   MomentsSection,
   OneOnOneSection,
   TriggerSection,
+  McpSection,
   ChangeJobsSection,
   FinalCTASection,
 } from '@/src/components/sections';
@@ -19,6 +20,7 @@ export const HomePage = () => (
     <MomentsSection today={todayIso()} />
     <OneOnOneSection />
     <TriggerSection />
+    <McpSection />
     <ChangeJobsSection />
     <FinalCTASection />
   </>

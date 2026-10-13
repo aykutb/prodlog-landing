@@ -15,7 +15,7 @@ const FAQ_SECTIONS = [
       },
       {
         q: 'Where can I log from?',
-        a: 'The web, Slack, email and the iOS app, all into the same log.',
+        a: 'The web, Slack, email, the iOS app and your AI assistant (Claude, ChatGPT or any MCP client), all into the same log.',
       },
       {
         q: "What if my work doesn't feel impressive?",
